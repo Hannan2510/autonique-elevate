@@ -476,30 +476,30 @@ function Landing() {
               })}
             </div>
 
-            {/* 2-Column WhatsApp Bot Feature Showcase with Tilted Image on Right */}
+            {/* 2-Column Calendar Showcase Feature with Tilted Illustration on Right */}
             <div data-reveal className="rounded-2xl border-none bg-white dark:bg-[#0B201E] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-teal-500/10 via-transparent to-transparent p-8 lg:p-10 shadow-lg">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                 {/* Left Side Info */}
                 <div className="lg:col-span-6 space-y-6 text-left">
                   <div className="inline-flex items-center gap-2 rounded-full border border-[#0D9488]/25 dark:border-[#0D9488]/40 bg-[#EFFFFE] dark:bg-[#0F2F2C] px-3.5 py-1 text-[11px] font-bold text-[#0F766E] dark:text-[#2DD4BF]">
-                    <MessageSquare className="h-3.5 w-3.5 text-[#0D9488] dark:text-[#2DD4BF]" />
-                    <span>WhatsApp Patient Automation</span>
+                    <Calendar className="h-3.5 w-3.5 text-[#0D9488] dark:text-[#2DD4BF]" />
+                    <span>Automated Appointment Scheduling</span>
                   </div>
 
                   <h3 className="font-display text-2xl sm:text-3xl font-black text-[#0F172A] dark:text-white leading-snug">
-                    24/7 Autonomous WhatsApp Clinic Booking Assistant
+                    Smart Calendar Slot Lookup & Instant Confirmations
                   </h3>
 
                   <p className="text-[14px] leading-relaxed text-[#475569] dark:text-[#A0B0AD] font-medium">
-                    Empower your patients to check doctor availability, select time slots, and receive instant booking receipts directly inside WhatsApp — reducing front-desk phone calls and cutting no-shows by 55%.
+                    Empower your patients to check doctor availability, select time slots, and receive instant booking receipts — reducing front-desk phone calls and cutting no-shows by 55%.
                   </p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                     {[
                       { t: "Autonomous Slot Lookup", desc: "Real-time doctor calendar sync" },
-                      { t: "Instant WhatsApp Receipts", desc: "Digital booking details & doctor info" },
-                      { t: "55% Lower No-Shows", desc: "Automated pre-visit WhatsApp reminders" },
-                      { t: "Meta Verified Bot", desc: "End-to-end encrypted healthcare chat" },
+                      { t: "Instant Receipts & Alerts", desc: "Digital booking details & doctor info" },
+                      { t: "55% Lower No-Shows", desc: "Automated pre-visit reminders" },
+                      { t: "Multi-Doctor Roster", desc: "Seamless appointment distribution" },
                     ].map((item) => (
                       <div key={item.t} className="flex items-start gap-2.5 p-2.5 rounded-xl border-none bg-[#F8FFFE] dark:bg-[#061514]">
                         <CheckCircle2 className="h-4 w-4 text-[#0D9488] dark:text-[#2DD4BF] shrink-0 mt-0.5" />
@@ -512,21 +512,14 @@ function Landing() {
                   </div>
                 </div>
 
-                {/* Right Side: Tilted WhatsApp Bot Mockup Frame */}
+                {/* Right Side: Tilted Calendar Booking Illustration Frame */}
                 <div className="lg:col-span-6 flex justify-center">
-                  <div className="relative w-full max-w-xs sm:max-w-sm">
-                    <div className="relative rounded-[24px] overflow-hidden transition-all duration-500 ease-out lg:[transform:perspective(1000px)_rotateY(-8deg)_rotateX(4deg)_rotate(-1.5deg)] lg:hover:[transform:perspective(1000px)_rotateY(-1deg)_rotateX(0deg)_rotate(0deg)] drop-shadow-[0_25px_35px_rgba(13,148,136,0.3)] hover:drop-shadow-[0_30px_45px_rgba(13,148,136,0.4)]">
-                      {/* Light Theme Render */}
+                  <div className="relative w-full max-w-sm sm:max-w-md">
+                    <div className="relative rounded-[16px] overflow-hidden bg-white dark:bg-[#0D2926] p-4 shadow-2xl transition-all duration-500 ease-out lg:[transform:perspective(1000px)_rotateY(-8deg)_rotateX(4deg)_rotate(-1.5deg)] lg:hover:[transform:perspective(1000px)_rotateY(-1deg)_rotateX(0deg)_rotate(0deg)] drop-shadow-[0_25px_35px_rgba(13,148,136,0.3)] hover:drop-shadow-[0_30px_45px_rgba(13,148,136,0.4)]">
                       <img
-                        src="/whatsapp-bot-light.jpg"
-                        alt="Autonique WhatsApp Clinic Bot Interactive Mockup (Light)"
-                        className="block dark:hidden w-full h-auto object-cover rounded-2xl shadow-2xl transition-all duration-300 hover:scale-[1.01]"
-                      />
-                      {/* Dark Theme Render */}
-                      <img
-                        src="/whatsapp-bot-dark.jpg"
-                        alt="Autonique WhatsApp Clinic Bot Interactive Mockup (Dark)"
-                        className="hidden dark:block w-full h-auto object-cover rounded-2xl shadow-2xl transition-all duration-300 hover:scale-[1.01]"
+                        src="/appointment-booking-illustration.png"
+                        alt="Autonique Clinic Appointment Booking Illustration"
+                        className="w-full h-auto object-contain rounded-xl transition-all duration-300 hover:scale-[1.01] dark:brightness-95 contrast-[1.02]"
                       />
                     </div>
                   </div>
@@ -536,7 +529,7 @@ function Landing() {
           </div>
         </section>
 
-        {/* ─── 6. How It Works (Workflow & Calendar Illustration) ─── */}
+        {/* ─── 6. How It Works ─── */}
         <section id="workflow" className="py-20 border-t border-[#0D9488]/12 dark:border-[#0D9488]/30 bg-white dark:bg-[#0A201E] relative z-10">
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div data-reveal className="text-center max-w-xl mx-auto mb-14 space-y-2">
@@ -548,40 +541,26 @@ function Landing() {
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              {/* Left Column: 6 Workflow Step Cards */}
-              <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {[
-                  { step: "01", title: "Booking", sub: "Online or front desk", spot: "from-emerald-400/20" },
-                  { step: "02", title: "Confirmation", sub: "WhatsApp alert sent", spot: "from-teal-400/20" },
-                  { step: "03", title: "Consultation", sub: "Doctor notes & EMR", spot: "from-lime-400/20" },
-                  { step: "04", title: "Prescription", sub: "Digital PDF signature", spot: "from-indigo-400/20" },
-                  { step: "05", title: "Billing", sub: "Stripe or cash receipt", spot: "from-emerald-400/20" },
-                  { step: "06", title: "Follow-up", sub: "Automated feedback", spot: "from-teal-400/20" },
-                ].map((s, idx) => (
-                  <div
-                    key={s.step}
-                    data-reveal
-                    data-reveal-delay={String((idx % 3) + 1)}
-                    className={`rounded-[8px] border-none bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${s.spot} via-transparent to-transparent p-4 text-center relative group transition-all shadow-xs hover:shadow-md`}
-                  >
-                    <div className="font-mono text-[12px] font-bold text-[#0D9488] dark:text-[#2DD4BF] mb-1">{s.step}</div>
-                    <div className="font-bold text-[13px] text-[#0F172A] dark:text-white">{s.title}</div>
-                    <div className="text-[10.5px] text-[#64748B] dark:text-[#809995] font-medium mt-0.5">{s.sub}</div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Right Column: Appointment Booking Vector Illustration */}
-              <div data-reveal data-reveal-delay="2" className="lg:col-span-5 flex justify-center">
-                <div className="rounded-[8px] border-none bg-[#F8FFFE] dark:bg-[#0D2926] p-6 shadow-xs flex items-center justify-center transition-all hover:scale-[1.01]">
-                  <img
-                    src="/appointment-booking-illustration.png"
-                    alt="Autonique Clinic Appointment Booking Illustration"
-                    className="w-full h-auto max-h-[300px] object-contain dark:brightness-95 contrast-[1.02]"
-                  />
+            <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
+              {[
+                { step: "01", title: "Booking", sub: "Online or front desk", spot: "from-emerald-400/20" },
+                { step: "02", title: "Confirmation", sub: "WhatsApp alert sent", spot: "from-teal-400/20" },
+                { step: "03", title: "Consultation", sub: "Doctor notes & EMR", spot: "from-lime-400/20" },
+                { step: "04", title: "Prescription", sub: "Digital PDF signature", spot: "from-indigo-400/20" },
+                { step: "05", title: "Billing", sub: "Stripe or cash receipt", spot: "from-emerald-400/20" },
+                { step: "06", title: "Follow-up", sub: "Automated feedback", spot: "from-teal-400/20" },
+              ].map((s, idx) => (
+                <div
+                  key={s.step}
+                  data-reveal
+                  data-reveal-delay={String((idx % 3) + 1)}
+                  className={`rounded-[8px] border-none bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${s.spot} via-transparent to-transparent p-4 text-center relative group transition-all shadow-xs hover:shadow-md`}
+                >
+                  <div className="font-mono text-[12px] font-bold text-[#0D9488] dark:text-[#2DD4BF] mb-1">{s.step}</div>
+                  <div className="font-bold text-[13px] text-[#0F172A] dark:text-white">{s.title}</div>
+                  <div className="text-[10.5px] text-[#64748B] dark:text-[#809995] font-medium mt-0.5">{s.sub}</div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>

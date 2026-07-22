@@ -120,8 +120,8 @@ function Brand() {
     <Link to="/dashboard" className="flex items-center gap-2.5 group">
       <div className="grid h-7 w-7 place-items-center rounded-lg bg-gradient-to-br from-emerald-600 to-teal-700 text-white font-bold text-[12px] tracking-tight shadow-sm transition-transform group-hover:scale-105">A</div>
       <div className="flex flex-col">
-        <span className="text-[14px] font-bold tracking-tight leading-none text-foreground">Autonique</span>
-        <span className="text-[10px] text-muted-foreground font-mono leading-none mt-0.5">Clinical OS</span>
+        <span className="text-[13.5px] font-bold tracking-tight leading-none text-foreground">Autonique</span>
+        <span className="text-[8.5px] text-muted-foreground/70 font-mono leading-none mt-0.5 uppercase tracking-widest font-medium">Clinical OS</span>
       </div>
     </Link>
   );
@@ -197,15 +197,15 @@ export function PageHeader({
   description,
   actions,
 }: {
-  title: string;
+  title: React.ReactNode;
   description?: string;
   actions?: React.ReactNode;
 }) {
   return (
-    <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-b border-border/40 bg-background/50 px-4 py-2.5 sm:px-8 sm:py-3">
+    <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-b border-border/40 bg-background/50 px-4 py-2.5 sm:px-8 sm:py-2.5">
       <div className="min-w-0">
-        <h1 className="truncate font-display text-[15px] font-semibold tracking-tight text-foreground sm:text-[16px]">{title}</h1>
-        {description && <p className="mt-0.5 text-[11.5px] text-muted-foreground/80 font-mono">{description}</p>}
+        <h1 className="truncate font-display text-[11.5px] sm:text-[12px] font-semibold tracking-tight text-foreground uppercase">{title}</h1>
+        {description && <p className="mt-0.5 text-[11px] text-muted-foreground/80 font-mono">{description}</p>}
       </div>
       {actions && <div className="flex shrink-0 items-center gap-2">{actions}</div>}
     </div>

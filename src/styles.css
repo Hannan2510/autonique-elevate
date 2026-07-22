@@ -130,6 +130,15 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  section[id],
+  div[id] {
+    scroll-margin-top: 80px;
+  }
+
   * {
     border-color: var(--color-border);
   }

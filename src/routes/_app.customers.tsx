@@ -4,7 +4,9 @@ import {
   Search,
   Plus,
   Filter,
+  Mail,
   Phone,
+  MapPin,
   Calendar,
   Users,
   CreditCard,
@@ -174,13 +176,8 @@ function Customers() {
                     className="hover:bg-emerald-500/4 transition-colors cursor-pointer group relative"
                   >
                     <td className="px-5 py-3.5">
-                      <div className="flex items-center gap-3">
-                        <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br ${avatarColors[idx % avatarColors.length]} font-bold text-[11px] text-white shadow-sm`}>
-                          {initials(p.name)}
-                        </div>
-                        <span className="font-semibold text-foreground text-[12.5px] group-hover:text-emerald-700 transition-colors">
-                          {p.name}
-                        </span>
+                      <div className={`grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br ${avatarColors[idx % avatarColors.length]} font-bold text-[11px] text-white shadow-sm`}>
+                        {initials(p.name)}
                       </div>
                     </td>
                     <td className="px-5 py-3.5">

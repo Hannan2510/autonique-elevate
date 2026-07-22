@@ -273,17 +273,17 @@ function Landing() {
                   </div>
                 </div>
 
-                {/* Entire Card Filled with Gradient (8px radius, borderless) */}
+                {/* Clean Cards with Subtle Top Radial Gradient Spotlights */}
                 <div data-reveal data-reveal-delay="3" className="grid grid-cols-4 gap-2.5 text-center">
                   {[
-                    { v: "40K+", l: "Doctors", bg: "bg-gradient-to-br from-[#D1FAE5] via-[#A7F3D0] to-[#6EE7B7] dark:from-[#064E3B] dark:via-[#043E2F] dark:to-[#022C22]", tc: "text-[#065F46] dark:text-[#34D399]", lc: "text-[#047857] dark:text-[#A7F3D0]" },
-                    { v: "25K+", l: "Clinics", bg: "bg-gradient-to-br from-[#CCFBF1] via-[#99F6E4] to-[#5EEAD4] dark:from-[#115E59] dark:via-[#0E4E4A] dark:to-[#042F2C]", tc: "text-[#115E59] dark:text-[#2DD4BF]", lc: "text-[#0F766E] dark:text-[#99F6E4]" },
-                    { v: "8M+", l: "Patients", bg: "bg-gradient-to-br from-[#ECFCCB] via-[#D9F99D] to-[#BEF264] dark:from-[#3F6212] dark:via-[#334E0E] dark:to-[#1A2E05]", tc: "text-[#3F6212] dark:text-[#A3E635]", lc: "text-[#4D7C0F] dark:text-[#D9F99D]" },
-                    { v: "99.9%", l: "Uptime", bg: "bg-gradient-to-br from-[#E0E7FF] via-[#C7D2FE] to-[#A5B4FC] dark:from-[#3730A3] dark:via-[#2E2882] dark:to-[#1E1B4B]", tc: "text-[#3730A3] dark:text-[#818CF8]", lc: "text-[#4338CA] dark:text-[#C7D2FE]" },
+                    { v: "40K+", l: "Doctors", spotlight: "bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-400/20 via-white to-white dark:from-emerald-500/25 dark:via-[#0B201E] dark:to-[#0B201E]", tc: "text-[#047857] dark:text-[#34D399]" },
+                    { v: "25K+", l: "Clinics", spotlight: "bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-teal-400/20 via-white to-white dark:from-teal-500/25 dark:via-[#0B201E] dark:to-[#0B201E]", tc: "text-[#0F766E] dark:text-[#2DD4BF]" },
+                    { v: "8M+", l: "Patients", spotlight: "bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-lime-400/20 via-white to-white dark:from-lime-500/25 dark:via-[#0B201E] dark:to-[#0B201E]", tc: "text-[#4D7C0F] dark:text-[#A3E635]" },
+                    { v: "99.9%", l: "Uptime", spotlight: "bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-400/20 via-white to-white dark:from-indigo-500/25 dark:via-[#0B201E] dark:to-[#0B201E]", tc: "text-[#4338CA] dark:text-[#818CF8]" },
                   ].map((s) => (
-                    <div key={s.l} className={`rounded-[8px] border-none ${s.bg} p-2.5 shadow-sm transition-all hover:scale-[1.02]`}>
+                    <div key={s.l} className={`rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 ${s.spotlight} p-2.5 shadow-xs transition-all hover:scale-[1.02]`}>
                       <div className={`font-display text-xl font-black ${s.tc}`}>{s.v}</div>
-                      <div className={`text-[10px] font-mono font-bold uppercase tracking-wider ${s.lc}`}>{s.l}</div>
+                      <div className="text-[10px] font-mono font-bold text-[#64748B] dark:text-[#809995] uppercase tracking-wider">{s.l}</div>
                     </div>
                   ))}
                 </div>
@@ -309,12 +309,12 @@ function Landing() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
               {/* Before Autonique */}
-              <div data-reveal data-reveal-delay="1" className="rounded-[8px] border-none bg-gradient-to-br from-[#FFE4E6] via-[#FECDD3] to-[#FDA4AF] dark:from-[#881337] dark:via-[#4C0519] dark:to-[#2A020D] p-6 space-y-4 shadow-sm">
-                <div className="flex items-center gap-2 text-[#9F1239] dark:text-[#FB7185] font-bold text-[14px]">
-                  <AlertCircle className="h-5 w-5 text-[#E11D48] dark:text-[#FB7185]" />
+              <div data-reveal data-reveal-delay="1" className="rounded-[8px] border border-rose-200/80 dark:border-rose-900/40 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-rose-500/10 via-white to-white dark:from-rose-950/40 dark:via-[#0D2926] dark:to-[#0D2926] p-6 space-y-4 shadow-xs">
+                <div className="flex items-center gap-2 text-rose-700 dark:text-rose-400 font-bold text-[14px]">
+                  <AlertCircle className="h-5 w-5 text-rose-600 dark:text-rose-400" />
                   <span>Legacy Disconnected Setup</span>
                 </div>
-                <ul className="space-y-3 text-[13px] text-[#881337] dark:text-[#FECDD3] font-medium">
+                <ul className="space-y-3 text-[13px] text-[#475569] dark:text-[#A0B0AD] font-medium">
                   {[
                     "Missed appointments due to manual reminder calls",
                     "Paper-based prescriptions causing dosage errors",
@@ -323,7 +323,7 @@ function Landing() {
                     "Uncollected bills & missing revenue telemetry",
                   ].map((err) => (
                     <li key={err} className="flex items-start gap-2.5">
-                      <span className="h-1.5 w-1.5 rounded-full bg-[#E11D48] mt-2 shrink-0" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-rose-500 mt-2 shrink-0" />
                       <span>{err}</span>
                     </li>
                   ))}
@@ -331,12 +331,12 @@ function Landing() {
               </div>
 
               {/* With Autonique - Featured Highlight Card */}
-              <div data-reveal data-reveal-delay="2" className="rounded-[8px] border-none bg-gradient-to-br from-[#D1FAE5] via-[#A7F3D0] to-[#6EE7B7] dark:from-[#064E3B] dark:via-[#043E2F] dark:to-[#022C22] p-6 space-y-4 shadow-md transition-all">
-                <div className="flex items-center gap-2 text-[#065F46] dark:text-[#34D399] font-bold text-[14px]">
-                  <Sparkles className="h-5 w-5 text-[#047857] dark:text-[#34D399]" />
+              <div data-reveal data-reveal-delay="2" className="rounded-[8px] border border-emerald-500/30 dark:border-emerald-500/50 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-500/20 via-white to-white dark:from-emerald-500/25 dark:via-[#0D2926] dark:to-[#0D2926] p-6 space-y-4 shadow-md transition-all">
+                <div className="flex items-center gap-2 text-[#0F766E] dark:text-[#2DD4BF] font-bold text-[14px]">
+                  <Sparkles className="h-5 w-5 text-[#0D9488] dark:text-[#2DD4BF]" />
                   <span>Unified Autonique Operating System</span>
                 </div>
-                <ul className="space-y-3 text-[13px] text-[#064E3B] dark:text-[#A7F3D0]">
+                <ul className="space-y-3 text-[13px] text-[#0F172A] dark:text-white">
                   {[
                     "Automated WhatsApp & SMS appointment reminders (55% lower no-shows)",
                     "Digital ICD-10 prescription engine with 1-click PDF export",
@@ -345,7 +345,7 @@ function Landing() {
                     "Integrated Stripe billing & real-time revenue analytics",
                   ].map((sol) => (
                     <li key={sol} className="flex items-start gap-2.5">
-                      <CheckCircle2 className="h-4 w-4 text-[#047857] dark:text-[#34D399] shrink-0 mt-0.5" />
+                      <CheckCircle2 className="h-4 w-4 text-[#0F766E] dark:text-[#2DD4BF] shrink-0 mt-0.5" />
                       <span className="font-semibold">{sol}</span>
                     </li>
                   ))}
@@ -370,21 +370,21 @@ function Landing() {
               </p>
             </div>
 
-            {/* Entire Card Filled with Soft Pastel Color Gradients */}
+            {/* Clean White/Dark Cards with Top Radial Spotlight & Gradient Badge */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               {[
-                { title: "Patient CRM", desc: "Centralized medical histories", icon: Users, bg: "bg-gradient-to-br from-[#D1FAE5] via-[#A7F3D0] to-[#6EE7B7] dark:from-[#064E3B] dark:to-[#022C22]", tc: "text-[#065F46] dark:text-[#34D399]", dc: "text-[#047857] dark:text-[#A7F3D0]" },
-                { title: "Appointments", desc: "Automated queue & tokens", icon: Calendar, bg: "bg-gradient-to-br from-[#ECFCCB] via-[#D9F99D] to-[#BEF264] dark:from-[#3F6212] dark:to-[#1A2E05]", tc: "text-[#3F6212] dark:text-[#A3E635]", dc: "text-[#4D7C0F] dark:text-[#D9F99D]" },
-                { title: "EMR Records", desc: "Structured clinical charting", icon: FileSpreadsheet, bg: "bg-gradient-to-br from-[#CCFBF1] via-[#99F6E4] to-[#5EEAD4] dark:from-[#115E59] dark:to-[#042F2C]", tc: "text-[#115E59] dark:text-[#2DD4BF]", dc: "text-[#0F766E] dark:text-[#99F6E4]" },
-                { title: "Billing & Invoices", desc: "Stripe & clinic receipts", icon: Receipt, bg: "bg-gradient-to-br from-[#E0E7FF] via-[#C7D2FE] to-[#A5B4FC] dark:from-[#3730A3] dark:to-[#1E1B4B]", tc: "text-[#3730A3] dark:text-[#818CF8]", dc: "text-[#4338CA] dark:text-[#C7D2FE]" },
-                { title: "Clinical Analytics", desc: "Revenue & visit telemetry", icon: BarChart3, bg: "bg-gradient-to-br from-[#CCFBF1] via-[#99F6E4] to-[#5EEAD4] dark:from-[#115E59] dark:to-[#042F2C]", tc: "text-[#115E59] dark:text-[#2DD4BF]", dc: "text-[#0F766E] dark:text-[#99F6E4]" },
-                { title: "AI Assistant", desc: "Smart diagnostic notes", icon: Bot, bg: "bg-gradient-to-br from-[#D1FAE5] via-[#A7F3D0] to-[#6EE7B7] dark:from-[#064E3B] dark:to-[#022C22]", tc: "text-[#065F46] dark:text-[#34D399]", dc: "text-[#047857] dark:text-[#A7F3D0]" },
-                { title: "Automated Follow-ups", desc: "WhatsApp patient reminders", icon: MessageSquare, bg: "bg-gradient-to-br from-[#ECFCCB] via-[#D9F99D] to-[#BEF264] dark:from-[#3F6212] dark:to-[#1A2E05]", tc: "text-[#3F6212] dark:text-[#A3E635]", dc: "text-[#4D7C0F] dark:text-[#D9F99D]" },
-                { title: "Staff Roster", desc: "Role-based staff permissions", icon: UserCheck, bg: "bg-gradient-to-br from-[#E0E7FF] via-[#C7D2FE] to-[#A5B4FC] dark:from-[#3730A3] dark:to-[#1E1B4B]", tc: "text-[#3730A3] dark:text-[#818CF8]", dc: "text-[#4338CA] dark:text-[#C7D2FE]" },
-                { title: "Pharmacy Inventory", desc: "Drug stock & batch tracking", icon: Boxes, bg: "bg-gradient-to-br from-[#D1FAE5] via-[#A7F3D0] to-[#6EE7B7] dark:from-[#064E3B] dark:to-[#022C22]", tc: "text-[#065F46] dark:text-[#34D399]", dc: "text-[#047857] dark:text-[#A7F3D0]" },
-                { title: "Custom Reports", desc: "Exportable PDF/CSV digests", icon: FileText, bg: "bg-gradient-to-br from-[#CCFBF1] via-[#99F6E4] to-[#5EEAD4] dark:from-[#115E59] dark:to-[#042F2C]", tc: "text-[#115E59] dark:text-[#2DD4BF]", dc: "text-[#0F766E] dark:text-[#99F6E4]" },
-                { title: "Smart Alerts", desc: "Real-time clinical triggers", icon: Bell, bg: "bg-gradient-to-br from-[#ECFCCB] via-[#D9F99D] to-[#BEF264] dark:from-[#3F6212] dark:to-[#1A2E05]", tc: "text-[#3F6212] dark:text-[#A3E635]", dc: "text-[#4D7C0F] dark:text-[#D9F99D]" },
-                { title: "Enterprise Security", desc: "HIPAA & 256-bit encryption", icon: Shield, bg: "bg-gradient-to-br from-[#E0E7FF] via-[#C7D2FE] to-[#A5B4FC] dark:from-[#3730A3] dark:to-[#1E1B4B]", tc: "text-[#3730A3] dark:text-[#818CF8]", dc: "text-[#4338CA] dark:text-[#C7D2FE]" },
+                { title: "Patient CRM", desc: "Centralized medical histories", icon: Users, spot: "from-emerald-400/15" },
+                { title: "Appointments", desc: "Automated queue & tokens", icon: Calendar, spot: "from-teal-400/15" },
+                { title: "EMR Records", desc: "Structured clinical charting", icon: FileSpreadsheet, spot: "from-lime-400/15" },
+                { title: "Billing & Invoices", desc: "Stripe & clinic receipts", icon: Receipt, spot: "from-indigo-400/15" },
+                { title: "Clinical Analytics", desc: "Revenue & visit telemetry", icon: BarChart3, spot: "from-teal-400/15" },
+                { title: "AI Assistant", desc: "Smart diagnostic notes", icon: Bot, spot: "from-emerald-400/15" },
+                { title: "Automated Follow-ups", desc: "WhatsApp patient reminders", icon: MessageSquare, spot: "from-lime-400/15" },
+                { title: "Staff Roster", desc: "Role-based staff permissions", icon: UserCheck, spot: "from-indigo-400/15" },
+                { title: "Pharmacy Inventory", desc: "Drug stock & batch tracking", icon: Boxes, spot: "from-emerald-400/15" },
+                { title: "Custom Reports", desc: "Exportable PDF/CSV digests", icon: FileText, spot: "from-teal-400/15" },
+                { title: "Smart Alerts", desc: "Real-time clinical triggers", icon: Bell, spot: "from-lime-400/15" },
+                { title: "Enterprise Security", desc: "HIPAA & 256-bit encryption", icon: Shield, spot: "from-indigo-400/15" },
               ].map((m, idx) => {
                 const Icon = m.icon;
                 return (
@@ -392,13 +392,13 @@ function Landing() {
                     key={m.title}
                     data-reveal
                     data-reveal-delay={String((idx % 4) + 1)}
-                    className={`rounded-[8px] border-none ${m.bg} p-4.5 shadow-xs hover:shadow-md transition-all group hover:scale-[1.02]`}
+                    className={`rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${m.spot} via-transparent to-transparent p-4.5 shadow-xs hover:border-[#0D9488]/40 transition-all group`}
                   >
-                    <div className="h-9 w-9 rounded-xl bg-white/80 dark:bg-black/30 text-[#0F766E] dark:text-[#2DD4BF] flex items-center justify-center mb-3 shadow-xs">
+                    <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-[#EFFFFE] to-[#CCFBF1] dark:from-[#0F3531] dark:to-[#092523] text-[#0F766E] dark:text-[#2DD4BF] flex items-center justify-center mb-3 shadow-xs group-hover:scale-105 transition-transform">
                       <Icon className="h-4.5 w-4.5" />
                     </div>
-                    <div className={`font-bold text-[13.5px] ${m.tc}`}>{m.title}</div>
-                    <div className={`text-[11px] font-semibold mt-0.5 ${m.dc}`}>{m.desc}</div>
+                    <div className="font-bold text-[13.5px] text-[#0F172A] dark:text-white">{m.title}</div>
+                    <div className="text-[11px] text-[#64748B] dark:text-[#809995] font-medium mt-0.5">{m.desc}</div>
                   </div>
                 );
               })}
@@ -424,16 +424,14 @@ function Landing() {
                   title: "AI Clinical Assistant",
                   desc: "Generate structured consultation notes and diagnostic summaries automatically during doctor visits.",
                   icon: Bot,
-                  bg: "bg-gradient-to-br from-[#D1FAE5] via-[#A7F3D0] to-[#6EE7B7] dark:from-[#064E3B] dark:to-[#022C22]",
-                  tc: "text-[#065F46] dark:text-[#34D399]",
-                  dc: "text-[#047857] dark:text-[#A7F3D0]",
+                  spot: "from-emerald-400/20",
                   preview: (
-                    <div className="rounded-xl border border-emerald-500/20 bg-white/80 dark:bg-black/30 p-3 text-[11px] space-y-1.5 shadow-xs">
-                      <div className="flex items-center justify-between text-emerald-900 dark:text-[#2DD4BF] font-bold">
+                    <div className="rounded-xl border border-emerald-500/20 bg-[#F0FDFA] dark:bg-[#0F3531] p-3 text-[11px] space-y-1.5 shadow-xs">
+                      <div className="flex items-center justify-between text-emerald-800 dark:text-[#2DD4BF] font-bold">
                         <span className="flex items-center gap-1"><Sparkles className="h-3 w-3" /> AI Note Draft</span>
                         <span>ICD-10 Ready</span>
                       </div>
-                      <p className="text-[#065F46] dark:text-[#A7F3D0] font-mono text-[10px]">Patient presents with acute pharyngitis. Prescribed Amoxicillin 500mg.</p>
+                      <p className="text-[#475569] dark:text-[#A0B0AD] font-mono text-[10px]">Patient presents with acute pharyngitis. Prescribed Amoxicillin 500mg.</p>
                     </div>
                   ),
                 },
@@ -441,16 +439,14 @@ function Landing() {
                   title: "Appointment Automation",
                   desc: "Multi-channel calendar scheduling with automated WhatsApp confirmation and cancellation management.",
                   icon: Calendar,
-                  bg: "bg-gradient-to-br from-[#CCFBF1] via-[#99F6E4] to-[#5EEAD4] dark:from-[#115E59] dark:to-[#042F2C]",
-                  tc: "text-[#115E59] dark:text-[#2DD4BF]",
-                  dc: "text-[#0F766E] dark:text-[#99F6E4]",
+                  spot: "from-teal-400/20",
                   preview: (
-                    <div className="rounded-xl border border-teal-500/20 bg-white/80 dark:bg-black/30 p-3 text-[11px] space-y-1.5 shadow-xs">
+                    <div className="rounded-xl border border-teal-500/20 bg-[#EEF2FF] dark:bg-[#122438] p-3 text-[11px] space-y-1.5 shadow-xs">
                       <div className="flex items-center justify-between text-teal-900 dark:text-teal-300 font-bold">
                         <span>WhatsApp Confirmation</span>
-                        <span className="text-emerald-800 dark:text-[#2DD4BF] font-mono text-[9.5px]">Sent 09:30 AM</span>
+                        <span className="text-emerald-700 dark:text-[#2DD4BF] font-mono text-[9.5px]">Sent 09:30 AM</span>
                       </div>
-                      <p className="text-[#115E59] dark:text-[#99F6E4] text-[10.5px]">"Hello Ava, your visit with Dr. Reyes is confirmed for 10:30 AM today."</p>
+                      <p className="text-[#475569] dark:text-[#A0B0AD] text-[10.5px]">"Hello Ava, your visit with Dr. Reyes is confirmed for 10:30 AM today."</p>
                     </div>
                   ),
                 },
@@ -458,16 +454,14 @@ function Landing() {
                   title: "Medical Billing & Stripe",
                   desc: "Accept online payments, issue digital receipts, and track clinic revenue with automated reconciliation.",
                   icon: Receipt,
-                  bg: "bg-gradient-to-br from-[#ECFCCB] via-[#D9F99D] to-[#BEF264] dark:from-[#3F6212] dark:to-[#1A2E05]",
-                  tc: "text-[#3F6212] dark:text-[#A3E635]",
-                  dc: "text-[#4D7C0F] dark:text-[#D9F99D]",
+                  spot: "from-lime-400/20",
                   preview: (
-                    <div className="rounded-xl border border-lime-500/20 bg-white/80 dark:bg-black/30 p-3 text-[11px] space-y-1.5 shadow-xs">
+                    <div className="rounded-xl border border-lime-500/20 bg-[#FFF7ED] dark:bg-[#2E2014] p-3 text-[11px] space-y-1.5 shadow-xs">
                       <div className="flex items-center justify-between text-lime-900 dark:text-lime-300 font-bold">
                         <span>Stripe Payment #INV-2841</span>
-                        <span className="text-emerald-900 dark:text-[#2DD4BF] font-bold">$129 Paid</span>
+                        <span className="text-emerald-800 dark:text-[#2DD4BF] font-bold">$129 Paid</span>
                       </div>
-                      <p className="text-[#3F6212] dark:text-[#D9F99D] font-mono text-[10px]">Consultation Fee · Card •••• 4242</p>
+                      <p className="text-[#475569] dark:text-[#A0B0AD] font-mono text-[10px]">Consultation Fee · Card •••• 4242</p>
                     </div>
                   ),
                 },
@@ -478,16 +472,16 @@ function Landing() {
                     key={card.title}
                     data-reveal
                     data-reveal-delay={String(i + 1)}
-                    className={`rounded-[8px] border-none ${card.bg} p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between`}
+                    className={`rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${card.spot} via-transparent to-transparent p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between`}
                   >
                     <div className="space-y-3">
-                      <div className="h-10 w-10 rounded-xl bg-white/80 dark:bg-black/30 text-[#0F766E] dark:text-[#2DD4BF] flex items-center justify-center shadow-xs">
+                      <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#EFFFFE] to-[#CCFBF1] dark:from-[#0F3531] dark:to-[#092523] text-[#0F766E] dark:text-[#2DD4BF] flex items-center justify-center shadow-xs">
                         <Icon className="h-5 w-5" />
                       </div>
-                      <h3 className={`text-[16px] font-bold ${card.tc}`}>{card.title}</h3>
-                      <p className={`text-[13px] leading-relaxed font-semibold ${card.dc}`}>{card.desc}</p>
+                      <h3 className="text-[16px] font-bold text-[#0F172A] dark:text-white">{card.title}</h3>
+                      <p className="text-[13px] text-[#475569] dark:text-[#A0B0AD] leading-relaxed font-medium">{card.desc}</p>
                     </div>
-                    <div className="mt-5 pt-4 border-t border-black/10 dark:border-white/10">
+                    <div className="mt-5 pt-4 border-t border-[#0D9488]/15 dark:border-[#0D9488]/30">
                       {card.preview}
                     </div>
                   </div>
@@ -511,22 +505,22 @@ function Landing() {
 
             <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
               {[
-                { step: "01", title: "Booking", sub: "Online or front desk", bg: "bg-gradient-to-br from-[#D1FAE5] to-[#A7F3D0] dark:from-[#064E3B] dark:to-[#022C22]", tc: "text-[#065F46] dark:text-[#34D399]", sc: "text-[#047857] dark:text-[#A7F3D0]" },
-                { step: "02", title: "Confirmation", sub: "WhatsApp alert sent", bg: "bg-gradient-to-br from-[#CCFBF1] to-[#99F6E4] dark:from-[#115E59] dark:to-[#042F2C]", tc: "text-[#115E59] dark:text-[#2DD4BF]", sc: "text-[#0F766E] dark:text-[#99F6E4]" },
-                { step: "03", title: "Consultation", sub: "Doctor notes & EMR", bg: "bg-gradient-to-br from-[#ECFCCB] to-[#D9F99D] dark:from-[#3F6212] dark:to-[#1A2E05]", tc: "text-[#3F6212] dark:text-[#A3E635]", sc: "text-[#4D7C0F] dark:text-[#D9F99D]" },
-                { step: "04", title: "Prescription", sub: "Digital PDF signature", bg: "bg-gradient-to-br from-[#E0E7FF] to-[#C7D2FE] dark:from-[#3730A3] dark:to-[#1E1B4B]", tc: "text-[#3730A3] dark:text-[#818CF8]", sc: "text-[#4338CA] dark:text-[#C7D2FE]" },
-                { step: "05", title: "Billing", sub: "Stripe or cash receipt", bg: "bg-gradient-to-br from-[#D1FAE5] to-[#A7F3D0] dark:from-[#064E3B] dark:to-[#022C22]", tc: "text-[#065F46] dark:text-[#34D399]", sc: "text-[#047857] dark:text-[#A7F3D0]" },
-                { step: "06", title: "Follow-up", sub: "Automated feedback", bg: "bg-gradient-to-br from-[#CCFBF1] to-[#99F6E4] dark:from-[#115E59] dark:to-[#042F2C]", tc: "text-[#115E59] dark:text-[#2DD4BF]", sc: "text-[#0F766E] dark:text-[#99F6E4]" },
+                { step: "01", title: "Booking", sub: "Online or front desk", spot: "from-emerald-400/20" },
+                { step: "02", title: "Confirmation", sub: "WhatsApp alert sent", spot: "from-teal-400/20" },
+                { step: "03", title: "Consultation", sub: "Doctor notes & EMR", spot: "from-lime-400/20" },
+                { step: "04", title: "Prescription", sub: "Digital PDF signature", spot: "from-indigo-400/20" },
+                { step: "05", title: "Billing", sub: "Stripe or cash receipt", spot: "from-emerald-400/20" },
+                { step: "06", title: "Follow-up", sub: "Automated feedback", spot: "from-teal-400/20" },
               ].map((s, idx) => (
                 <div
                   key={s.step}
                   data-reveal
                   data-reveal-delay={String((idx % 3) + 1)}
-                  className={`rounded-[8px] border-none ${s.bg} p-4 text-center relative group hover:scale-[1.02] transition-all shadow-xs`}
+                  className={`rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${s.spot} via-transparent to-transparent p-4 text-center relative group hover:border-[#0D9488] transition-all shadow-xs`}
                 >
-                  <div className={`font-mono text-[12px] font-bold mb-1 ${s.sc}`}>{s.step}</div>
-                  <div className={`font-bold text-[13px] ${s.tc}`}>{s.title}</div>
-                  <div className={`text-[10.5px] font-semibold mt-0.5 ${s.sc}`}>{s.sub}</div>
+                  <div className="font-mono text-[12px] font-bold text-[#0D9488] dark:text-[#2DD4BF] mb-1">{s.step}</div>
+                  <div className="font-bold text-[13px] text-[#0F172A] dark:text-white">{s.title}</div>
+                  <div className="text-[10.5px] text-[#64748B] dark:text-[#809995] font-medium mt-0.5">{s.sub}</div>
                 </div>
               ))}
             </div>
@@ -583,10 +577,10 @@ function Landing() {
                 {activePreviewTab === "dashboard" && (
                   <div className="space-y-4 animate-fade-in">
                     <div className="grid grid-cols-4 gap-3">
-                      <div className="rounded-[8px] border-none p-3 bg-gradient-to-br from-[#D1FAE5] via-[#A7F3D0] to-[#6EE7B7] dark:from-[#064E3B] dark:to-[#022C22]"><div className="text-[10px] uppercase font-mono text-[#065F46] dark:text-[#6EE7B7] font-bold">Total Patients</div><div className="text-xl font-black text-[#047857] dark:text-[#34D399]">4,892</div></div>
-                      <div className="rounded-[8px] border-none p-3 bg-gradient-to-br from-[#ECFCCB] via-[#D9F99D] to-[#BEF264] dark:from-[#3F6212] dark:to-[#1A2E05]"><div className="text-[10px] uppercase font-mono text-[#3F6212] dark:text-[#BEF264] font-bold">Appointments</div><div className="text-xl font-black text-[#4D7C0F] dark:text-[#A3E635]">142 Today</div></div>
-                      <div className="rounded-[8px] border-none p-3 bg-gradient-to-br from-[#CCFBF1] via-[#99F6E4] to-[#5EEAD4] dark:from-[#115E59] dark:to-[#042F2C]"><div className="text-[10px] uppercase font-mono text-[#115E59] dark:text-[#5EEAD4] font-bold">Revenue</div><div className="text-xl font-black text-[#0F766E] dark:text-[#2DD4BF]">$18,420</div></div>
-                      <div className="rounded-[8px] border-none p-3 bg-gradient-to-br from-[#E0E7FF] via-[#C7D2FE] to-[#A5B4FC] dark:from-[#3730A3] dark:to-[#1E1B4B]"><div className="text-[10px] uppercase font-mono text-[#3730A3] dark:text-[#A5B4FC] font-bold">Active Doctors</div><div className="text-xl font-black text-[#4338CA] dark:text-[#818CF8]">12 On Duty</div></div>
+                      <div className="rounded-[8px] border border-[#0D9488]/20 dark:border-[#0D9488]/40 p-3 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-400/20 via-transparent to-transparent"><div className="text-[10px] uppercase font-mono text-[#0F766E] dark:text-[#2DD4BF] font-bold">Total Patients</div><div className="text-xl font-black text-[#0F172A] dark:text-white">4,892</div></div>
+                      <div className="rounded-[8px] border border-[#0D9488]/20 dark:border-[#0D9488]/40 p-3 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-lime-400/20 via-transparent to-transparent"><div className="text-[10px] uppercase font-mono text-[#4D7C0F] dark:text-[#A3E635] font-bold">Appointments</div><div className="text-xl font-black text-[#0F172A] dark:text-white">142 Today</div></div>
+                      <div className="rounded-[8px] border border-[#0D9488]/20 dark:border-[#0D9488]/40 p-3 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-teal-400/20 via-transparent to-transparent"><div className="text-[10px] uppercase font-mono text-[#0F766E] dark:text-[#2DD4BF] font-bold">Revenue</div><div className="text-xl font-black text-[#0F172A] dark:text-white">$18,420</div></div>
+                      <div className="rounded-[8px] border border-[#0D9488]/20 dark:border-[#0D9488]/40 p-3 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-400/20 via-transparent to-transparent"><div className="text-[10px] uppercase font-mono text-[#4338CA] dark:text-[#818CF8] font-bold">Active Doctors</div><div className="text-xl font-black text-[#0F172A] dark:text-white">12 On Duty</div></div>
                     </div>
                     <div className="rounded-xl border border-emerald-500/20 bg-white dark:bg-[#0D2926] p-4 shadow-sm">
                       <div className="flex justify-between items-center text-[12px] font-bold text-[#0F172A] dark:text-white mb-2"><span>Real-time Clinical Operations</span><span className="text-emerald-700 dark:text-[#2DD4BF] font-mono text-[11px]">Updated 1 min ago</span></div>
@@ -664,9 +658,9 @@ function Landing() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
-                { title: "Multi-Tenant Architecture", desc: "Isolated clinic data boundaries with multi-campus hospital organization support.", icon: Server, bg: "bg-gradient-to-br from-[#D1FAE5] via-[#A7F3D0] to-[#6EE7B7] dark:from-[#064E3B] dark:to-[#022C22]", tc: "text-[#065F46] dark:text-[#34D399]", dc: "text-[#047857] dark:text-[#A7F3D0]" },
-                { title: "Role-Based Access Control", desc: "Granular permissions for Doctors, Nurses, Receptionists, and Billing staff.", icon: KeyRound, bg: "bg-gradient-to-br from-[#CCFBF1] via-[#99F6E4] to-[#5EEAD4] dark:from-[#115E59] dark:to-[#042F2C]", tc: "text-[#115E59] dark:text-[#2DD4BF]", dc: "text-[#0F766E] dark:text-[#99F6E4]" },
-                { title: "Immutable Audit Logging", desc: "Complete timestamped records of every patient chart view and prescription edit.", icon: FileText, bg: "bg-gradient-to-br from-[#E0E7FF] via-[#C7D2FE] to-[#A5B4FC] dark:from-[#3730A3] dark:to-[#1E1B4B]", tc: "text-[#3730A3] dark:text-[#818CF8]", dc: "text-[#4338CA] dark:text-[#C7D2FE]" },
+                { title: "Multi-Tenant Architecture", desc: "Isolated clinic data boundaries with multi-campus hospital organization support.", icon: Server, spot: "from-emerald-400/20" },
+                { title: "Role-Based Access Control", desc: "Granular permissions for Doctors, Nurses, Receptionists, and Billing staff.", icon: KeyRound, spot: "from-teal-400/20" },
+                { title: "Immutable Audit Logging", desc: "Complete timestamped records of every patient chart view and prescription edit.", icon: FileText, spot: "from-indigo-400/20" },
               ].map((e, idx) => {
                 const Icon = e.icon;
                 return (
@@ -674,13 +668,13 @@ function Landing() {
                     key={e.title}
                     data-reveal
                     data-reveal-delay={String(idx + 1)}
-                    className={`rounded-[8px] border-none ${e.bg} p-6 shadow-xs hover:shadow-md transition-all`}
+                    className={`rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${e.spot} via-transparent to-transparent p-6 shadow-xs hover:shadow-md transition-all`}
                   >
-                    <div className="h-10 w-10 rounded-xl bg-white/80 dark:bg-black/30 text-[#0F766E] dark:text-[#2DD4BF] flex items-center justify-center mb-4 shadow-xs">
+                    <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#EFFFFE] to-[#CCFBF1] dark:from-[#0F3531] dark:to-[#092523] text-[#0F766E] dark:text-[#2DD4BF] flex items-center justify-center mb-4 shadow-xs">
                       <Icon className="h-5 w-5" />
                     </div>
-                    <h3 className={`text-[15px] font-bold ${e.tc}`}>{e.title}</h3>
-                    <p className={`text-[13px] mt-1.5 leading-relaxed font-semibold ${e.dc}`}>{e.desc}</p>
+                    <h3 className="text-[15px] font-bold text-[#0F172A] dark:text-white">{e.title}</h3>
+                    <p className="text-[13px] text-[#475569] dark:text-[#A0B0AD] mt-1.5 leading-relaxed font-medium">{e.desc}</p>
                   </div>
                 );
               })}
@@ -693,20 +687,20 @@ function Landing() {
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div data-reveal className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { icon: Shield, t: "HIPAA Compliant", s: "End-to-end encrypted data", bg: "bg-gradient-to-br from-[#D1FAE5] via-[#A7F3D0] to-[#6EE7B7] dark:from-[#064E3B] dark:to-[#022C22]", tc: "text-[#065F46] dark:text-[#34D399]", sc: "text-[#047857] dark:text-[#A7F3D0]" },
-                { icon: Lock, t: "GDPR Certified", s: "Strict privacy safeguards", bg: "bg-gradient-to-br from-[#CCFBF1] via-[#99F6E4] to-[#5EEAD4] dark:from-[#115E59] dark:to-[#042F2C]", tc: "text-[#115E59] dark:text-[#2DD4BF]", sc: "text-[#0F766E] dark:text-[#99F6E4]" },
-                { icon: Clock, t: "99.9% Uptime SLA", s: "Guaranteed cloud reliability", bg: "bg-gradient-to-br from-[#ECFCCB] via-[#D9F99D] to-[#BEF264] dark:from-[#3F6212] dark:to-[#1A2E05]", tc: "text-[#3F6212] dark:text-[#A3E635]", sc: "text-[#4D7C0F] dark:text-[#D9F99D]" },
-                { icon: Award, t: "ISO 27001", s: "Enterprise security standard", bg: "bg-gradient-to-br from-[#E0E7FF] via-[#C7D2FE] to-[#A5B4FC] dark:from-[#3730A3] dark:to-[#1E1B4B]", tc: "text-[#3730A3] dark:text-[#818CF8]", sc: "text-[#4338CA] dark:text-[#C7D2FE]" },
+                { icon: Shield, t: "HIPAA Compliant", s: "End-to-end encrypted data", spot: "from-emerald-400/20" },
+                { icon: Lock, t: "GDPR Certified", s: "Strict privacy safeguards", spot: "from-teal-400/20" },
+                { icon: Clock, t: "99.9% Uptime SLA", s: "Guaranteed cloud reliability", spot: "from-lime-400/20" },
+                { icon: Award, t: "ISO 27001", s: "Enterprise security standard", spot: "from-indigo-400/20" },
               ].map((item, i) => {
                 const Icon = item.icon;
                 return (
-                  <div key={item.t} data-reveal data-reveal-delay={String(i + 1)} className={`flex items-start gap-3 p-4 rounded-[8px] border-none ${item.bg} shadow-xs`}>
-                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/80 dark:bg-black/30 text-[#0D9488] dark:text-[#2DD4BF] shadow-xs">
+                  <div key={item.t} data-reveal data-reveal-delay={String(i + 1)} className={`flex items-start gap-3 p-4 rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${item.spot} via-transparent to-transparent shadow-xs`}>
+                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[#EFFFFE] to-[#CCFBF1] dark:from-[#0F3531] dark:to-[#092523] text-[#0D9488] dark:text-[#2DD4BF] shadow-xs">
                       <Icon className="h-4.5 w-4.5" />
                     </div>
                     <div>
-                      <div className={`text-[13px] font-bold ${item.tc}`}>{item.t}</div>
-                      <div className={`text-[11px] font-semibold ${item.sc}`}>{item.s}</div>
+                      <div className="text-[13px] font-bold text-[#0F172A] dark:text-white">{item.t}</div>
+                      <div className="text-[11px] text-[#64748B] dark:text-[#809995] font-medium">{item.s}</div>
                     </div>
                   </div>
                 );
@@ -729,29 +723,29 @@ function Landing() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {[
-                { name: "Dr. Sarah Ahmed", role: "General Practitioner, Karachi", quote: "Autonique transformed how we manage our clinic. Patient no-shows dropped by 55% after using WhatsApp reminders.", stars: 5, delay: "1", bg: "bg-gradient-to-br from-[#D1FAE5] via-[#A7F3D0] to-[#6EE7B7] dark:from-[#064E3B] dark:to-[#022C22]", tc: "text-[#065F46] dark:text-[#34D399]", rc: "text-[#047857] dark:text-[#A7F3D0]" },
-                { name: "Dr. Farhan Malik", role: "Orthopedic Surgeon, Lahore", quote: "The billing and prescription modules save us 3+ hours every single day. It's the best investment we've made for our practice.", stars: 5, delay: "2", bg: "bg-gradient-to-br from-[#CCFBF1] via-[#99F6E4] to-[#5EEAD4] dark:from-[#115E59] dark:to-[#042F2C]", tc: "text-[#115E59] dark:text-[#2DD4BF]", rc: "text-[#0F766E] dark:text-[#99F6E4]" },
-                { name: "Dr. Nadia Reyes", role: "Clinic Director, Islamabad", quote: "From EMR to payments — everything is in one place. Our staff onboarded in just 2 days. Absolutely seamless.", stars: 5, delay: "3", bg: "bg-gradient-to-br from-[#ECFCCB] via-[#D9F99D] to-[#BEF264] dark:from-[#3F6212] dark:to-[#1A2E05]", tc: "text-[#3F6212] dark:text-[#A3E635]", rc: "text-[#4D7C0F] dark:text-[#D9F99D]" },
+                { name: "Dr. Sarah Ahmed", role: "General Practitioner, Karachi", quote: "Autonique transformed how we manage our clinic. Patient no-shows dropped by 55% after using WhatsApp reminders.", stars: 5, delay: "1", spot: "from-emerald-400/20" },
+                { name: "Dr. Farhan Malik", role: "Orthopedic Surgeon, Lahore", quote: "The billing and prescription modules save us 3+ hours every single day. It's the best investment we've made for our practice.", stars: 5, delay: "2", spot: "from-teal-400/20" },
+                { name: "Dr. Nadia Reyes", role: "Clinic Director, Islamabad", quote: "From EMR to payments — everything is in one place. Our staff onboarded in just 2 days. Absolutely seamless.", stars: 5, delay: "3", spot: "from-lime-400/20" },
               ].map((t) => (
                 <div
                   key={t.name}
                   data-reveal
                   data-reveal-delay={t.delay}
-                  className={`rounded-[8px] border-none ${t.bg} p-6 shadow-xs hover:shadow-md transition-all flex flex-col gap-4`}
+                  className={`rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${t.spot} via-transparent to-transparent p-6 shadow-xs hover:shadow-md transition-all flex flex-col gap-4`}
                 >
                   <div className="flex gap-0.5">
                     {Array(t.stars).fill(0).map((_, i) => (
                       <Star key={i} className="h-4 w-4 fill-[#F59E0B] text-[#F59E0B]" />
                     ))}
                   </div>
-                  <p className={`text-[13.5px] leading-relaxed font-semibold flex-1 ${t.tc}`}>"{t.quote}"</p>
-                  <div className="flex items-center gap-2.5 pt-3 border-t border-black/10 dark:border-white/10">
+                  <p className="text-[13.5px] leading-relaxed text-[#334155] dark:text-[#A0B0AD] font-medium flex-1">"{t.quote}"</p>
+                  <div className="flex items-center gap-2.5 pt-3 border-t border-[#0D9488]/15 dark:border-[#0D9488]/30">
                     <div className="grid h-9 w-9 place-items-center rounded-full bg-[#0F766E] text-white font-bold text-[13px]">
                       {t.name[3]}
                     </div>
                     <div>
-                      <div className={`text-[13px] font-bold ${t.tc}`}>{t.name}</div>
-                      <div className={`text-[11px] font-semibold ${t.rc}`}>{t.role}</div>
+                      <div className="text-[13px] font-bold text-[#0F172A] dark:text-white">{t.name}</div>
+                      <div className="text-[11px] text-[#64748B] dark:text-[#809995] font-medium">{t.role}</div>
                     </div>
                   </div>
                 </div>
@@ -792,17 +786,17 @@ function Landing() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {[
-                { n: "Starter", p: annualBilling ? "$39" : "$49", s: "For solo doctor practices.", f: ["Smart calendar scheduling", "Structured patient records", "Automated email reminders", "Standard revenue reports"], delay: "1", bg: "bg-gradient-to-br from-[#D1FAE5] via-[#A7F3D0] to-[#6EE7B7] dark:from-[#064E3B] dark:to-[#022C22]", tc: "text-[#065F46] dark:text-[#34D399]", fc: "text-[#047857] dark:text-[#A7F3D0]" },
-                { n: "Growth", p: annualBilling ? "$99" : "$129", s: "For growing clinic teams.", f: ["Everything in Starter", "Stripe payment gateway", "WhatsApp automation", "Priority 24/7 support"], highlight: true, delay: "2", bg: "bg-gradient-to-br from-[#CCFBF1] via-[#99F6E4] to-[#5EEAD4] dark:from-[#115E59] dark:to-[#042F2C]", tc: "text-[#115E59] dark:text-[#2DD4BF]", fc: "text-[#0F766E] dark:text-[#99F6E4]" },
-                { n: "Enterprise", p: "Custom", s: "For hospital groups.", f: ["Custom EMR integrations", "Immutable audit logs", "99.99% SLA & dedicated CSM", "Custom BAA — HIPAA"], delay: "3", bg: "bg-gradient-to-br from-[#E0E7FF] via-[#C7D2FE] to-[#A5B4FC] dark:from-[#3730A3] dark:to-[#1E1B4B]", tc: "text-[#3730A3] dark:text-[#818CF8]", fc: "text-[#4338CA] dark:text-[#C7D2FE]" },
+                { n: "Starter", p: annualBilling ? "$39" : "$49", s: "For solo doctor practices.", f: ["Smart calendar scheduling", "Structured patient records", "Automated email reminders", "Standard revenue reports"], delay: "1", spot: "from-emerald-400/20" },
+                { n: "Growth", p: annualBilling ? "$99" : "$129", s: "For growing clinic teams.", f: ["Everything in Starter", "Stripe payment gateway", "WhatsApp automation", "Priority 24/7 support"], highlight: true, delay: "2", spot: "from-teal-400/30" },
+                { n: "Enterprise", p: "Custom", s: "For hospital groups.", f: ["Custom EMR integrations", "Immutable audit logs", "99.99% SLA & dedicated CSM", "Custom BAA — HIPAA"], delay: "3", spot: "from-indigo-400/20" },
               ].map((t) => (
                 <div
                   key={t.n}
                   data-reveal
                   data-reveal-delay={t.delay}
-                  className={`rounded-[8px] border-none p-6 flex flex-col justify-between transition-all duration-300 ${t.bg} ${
+                  className={`rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${t.spot} via-transparent to-transparent p-6 flex flex-col justify-between transition-all duration-300 ${
                     t.highlight
-                      ? "ring-2 ring-[#0D9488]/40 shadow-xl scale-[1.02]"
+                      ? "border-[#0D9488] ring-2 ring-[#0D9488]/40 shadow-xl scale-[1.02]"
                       : "shadow-xs hover:shadow-md"
                   }`}
                 >
@@ -812,17 +806,17 @@ function Landing() {
                         Most Popular
                       </div>
                     )}
-                    <h3 className={`text-[15px] font-bold ${t.tc}`}>{t.n}</h3>
-                    <div className={`mt-1 font-display text-3xl font-extrabold tracking-tight ${t.tc}`}>
+                    <h3 className="text-[15px] font-bold text-[#0F172A] dark:text-white">{t.n}</h3>
+                    <div className="mt-1 font-display text-3xl font-extrabold tracking-tight text-[#0F172A] dark:text-white">
                       {t.p}
                       {t.p !== "Custom" && (
-                        <span className={`ml-1 font-mono text-[11.5px] font-normal ${t.fc}`}>/ mo</span>
+                        <span className="ml-1 font-mono text-[11.5px] text-[#64748B] dark:text-[#809995] font-normal">/ mo</span>
                       )}
                     </div>
-                    <div className={`mt-0.5 text-[12px] font-semibold ${t.fc}`}>{t.s}</div>
+                    <div className="mt-0.5 text-[12px] text-[#64748B] dark:text-[#809995] font-medium">{t.s}</div>
                     <ul className="mt-5 space-y-2.5">
                       {t.f.map((i) => (
-                        <li key={i} className={`flex items-center gap-2 text-[12.5px] font-semibold ${t.fc}`}>
+                        <li key={i} className="flex items-center gap-2 text-[12.5px] text-[#334155] dark:text-[#E2F1F0] font-medium">
                           <CheckCircle2 className="h-4 w-4 text-[#0F766E] dark:text-[#2DD4BF] shrink-0" />
                           {i}
                         </li>
@@ -834,7 +828,7 @@ function Landing() {
                     className={`mt-6 inline-flex h-10 w-full items-center justify-center rounded-xl text-[13px] font-bold transition-all duration-300 cursor-pointer ${
                       t.highlight
                         ? "bg-gradient-to-r from-[#0F766E] to-[#0D9488] hover:from-[#0A5754] hover:to-[#0F766E] text-white shadow-lg shadow-[#0D9488]/25"
-                        : "border border-black/10 dark:border-white/10 bg-white/80 dark:bg-black/30 hover:bg-white text-[#0F766E] dark:text-[#2DD4BF]"
+                        : "border border-[#0D9488]/25 dark:border-[#0D9488]/40 bg-[#F8FFFE] dark:bg-[#0F3531] hover:bg-[#EFFFFE] text-[#0F766E] dark:text-[#2DD4BF]"
                     }`}
                   >
                     Start Free Trial
@@ -868,17 +862,17 @@ function Landing() {
                   key={faq.q}
                   data-reveal
                   data-reveal-delay={String(i + 1)}
-                  className="rounded-[8px] border-none bg-gradient-to-br from-[#D1FAE5] via-[#A7F3D0] to-[#6EE7B7] dark:from-[#064E3B] dark:to-[#022C22] overflow-hidden shadow-xs"
+                  className="rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-400/10 via-transparent to-transparent overflow-hidden shadow-xs"
                 >
                   <button
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex items-center justify-between p-5 text-left font-bold text-[14px] text-[#065F46] dark:text-[#34D399] cursor-pointer"
+                    className="w-full flex items-center justify-between p-5 text-left font-bold text-[14px] text-[#0F172A] dark:text-white cursor-pointer"
                   >
                     <span>{faq.q}</span>
-                    <ChevronDown className={`h-4 w-4 text-[#047857] dark:text-[#2DD4BF] transition-transform ${openFaq === i ? "rotate-180" : ""}`} />
+                    <ChevronDown className={`h-4 w-4 text-[#0D9488] dark:text-[#2DD4BF] transition-transform ${openFaq === i ? "rotate-180" : ""}`} />
                   </button>
                   {openFaq === i && (
-                    <div className="px-5 pb-5 pt-0 text-[13px] text-[#047857] dark:text-[#A7F3D0] leading-relaxed font-semibold border-t border-emerald-500/20 mt-1">
+                    <div className="px-5 pb-5 pt-0 text-[13px] text-[#475569] dark:text-[#A0B0AD] leading-relaxed font-medium border-t border-[#0D9488]/10 dark:border-[#0D9488]/20 mt-1">
                       {faq.a}
                     </div>
                   )}

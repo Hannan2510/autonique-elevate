@@ -536,7 +536,7 @@ function Landing() {
           </div>
         </section>
 
-        {/* ─── 6. How It Works ─── */}
+        {/* ─── 6. How It Works (Workflow & Calendar Illustration) ─── */}
         <section id="workflow" className="py-20 border-t border-[#0D9488]/12 dark:border-[#0D9488]/30 bg-white dark:bg-[#0A201E] relative z-10">
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div data-reveal className="text-center max-w-xl mx-auto mb-14 space-y-2">
@@ -548,26 +548,40 @@ function Landing() {
               </h2>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
-              {[
-                { step: "01", title: "Booking", sub: "Online or front desk", spot: "from-emerald-400/20" },
-                { step: "02", title: "Confirmation", sub: "WhatsApp alert sent", spot: "from-teal-400/20" },
-                { step: "03", title: "Consultation", sub: "Doctor notes & EMR", spot: "from-lime-400/20" },
-                { step: "04", title: "Prescription", sub: "Digital PDF signature", spot: "from-indigo-400/20" },
-                { step: "05", title: "Billing", sub: "Stripe or cash receipt", spot: "from-emerald-400/20" },
-                { step: "06", title: "Follow-up", sub: "Automated feedback", spot: "from-teal-400/20" },
-              ].map((s, idx) => (
-                <div
-                  key={s.step}
-                  data-reveal
-                  data-reveal-delay={String((idx % 3) + 1)}
-                  className={`rounded-[8px] border-none bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${s.spot} via-transparent to-transparent p-4 text-center relative group transition-all shadow-xs`}
-                >
-                  <div className="font-mono text-[12px] font-bold text-[#0D9488] dark:text-[#2DD4BF] mb-1">{s.step}</div>
-                  <div className="font-bold text-[13px] text-[#0F172A] dark:text-white">{s.title}</div>
-                  <div className="text-[10.5px] text-[#64748B] dark:text-[#809995] font-medium mt-0.5">{s.sub}</div>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              {/* Left Column: 6 Workflow Step Cards */}
+              <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {[
+                  { step: "01", title: "Booking", sub: "Online or front desk", spot: "from-emerald-400/20" },
+                  { step: "02", title: "Confirmation", sub: "WhatsApp alert sent", spot: "from-teal-400/20" },
+                  { step: "03", title: "Consultation", sub: "Doctor notes & EMR", spot: "from-lime-400/20" },
+                  { step: "04", title: "Prescription", sub: "Digital PDF signature", spot: "from-indigo-400/20" },
+                  { step: "05", title: "Billing", sub: "Stripe or cash receipt", spot: "from-emerald-400/20" },
+                  { step: "06", title: "Follow-up", sub: "Automated feedback", spot: "from-teal-400/20" },
+                ].map((s, idx) => (
+                  <div
+                    key={s.step}
+                    data-reveal
+                    data-reveal-delay={String((idx % 3) + 1)}
+                    className={`rounded-[8px] border-none bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${s.spot} via-transparent to-transparent p-4 text-center relative group transition-all shadow-xs hover:shadow-md`}
+                  >
+                    <div className="font-mono text-[12px] font-bold text-[#0D9488] dark:text-[#2DD4BF] mb-1">{s.step}</div>
+                    <div className="font-bold text-[13px] text-[#0F172A] dark:text-white">{s.title}</div>
+                    <div className="text-[10.5px] text-[#64748B] dark:text-[#809995] font-medium mt-0.5">{s.sub}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Right Column: Appointment Booking Vector Illustration */}
+              <div data-reveal data-reveal-delay="2" className="lg:col-span-5 flex justify-center">
+                <div className="rounded-[8px] border-none bg-[#F8FFFE] dark:bg-[#0D2926] p-6 shadow-xs flex items-center justify-center transition-all hover:scale-[1.01]">
+                  <img
+                    src="/appointment-booking-illustration.png"
+                    alt="Autonique Clinic Appointment Booking Illustration"
+                    className="w-full h-auto max-h-[300px] object-contain dark:brightness-95 contrast-[1.02]"
+                  />
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </section>

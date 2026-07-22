@@ -138,68 +138,13 @@ function Landing() {
                   <span className="font-mono text-[9px] text-emerald-300 bg-emerald-500/20 px-1.5 py-0.2 rounded font-semibold">Live</span>
                 </div>
 
-                {/* Dashboard Canvas */}
-                <div className="p-4 bg-[#f8faf9] space-y-3.5 text-left">
-                  
-                  {/* Top Bar */}
-                  <div className="flex items-center justify-between border-b border-border/40 pb-2">
-                    <span className="inline-flex items-center gap-1 rounded-full border border-[#00a878]/30 bg-[#e6f7f0] px-2 py-0.5 font-mono text-[9.5px] font-semibold text-[#00684a]">
-                      <span className="h-1.5 w-1.5 rounded-full bg-[#00a878] animate-pulse" /> Operational
-                    </span>
-                    <div className="flex items-center gap-1.5">
-                      <div className="grid h-5.5 w-5.5 place-items-center rounded-full bg-[#00a878] text-white font-bold text-[9.5px]">IR</div>
-                      <span className="text-[11px] font-semibold text-[#0f172a]">Dr. Reyes</span>
-                    </div>
-                  </div>
-
-                  {/* Greeting */}
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h4 className="font-display text-xs sm:text-sm font-bold text-[#0f172a]">GOOD MORNING, DR. SARAH 👋</h4>
-                      <p className="text-[10px] font-mono text-[#64748b]">Today's clinic telemetry</p>
-                    </div>
-                    <span className="font-mono text-[9.5px] bg-[#e6f7f0] text-[#00684a] px-2 py-0.5 rounded font-semibold">Clinic Open</span>
-                  </div>
-
-                  {/* 4 Light Green KPI Cards */}
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="rounded-xl p-2.5 border border-[#00a878]/15 bg-[#E6F7F0]">
-                      <span className="text-[9.5px] font-semibold text-[#1e293b] block">Patients</span>
-                      <span className="font-display text-base font-bold text-[#0f172a] block mt-0.5">4,892</span>
-                      <span className="text-[9px] font-mono text-[#00684a] font-semibold block mt-0.5">+12% month</span>
-                    </div>
-                    <div className="rounded-xl p-2.5 border border-[#84cc16]/20 bg-[#F4FBF0]">
-                      <span className="text-[9.5px] font-semibold text-[#1e293b] block">Appointments</span>
-                      <span className="font-display text-base font-bold text-[#0f172a] block mt-0.5">48</span>
-                      <span className="text-[9px] font-mono text-[#3f6212] font-semibold block mt-0.5">+8% bookings</span>
-                    </div>
-                    <div className="rounded-xl p-2.5 border border-[#00a878]/15 bg-[#E9F9F2]">
-                      <span className="text-[9.5px] font-semibold text-[#1e293b] block">Revenue</span>
-                      <span className="font-display text-base font-bold text-[#0f172a] block mt-0.5">$24,500</span>
-                      <span className="text-[9px] font-mono text-[#00684a] font-semibold block mt-0.5">+15% revenue</span>
-                    </div>
-                    <div className="rounded-xl p-2.5 border border-[#14b8a6]/20 bg-[#EAFBF7]">
-                      <span className="text-[9.5px] font-semibold text-[#1e293b] block">Active Doctors</span>
-                      <span className="font-display text-base font-bold text-[#0f172a] block mt-0.5">35</span>
-                      <span className="text-[9px] font-mono text-[#0f766e] font-semibold block mt-0.5">On Leave -2%</span>
-                    </div>
-                  </div>
-
-                  {/* Revenue Line Chart */}
-                  <div className="rounded-xl border border-border/60 bg-white p-2.5 space-y-1">
-                    <div className="flex justify-between text-[10px] font-bold text-[#0f172a]">
-                      <span>Revenue Trend</span>
-                      <span className="font-mono text-[#00a878] text-[9px]">Apr: $15,000</span>
-                    </div>
-                    <div className="h-16 pt-1">
-                      <svg viewBox="0 0 400 80" className="h-full w-full overflow-visible" preserveAspectRatio="none">
-                        <path d="M 0,60 Q 40,30 80,40 T 160,15 T 240,30 T 320,40 T 400,10" fill="none" stroke="#84cc16" strokeWidth="2.5" />
-                        <circle cx="160" cy="15" r="3" fill="#84cc16" />
-                      </svg>
-                    </div>
-                  </div>
-
-                </div>
+                {/* Exact High-Res Dashboard Image */}
+                <img
+                  src="/dashboard-home-img.png"
+                  alt="Autonique Clinical OS Dashboard"
+                  className="w-full h-auto object-cover rounded-b-2xl shadow-inner border-t border-white/10"
+                  style={{ imageRendering: "auto" }}
+                />
               </div>
 
               {/* Compact Stats Row (Directly Underneath) */}

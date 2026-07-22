@@ -272,21 +272,6 @@ function Landing() {
                     />
                   </div>
                 </div>
-
-                {/* Clean Cards with Subtle Top Radial Gradient Spotlights */}
-                <div data-reveal data-reveal-delay="3" className="grid grid-cols-4 gap-2.5 text-center">
-                  {[
-                    { v: "40K+", l: "Doctors", spotlight: "bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-400/20 via-white to-white dark:from-emerald-500/25 dark:via-[#0B201E] dark:to-[#0B201E]", tc: "text-[#047857] dark:text-[#34D399]" },
-                    { v: "25K+", l: "Clinics", spotlight: "bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-teal-400/20 via-white to-white dark:from-teal-500/25 dark:via-[#0B201E] dark:to-[#0B201E]", tc: "text-[#0F766E] dark:text-[#2DD4BF]" },
-                    { v: "8M+", l: "Patients", spotlight: "bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-lime-400/20 via-white to-white dark:from-lime-500/25 dark:via-[#0B201E] dark:to-[#0B201E]", tc: "text-[#4D7C0F] dark:text-[#A3E635]" },
-                    { v: "99.9%", l: "Uptime", spotlight: "bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-400/20 via-white to-white dark:from-indigo-500/25 dark:via-[#0B201E] dark:to-[#0B201E]", tc: "text-[#4338CA] dark:text-[#818CF8]" },
-                  ].map((s) => (
-                    <div key={s.l} className={`rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 ${s.spotlight} p-2.5 shadow-xs transition-all hover:scale-[1.02]`}>
-                      <div className={`font-display text-xl font-black ${s.tc}`}>{s.v}</div>
-                      <div className="text-[10px] font-mono font-bold text-[#64748B] dark:text-[#809995] uppercase tracking-wider">{s.l}</div>
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
           </div>

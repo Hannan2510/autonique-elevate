@@ -4,10 +4,8 @@ import {
   Search,
   Plus,
   Filter,
-  Mail,
   Phone,
   Calendar,
-  MoreHorizontal,
   Users,
   CreditCard,
   X,
@@ -165,7 +163,7 @@ function Customers() {
                   <th className="px-5 py-3 font-semibold">Contact</th>
                   <th className="px-5 py-3 font-semibold">Last Visit</th>
                   <th className="px-5 py-3 font-semibold">Status</th>
-                  <th className="px-5 py-3 font-semibold text-right">Actions</th>
+                  <th className="px-5 py-3 font-semibold"></th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border/30">
@@ -186,15 +184,9 @@ function Customers() {
                       </div>
                     </td>
                     <td className="px-5 py-3.5">
-                      <div className="space-y-0.5">
-                        <div className="flex items-center gap-1.5 font-mono text-[11px] text-foreground">
-                          <Mail className="h-3 w-3 text-muted-foreground shrink-0" />
-                          {p.email}
-                        </div>
-                        <div className="flex items-center gap-1.5 font-mono text-[10.5px] text-muted-foreground">
-                          <Phone className="h-3 w-3 shrink-0" />
-                          {p.phone}
-                        </div>
+                      <div className="flex items-center gap-1.5 font-mono text-[11px] text-foreground">
+                        <Phone className="h-3 w-3 text-muted-foreground shrink-0" />
+                        {p.phone}
                       </div>
                     </td>
                     <td className="px-5 py-3.5">
@@ -207,22 +199,13 @@ function Customers() {
                       <StatusBadge s={p.status} />
                     </td>
                     <td className="px-5 py-3.5 text-right">
-                      <div className="inline-flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button
-                          onClick={(e) => { e.stopPropagation(); setSelectedId(p.id); }}
-                          className="inline-flex items-center gap-1 h-7 px-2.5 rounded-md bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 font-medium text-[11px] transition-colors cursor-pointer"
-                          title="View Details"
-                        >
-                          <Eye className="h-3 w-3" />
-                          View
-                        </button>
-                        <button
-                          onClick={(e) => e.stopPropagation()}
-                          className="h-7 w-7 grid place-items-center rounded-md hover:bg-accent text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-                        >
-                          <MoreHorizontal className="h-3.5 w-3.5" />
-                        </button>
-                      </div>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); setSelectedId(p.id); }}
+                        className="p-1.5 rounded-lg text-muted-foreground hover:text-emerald-700 hover:bg-emerald-500/10 transition-colors cursor-pointer"
+                        title="View Patient"
+                      >
+                        <Eye className="h-4 w-4" />
+                      </button>
                     </td>
                   </tr>
                 ))}

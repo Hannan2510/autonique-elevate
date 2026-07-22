@@ -161,7 +161,7 @@ function Dashboard() {
             return (
               <div
                 key={card.title}
-                className={`rounded-xl p-3.5 sm:p-4 transition-all shadow-2xs hover:shadow-md relative overflow-hidden group cursor-pointer border border-emerald-500/10 ${card.gradientClass}`}
+                className={`rounded-xl p-3.5 sm:p-4 transition-all shadow-sm hover:shadow-md relative overflow-hidden group cursor-pointer border border-emerald-500/10 ${card.gradientClass}`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">

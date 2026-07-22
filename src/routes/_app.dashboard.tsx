@@ -153,37 +153,37 @@ function Dashboard() {
         }
       />
 
-      <div className="px-4 py-5 sm:px-8 space-y-6">
-        {/* KPI Cards Grid — Matching Gradient Pastel Cards from Image */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="px-4 py-4 sm:px-6 space-y-4 sm:space-y-5">
+        {/* KPI Cards Grid — Compact, Neat Gradient Cards */}
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {kpiCards.map((card) => {
             const Icon = card.icon;
             return (
               <div
                 key={card.title}
-                className={`rounded-2xl p-4.5 transition-all shadow-2xs hover:shadow-md relative overflow-hidden group cursor-pointer border border-emerald-500/10 ${card.gradientClass}`}
+                className={`rounded-xl p-3.5 sm:p-4 transition-all shadow-2xs hover:shadow-md relative overflow-hidden group cursor-pointer border border-emerald-500/10 ${card.gradientClass}`}
               >
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <div className="grid h-8 w-8 place-items-center rounded-full bg-white/90 dark:bg-card/90 text-foreground shadow-2xs">
-                      <Icon className="h-4 w-4 text-emerald-700 dark:text-emerald-400" />
+                  <div className="flex items-center gap-2">
+                    <div className="grid h-7 w-7 place-items-center rounded-full bg-white/90 dark:bg-card/90 text-foreground shadow-2xs">
+                      <Icon className="h-3.5 w-3.5 text-emerald-700 dark:text-emerald-400" />
                     </div>
-                    <span className="text-[13px] font-semibold text-foreground/90">{card.title}</span>
+                    <span className="text-[12px] font-semibold text-foreground/90">{card.title}</span>
                   </div>
-                  <button className="text-muted-foreground hover:text-foreground p-1 rounded hover:bg-white/40 transition-colors">
-                    <MoreHorizontal className="h-4 w-4" />
+                  <button className="text-muted-foreground hover:text-foreground p-0.5 rounded hover:bg-white/40 transition-colors">
+                    <MoreHorizontal className="h-3.5 w-3.5" />
                   </button>
                 </div>
 
-                <div className="mt-3.5 font-display text-3xl font-bold tracking-tight text-foreground">
+                <div className="mt-2.5 font-display text-[22px] sm:text-2xl font-bold tracking-tight text-foreground">
                   {card.value}
                 </div>
 
-                <div className="mt-3 flex items-center gap-2">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-white/90 dark:bg-card/90 px-2.5 py-0.5 text-[11px] font-semibold text-foreground shadow-2xs border border-black/5">
+                <div className="mt-2 flex items-center gap-2">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-white/90 dark:bg-card/90 px-2 py-0.5 text-[10px] font-semibold text-foreground shadow-2xs border border-black/5">
                     <span className="text-muted-foreground/80 font-medium">{card.badgeLabel}</span>
                     <span className={`inline-flex items-center font-mono ${card.up ? "text-emerald-700 dark:text-emerald-400" : "text-rose-600"}`}>
-                      {card.up ? <TrendingUp className="mr-0.5 h-3 w-3 inline" /> : <TrendingDown className="mr-0.5 h-3 w-3 inline" />}
+                      {card.up ? <TrendingUp className="mr-0.5 h-2.5 w-2.5 inline" /> : <TrendingDown className="mr-0.5 h-2.5 w-2.5 inline" />}
                       {card.delta}
                     </span>
                   </span>
@@ -193,20 +193,20 @@ function Dashboard() {
           })}
         </div>
 
-        {/* Charts Section — Line Chart + Donut Chart (Matching Screenshot) */}
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-          {/* Revenue Overview (Curved Line Chart with Peak Badge) */}
+        {/* Charts Section — Compact Line Chart + Donut Chart */}
+        <div className="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-3">
+          {/* Revenue Overview (Curved Line Chart) */}
           <Card
             title="Revenue Overview"
             className="lg:col-span-2 shadow-2xs"
-            padding="p-4 sm:p-5"
+            padding="p-3.5 sm:p-4"
             action={
-              <div className="flex items-center gap-1 rounded-full bg-muted/60 p-0.5 text-[11px] font-medium">
+              <div className="flex items-center gap-0.5 rounded-full bg-muted/60 p-0.5 text-[10.5px] font-medium">
                 {(["overview", "monthly", "yearly"] as const).map((t) => (
                   <button
                     key={t}
                     onClick={() => setChartTimeframe(t)}
-                    className={`rounded-full px-3 py-1 capitalize transition-all cursor-pointer ${
+                    className={`rounded-full px-2.5 py-0.5 capitalize transition-all cursor-pointer ${
                       chartTimeframe === t
                         ? "bg-background text-foreground shadow-2xs font-semibold"
                         : "text-muted-foreground hover:text-foreground"
@@ -218,65 +218,64 @@ function Dashboard() {
               </div>
             }
           >
-            <div className="text-[11.5px] text-muted-foreground mb-3 font-mono">Last 6 months performance</div>
-            <div className="h-64 w-full">
+            <div className="text-[11px] text-muted-foreground mb-2 font-mono">Last 6 months performance</div>
+            <div className="h-48 sm:h-52 w-full">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={revenueOverviewData} margin={{ top: 25, right: 20, left: -15, bottom: 0 }}>
+                <LineChart data={revenueOverviewData} margin={{ top: 20, right: 15, left: -20, bottom: 0 }}>
                   <XAxis
                     dataKey="m"
                     tickLine={false}
                     axisLine={false}
-                    tick={{ fill: "var(--muted-foreground)", fontSize: 11, fontFamily: "var(--font-mono)" }}
+                    tick={{ fill: "var(--muted-foreground)", fontSize: 10.5, fontFamily: "var(--font-mono)" }}
                   />
                   <YAxis
                     tickLine={false}
                     axisLine={false}
                     tickFormatter={(v) => `$${v / 1000}k`}
-                    tick={{ fill: "var(--muted-foreground)", fontSize: 11, fontFamily: "var(--font-mono)" }}
+                    tick={{ fill: "var(--muted-foreground)", fontSize: 10.5, fontFamily: "var(--font-mono)" }}
                   />
                   <Tooltip
                     cursor={{ stroke: "#a3e635", strokeDasharray: "3 3" }}
                     contentStyle={{
                       background: "var(--card)",
                       border: "none",
-                      borderRadius: 10,
-                      fontSize: 12,
-                      boxShadow: "0 8px 24px rgba(0, 0, 0, 0.12)",
+                      borderRadius: 8,
+                      fontSize: 11,
+                      boxShadow: "0 6px 20px rgba(0, 0, 0, 0.1)",
                     }}
                     formatter={(v: number) => [`$${v.toLocaleString()}`, "Revenue"]}
                   />
-                  {/* Vertical dashed line for Peak May value */}
                   <ReferenceLine x="May" stroke="#a3e635" strokeDasharray="3 3" />
                   <Line
                     type="monotone"
                     dataKey="v"
                     stroke="#84cc16"
-                    strokeWidth={2.75}
-                    dot={{ r: 4, fill: "#84cc16", stroke: "#ffffff", strokeWidth: 2 }}
-                    activeDot={{ r: 6, fill: "#65a30d", stroke: "#ffffff", strokeWidth: 2 }}
+                    strokeWidth={2.25}
+                    dot={{ r: 3.5, fill: "#84cc16", stroke: "#ffffff", strokeWidth: 1.75 }}
+                    activeDot={{ r: 5, fill: "#65a30d", stroke: "#ffffff", strokeWidth: 1.75 }}
                   />
                 </LineChart>
               </ResponsiveContainer>
             </div>
           </Card>
 
-          {/* Appointment Stats (Donut Chart - Matching Screenshot) */}
+          {/* Appointment Stats (Donut Chart) */}
           <Card
             title="Appointment Stats"
             className="shadow-2xs"
-            padding="p-4 sm:p-5"
-            action={<span className="text-[11px] text-muted-foreground font-mono">This month's distribution</span>}
+            padding="p-3.5 sm:p-4"
+            action={<span className="text-[10.5px] text-muted-foreground font-mono">This month's distribution</span>}
           >
-            <div className="relative flex flex-col items-center justify-center py-2">
-              <div className="h-52 w-full relative grid place-items-center">
+            <div className="relative flex flex-col items-center justify-center py-1">
+              <div className="h-44 sm:h-48 w-full relative grid place-items-center">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
                       data={appointmentStatsData}
                       cx="50%"
                       cy="50%"
-                      innerRadius={62}
-                      outerRadius={82}
+                      innerRadius={50}
+                      outerRadius={68}
                       paddingAngle={4}
                       dataKey="value"
                       stroke="none"
@@ -289,16 +288,16 @@ function Dashboard() {
                 </ResponsiveContainer>
                 {/* Center Content in Donut Chart */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                  <span className="font-display text-3xl font-bold tracking-tight text-foreground">54</span>
-                  <span className="text-[10.5px] font-medium text-muted-foreground">Total Appointment</span>
+                  <span className="font-display text-2xl font-bold tracking-tight text-foreground">54</span>
+                  <span className="text-[10px] font-medium text-muted-foreground">Total Appointment</span>
                 </div>
               </div>
 
               {/* Bottom Legend */}
-              <div className="mt-2 flex items-center justify-center gap-4 text-[11.5px] font-medium">
+              <div className="mt-1.5 flex items-center justify-center gap-3.5 text-[10.5px] font-medium">
                 {appointmentStatsData.map((item) => (
                   <div key={item.name} className="flex items-center gap-1.5">
-                    <span className="h-2 w-2 rounded-full" style={{ backgroundColor: item.color }} />
+                    <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: item.color }} />
                     <span className="text-muted-foreground">{item.name}</span>
                   </div>
                 ))}
@@ -308,43 +307,43 @@ function Dashboard() {
         </div>
 
         {/* Bottom Section — Table & Recent Patients Side List */}
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-3">
           {/* Revenue Overview Table */}
           <Card title="Revenue Overview" className="lg:col-span-2 shadow-2xs" padding="p-0">
-            <div className="px-5 py-2 text-[11.5px] text-muted-foreground font-mono">Last 6 months performance</div>
+            <div className="px-4 py-2 text-[11px] text-muted-foreground font-mono">Last 6 months performance</div>
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-[12.5px]">
-                <thead className="bg-muted/40 font-mono text-[10.5px] uppercase tracking-wider text-muted-foreground">
+              <table className="w-full text-left text-[11.5px]">
+                <thead className="bg-muted/40 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
                   <tr>
-                    <th className="px-5 py-2.5 font-semibold">Doctor</th>
-                    <th className="px-5 py-2.5 font-semibold">Patient</th>
-                    <th className="px-5 py-2.5 font-semibold">Time</th>
-                    <th className="px-5 py-2.5 font-semibold">Status</th>
-                    <th className="px-5 py-2.5 font-semibold text-right">Action</th>
+                    <th className="px-4 py-2 font-semibold">Doctor</th>
+                    <th className="px-4 py-2 font-semibold">Patient</th>
+                    <th className="px-4 py-2 font-semibold">Time</th>
+                    <th className="px-4 py-2 font-semibold">Status</th>
+                    <th className="px-4 py-2 font-semibold text-right">Action</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border/40">
                   {recentPatients.map((row, idx) => (
                     <tr key={idx} className="hover:bg-muted/20 transition-colors">
-                      <td className="px-5 py-3">
-                        <div className="flex items-center gap-2.5">
-                          <img src={row.docAvatar} alt={row.docName} className="h-7 w-7 rounded-full object-cover shadow-2xs" />
+                      <td className="px-4 py-2.5">
+                        <div className="flex items-center gap-2">
+                          <img src={row.docAvatar} alt={row.docName} className="h-6 w-6 rounded-full object-cover shadow-2xs" />
                           <div>
                             <div className="font-semibold text-foreground">{row.docName}</div>
-                            <div className="text-[10.5px] text-muted-foreground">{row.docDept}</div>
+                            <div className="text-[10px] text-muted-foreground">{row.docDept}</div>
                           </div>
                         </div>
                       </td>
-                      <td className="px-5 py-3">
+                      <td className="px-4 py-2.5">
                         <div>
                           <div className="font-semibold text-foreground">{row.patientName}</div>
-                          <div className="font-mono text-[10px] text-muted-foreground">ID: #{row.patientId}</div>
+                          <div className="font-mono text-[9.5px] text-muted-foreground">ID: #{row.patientId}</div>
                         </div>
                       </td>
-                      <td className="px-5 py-3 font-mono text-[11.5px] text-muted-foreground">{row.time}</td>
-                      <td className="px-5 py-3">
+                      <td className="px-4 py-2.5 font-mono text-[11px] text-muted-foreground">{row.time}</td>
+                      <td className="px-4 py-2.5">
                         <span
-                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full font-mono text-[10.5px] font-semibold ${
+                          className={`inline-flex items-center px-2 py-0.5 rounded-full font-mono text-[10px] font-semibold ${
                             row.status === "Confirmed"
                               ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20"
                               : "bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20"
@@ -353,13 +352,13 @@ function Dashboard() {
                           {row.status}
                         </span>
                       </td>
-                      <td className="px-5 py-3 text-right">
-                        <div className="inline-flex items-center gap-1.5 text-muted-foreground">
+                      <td className="px-4 py-2.5 text-right">
+                        <div className="inline-flex items-center gap-1 text-muted-foreground">
                           <button className="p-1 rounded hover:bg-accent hover:text-foreground transition-colors">
-                            <Eye className="h-3.5 w-3.5" />
+                            <Eye className="h-3 w-3" />
                           </button>
                           <button className="p-1 rounded hover:bg-accent hover:text-foreground transition-colors">
-                            <Edit2 className="h-3.5 w-3.5" />
+                            <Edit2 className="h-3 w-3" />
                           </button>
                         </div>
                       </td>
@@ -375,19 +374,19 @@ function Dashboard() {
             title="Recent Patients"
             className="shadow-2xs"
             padding="p-0"
-            action={<button className="text-[11.5px] font-semibold text-emerald-700 dark:text-emerald-400 hover:underline">View All</button>}
+            action={<button className="text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 hover:underline">View All</button>}
           >
             <ul className="divide-y divide-border/40">
               {sidePatientsList.map((p, idx) => (
-                <li key={idx} className="flex items-center justify-between px-5 py-3 hover:bg-muted/20 transition-colors">
-                  <div className="flex items-center gap-2.5">
-                    <img src={p.avatar} alt={p.name} className="h-8 w-8 rounded-full object-cover shadow-2xs" />
+                <li key={idx} className="flex items-center justify-between px-4 py-2.5 hover:bg-muted/20 transition-colors">
+                  <div className="flex items-center gap-2">
+                    <img src={p.avatar} alt={p.name} className="h-7 w-7 rounded-full object-cover shadow-2xs" />
                     <div>
-                      <div className="font-semibold text-foreground text-[12.5px]">{p.name}</div>
-                      <div className="text-[11px] text-muted-foreground">{p.detail}</div>
+                      <div className="font-semibold text-foreground text-[11.5px]">{p.name}</div>
+                      <div className="text-[10.5px] text-muted-foreground">{p.detail}</div>
                     </div>
                   </div>
-                  <div className="text-right font-mono text-[10.5px] text-muted-foreground">
+                  <div className="text-right font-mono text-[10px] text-muted-foreground">
                     <div className="font-semibold text-foreground">{p.age}</div>
                     <div>{p.date}</div>
                   </div>

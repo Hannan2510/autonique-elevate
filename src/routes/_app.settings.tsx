@@ -69,8 +69,8 @@ function Settings() {
       {/* PageHeader - Overview Theme Match */}
       <PageHeader
         title={
-          <span className="flex items-center gap-1.5 font-normal text-foreground">
-            Clinic & Account <span className="font-serif italic font-normal text-emerald-800 dark:text-emerald-300">Settings</span>
+          <span className="flex items-center gap-1.5 font-semibold text-foreground">
+            Clinic & Account <span className="text-emerald-800 dark:text-emerald-300 font-semibold">Settings</span>
           </span>
         }
         description="Manage your account preferences, notification rules, clinic legal details, and security parameters."

@@ -84,8 +84,8 @@ function Customers() {
       {/* PageHeader - Clean & Modern */}
       <PageHeader
         title={
-          <span className="flex items-center gap-1.5 font-normal text-foreground">
-            Patient <span className="font-serif italic font-normal text-emerald-800 dark:text-emerald-300">Directory</span>
+          <span className="flex items-center gap-1.5 font-semibold text-foreground">
+            Patient <span className="text-emerald-800 dark:text-emerald-300 font-semibold">Directory</span>
           </span>
         }
         description="Search, filter and manage patient medical records."

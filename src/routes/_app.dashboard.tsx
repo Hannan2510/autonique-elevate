@@ -137,8 +137,8 @@ function Dashboard() {
       {/* Top Header - Matching Clinexa Greeting Style */}
       <PageHeader
         title={
-          <span className="flex items-center gap-1.5 font-normal text-foreground">
-            Good Morning, <span className="font-serif italic font-normal text-emerald-800 dark:text-emerald-300">Dr. Sarah</span>
+          <span className="flex items-center gap-1.5 font-semibold text-foreground">
+            Good Morning, <span className="text-emerald-800 dark:text-emerald-300 font-semibold">Dr. Sarah</span> 👋
           </span>
         }
         description="Here's what's happening in your clinic today."

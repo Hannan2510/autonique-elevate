@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/_app'
+import { Route as AppClinicRouteImport } from './routes/_app.clinic'
 import { Route as AppCustomersRouteImport } from './routes/_app.customers'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
@@ -23,6 +24,11 @@ const IndexRoute = IndexRouteImport.update({
 const AppRoute = AppRouteImport.update({
   id: '/_app',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AppClinicRoute = AppClinicRouteImport.update({
+  id: '/clinic',
+  path: '/clinic',
+  getParentRoute: () => AppRoute,
 } as any)
 const AppCustomersRoute = AppCustomersRouteImport.update({
   id: '/customers',
@@ -42,12 +48,14 @@ const AppSettingsRoute = AppSettingsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/clinic': typeof AppClinicRoute
   '/customers': typeof AppCustomersRoute
   '/dashboard': typeof AppDashboardRoute
   '/settings': typeof AppSettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/clinic': typeof AppClinicRoute
   '/customers': typeof AppCustomersRoute
   '/dashboard': typeof AppDashboardRoute
   '/settings': typeof AppSettingsRoute
@@ -56,19 +64,21 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
+  '/_app/clinic': typeof AppClinicRoute
   '/_app/customers': typeof AppCustomersRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/settings': typeof AppSettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/customers' | '/dashboard' | '/settings'
+  fullPaths: '/' | '/clinic' | '/customers' | '/dashboard' | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/customers' | '/dashboard' | '/settings'
+  to: '/' | '/clinic' | '/customers' | '/dashboard' | '/settings'
   id:
     | '__root__'
     | '/'
     | '/_app'
+    | '/_app/clinic'
     | '/_app/customers'
     | '/_app/dashboard'
     | '/_app/settings'
@@ -95,6 +105,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/clinic': {
+      id: '/_app/clinic'
+      path: '/clinic'
+      fullPath: '/clinic'
+      preLoaderRoute: typeof AppClinicRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/customers': {
       id: '/_app/customers'
       path: '/customers'
@@ -120,12 +137,14 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteChildren {
+  AppClinicRoute: typeof AppClinicRoute
   AppCustomersRoute: typeof AppCustomersRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppSettingsRoute: typeof AppSettingsRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppClinicRoute: AppClinicRoute,
   AppCustomersRoute: AppCustomersRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppSettingsRoute: AppSettingsRoute,

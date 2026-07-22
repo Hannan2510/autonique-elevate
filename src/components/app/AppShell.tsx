@@ -13,6 +13,7 @@ import {
   X,
   ChevronDown,
   LogOut,
+  Building2,
 } from "lucide-react";
 
 type NavItem = {
@@ -24,6 +25,7 @@ type NavItem = {
 
 const nav: NavItem[] = [
   { to: "/dashboard", label: "Overview", icon: LayoutDashboard },
+  { to: "/clinic", label: "Clinic Panel", icon: Building2 },
   { to: "/customers", label: "Patients", icon: Users },
   { to: "/appointments", label: "Appointments", icon: Calendar, disabled: true },
   { to: "/revenue", label: "Revenue", icon: Receipt, disabled: true },

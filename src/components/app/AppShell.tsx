@@ -9,7 +9,6 @@ import {
   BarChart3,
   Search,
   Bell,
-  Command,
   Menu,
   X,
   ChevronDown,
@@ -75,11 +74,8 @@ export function AppShell() {
               <Search className="pointer-events-none absolute top-1/2 left-2.5 h-3 w-3 -translate-y-1/2 text-muted-foreground" />
               <input
                 placeholder="Search patients, visits, records…"
-                className="h-7.5 w-full rounded-md border border-border/60 bg-background pl-7 pr-10 text-[11.5px] placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring focus:border-ring transition-all"
+                className="h-7.5 w-full rounded-md border border-border/60 bg-background pl-7 pr-3 text-[11.5px] placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring focus:border-ring transition-all"
               />
-              <kbd className="pointer-events-none absolute top-1/2 right-2 flex -translate-y-1/2 items-center gap-0.5 rounded border border-border bg-muted/80 px-1 py-0.2 font-mono text-[9px] text-muted-foreground shadow-2xs">
-                <Command className="h-2 w-2" />K
-              </kbd>
             </div>
           </div>
 

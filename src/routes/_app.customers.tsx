@@ -6,16 +6,13 @@ import {
   Filter,
   Mail,
   Phone,
-  MapPin,
   Calendar,
   MoreHorizontal,
   Users,
-  Activity,
   CreditCard,
   X,
   Eye,
   ChevronRight,
-  TrendingUp,
   Clock,
 } from "lucide-react";
 import { Badge, Button, Card, PageHeader } from "@/components/app/AppShell";
@@ -109,34 +106,6 @@ function Customers() {
       />
 
       <div className="px-4 py-5 sm:px-6 space-y-5">
-        {/* Premium KPI Summary Cards */}
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {[
-            { label: "Active Patients", val: "5", sub: "+2 this month", icon: Users, color: "kpi-card-mint", iconColor: "text-emerald-700" },
-            { label: "Total Visits", val: "46", sub: "All time", icon: Activity, color: "kpi-card-lime", iconColor: "text-lime-700" },
-            { label: "Upcoming Visits", val: "2", sub: "Next 7 days", icon: Calendar, color: "kpi-card-emerald", iconColor: "text-green-700" },
-            { label: "Outstanding", val: "$360", sub: "Pending balance", icon: CreditCard, color: "kpi-card-teal", iconColor: "text-teal-700" },
-          ].map((item) => {
-            const Icon = item.icon;
-            return (
-              <div key={item.label} className={`rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-200 cursor-default ${item.color}`}>
-                <div className="flex items-start justify-between">
-                  <div className="space-y-2">
-                    <span className="text-[11px] font-semibold text-foreground/70 uppercase tracking-wide">{item.label}</span>
-                    <div className="font-display text-2xl font-bold tracking-tight text-foreground">{item.val}</div>
-                  </div>
-                  <div className={`grid h-8 w-8 place-items-center rounded-xl bg-white/70 shadow-sm ${item.iconColor}`}>
-                    <Icon className="h-4 w-4" />
-                  </div>
-                </div>
-                <div className="mt-2 flex items-center gap-1 font-mono text-[10px] text-foreground/60">
-                  <TrendingUp className="h-3 w-3" />
-                  {item.sub}
-                </div>
-              </div>
-            );
-          })}
-        </div>
 
         {/* Premium Filter + Search Bar */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 rounded-xl bg-card border border-border/50 px-4 py-3 shadow-sm">
@@ -193,9 +162,7 @@ function Customers() {
               <thead className="bg-muted/20 font-mono text-[10px] uppercase tracking-widest text-muted-foreground border-b border-border/40">
                 <tr>
                   <th className="px-5 py-3 font-semibold">Patient</th>
-                  <th className="px-5 py-3 font-semibold">Provider</th>
                   <th className="px-5 py-3 font-semibold">Contact</th>
-                  <th className="px-5 py-3 font-semibold">Location</th>
                   <th className="px-5 py-3 font-semibold">Last Visit</th>
                   <th className="px-5 py-3 font-semibold">Status</th>
                   <th className="px-5 py-3 font-semibold text-right">Actions</th>
@@ -213,20 +180,9 @@ function Customers() {
                         <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br ${avatarColors[idx % avatarColors.length]} font-bold text-[11px] text-white shadow-sm`}>
                           {initials(p.name)}
                         </div>
-                        <div>
-                          <div className="font-semibold text-foreground text-[12.5px] group-hover:text-emerald-700 transition-colors">
-                            {p.name}
-                          </div>
-                          <div className="font-mono text-[10px] text-muted-foreground/80 mt-0.5">#{p.id}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-5 py-3.5">
-                      <div className="flex items-center gap-2">
-                        <div className="h-6 w-6 grid place-items-center rounded-full bg-emerald-500/10 text-emerald-700 font-bold text-[9px]">
-                          {p.provider.split(" ").pop()?.[0]}
-                        </div>
-                        <span className="font-medium text-foreground text-[12px]">{p.provider}</span>
+                        <span className="font-semibold text-foreground text-[12.5px] group-hover:text-emerald-700 transition-colors">
+                          {p.name}
+                        </span>
                       </div>
                     </td>
                     <td className="px-5 py-3.5">
@@ -239,12 +195,6 @@ function Customers() {
                           <Phone className="h-3 w-3 shrink-0" />
                           {p.phone}
                         </div>
-                      </div>
-                    </td>
-                    <td className="px-5 py-3.5">
-                      <div className="flex items-center gap-1.5 text-muted-foreground">
-                        <MapPin className="h-3 w-3 shrink-0" />
-                        <span className="font-medium text-[12px]">{p.city}</span>
                       </div>
                     </td>
                     <td className="px-5 py-3.5">
@@ -278,7 +228,7 @@ function Customers() {
                 ))}
                 {filtered.length === 0 && (
                   <tr>
-                    <td colSpan={7} className="px-5 py-12 text-center">
+                    <td colSpan={5} className="px-5 py-12 text-center">
                       <div className="flex flex-col items-center gap-2">
                         <Users className="h-8 w-8 text-muted-foreground/30" />
                         <p className="text-[12px] text-muted-foreground font-mono">No patients found matching "{query}"</p>

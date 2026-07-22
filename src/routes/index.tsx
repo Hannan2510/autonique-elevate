@@ -250,8 +250,8 @@ function Landing() {
                 </div>
               </div>
 
-              {/* Tilted Dashboard Window */}
-              <div data-reveal data-reveal-delay="2" className="lg:col-span-6 space-y-4">
+              {/* Tilted Dashboard Window with Floating WhatsApp Mobile Mockup */}
+              <div data-reveal data-reveal-delay="2" className="lg:col-span-6 space-y-4 relative">
                 <div className="relative rounded-[8px] border border-[#0D9488]/30 dark:border-[#0D9488]/50 bg-white dark:bg-[#0B201E] shadow-[0_30px_70px_-15px_rgba(13,148,136,0.25)] overflow-hidden transition-all duration-500 ease-out lg:[transform:perspective(1000px)_rotateY(-8deg)_rotateX(4deg)_rotate(-1.5deg)] lg:hover:[transform:perspective(1000px)_rotateY(-1deg)_rotateX(0deg)_rotate(0deg)] max-w-md mx-auto lg:max-w-none">
                   <div className="flex items-center justify-between px-3.5 py-2.5 bg-[#022C2C] text-white">
                     <div className="flex items-center gap-1.5">
@@ -269,6 +269,23 @@ function Landing() {
                       src="/dashboard-home-img.png"
                       alt="Autonique Clinical OS Dashboard"
                       className="w-full h-auto object-cover object-top"
+                    />
+                  </div>
+                </div>
+
+                {/* Floating Tilted Smartphone WhatsApp Bot Mockup */}
+                <div className="absolute -bottom-8 -right-3 sm:-right-6 w-44 sm:w-52 rounded-[22px] border-[3px] border-[#071918] bg-[#071918] shadow-[0_25px_50px_-12px_rgba(13,148,136,0.35)] overflow-hidden transition-all duration-500 ease-out [transform:perspective(1000px)_rotateY(-14deg)_rotateX(10deg)_rotate(5deg)] hover:[transform:perspective(1000px)_rotateY(0deg)_rotateX(0deg)_rotate(0deg)] z-20 hidden sm:block group cursor-pointer">
+                  <div className="flex items-center justify-between px-3 py-1.5 bg-[#0B1E1C] text-white text-[9.5px] font-mono">
+                    <span className="flex items-center gap-1 font-bold text-[#99F6E4]">
+                      <MessageSquare className="h-3 w-3 text-[#14B8A6]" /> WhatsApp Bot
+                    </span>
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#14B8A6] animate-pulse" />
+                  </div>
+                  <div className="overflow-hidden bg-[#071918]" style={{ maxHeight: "280px" }}>
+                    <img
+                      src="/whatsapp-bot-booking.png"
+                      alt="Autonique WhatsApp Clinic Booking Bot"
+                      className="w-full h-auto object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
                 </div>
@@ -441,12 +458,18 @@ function Landing() {
                   icon: Calendar,
                   spot: "from-teal-400/20",
                   preview: (
-                    <div className="rounded-xl border border-teal-500/20 bg-[#EEF2FF] dark:bg-[#122438] p-3 text-[11px] space-y-1.5 shadow-xs">
-                      <div className="flex items-center justify-between text-teal-900 dark:text-teal-300 font-bold">
-                        <span>WhatsApp Confirmation</span>
-                        <span className="text-emerald-700 dark:text-[#2DD4BF] font-mono text-[9.5px]">Sent 09:30 AM</span>
+                    <div className="rounded-xl border border-teal-500/20 bg-[#071918] p-2 text-[11px] space-y-1.5 shadow-xs overflow-hidden">
+                      <div className="flex items-center justify-between text-[#99F6E4] px-1 font-bold">
+                        <span className="flex items-center gap-1 font-mono text-[10px]"><MessageSquare className="h-3 w-3 text-[#14B8A6]" /> Live WhatsApp Bot</span>
+                        <span className="text-emerald-400 font-mono text-[9px] font-bold">Active</span>
                       </div>
-                      <p className="text-[#475569] dark:text-[#A0B0AD] text-[10.5px]">"Hello Ava, your visit with Dr. Reyes is confirmed for 10:30 AM today."</p>
+                      <div className="rounded-lg overflow-hidden border border-[#0D9488]/30 max-h-[140px] [transform:perspective(500px)_rotateX(4deg)]">
+                        <img
+                          src="/whatsapp-bot-booking.png"
+                          alt="WhatsApp Clinic Booking Bot"
+                          className="w-full h-auto object-cover object-top"
+                        />
+                      </div>
                     </div>
                   ),
                 },

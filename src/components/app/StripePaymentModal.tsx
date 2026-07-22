@@ -63,35 +63,35 @@ export function StripePaymentModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto font-sans">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-foreground/25 backdrop-blur-xs transition-opacity"
         onClick={status === "processing" ? undefined : onClose}
       />
 
-      {/* Modal Card */}
-      <div className="relative w-full max-w-lg rounded-2xl bg-card vercel-card shadow-2xl overflow-hidden border border-border/40 z-10 transition-all">
-        {/* Stripe Brand Header Bar */}
-        <div className="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white">
+      {/* Modal Card — Dashboard Theme */}
+      <div className="relative w-full max-w-lg rounded-2xl bg-card vercel-card shadow-2xl overflow-hidden border border-emerald-500/20 z-10 transition-all">
+        {/* Header Bar — Dashboard Soft Green Gradient */}
+        <div className="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-emerald-900 via-teal-900 to-emerald-950 text-white">
           <div className="flex items-center gap-2.5">
-            <div className="flex items-center justify-center h-7 w-7 rounded-lg bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 font-bold text-xs tracking-tight">
+            <div className="flex items-center justify-center h-7 w-7 rounded-lg bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 font-bold text-xs tracking-tight">
               S
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-[13px] font-bold tracking-tight">Stripe Checkout</span>
-                <span className="inline-flex items-center gap-1 rounded bg-indigo-500/20 px-1.5 py-0.2 font-mono text-[9px] font-semibold text-indigo-300 border border-indigo-500/30">
-                  <ShieldCheck className="h-2.5 w-2.5 text-indigo-300" /> 256-bit AES
+                <span className="text-[13.5px] font-bold tracking-tight">Stripe Gateway</span>
+                <span className="inline-flex items-center gap-1 rounded bg-emerald-500/20 px-1.5 py-0.2 font-mono text-[9px] font-semibold text-emerald-300 border border-emerald-500/30">
+                  <ShieldCheck className="h-2.5 w-2.5 text-emerald-300" /> 256-bit AES
                 </span>
               </div>
-              <p className="text-[10px] text-slate-400 font-mono">Secured by Stripe Payments</p>
+              <p className="text-[10px] text-emerald-200/70 font-mono">Secured Clinical Checkout</p>
             </div>
           </div>
           {status !== "processing" && (
             <button
               onClick={onClose}
-              className="p-1 rounded-md text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+              className="p-1 rounded-md text-emerald-200/70 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
             >
               <X className="h-4 w-4" />
             </button>
@@ -148,20 +148,20 @@ export function StripePaymentModal({
           ) : (
             /* Payment Form */
             <form onSubmit={handlePay} className="space-y-5">
-              {/* Order Summary Header */}
-              <div className="flex items-center justify-between rounded-xl bg-muted/30 p-3.5 border border-border/40">
+              {/* Order Summary Header — Dashboard Gradient Mint */}
+              <div className="flex items-center justify-between rounded-xl kpi-gradient-mint p-3.5 border border-emerald-500/10 shadow-2xs">
                 <div>
                   <div className="text-[12.5px] font-bold text-foreground">{item.title}</div>
                   <div className="text-[11px] text-muted-foreground">{item.description}</div>
                   {item.patientName && (
-                    <div className="mt-0.5 font-mono text-[10px] text-emerald-700 dark:text-emerald-400 font-semibold">
+                    <div className="mt-0.5 font-mono text-[10px] text-emerald-800 dark:text-emerald-300 font-semibold">
                       Patient: {item.patientName}
                     </div>
                   )}
                 </div>
                 <div className="text-right">
                   <div className="text-[10px] text-muted-foreground uppercase font-mono">Amount Due</div>
-                  <div className="font-display text-xl font-bold text-emerald-700 dark:text-emerald-400 tracking-tight">
+                  <div className="font-display text-xl font-bold text-emerald-800 dark:text-emerald-300 tracking-tight">
                     ${item.amount.toFixed(2)}
                   </div>
                 </div>
@@ -178,11 +178,11 @@ export function StripePaymentModal({
                     onClick={() => setPaymentMethod("card")}
                     className={`flex items-center justify-center gap-2 rounded-lg border p-2 text-[11.5px] font-medium transition-all cursor-pointer ${
                       paymentMethod === "card"
-                        ? "border-indigo-600 bg-indigo-500/10 text-indigo-900 dark:text-indigo-300 font-semibold shadow-2xs"
+                        ? "border-emerald-600 bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 font-semibold shadow-2xs"
                         : "border-border/60 hover:bg-accent text-muted-foreground"
                     }`}
                   >
-                    <CreditCard className="h-3.5 w-3.5" />
+                    <CreditCard className="h-3.5 w-3.5 text-emerald-700 dark:text-emerald-400" />
                     <span>Card</span>
                   </button>
                   <button
@@ -190,7 +190,7 @@ export function StripePaymentModal({
                     onClick={() => setPaymentMethod("apple")}
                     className={`flex items-center justify-center gap-1.5 rounded-lg border p-2 text-[11.5px] font-medium transition-all cursor-pointer ${
                       paymentMethod === "apple"
-                        ? "border-indigo-600 bg-indigo-500/10 text-indigo-900 dark:text-indigo-300 font-semibold shadow-2xs"
+                        ? "border-emerald-600 bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 font-semibold shadow-2xs"
                         : "border-border/60 hover:bg-accent text-muted-foreground"
                     }`}
                   >
@@ -201,7 +201,7 @@ export function StripePaymentModal({
                     onClick={() => setPaymentMethod("google")}
                     className={`flex items-center justify-center gap-1.5 rounded-lg border p-2 text-[11.5px] font-medium transition-all cursor-pointer ${
                       paymentMethod === "google"
-                        ? "border-indigo-600 bg-indigo-500/10 text-indigo-900 dark:text-indigo-300 font-semibold shadow-2xs"
+                        ? "border-emerald-600 bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 font-semibold shadow-2xs"
                         : "border-border/60 hover:bg-accent text-muted-foreground"
                     }`}
                   >
@@ -223,7 +223,7 @@ export function StripePaymentModal({
                       onChange={(e) => setCardHolder(e.target.value)}
                       required
                       placeholder="Dr. Sarah Khan"
-                      className="h-8 w-full rounded-md border border-border/60 bg-background px-3 text-[12px] placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                      className="h-8 w-full rounded-md border border-border/60 bg-background px-3 text-[12px] placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-emerald-500"
                     />
                   </div>
 
@@ -236,7 +236,7 @@ export function StripePaymentModal({
                         <Lock className="h-2.5 w-2.5 text-emerald-600" /> Stripe Encrypted
                       </div>
                     </div>
-                    <div className="rounded-md border border-border/60 overflow-hidden focus-within:ring-1 focus-within:ring-indigo-500">
+                    <div className="rounded-md border border-border/60 overflow-hidden focus-within:ring-1 focus-within:ring-emerald-500">
                       <div className="relative border-b border-border/40">
                         <input
                           type="text"
@@ -246,7 +246,7 @@ export function StripePaymentModal({
                           placeholder="4242 4242 4242 4242"
                           className="h-8.5 w-full bg-background pl-3 pr-10 text-[12px] font-mono placeholder:text-muted-foreground focus:outline-none"
                         />
-                        <div className="absolute right-2.5 top-1/2 -translate-y-1/2 font-mono text-[9.5px] font-bold text-indigo-600">
+                        <div className="absolute right-2.5 top-1/2 -translate-y-1/2 font-mono text-[9.5px] font-bold text-emerald-700 dark:text-emerald-400">
                           VISA
                         </div>
                       </div>
@@ -281,18 +281,18 @@ export function StripePaymentModal({
                       onChange={(e) => setZip(e.target.value)}
                       required
                       placeholder="10119"
-                      className="h-8 w-full max-w-[140px] rounded-md border border-border/60 bg-background px-3 text-[12px] font-mono placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                      className="h-8 w-full max-w-[140px] rounded-md border border-border/60 bg-background px-3 text-[12px] font-mono placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-emerald-500"
                     />
                   </div>
                 </div>
               )}
 
-              {/* Footer Submit Button */}
+              {/* Footer Submit Button — Dashboard Emerald Primary */}
               <div className="space-y-2 pt-1">
                 <button
                   type="submit"
                   disabled={status === "processing"}
-                  className="w-full h-10 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-semibold text-[13px] shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-70"
+                  className="w-full h-10 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-[13px] shadow-sm flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-70"
                 >
                   {status === "processing" ? (
                     <>

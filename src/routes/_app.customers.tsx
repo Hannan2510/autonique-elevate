@@ -124,7 +124,7 @@ function Customers() {
           <div className="flex items-center gap-2.5">
             <span className="font-mono text-[11px] text-muted-foreground font-medium hidden sm:inline">Sunday, June 22, 2026</span>
             <Button size="sm" onClick={() => triggerStripePay(patients[0])}>
-              <StripeIcon className="h-3 w-3 text-indigo-300" />
+              <StripeIcon className="h-3 w-3 text-emerald-300" />
               <span>Stripe Gateway</span>
             </Button>
           </div>
@@ -249,7 +249,7 @@ function Customers() {
                             e.stopPropagation();
                             triggerStripePay(p);
                           }}
-                          className="px-2 py-1 rounded bg-indigo-600 hover:bg-indigo-700 text-white font-mono text-[10.5px] font-medium flex items-center gap-1 shadow-2xs transition-all cursor-pointer"
+                          className="px-2 py-1 rounded bg-emerald-600 hover:bg-emerald-700 text-white font-mono text-[10.5px] font-medium flex items-center gap-1 shadow-2xs transition-all cursor-pointer"
                         >
                           <StripeIcon className="h-3 w-3" />
                           <span>Pay ${p.balance > 0 ? p.balance : 180}</span>
@@ -305,14 +305,14 @@ function Customers() {
                 </div>
 
                 {/* Stripe Quick Checkout Bar */}
-                <div className="rounded-xl p-3.5 bg-gradient-to-r from-slate-900 to-indigo-950 text-white flex items-center justify-between shadow-md">
+                <div className="rounded-xl p-3.5 bg-gradient-to-r from-emerald-900 via-teal-900 to-emerald-950 text-white flex items-center justify-between shadow-md">
                   <div>
-                    <div className="text-[10px] text-indigo-300 font-mono uppercase">Outstanding Balance</div>
+                    <div className="text-[10px] text-emerald-300 font-mono uppercase">Outstanding Balance</div>
                     <div className="text-lg font-bold font-display">${selectedPatient.balance > 0 ? selectedPatient.balance : 180}.00</div>
                   </div>
                   <button
                     onClick={() => triggerStripePay(selectedPatient)}
-                    className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-[11.5px] font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
+                    className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-[11.5px] font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
                   >
                     <StripeIcon className="h-3.5 w-3.5" />
                     <span>Pay with Stripe</span>

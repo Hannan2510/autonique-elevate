@@ -283,7 +283,7 @@ function Settings() {
                   <div className="flex shrink-0 gap-2">
                     <button
                       onClick={() => handleStripeUpgrade("Enterprise Upgrade", 899)}
-                      className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-[12px] font-medium flex items-center gap-1.5 shadow-2xs transition-all cursor-pointer"
+                      className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[12px] font-semibold flex items-center gap-1.5 shadow-2xs transition-all cursor-pointer"
                     >
                       <StripeIcon className="h-3.5 w-3.5" />
                       <span>Upgrade via Stripe ($899)</span>
@@ -295,11 +295,11 @@ function Settings() {
               <Card title="Payment method" padding="p-0">
                 <Field label="Card on file">
                   <div className="flex items-center gap-3">
-                    <div className="grid h-7 w-11 place-items-center rounded border border-border/60 bg-slate-900 font-mono text-[9.5px] font-bold text-white">VISA</div>
+                    <div className="grid h-7 w-11 place-items-center rounded border border-border/60 bg-emerald-950 font-mono text-[9.5px] font-bold text-white">VISA</div>
                     <div className="text-[12px] font-mono font-semibold">•••• 4242</div>
                     <div className="text-[11px] font-mono text-muted-foreground">Expires 08 / 28</div>
                     <Button variant="outline" size="sm" onClick={() => handleStripeUpgrade("Card Verification", 1)}>
-                      <StripeIcon className="h-3 w-3 text-indigo-500" />
+                      <StripeIcon className="h-3 w-3 text-emerald-600" />
                       <span>Update via Stripe</span>
                     </Button>
                   </div>
@@ -334,7 +334,7 @@ function Settings() {
                             ) : (
                               <button
                                 onClick={() => handleStripeUpgrade(`Invoice ${r.i}`, r.a)}
-                                className="px-2 py-0.5 rounded bg-indigo-600 hover:bg-indigo-700 text-white font-mono text-[10px] font-medium inline-flex items-center gap-1 shadow-2xs cursor-pointer"
+                                className="px-2 py-0.5 rounded bg-emerald-600 hover:bg-emerald-700 text-white font-mono text-[10px] font-medium inline-flex items-center gap-1 shadow-2xs cursor-pointer"
                               >
                                 <StripeIcon className="h-2.5 w-2.5" />
                                 <span>Pay Stripe</span>

@@ -144,7 +144,7 @@ function Landing() {
       `}</style>
 
       <div className="min-h-screen bg-[#F8FFFE] text-[#0F172A] font-sans selection:bg-[#0D9488]/20 selection:text-[#0F766E] overflow-x-hidden antialiased">
-        <div className="fixed inset-0 pointer-events-none opacity-[0.032] bg-[radial-gradient(#0D9488_1px,transparent_1px)] [background-size:24px_24px] z-0" />
+        <div className="fixed inset-0 pointer-events-none opacity-[0.035] bg-[radial-gradient(#0D9488_1px,transparent_1px)] [background-size:24px_24px] z-0" />
 
         {/* ─── 1. Sticky Header ─── */}
         <header className="sticky top-0 z-50 border-b border-[#0D9488]/15 bg-[#F8FFFE]/92 backdrop-blur-xl">
@@ -170,13 +170,16 @@ function Landing() {
         </header>
 
         {/* ─── 2. Hero Section ─── */}
-        <section id="home" className="relative overflow-hidden pt-14 pb-20 lg:pt-20 lg:pb-28 bg-gradient-to-b from-[#EFFFFE] via-[#F8FFFE] to-[#F8FFFE]">
+        <section id="home" className="relative overflow-hidden pt-14 pb-20 lg:pt-20 lg:pb-28 bg-gradient-to-b from-[#CCFBF1]/35 via-[#F8FFFE] to-[#F8FFFE]">
+          {/* Ambient background teal glow circle */}
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#0D9488]/10 rounded-full blur-3xl pointer-events-none" />
+
           <div className="mx-auto max-w-6xl px-5 sm:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               <div className="lg:col-span-6 space-y-6 text-left">
                 <div
                   data-reveal
-                  className="inline-flex items-center gap-2 rounded-full border border-[#0D9488]/25 bg-[#EFFFFE] px-4 py-1.5 text-[11.5px] font-bold text-[#0F766E] shadow-sm"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#0D9488]/30 bg-[#CCFBF1]/40 px-4 py-1.5 text-[11.5px] font-bold text-[#0F766E] shadow-sm backdrop-blur-xs"
                 >
                   <span className="flex h-2 w-2 rounded-full bg-[#14B8A6] animate-pulse" />
                   Trusted by 40,000+ Doctors & Clinics Worldwide
@@ -247,7 +250,7 @@ function Landing() {
 
               {/* Tilted Dashboard Window */}
               <div data-reveal data-reveal-delay="2" className="lg:col-span-6 space-y-4">
-                <div className="relative rounded-2xl border border-[#0D9488]/30 bg-white shadow-[0_30px_70px_-15px_rgba(13,148,136,0.25)] overflow-hidden transition-all duration-500 ease-out lg:[transform:perspective(1000px)_rotateY(-8deg)_rotateX(4deg)_rotate(-1.5deg)] lg:hover:[transform:perspective(1000px)_rotateY(-1deg)_rotateX(0deg)_rotate(0deg)] max-w-md mx-auto lg:max-w-none">
+                <div className="relative rounded-2xl border border-[#0D9488]/35 bg-white shadow-[0_30px_70px_-15px_rgba(13,148,136,0.3)] overflow-hidden transition-all duration-500 ease-out lg:[transform:perspective(1000px)_rotateY(-8deg)_rotateX(4deg)_rotate(-1.5deg)] lg:hover:[transform:perspective(1000px)_rotateY(-1deg)_rotateX(0deg)_rotate(0deg)] max-w-md mx-auto lg:max-w-none">
                   <div className="flex items-center justify-between px-3.5 py-2.5 bg-[#022C2C] text-white">
                     <div className="flex items-center gap-1.5">
                       <span className="h-2.5 w-2.5 rounded-full bg-[#EF4444]" />
@@ -268,16 +271,17 @@ function Landing() {
                   </div>
                 </div>
 
+                {/* Graded KPI Stat Cards */}
                 <div data-reveal data-reveal-delay="3" className="grid grid-cols-4 gap-2 text-center">
                   {[
-                    { v: "40K+", l: "Doctors" },
-                    { v: "25K+", l: "Clinics" },
-                    { v: "8M+", l: "Patients" },
-                    { v: "99.9%", l: "Uptime" },
+                    { v: "40K+", l: "Doctors", color: "kpi-card-mint" },
+                    { v: "25K+", l: "Clinics", color: "kpi-card-lime" },
+                    { v: "8M+", l: "Patients", color: "kpi-card-emerald" },
+                    { v: "99.9%", l: "Uptime", color: "kpi-card-teal" },
                   ].map((s) => (
-                    <div key={s.l} className="rounded-xl bg-white border border-[#0D9488]/15 p-2.5 shadow-sm">
-                      <div className="font-display text-xl font-black text-[#0F766E]">{s.v}</div>
-                      <div className="text-[10px] font-mono font-bold text-[#64748B] uppercase tracking-wider">{s.l}</div>
+                    <div key={s.l} className={`rounded-xl p-2.5 shadow-sm hover:shadow-md transition-all ${s.color}`}>
+                      <div className="font-display text-xl font-black text-[#0F172A]">{s.v}</div>
+                      <div className="text-[10px] font-mono font-bold text-[#0F766E] uppercase tracking-wider">{s.l}</div>
                     </div>
                   ))}
                 </div>
@@ -287,7 +291,7 @@ function Landing() {
         </section>
 
         {/* ─── 3. The Problem Section ─── */}
-        <section id="problem" className="py-20 border-t border-[#0D9488]/12 bg-white relative z-10">
+        <section id="problem" className="py-20 border-t border-[#0D9488]/15 bg-gradient-to-b from-[#F0FDFA]/60 via-[#F8FFFE] to-[#F0FDFA]/40 relative z-10">
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div data-reveal className="text-center max-w-2xl mx-auto mb-14 space-y-2">
               <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#0D9488] font-bold">
@@ -303,7 +307,7 @@ function Landing() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
               {/* Before Autonique */}
-              <div data-reveal data-reveal-delay="1" className="rounded-2xl border border-rose-200 bg-rose-50/30 p-6 space-y-4">
+              <div data-reveal data-reveal-delay="1" className="rounded-2xl border border-rose-200/80 bg-gradient-to-br from-rose-50/70 via-white to-rose-50/30 p-6 space-y-4 shadow-sm hover:shadow-md transition-all">
                 <div className="flex items-center gap-2 text-rose-700 font-bold text-[14px]">
                   <AlertCircle className="h-5 w-5 text-rose-600" />
                   <span>Legacy Disconnected Setup</span>
@@ -324,13 +328,13 @@ function Landing() {
                 </ul>
               </div>
 
-              {/* With Autonique */}
-              <div data-reveal data-reveal-delay="2" className="rounded-2xl border border-[#0D9488]/30 bg-[#F0FDFA] p-6 space-y-4">
+              {/* With Autonique - Graded Teal Card */}
+              <div data-reveal data-reveal-delay="2" className="rounded-2xl p-6 space-y-4 shadow-sm hover:shadow-lg transition-all kpi-card-mint">
                 <div className="flex items-center gap-2 text-[#0F766E] font-bold text-[14px]">
                   <Sparkles className="h-5 w-5 text-[#0D9488]" />
                   <span>Unified Autonique Operating System</span>
                 </div>
-                <ul className="space-y-3 text-[13px] text-[#334155]">
+                <ul className="space-y-3 text-[13px] text-[#0F172A]">
                   {[
                     "Automated WhatsApp & SMS appointment reminders (55% lower no-shows)",
                     "Digital ICD-10 prescription engine with 1-click PDF export",
@@ -339,8 +343,8 @@ function Landing() {
                     "Integrated Stripe billing & real-time revenue analytics",
                   ].map((sol) => (
                     <li key={sol} className="flex items-start gap-2.5">
-                      <CheckCircle2 className="h-4 w-4 text-[#0D9488] shrink-0 mt-0.5" />
-                      <span className="font-medium">{sol}</span>
+                      <CheckCircle2 className="h-4 w-4 text-[#0F766E] shrink-0 mt-0.5" />
+                      <span className="font-semibold">{sol}</span>
                     </li>
                   ))}
                 </ul>
@@ -350,7 +354,7 @@ function Landing() {
         </section>
 
         {/* ─── 4. What AUTONIQUE Clinics Solves ─── */}
-        <section id="platform" className="py-20 border-t border-[#0D9488]/12 bg-[#F8FFFE] relative z-10">
+        <section id="platform" className="py-20 border-t border-[#0D9488]/15 bg-white relative z-10">
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div data-reveal className="text-center max-w-2xl mx-auto mb-14 space-y-2">
               <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#0D9488] font-bold">
@@ -366,18 +370,18 @@ function Landing() {
 
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               {[
-                { title: "Patient CRM", desc: "Centralized medical histories", icon: Users },
-                { title: "Appointments", desc: "Automated queue & tokens", icon: Calendar },
-                { title: "EMR Records", desc: "Structured clinical charting", icon: FileSpreadsheet },
-                { title: "Billing & Invoices", desc: "Stripe & clinic receipts", icon: Receipt },
-                { title: "Clinical Analytics", desc: "Revenue & visit telemetry", icon: BarChart3 },
-                { title: "AI Assistant", desc: "Smart diagnostic notes", icon: Bot },
-                { title: "Automated Follow-ups", desc: "WhatsApp patient reminders", icon: MessageSquare },
-                { title: "Staff Roster", desc: "Role-based staff permissions", icon: UserCheck },
-                { title: "Pharmacy Inventory", desc: "Drug stock & batch tracking", icon: Boxes },
-                { title: "Custom Reports", desc: "Exportable PDF/CSV digests", icon: FileText },
-                { title: "Smart Alerts", desc: "Real-time clinical triggers", icon: Bell },
-                { title: "Enterprise Security", desc: "HIPAA & 256-bit encryption", icon: Shield },
+                { title: "Patient CRM", desc: "Centralized medical histories", icon: Users, color: "kpi-card-mint" },
+                { title: "Appointments", desc: "Automated queue & tokens", icon: Calendar, color: "kpi-card-lime" },
+                { title: "EMR Records", desc: "Structured clinical charting", icon: FileSpreadsheet, color: "kpi-card-emerald" },
+                { title: "Billing & Invoices", desc: "Stripe & clinic receipts", icon: Receipt, color: "kpi-card-teal" },
+                { title: "Clinical Analytics", desc: "Revenue & visit telemetry", icon: BarChart3, color: "kpi-card-teal" },
+                { title: "AI Assistant", desc: "Smart diagnostic notes", icon: Bot, color: "kpi-card-emerald" },
+                { title: "Automated Follow-ups", desc: "WhatsApp patient reminders", icon: MessageSquare, color: "kpi-card-lime" },
+                { title: "Staff Roster", desc: "Role-based staff permissions", icon: UserCheck, color: "kpi-card-mint" },
+                { title: "Pharmacy Inventory", desc: "Drug stock & batch tracking", icon: Boxes, color: "kpi-card-mint" },
+                { title: "Custom Reports", desc: "Exportable PDF/CSV digests", icon: FileText, color: "kpi-card-lime" },
+                { title: "Smart Alerts", desc: "Real-time clinical triggers", icon: Bell, color: "kpi-card-emerald" },
+                { title: "Enterprise Security", desc: "HIPAA & 256-bit encryption", icon: Shield, color: "kpi-card-teal" },
               ].map((m, idx) => {
                 const Icon = m.icon;
                 return (
@@ -385,13 +389,13 @@ function Landing() {
                     key={m.title}
                     data-reveal
                     data-reveal-delay={String((idx % 4) + 1)}
-                    className="rounded-2xl border border-[#0D9488]/15 bg-white p-4.5 shadow-sm hover:border-[#0D9488]/40 hover:shadow-md transition-all group"
+                    className={`rounded-2xl p-4.5 shadow-xs hover:shadow-md transition-all group ${m.color}`}
                   >
-                    <div className="h-9 w-9 rounded-xl bg-[#EFFFFE] text-[#0F766E] flex items-center justify-center mb-3 group-hover:bg-[#0F766E] group-hover:text-white transition-colors">
-                      <Icon className="h-4.5 w-4.5" />
+                    <div className="h-9 w-9 rounded-xl bg-white/80 text-[#0F766E] flex items-center justify-center mb-3 shadow-xs group-hover:scale-105 transition-transform">
+                      <Icon className="h-4.5 w-4.5 text-[#0F766E]" />
                     </div>
                     <div className="font-bold text-[13.5px] text-[#0F172A]">{m.title}</div>
-                    <div className="text-[11px] text-[#64748B] font-medium mt-0.5">{m.desc}</div>
+                    <div className="text-[11px] text-[#0F766E]/90 font-semibold mt-0.5">{m.desc}</div>
                   </div>
                 );
               })}
@@ -400,7 +404,7 @@ function Landing() {
         </section>
 
         {/* ─── 5. Core Platform Capabilities ─── */}
-        <section className="py-20 border-t border-[#0D9488]/12 bg-white relative z-10">
+        <section className="py-20 border-t border-[#0D9488]/15 bg-gradient-to-b from-[#F0FDFA]/70 via-[#F8FFFE] to-[#F0FDFA]/40 relative z-10">
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div data-reveal className="text-center max-w-xl mx-auto mb-14 space-y-2">
               <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#0D9488] font-bold">
@@ -417,8 +421,9 @@ function Landing() {
                   title: "AI Clinical Assistant",
                   desc: "Generate structured consultation notes and diagnostic summaries automatically during doctor visits.",
                   icon: Bot,
+                  color: "kpi-card-mint",
                   preview: (
-                    <div className="rounded-xl border border-emerald-500/20 bg-[#F0FDFA] p-3 text-[11px] space-y-1.5">
+                    <div className="rounded-xl bg-white/90 p-3 text-[11px] space-y-1.5 shadow-xs">
                       <div className="flex items-center justify-between text-emerald-800 font-bold">
                         <span className="flex items-center gap-1"><Sparkles className="h-3 w-3" /> AI Note Draft</span>
                         <span>ICD-10 Ready</span>
@@ -431,11 +436,12 @@ function Landing() {
                   title: "Appointment Automation",
                   desc: "Multi-channel calendar scheduling with automated WhatsApp confirmation and cancellation management.",
                   icon: Calendar,
+                  color: "kpi-card-teal",
                   preview: (
-                    <div className="rounded-xl border border-indigo-500/20 bg-[#EEF2FF] p-3 text-[11px] space-y-1.5">
-                      <div className="flex items-center justify-between text-indigo-900 font-bold">
+                    <div className="rounded-xl bg-white/90 p-3 text-[11px] space-y-1.5 shadow-xs">
+                      <div className="flex items-center justify-between text-teal-900 font-bold">
                         <span>WhatsApp Confirmation</span>
-                        <span className="text-emerald-600 font-mono text-[9.5px]">Sent 09:30 AM</span>
+                        <span className="text-emerald-700 font-mono text-[9.5px]">Sent 09:30 AM</span>
                       </div>
                       <p className="text-[#475569] text-[10.5px]">"Hello Ava, your visit with Dr. Reyes is confirmed for 10:30 AM today."</p>
                     </div>
@@ -445,11 +451,12 @@ function Landing() {
                   title: "Medical Billing & Stripe",
                   desc: "Accept online payments, issue digital receipts, and track clinic revenue with automated reconciliation.",
                   icon: Receipt,
+                  color: "kpi-card-emerald",
                   preview: (
-                    <div className="rounded-xl border border-amber-500/20 bg-[#FFF7ED] p-3 text-[11px] space-y-1.5">
-                      <div className="flex items-center justify-between text-amber-900 font-bold">
+                    <div className="rounded-xl bg-white/90 p-3 text-[11px] space-y-1.5 shadow-xs">
+                      <div className="flex items-center justify-between text-green-900 font-bold">
                         <span>Stripe Payment #INV-2841</span>
-                        <span className="text-emerald-700 font-bold">$129 Paid</span>
+                        <span className="text-emerald-800 font-bold">$129 Paid</span>
                       </div>
                       <p className="text-[#475569] font-mono text-[10px]">Consultation Fee · Card •••• 4242</p>
                     </div>
@@ -462,16 +469,16 @@ function Landing() {
                     key={card.title}
                     data-reveal
                     data-reveal-delay={String(i + 1)}
-                    className="rounded-2xl border border-[#0D9488]/20 bg-[#F8FFFE] p-6 shadow-sm hover:shadow-lg transition-all flex flex-col justify-between"
+                    className={`rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between ${card.color}`}
                   >
                     <div className="space-y-3">
-                      <div className="h-10 w-10 rounded-xl bg-white border border-[#0D9488]/20 text-[#0F766E] flex items-center justify-center shadow-xs">
+                      <div className="h-10 w-10 rounded-xl bg-white/90 text-[#0F766E] flex items-center justify-center shadow-xs">
                         <Icon className="h-5 w-5" />
                       </div>
                       <h3 className="text-[16px] font-bold text-[#0F172A]">{card.title}</h3>
-                      <p className="text-[13px] text-[#475569] leading-relaxed font-medium">{card.desc}</p>
+                      <p className="text-[13px] text-[#0F766E]/90 leading-relaxed font-semibold">{card.desc}</p>
                     </div>
-                    <div className="mt-5 pt-4 border-t border-[#0D9488]/15">
+                    <div className="mt-5 pt-4 border-t border-[#0F766E]/15">
                       {card.preview}
                     </div>
                   </div>
@@ -482,7 +489,7 @@ function Landing() {
         </section>
 
         {/* ─── 6. How It Works ─── */}
-        <section id="workflow" className="py-20 border-t border-[#0D9488]/12 bg-[#F8FFFE] relative z-10">
+        <section id="workflow" className="py-20 border-t border-[#0D9488]/15 bg-white relative z-10">
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div data-reveal className="text-center max-w-xl mx-auto mb-14 space-y-2">
               <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#0D9488] font-bold">
@@ -495,22 +502,22 @@ function Landing() {
 
             <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
               {[
-                { step: "01", title: "Booking", sub: "Online or front desk" },
-                { step: "02", title: "Confirmation", sub: "WhatsApp alert sent" },
-                { step: "03", title: "Consultation", sub: "Doctor notes & EMR" },
-                { step: "04", title: "Prescription", sub: "Digital PDF signature" },
-                { step: "05", title: "Billing", sub: "Stripe or cash receipt" },
-                { step: "06", title: "Follow-up", sub: "Automated feedback" },
+                { step: "01", title: "Booking", sub: "Online or front desk", color: "kpi-card-mint" },
+                { step: "02", title: "Confirmation", sub: "WhatsApp alert sent", color: "kpi-card-teal" },
+                { step: "03", title: "Consultation", sub: "Doctor notes & EMR", color: "kpi-card-emerald" },
+                { step: "04", title: "Prescription", sub: "Digital PDF signature", color: "kpi-card-lime" },
+                { step: "05", title: "Billing", sub: "Stripe or cash receipt", color: "kpi-card-mint" },
+                { step: "06", title: "Follow-up", sub: "Automated feedback", color: "kpi-card-teal" },
               ].map((s, idx) => (
                 <div
                   key={s.step}
                   data-reveal
                   data-reveal-delay={String((idx % 3) + 1)}
-                  className="rounded-2xl border border-[#0D9488]/20 bg-white p-4 text-center relative group hover:border-[#0D9488] transition-all"
+                  className={`rounded-2xl p-4 text-center relative group hover:shadow-md transition-all ${s.color}`}
                 >
-                  <div className="font-mono text-[12px] font-bold text-[#0D9488] mb-1">{s.step}</div>
+                  <div className="font-mono text-[12px] font-bold text-[#0F766E] mb-1">{s.step}</div>
                   <div className="font-bold text-[13px] text-[#0F172A]">{s.title}</div>
-                  <div className="text-[10.5px] text-[#64748B] font-medium mt-0.5">{s.sub}</div>
+                  <div className="text-[10.5px] text-[#0F766E]/90 font-semibold mt-0.5">{s.sub}</div>
                 </div>
               ))}
             </div>
@@ -518,7 +525,7 @@ function Landing() {
         </section>
 
         {/* ─── 7. Live Product Preview ─── */}
-        <section id="preview" className="py-20 border-t border-[#0D9488]/12 bg-white relative z-10">
+        <section id="preview" className="py-20 border-t border-[#0D9488]/15 bg-gradient-to-b from-[#F0FDFA]/60 via-[#F8FFFE] to-[#F0FDFA]/40 relative z-10">
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div data-reveal className="text-center max-w-xl mx-auto mb-10 space-y-2">
               <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#0D9488] font-bold">
@@ -544,7 +551,7 @@ function Landing() {
                   className={`px-4 py-2 rounded-xl text-[13px] font-bold transition-all cursor-pointer ${
                     activePreviewTab === t.id
                       ? "bg-[#0F766E] text-white shadow-md"
-                      : "bg-[#F8FFFE] border border-[#0D9488]/20 text-[#475569] hover:bg-[#EFFFFE]"
+                      : "bg-white border border-[#0D9488]/20 text-[#475569] hover:bg-[#EFFFFE]"
                   }`}
                 >
                   {t.label}
@@ -635,7 +642,7 @@ function Landing() {
         </section>
 
         {/* ─── 8. Why AUTONIQUE Clinics (Enterprise Architecture) ─── */}
-        <section className="py-20 border-t border-[#0D9488]/12 bg-[#F8FFFE] relative z-10">
+        <section className="py-20 border-t border-[#0D9488]/15 bg-white relative z-10">
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div data-reveal className="text-center max-w-xl mx-auto mb-14 space-y-2">
               <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#0D9488] font-bold">
@@ -648,9 +655,9 @@ function Landing() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
-                { title: "Multi-Tenant Architecture", desc: "Isolated clinic data boundaries with multi-campus hospital organization support.", icon: Server },
-                { title: "Role-Based Access Control", desc: "Granular permissions for Doctors, Nurses, Receptionists, and Billing staff.", icon: KeyRound },
-                { title: "Immutable Audit Logging", desc: "Complete timestamped records of every patient chart view and prescription edit.", icon: FileText },
+                { title: "Multi-Tenant Architecture", desc: "Isolated clinic data boundaries with multi-campus hospital organization support.", icon: Server, color: "kpi-card-mint" },
+                { title: "Role-Based Access Control", desc: "Granular permissions for Doctors, Nurses, Receptionists, and Billing staff.", icon: KeyRound, color: "kpi-card-teal" },
+                { title: "Immutable Audit Logging", desc: "Complete timestamped records of every patient chart view and prescription edit.", icon: FileText, color: "kpi-card-emerald" },
               ].map((e, idx) => {
                 const Icon = e.icon;
                 return (
@@ -658,13 +665,13 @@ function Landing() {
                     key={e.title}
                     data-reveal
                     data-reveal-delay={String(idx + 1)}
-                    className="rounded-2xl border border-[#0D9488]/20 bg-white p-6 shadow-sm hover:shadow-md transition-all"
+                    className={`rounded-2xl p-6 shadow-sm hover:shadow-md transition-all ${e.color}`}
                   >
-                    <div className="h-10 w-10 rounded-xl bg-[#EFFFFE] text-[#0F766E] flex items-center justify-center mb-4">
-                      <Icon className="h-5 w-5" />
+                    <div className="h-10 w-10 rounded-xl bg-white/90 text-[#0F766E] flex items-center justify-center mb-4 shadow-xs">
+                      <Icon className="h-5 w-5 text-[#0F766E]" />
                     </div>
                     <h3 className="text-[15px] font-bold text-[#0F172A]">{e.title}</h3>
-                    <p className="text-[13px] text-[#475569] mt-1.5 leading-relaxed font-medium">{e.desc}</p>
+                    <p className="text-[13px] text-[#0F766E]/90 mt-1.5 leading-relaxed font-semibold">{e.desc}</p>
                   </div>
                 );
               })}
@@ -673,24 +680,24 @@ function Landing() {
         </section>
 
         {/* ─── 9. Healthcare Compliance ─── */}
-        <section className="py-12 border-t border-[#0D9488]/12 bg-white relative z-10">
+        <section className="py-12 border-t border-[#0D9488]/15 bg-gradient-to-b from-[#F0FDFA]/70 via-[#F8FFFE] to-[#F0FDFA]/40 relative z-10">
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div data-reveal className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { icon: Shield, t: "HIPAA Compliant", s: "End-to-end encrypted data" },
-                { icon: Lock, t: "GDPR Certified", s: "Strict privacy safeguards" },
-                { icon: Clock, t: "99.9% Uptime SLA", s: "Guaranteed cloud reliability" },
-                { icon: Award, t: "ISO 27001", s: "Enterprise security standard" },
+                { icon: Shield, t: "HIPAA Compliant", s: "End-to-end encrypted data", color: "kpi-card-mint" },
+                { icon: Lock, t: "GDPR Certified", s: "Strict privacy safeguards", color: "kpi-card-teal" },
+                { icon: Clock, t: "99.9% Uptime SLA", s: "Guaranteed cloud reliability", color: "kpi-card-lime" },
+                { icon: Award, t: "ISO 27001", s: "Enterprise security standard", color: "kpi-card-emerald" },
               ].map((item, i) => {
                 const Icon = item.icon;
                 return (
-                  <div key={item.t} data-reveal data-reveal-delay={String(i + 1)} className="flex items-start gap-3 p-4 rounded-2xl border border-[#0D9488]/15 bg-[#F0FDFA]">
-                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white text-[#0D9488] shadow-xs">
-                      <Icon className="h-4.5 w-4.5" />
+                  <div key={item.t} data-reveal data-reveal-delay={String(i + 1)} className={`flex items-start gap-3 p-4 rounded-2xl shadow-xs ${item.color}`}>
+                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/90 text-[#0D9488] shadow-xs">
+                      <Icon className="h-4.5 w-4.5 text-[#0F766E]" />
                     </div>
                     <div>
                       <div className="text-[13px] font-bold text-[#0F172A]">{item.t}</div>
-                      <div className="text-[11px] text-[#64748B] font-medium">{item.s}</div>
+                      <div className="text-[11px] text-[#0F766E]/90 font-semibold">{item.s}</div>
                     </div>
                   </div>
                 );
@@ -700,7 +707,7 @@ function Landing() {
         </section>
 
         {/* ─── 10. Social Proof / Testimonials ─── */}
-        <section id="social-proof" className="py-20 border-t border-[#0D9488]/12 bg-white relative z-10">
+        <section id="social-proof" className="py-20 border-t border-[#0D9488]/15 bg-white relative z-10">
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div data-reveal className="text-center max-w-lg mx-auto mb-14 space-y-2">
               <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#0D9488] font-bold">
@@ -713,29 +720,29 @@ function Landing() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {[
-                { name: "Dr. Sarah Ahmed", role: "General Practitioner, Karachi", quote: "Autonique transformed how we manage our clinic. Patient no-shows dropped by 55% after using WhatsApp reminders.", stars: 5, delay: "1", bg: "bg-[#F0FDFA] border-[#14B8A6]/25", avatarGrad: "from-[#0F766E] to-[#14B8A6]", border: "border-t border-[#14B8A6]/15" },
-                { name: "Dr. Farhan Malik", role: "Orthopedic Surgeon, Lahore", quote: "The billing and prescription modules save us 3+ hours every single day. It's the best investment we've made for our practice.", stars: 5, delay: "2", bg: "bg-[#EEF2FF] border-[#818CF8]/25", avatarGrad: "from-[#6366F1] to-[#818CF8]", border: "border-t border-[#818CF8]/15" },
-                { name: "Dr. Nadia Reyes", role: "Clinic Director, Islamabad", quote: "From EMR to payments — everything is in one place. Our staff onboarded in just 2 days. Absolutely seamless.", stars: 5, delay: "3", bg: "bg-[#FFF7ED] border-[#FB923C]/25", avatarGrad: "from-[#EA580C] to-[#FB923C]", border: "border-t border-[#FB923C]/15" },
+                { name: "Dr. Sarah Ahmed", role: "General Practitioner, Karachi", quote: "Autonique transformed how we manage our clinic. Patient no-shows dropped by 55% after using WhatsApp reminders.", stars: 5, delay: "1", color: "kpi-card-mint" },
+                { name: "Dr. Farhan Malik", role: "Orthopedic Surgeon, Lahore", quote: "The billing and prescription modules save us 3+ hours every single day. It's the best investment we've made for our practice.", stars: 5, delay: "2", color: "kpi-card-teal" },
+                { name: "Dr. Nadia Reyes", role: "Clinic Director, Islamabad", quote: "From EMR to payments — everything is in one place. Our staff onboarded in just 2 days. Absolutely seamless.", stars: 5, delay: "3", color: "kpi-card-emerald" },
               ].map((t) => (
                 <div
                   key={t.name}
                   data-reveal
                   data-reveal-delay={t.delay}
-                  className={`rounded-2xl border ${t.bg} p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col gap-4`}
+                  className={`rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col gap-4 ${t.color}`}
                 >
                   <div className="flex gap-0.5">
                     {Array(t.stars).fill(0).map((_, i) => (
                       <Star key={i} className="h-4 w-4 fill-[#F59E0B] text-[#F59E0B]" />
                     ))}
                   </div>
-                  <p className="text-[13.5px] leading-relaxed text-[#334155] font-medium flex-1">"{t.quote}"</p>
-                  <div className={`flex items-center gap-2.5 pt-3 ${t.border}`}>
-                    <div className={`grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br ${t.avatarGrad} text-white font-bold text-[13px]`}>
+                  <p className="text-[13.5px] leading-relaxed text-[#0F172A] font-semibold flex-1">"{t.quote}"</p>
+                  <div className="flex items-center gap-2.5 pt-3 border-t border-[#0F766E]/15">
+                    <div className="grid h-9 w-9 place-items-center rounded-full bg-[#0F766E] text-white font-bold text-[13px]">
                       {t.name[3]}
                     </div>
                     <div>
                       <div className="text-[13px] font-bold text-[#0F172A]">{t.name}</div>
-                      <div className="text-[11px] text-[#64748B] font-medium">{t.role}</div>
+                      <div className="text-[11px] text-[#0F766E]/90 font-semibold">{t.role}</div>
                     </div>
                   </div>
                 </div>
@@ -745,7 +752,7 @@ function Landing() {
         </section>
 
         {/* ─── 11. Pricing ─── */}
-        <section id="pricing" className="py-20 border-t border-[#0D9488]/12 bg-[#F8FFFE] relative z-10">
+        <section id="pricing" className="py-20 border-t border-[#0D9488]/15 bg-gradient-to-b from-[#F0FDFA]/70 via-[#F8FFFE] to-[#F0FDFA]/40 relative z-10">
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-12">
               <div data-reveal>
@@ -769,25 +776,25 @@ function Landing() {
                   className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-[12px] font-bold transition-all cursor-pointer ${annualBilling ? "bg-[#0F766E] text-white shadow-sm" : "text-[#64748B]"}`}
                 >
                   Annual
-                  <span className="font-mono text-[9.5px] bg-[#EFFFFE] text-[#0F766E] px-1.5 py-0.2 rounded font-bold">Save 20%</span>
+                  <span className="font-mono text-[9.5px] bg-[#CCFBF1] text-[#0F766E] px-1.5 py-0.2 rounded font-bold">Save 20%</span>
                 </button>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {[
-                { n: "Starter", p: annualBilling ? "$39" : "$49", s: "For solo doctor practices.", f: ["Smart calendar scheduling", "Structured patient records", "Automated email reminders", "Standard revenue reports"], delay: "1" },
-                { n: "Growth", p: annualBilling ? "$99" : "$129", s: "For growing clinic teams.", f: ["Everything in Starter", "Stripe payment gateway", "WhatsApp automation", "Priority 24/7 support"], highlight: true, delay: "2" },
-                { n: "Enterprise", p: "Custom", s: "For hospital groups.", f: ["Custom EMR integrations", "Immutable audit logs", "99.99% SLA & dedicated CSM", "Custom BAA — HIPAA"], delay: "3" },
+                { n: "Starter", p: annualBilling ? "$39" : "$49", s: "For solo doctor practices.", f: ["Smart calendar scheduling", "Structured patient records", "Automated email reminders", "Standard revenue reports"], delay: "1", color: "kpi-card-mint" },
+                { n: "Growth", p: annualBilling ? "$99" : "$129", s: "For growing clinic teams.", f: ["Everything in Starter", "Stripe payment gateway", "WhatsApp automation", "Priority 24/7 support"], highlight: true, delay: "2", color: "kpi-card-teal" },
+                { n: "Enterprise", p: "Custom", s: "For hospital groups.", f: ["Custom EMR integrations", "Immutable audit logs", "99.99% SLA & dedicated CSM", "Custom BAA — HIPAA"], delay: "3", color: "kpi-card-lime" },
               ].map((t) => (
                 <div
                   key={t.n}
                   data-reveal
                   data-reveal-delay={t.delay}
-                  className={`rounded-2xl border p-6 flex flex-col justify-between transition-all duration-300 ${
+                  className={`rounded-2xl border p-6 flex flex-col justify-between transition-all duration-300 ${t.color} ${
                     t.highlight
-                      ? "border-[#0D9488] bg-white ring-2 ring-[#0D9488]/20 shadow-xl"
-                      : "border-[#0D9488]/15 bg-white shadow-sm hover:shadow-lg"
+                      ? "border-[#0D9488] ring-2 ring-[#0D9488]/30 shadow-xl"
+                      : "border-[#0D9488]/20 shadow-sm hover:shadow-lg"
                   }`}
                 >
                   <div>
@@ -800,14 +807,14 @@ function Landing() {
                     <div className="mt-1 font-display text-3xl font-extrabold tracking-tight text-[#0F172A]">
                       {t.p}
                       {t.p !== "Custom" && (
-                        <span className="ml-1 font-mono text-[11.5px] text-[#64748B] font-normal">/ mo</span>
+                        <span className="ml-1 font-mono text-[11.5px] text-[#0F766E]/80 font-semibold">/ mo</span>
                       )}
                     </div>
-                    <div className="mt-0.5 text-[12px] text-[#64748B] font-medium">{t.s}</div>
+                    <div className="mt-0.5 text-[12px] text-[#0F766E]/90 font-semibold">{t.s}</div>
                     <ul className="mt-5 space-y-2.5">
                       {t.f.map((i) => (
-                        <li key={i} className="flex items-center gap-2 text-[12.5px] text-[#334155] font-medium">
-                          <CheckCircle2 className="h-4 w-4 text-[#0D9488] shrink-0" />
+                        <li key={i} className="flex items-center gap-2 text-[12.5px] text-[#0F172A] font-semibold">
+                          <CheckCircle2 className="h-4 w-4 text-[#0F766E] shrink-0" />
                           {i}
                         </li>
                       ))}
@@ -818,7 +825,7 @@ function Landing() {
                     className={`mt-6 inline-flex h-10 w-full items-center justify-center rounded-xl text-[13px] font-bold transition-all duration-300 cursor-pointer ${
                       t.highlight
                         ? "bg-gradient-to-r from-[#0F766E] to-[#0D9488] hover:from-[#0A5754] hover:to-[#0F766E] text-white shadow-lg shadow-[#0D9488]/25"
-                        : "border border-[#0D9488]/25 bg-[#F8FFFE] hover:bg-[#EFFFFE] text-[#0F766E]"
+                        : "border border-[#0D9488]/30 bg-white hover:bg-[#EFFFFE] text-[#0F766E]"
                     }`}
                   >
                     Start Free Trial
@@ -830,7 +837,7 @@ function Landing() {
         </section>
 
         {/* ─── 12. FAQ Section ─── */}
-        <section className="py-20 border-t border-[#0D9488]/12 bg-white relative z-10">
+        <section className="py-20 border-t border-[#0D9488]/15 bg-white relative z-10">
           <div className="mx-auto max-w-4xl px-5 sm:px-8">
             <div data-reveal className="text-center max-w-xl mx-auto mb-14 space-y-2">
               <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#0D9488] font-bold">
@@ -852,17 +859,17 @@ function Landing() {
                   key={faq.q}
                   data-reveal
                   data-reveal-delay={String(i + 1)}
-                  className="rounded-2xl border border-[#0D9488]/20 bg-[#F8FFFE] overflow-hidden"
+                  className="rounded-2xl border border-[#0D9488]/20 kpi-card-mint overflow-hidden shadow-xs"
                 >
                   <button
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                     className="w-full flex items-center justify-between p-5 text-left font-bold text-[14px] text-[#0F172A] cursor-pointer"
                   >
                     <span>{faq.q}</span>
-                    <ChevronDown className={`h-4 w-4 text-[#0D9488] transition-transform ${openFaq === i ? "rotate-180" : ""}`} />
+                    <ChevronDown className={`h-4 w-4 text-[#0F766E] transition-transform ${openFaq === i ? "rotate-180" : ""}`} />
                   </button>
                   {openFaq === i && (
-                    <div className="px-5 pb-5 pt-0 text-[13px] text-[#475569] leading-relaxed font-medium border-t border-[#0D9488]/10 mt-1">
+                    <div className="px-5 pb-5 pt-0 text-[13px] text-[#0F766E]/90 leading-relaxed font-semibold border-t border-[#0F766E]/15 mt-1">
                       {faq.a}
                     </div>
                   )}
@@ -873,7 +880,7 @@ function Landing() {
         </section>
 
         {/* ─── 13. Final CTA Banner ─── */}
-        <section className="py-16 border-t border-[#0D9488]/12 bg-white relative z-10">
+        <section className="py-16 border-t border-[#0D9488]/15 bg-white relative z-10">
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div
               data-reveal

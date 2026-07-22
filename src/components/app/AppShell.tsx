@@ -54,9 +54,9 @@ export function ThemeToggle() {
       aria-label="Toggle theme"
     >
       {theme === "dark" ? (
-        <Sun className="h-3.5 w-3.5 text-amber-400" />
+        <Sun className="h-3.5 w-3.5 text-[#2DD4BF] transition-transform duration-300 hover:rotate-45" />
       ) : (
-        <Moon className="h-3.5 w-3.5 text-[#0F766E]" />
+        <Moon className="h-3.5 w-3.5 text-[#0F766E] transition-transform duration-300 hover:-rotate-12" />
       )}
     </button>
   );
@@ -107,8 +107,8 @@ export function AppShell() {
       )}
 
       <div className="lg:pl-60">
-        {/* Top bar - Compact modern SaaS style */}
-        <header className="sticky top-0 z-30 flex h-12 items-center justify-between gap-3 border-b border-border/40 bg-background/90 px-4 backdrop-blur-md sm:px-6">
+        {/* Top bar - Compact modern SaaS style with Depth */}
+        <header className="sticky top-0 z-30 flex h-12 items-center justify-between gap-3 border-none bg-background/95 px-4 backdrop-blur-md sm:px-6 shadow-md shadow-black/5 dark:shadow-black/50">
           <div className="flex items-center gap-2.5 min-w-0 flex-1">
             <button
               className="grid h-7 w-7 place-items-center rounded-md border border-border/60 text-muted-foreground hover:bg-accent lg:hidden shrink-0"

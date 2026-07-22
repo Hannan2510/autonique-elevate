@@ -36,6 +36,7 @@ import {
   RefreshCw,
   PhoneCall,
   MessageSquare,
+  Bell,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({

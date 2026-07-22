@@ -307,47 +307,16 @@ function Landing() {
         </div>
       </section>
 
-      {/* 📊 Practice Control Center Showcase Section (Before Pricing) */}
-      <section id="telemetry" className="py-16 border-t border-[#00a878]/15 bg-[#F7FCF9]">
-        <div className="mx-auto max-w-6xl px-5 sm:px-8 space-y-8">
-          <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-[#00a878] font-bold">
-              Practice Control Center
-            </span>
-            <h2 className="font-display text-2xl font-bold tracking-tight sm:text-3xl text-[#0f172a]">
-              Unified Clinical Telemetry & Daily Practice Overview
-            </h2>
-            <p className="text-[13.5px] text-[#64748b]">
-              Monitor live patient volume, appointment velocity, active physician schedules, and revenue trends in real-time.
-            </p>
-          </div>
-
-          {/* Full Showcase Image Card Container */}
-          <div className="relative rounded-2xl border border-[#00a878]/30 bg-white p-2.5 sm:p-4 shadow-[0_20px_50px_-10px_rgba(0,168,120,0.18)] transition-all hover:shadow-[0_25px_60px_-10px_rgba(0,168,120,0.25)]">
-            <div className="rounded-xl overflow-hidden border border-[#00a878]/20 shadow-sm">
-              <img
-                src="/dashboard-home-img.png"
-                alt="Autonique Practice Control Center"
-                className="w-full h-auto object-cover rounded-xl"
-                style={{ imageRendering: "auto" }}
-              />
-            </div>
-            
-            {/* Highlights Bar below image */}
-            <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-3 pt-3 border-t border-[#00a878]/15 text-center font-sans">
-              <div className="flex items-center justify-center gap-1.5 text-[12px] font-semibold text-[#00684a] bg-[#e6f7f0] py-2 rounded-xl">
-                <CheckCircle2 className="h-4 w-4 text-[#00a878]" /> Live Patient Queue
-              </div>
-              <div className="flex items-center justify-center gap-1.5 text-[12px] font-semibold text-[#00684a] bg-[#e6f7f0] py-2 rounded-xl">
-                <CheckCircle2 className="h-4 w-4 text-[#00a878]" /> Real-time Revenue Trends
-              </div>
-              <div className="flex items-center justify-center gap-1.5 text-[12px] font-semibold text-[#00684a] bg-[#e6f7f0] py-2 rounded-xl">
-                <CheckCircle2 className="h-4 w-4 text-[#00a878]" /> Doctor Duty Telemetry
-              </div>
-              <div className="flex items-center justify-center gap-1.5 text-[12px] font-semibold text-[#00684a] bg-[#e6f7f0] py-2 rounded-xl">
-                <CheckCircle2 className="h-4 w-4 text-[#00a878]" /> 99.9% Operational SLA
-              </div>
-            </div>
+      {/* 📱 5. Mobile App & WhatsApp Bot Showcase Banner (Just before Pricing) */}
+      <section className="py-12 border-t border-[#00a878]/15 bg-[#F7FCF9]">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <div className="rounded-3xl border border-[#00a878]/20 bg-white overflow-hidden shadow-lg transition-transform hover:scale-[1.005]">
+            <img
+              src="/whatsapp-bot-section.png"
+              alt="Manage with Autonique — WhatsApp Bot Automation & Mobile App"
+              className="w-full h-auto object-cover"
+              style={{ imageRendering: "auto" }}
+            />
           </div>
         </div>
       </section>

@@ -132,8 +132,8 @@ function Landing() {
             {/* Right Column (6 cols): Dashboard Window Frame + Compact Stats Bar Directly Underneath */}
             <div className="lg:col-span-6 space-y-4">
               
-              {/* Desktop Window Frame with Light Green Dashboard UI inside */}
-              <div className="rounded-2xl border border-emerald-500/30 bg-card shadow-[0_20px_50px_-10px_rgba(16,185,129,0.18)] overflow-hidden transition-all">
+              {/* Desktop Window Frame with 3D Perspective Tilt Effect */}
+              <div className="relative rounded-2xl border border-emerald-500/30 bg-card shadow-[0_25px_60px_-15px_rgba(16,185,129,0.25)] overflow-hidden transition-all duration-500 ease-out lg:[transform:perspective(1000px)_rotateY(-10deg)_rotateX(5deg)_rotate(-2deg)] lg:hover:[transform:perspective(1000px)_rotateY(-2deg)_rotateX(1deg)_rotate(0deg)]">
                 
                 {/* Window Header Dots + Title */}
                 <div className="flex items-center justify-between border-b border-border/60 px-4 py-2.5 bg-gradient-to-r from-emerald-900 via-teal-900 to-emerald-950 text-white">

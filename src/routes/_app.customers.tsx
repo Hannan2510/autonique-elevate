@@ -16,8 +16,10 @@ import {
   X,
   Eye,
   FileText,
+  CreditCard as StripeIcon,
 } from "lucide-react";
 import { Badge, Button, Card, PageHeader } from "@/components/app/AppShell";
+import { StripePaymentModal, StripePaymentItem } from "@/components/app/StripePaymentModal";
 
 export const Route = createFileRoute("/_app/customers")({
   head: () => ({
@@ -49,7 +51,7 @@ type Patient = {
 };
 
 const patients: Patient[] = [
-  { id: "P-1042", name: "Ava Chen", email: "ava.chen@meridian.io", phone: "+49 30 8823 1194", city: "Berlin", status: "active", lastVisit: "22 Jul 2026", nextVisit: "05 Aug 2026", visits: 14, balance: 0, provider: "Dr. Reyes", notes: "Prefers morning appointments. Allergic to penicillin." },
+  { id: "P-1042", name: "Ava Chen", email: "ava.chen@meridian.io", phone: "+49 30 8823 1194", city: "Berlin", status: "active", lastVisit: "22 Jul 2026", nextVisit: "05 Aug 2026", visits: 14, balance: 180, provider: "Dr. Reyes", notes: "Prefers morning appointments. Allergic to penicillin." },
   { id: "P-1041", name: "Marcus Weiss", email: "m.weiss@hey.com", phone: "+49 30 4412 8802", city: "Berlin", status: "active", lastVisit: "22 Jul 2026", visits: 6, balance: 240, provider: "Dr. Okafor", notes: "Post-op follow-up scheduled." },
   { id: "P-1040", name: "Priya Kapoor", email: "priya.k@fastmail.com", phone: "+49 30 2201 4488", city: "Potsdam", status: "active", lastVisit: "22 Jul 2026", visits: 3, balance: 0, provider: "Dr. Reyes", notes: "New procedure evaluation in progress." },
   { id: "P-1039", name: "Jonas Lind", email: "jonas@lind.se", phone: "+46 8 4402 1188", city: "Stockholm", status: "new", lastVisit: "22 Jul 2026", visits: 1, balance: 120, provider: "Dr. Okafor", notes: "Referred by Dr. Bergman." },
@@ -68,6 +70,14 @@ function Customers() {
   const [tabFilter, setTabFilter] = useState<"all" | "active" | "new">("all");
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
+  // Stripe Modal state
+  const [stripeModalOpen, setStripeModalOpen] = useState(false);
+  const [stripeItem, setStripeItem] = useState<StripePaymentItem>({
+    title: "Patient Consultation Invoice",
+    description: "Clinic Visit & Evaluation Fee",
+    amount: 180,
+  });
+
   const filtered = useMemo(() => {
     return patients.filter((p) => {
       if (tabFilter !== "all" && p.status !== tabFilter) return false;
@@ -79,8 +89,29 @@ function Customers() {
 
   const selectedPatient = useMemo(() => patients.find((p) => p.id === selectedId), [selectedId]);
 
+  const triggerStripePay = (patient: Patient) => {
+    setStripeItem({
+      title: `Invoice #${patient.id} — ${patient.name}`,
+      description: `Outpatient Services & Consultation Balance`,
+      amount: patient.balance > 0 ? patient.balance : 180,
+      patientName: patient.name,
+      invoiceId: patient.id,
+    });
+    setStripeModalOpen(true);
+  };
+
   return (
     <>
+      {/* Stripe Payment Modal */}
+      <StripePaymentModal
+        isOpen={stripeModalOpen}
+        onClose={() => setStripeModalOpen(false)}
+        item={stripeItem}
+        onSuccess={(txId) => {
+          console.log("Stripe transaction successful:", txId);
+        }}
+      />
+
       {/* PageHeader - Clean & Modern */}
       <PageHeader
         title={
@@ -92,9 +123,9 @@ function Customers() {
         actions={
           <div className="flex items-center gap-2.5">
             <span className="font-mono text-[11px] text-muted-foreground font-medium hidden sm:inline">Sunday, June 22, 2026</span>
-            <Button size="sm">
-              <Plus className="h-3 w-3" />
-              <span>Add Patient</span>
+            <Button size="sm" onClick={() => triggerStripePay(patients[0])}>
+              <StripeIcon className="h-3 w-3 text-indigo-300" />
+              <span>Stripe Gateway</span>
             </Button>
           </div>
         }
@@ -107,7 +138,7 @@ function Customers() {
             { label: "Active Patients", val: "5", sub: "Registered", grad: "kpi-gradient-mint", icon: Users },
             { label: "Total Visits", val: "46", sub: "All time", grad: "kpi-gradient-lime", icon: Activity },
             { label: "Upcoming Visits", val: "2", sub: "This week", grad: "kpi-gradient-emerald", icon: Calendar },
-            { label: "Total Balance", val: "$360", sub: "Outstanding", grad: "kpi-gradient-teal", icon: CreditCard },
+            { label: "Total Balance", val: "$540", sub: "Outstanding", grad: "kpi-gradient-teal", icon: CreditCard },
           ].map((item) => {
             const Icon = item.icon;
             return (
@@ -176,7 +207,7 @@ function Customers() {
                   <th className="px-4 py-2.5 font-semibold">Location</th>
                   <th className="px-4 py-2.5 font-semibold">Last Visit</th>
                   <th className="px-4 py-2.5 font-semibold">Status</th>
-                  <th className="px-4 py-2.5 font-semibold text-right">Action</th>
+                  <th className="px-4 py-2.5 font-semibold text-right">Stripe Payment</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border/40">
@@ -212,22 +243,16 @@ function Customers() {
                       <StatusBadge s={p.status} />
                     </td>
                     <td className="px-4 py-3 text-right">
-                      <div className="inline-flex items-center gap-1 text-muted-foreground">
+                      <div className="inline-flex items-center gap-1.5 text-muted-foreground">
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
-                            setSelectedId(p.id);
+                            triggerStripePay(p);
                           }}
-                          className="p-1 rounded hover:bg-emerald-500/10 hover:text-emerald-700 transition-colors"
-                          title="View Details"
+                          className="px-2 py-1 rounded bg-indigo-600 hover:bg-indigo-700 text-white font-mono text-[10.5px] font-medium flex items-center gap-1 shadow-2xs transition-all cursor-pointer"
                         >
-                          <Eye className="h-3.5 w-3.5" />
-                        </button>
-                        <button
-                          onClick={(e) => e.stopPropagation()}
-                          className="p-1 rounded hover:bg-accent hover:text-foreground transition-colors"
-                        >
-                          <MoreHorizontal className="h-3.5 w-3.5" />
+                          <StripeIcon className="h-3 w-3" />
+                          <span>Pay ${p.balance > 0 ? p.balance : 180}</span>
                         </button>
                       </div>
                     </td>
@@ -279,6 +304,21 @@ function Customers() {
                   <StatusBadge s={selectedPatient.status} />
                 </div>
 
+                {/* Stripe Quick Checkout Bar */}
+                <div className="rounded-xl p-3.5 bg-gradient-to-r from-slate-900 to-indigo-950 text-white flex items-center justify-between shadow-md">
+                  <div>
+                    <div className="text-[10px] text-indigo-300 font-mono uppercase">Outstanding Balance</div>
+                    <div className="text-lg font-bold font-display">${selectedPatient.balance > 0 ? selectedPatient.balance : 180}.00</div>
+                  </div>
+                  <button
+                    onClick={() => triggerStripePay(selectedPatient)}
+                    className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-[11.5px] font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
+                  >
+                    <StripeIcon className="h-3.5 w-3.5" />
+                    <span>Pay with Stripe</span>
+                  </button>
+                </div>
+
                 {/* Quick Stats Grid */}
                 <div className="grid grid-cols-2 gap-2.5">
                   <div className="rounded-lg p-3 kpi-gradient-mint border border-emerald-500/10">
@@ -320,7 +360,10 @@ function Customers() {
               {/* Drawer Footer */}
               <div className="border-t border-border/40 p-4 bg-background flex items-center justify-end gap-2">
                 <Button variant="outline" size="sm" onClick={() => setSelectedId(null)}>Close</Button>
-                <Button size="sm">Open Medical Chart</Button>
+                <Button size="sm" onClick={() => triggerStripePay(selectedPatient)}>
+                  <StripeIcon className="h-3.5 w-3.5" />
+                  <span>Stripe Payment</span>
+                </Button>
               </div>
             </div>
           </div>

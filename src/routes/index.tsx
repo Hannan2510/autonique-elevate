@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, ChevronRight } from "lucide-react";
 import heroClinic from "@/assets/hero-clinic.jpg.asset.json";
-import heroWhatsapp from "@/assets/hero-clinic-whatsapp.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -57,25 +56,32 @@ function Landing() {
         </div>
       </header>
 
-      <section className="relative overflow-hidden border-b border-border/70 bg-background">
+      <section className="relative overflow-hidden border-b border-border/70">
         <div className="absolute inset-0" aria-hidden>
-          <div className="absolute inset-0 bg-gradient-to-br from-secondary/40 via-background to-background" />
-          <div className="absolute inset-0 bg-grid opacity-20" />
+          <img
+            src={heroClinic.url}
+            alt=""
+            width={1024}
+            height={1024}
+            className="h-full w-full object-cover opacity-70"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
+          <div className="absolute inset-0 bg-grid opacity-30" />
         </div>
-        <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-5 pt-16 pb-16 sm:px-8 lg:grid-cols-2 lg:pt-24 lg:pb-28">
-          <div className="max-w-xl">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1 text-[12px] text-muted-foreground backdrop-blur">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#25D366]" />
-              WhatsApp patient engagement, built-in
+        <div className="relative mx-auto max-w-7xl px-5 pt-20 pb-24 sm:px-8 sm:pt-28 sm:pb-32">
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-3 py-1 text-[12px] text-muted-foreground backdrop-blur">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+              New — Autonique 2.4 · Team scheduling
               <ChevronRight className="h-3 w-3" />
             </div>
-            <h1 className="text-balance font-display text-4xl leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-              Your clinic, now on WhatsApp.
+            <h1 className="text-balance font-display text-5xl leading-[1.02] tracking-tight sm:text-6xl md:text-7xl">
+              The operating system for modern clinics.
             </h1>
-            <p className="mt-5 text-balance text-[15px] leading-relaxed text-muted-foreground sm:text-base">
-              Let patients book, reschedule, and get reminders through the app they already use. Autonique connects your practice to patients in the channel they prefer.
+            <p className="mx-auto mt-6 max-w-xl text-balance text-[15px] leading-relaxed text-muted-foreground sm:text-base">
+              Autonique unifies scheduling, patient records, revenue and team operations into one considered workspace. Built for clinics that expect more from their software.
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="mt-9 flex items-center justify-center gap-3">
               <Link to="/dashboard" className="inline-flex h-10 items-center gap-1.5 rounded-md bg-primary px-4 text-[13px] font-medium text-primary-foreground transition-opacity hover:opacity-90">
                 Start free trial
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -84,43 +90,60 @@ function Landing() {
                 Book a demo
               </a>
             </div>
-            <div className="mt-8 flex items-center gap-4 text-[12px] text-muted-foreground">
-              <span className="flex items-center gap-1.5">
-                <Check className="h-3.5 w-3.5 text-primary" />
-                Automated reminders
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Check className="h-3.5 w-3.5 text-primary" />
-                Two-way booking
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Check className="h-3.5 w-3.5 text-primary" />
-                HIPAA-aware logs
-              </span>
-            </div>
           </div>
 
-          <div className="relative lg:pl-4">
-            <div className="relative overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[0_1px_0_0_var(--border),0_24px_80px_-24px_rgba(0,0,0,0.18)]">
-              <img
-                src={heroWhatsapp.url}
-                alt="Patient booking an appointment through WhatsApp in a modern clinic"
-                width={1920}
-                height={1080}
-                className="h-auto w-full"
-                loading="eager"
-              />
-            </div>
-            <div className="absolute -bottom-6 -left-4 hidden rounded-lg border border-border bg-background px-4 py-3 shadow-lg lg:block">
-              <div className="flex items-center gap-3">
-                <div className="grid h-8 w-8 place-items-center rounded-full bg-[#25D366]/10 text-[#25D366]">
-                  <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
-                  </svg>
+          <div className="relative mx-auto mt-20 max-w-5xl">
+            <div className="rounded-xl border border-border bg-card shadow-[0_1px_0_0_var(--border),0_20px_60px_-20px_rgba(0,0,0,0.15)]">
+              <div className="flex items-center gap-1.5 border-b border-border px-4 py-2.5">
+                <span className="h-2.5 w-2.5 rounded-full bg-muted" />
+                <span className="h-2.5 w-2.5 rounded-full bg-muted" />
+                <span className="h-2.5 w-2.5 rounded-full bg-muted" />
+                <div className="ml-3 flex items-center gap-1.5 rounded-md border border-border/70 bg-background px-2 py-0.5 text-[11px] text-muted-foreground">
+                  app.autonique.com/dashboard
                 </div>
-                <div>
-                  <div className="text-[13px] font-medium text-foreground">Appointment confirmed</div>
-                  <div className="text-[11px] text-muted-foreground">Sent via WhatsApp · 2m ago</div>
+              </div>
+              <div className="grid grid-cols-12 gap-0">
+                <aside className="col-span-3 hidden border-r border-border p-4 lg:block">
+                  <div className="mb-4 flex items-center gap-2">
+                    <div className="h-5 w-5 rounded bg-primary" />
+                    <span className="text-[12px] font-medium">Autonique</span>
+                  </div>
+                  <div className="space-y-1">
+                    {["Overview", "Patients", "Appointments", "Revenue", "Team", "Settings"].map((i, idx) => (
+                      <div key={i} className={`rounded px-2 py-1.5 text-[12px] ${idx === 0 ? "bg-accent text-foreground" : "text-muted-foreground"}`}>
+                        {i}
+                      </div>
+                    ))}
+                  </div>
+                </aside>
+                <div className="col-span-12 p-6 lg:col-span-9">
+                  <div className="mb-4 flex items-center justify-between">
+                    <div>
+                      <div className="font-display text-2xl tracking-tight">Overview</div>
+                      <div className="text-[12px] text-muted-foreground">Tuesday, 22 July 2026</div>
+                    </div>
+                    <div className="flex gap-2 text-[11px] text-muted-foreground">
+                      <span className="rounded border border-border px-2 py-1">Last 30 days</span>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      { l: "Revenue", v: "$248,320", d: "+12.4%" },
+                      { l: "Bookings", v: "1,284", d: "+3.1%" },
+                      { l: "Retention", v: "94.2%", d: "+0.8%" },
+                    ].map((s) => (
+                      <div key={s.l} className="rounded-lg border border-border bg-background p-3">
+                        <div className="text-[11px] text-muted-foreground">{s.l}</div>
+                        <div className="mt-1 font-display text-xl tracking-tight">{s.v}</div>
+                        <div className="text-[11px] text-muted-foreground">{s.d}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-3 h-32 rounded-lg border border-border bg-background p-3">
+                    <svg viewBox="0 0 400 100" className="h-full w-full" preserveAspectRatio="none">
+                      <path d="M0,70 C40,60 60,80 100,55 C140,30 180,50 220,40 C260,30 300,55 340,30 L400,20" stroke="currentColor" strokeWidth="1.5" fill="none" className="text-foreground" />
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>

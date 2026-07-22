@@ -62,27 +62,27 @@
 }
 
 :root {
-  /* Monochrome enterprise palette — Linear/Vercel/Stripe feel */
+  /* Clinic palette — deep teal + warm cream, calm medical feel */
   --radius: 0.5rem;
-  --background: oklch(0.995 0 0);
-  --foreground: oklch(0.16 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.16 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.16 0 0);
-  --primary: oklch(0.18 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.2 0 0);
-  --muted: oklch(0.972 0 0);
-  --muted-foreground: oklch(0.5 0 0);
-  --accent: oklch(0.96 0 0);
-  --accent-foreground: oklch(0.18 0 0);
+  --background: oklch(0.985 0.006 95);
+  --foreground: oklch(0.24 0.03 195);
+  --card: oklch(0.995 0.004 95);
+  --card-foreground: oklch(0.24 0.03 195);
+  --popover: oklch(0.995 0.004 95);
+  --popover-foreground: oklch(0.24 0.03 195);
+  --primary: oklch(0.38 0.07 190);
+  --primary-foreground: oklch(0.985 0.006 95);
+  --secondary: oklch(0.94 0.015 170);
+  --secondary-foreground: oklch(0.28 0.04 195);
+  --muted: oklch(0.955 0.01 150);
+  --muted-foreground: oklch(0.48 0.02 195);
+  --accent: oklch(0.92 0.03 165);
+  --accent-foreground: oklch(0.28 0.05 195);
   --destructive: oklch(0.52 0.19 25);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.918 0 0);
-  --input: oklch(0.918 0 0);
-  --ring: oklch(0.75 0 0);
+  --border: oklch(0.9 0.012 170);
+  --input: oklch(0.9 0.012 170);
+  --ring: oklch(0.55 0.08 190);
   --success: oklch(0.62 0.13 155);
   --warning: oklch(0.72 0.14 75);
   --chart-1: oklch(0.646 0.222 41.116);
@@ -167,8 +167,8 @@
 /* Subtle grid pattern for hero */
 @utility bg-grid {
   background-image:
-    linear-gradient(to right, oklch(0.918 0 0) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.918 0 0) 1px, transparent 1px);
+    linear-gradient(to right, oklch(0.88 0.02 170) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.88 0.02 170) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: radial-gradient(ellipse 60% 60% at 50% 40%, black 40%, transparent 100%);
 }

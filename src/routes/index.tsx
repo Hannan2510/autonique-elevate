@@ -37,6 +37,8 @@ import {
   PhoneCall,
   MessageSquare,
   Bell,
+  Sun,
+  Moon,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -80,10 +82,10 @@ function useScrollReveal() {
   }, []);
 }
 
-/* Clinical ECG-pulse SVG Logo (Dark Glass Theme) */
-function Logo({ className = "" }: { className?: string }) {
+/* Clinical ECG-pulse SVG Logo */
+function Logo({ isDark = true }: { isDark?: boolean }) {
   return (
-    <div className={`flex items-center gap-3 ${className}`}>
+    <div className="flex items-center gap-3">
       <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-600 via-teal-500 to-cyan-400 text-white shadow-lg shadow-emerald-500/30 transition-transform duration-300 hover:scale-105">
         <svg
           viewBox="0 0 24 24"
@@ -105,10 +107,10 @@ function Logo({ className = "" }: { className?: string }) {
         </svg>
       </div>
       <div className="flex flex-col">
-        <span className="text-[17.5px] font-extrabold tracking-tight leading-none text-white font-sans">
+        <span className={`text-[17.5px] font-extrabold tracking-tight leading-none ${isDark ? "text-white" : "text-[#0F172A]"} font-sans`}>
           Autonique
         </span>
-        <span className="text-[8.5px] text-teal-400 font-mono leading-none mt-0.5 uppercase tracking-[0.22em] font-bold">
+        <span className="text-[8.5px] text-teal-400 dark:text-teal-400 font-mono leading-none mt-0.5 uppercase tracking-[0.22em] font-bold">
           Clinical OS
         </span>
       </div>
@@ -117,6 +119,7 @@ function Logo({ className = "" }: { className?: string }) {
 }
 
 function Landing() {
+  const [isDark, setIsDark] = useState(true);
   const [annualBilling, setAnnualBilling] = useState(true);
   const [activePreviewTab, setActivePreviewTab] = useState<"dashboard" | "crm" | "appointments" | "emr" | "billing">("dashboard");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -143,28 +146,53 @@ function Landing() {
         [data-reveal-delay="5"] { transition-delay: 0.5s; }
       `}</style>
 
-      {/* Dark Glassmorphic Theme Container */}
-      <div className="min-h-screen bg-[#050B14] text-slate-100 font-sans selection:bg-teal-500/30 selection:text-teal-200 overflow-x-hidden antialiased">
+      {/* Main Theme Container */}
+      <div className={`min-h-screen font-sans overflow-x-hidden antialiased transition-colors duration-300 ${
+        isDark ? "bg-[#050B14] text-slate-100 selection:bg-teal-500/30 selection:text-teal-200" : "bg-[#F8FFFE] text-[#0F172A] selection:bg-[#0D9488]/20 selection:text-[#0F766E]"
+      }`}>
         
-        {/* Subtle glowing radial background lights */}
-        <div className="fixed inset-0 pointer-events-none opacity-[0.03] bg-[radial-gradient(#14B8A6_1px,transparent_1px)] [background-size:28px_28px] z-0" />
-        <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none z-0" />
+        {/* Subtle background glow */}
+        <div className={`fixed inset-0 pointer-events-none opacity-[0.035] bg-[radial-gradient(#14B8A6_1px,transparent_1px)] [background-size:28px_28px] z-0`} />
+        {isDark && (
+          <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none z-0" />
+        )}
 
-        {/* ─── 1. Dark Glass Header ─── */}
-        <header className="sticky top-0 z-50 border-b border-emerald-500/20 bg-[#050B14]/85 backdrop-blur-xl">
+        {/* ─── 1. Header with Theme Switcher ─── */}
+        <header className={`sticky top-0 z-50 transition-colors duration-300 backdrop-blur-xl ${
+          isDark ? "border-b border-emerald-500/20 bg-[#050B14]/85" : "border-b border-[#0D9488]/15 bg-[#F8FFFE]/92"
+        }`}>
           <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-            <Logo />
-            <nav className="hidden items-center gap-8 md:flex text-[13.5px] font-semibold text-slate-300">
+            <Logo isDark={isDark} />
+            
+            <nav className={`hidden items-center gap-8 md:flex text-[13.5px] font-semibold ${isDark ? "text-slate-300" : "text-[#475569]"}`}>
               <a href="#problem" className="hover:text-teal-400 transition-colors">Why Change</a>
               <a href="#platform" className="hover:text-teal-400 transition-colors">Platform</a>
               <a href="#workflow" className="hover:text-teal-400 transition-colors">Workflow</a>
               <a href="#preview" className="hover:text-teal-400 transition-colors">Product</a>
               <a href="#pricing" className="hover:text-teal-400 transition-colors">Pricing</a>
             </nav>
+
             <div className="flex items-center gap-3">
-              <Link to="/dashboard" className="hidden text-[13.5px] font-bold text-slate-300 hover:text-teal-400 sm:inline transition-colors px-3 py-1.5 rounded-lg hover:bg-emerald-500/10">
+              {/* Theme Toggle Button */}
+              <button
+                onClick={() => setIsDark(!isDark)}
+                aria-label="Toggle theme"
+                className={`p-2 rounded-xl transition-all cursor-pointer ${
+                  isDark
+                    ? "bg-[#0B1726] border border-emerald-500/30 text-teal-300 hover:bg-emerald-500/20 shadow-xs"
+                    : "bg-white border border-[#0D9488]/20 text-[#0F766E] hover:bg-[#EFFFFE] shadow-xs"
+                }`}
+                title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              >
+                {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              </button>
+
+              <Link to="/dashboard" className={`hidden text-[13.5px] font-bold sm:inline transition-colors px-3 py-1.5 rounded-lg ${
+                isDark ? "text-slate-300 hover:text-teal-400 hover:bg-emerald-500/10" : "text-[#334155] hover:text-[#0D9488] hover:bg-[#0D9488]/10"
+              }`}>
                 Sign In
               </Link>
+
               <Link to="/dashboard" className="inline-flex h-9.5 items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-600 via-teal-500 to-cyan-500 hover:from-emerald-500 hover:to-teal-400 px-4.5 text-[13px] font-bold text-white transition-all duration-300 shadow-lg shadow-emerald-500/25 active:scale-95 cursor-pointer">
                 <Rocket className="h-3.5 w-3.5" />
                 <span>Start Free Trial</span>
@@ -173,17 +201,23 @@ function Landing() {
           </div>
         </header>
 
-        {/* ─── 2. Hero Section (Dark Glass) ─── */}
-        <section id="home" className="relative overflow-hidden pt-14 pb-20 lg:pt-20 lg:pb-28 bg-gradient-to-b from-[#050B14] via-[#071322] to-[#050B14]">
-          {/* Ambient glowing radial light */}
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] bg-gradient-to-tr from-emerald-500/15 to-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
+        {/* ─── 2. Hero Section ─── */}
+        <section id="home" className={`relative overflow-hidden pt-14 pb-20 lg:pt-20 lg:pb-28 ${
+          isDark ? "bg-gradient-to-b from-[#050B14] via-[#071322] to-[#050B14]" : "bg-gradient-to-b from-[#EFFFFE]/70 via-[#F8FFFE] to-[#F8FFFE]"
+        }`}>
+          {/* Ambient light halo */}
+          <div className={`absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] rounded-full blur-[120px] pointer-events-none ${
+            isDark ? "bg-gradient-to-tr from-emerald-500/15 to-cyan-500/10" : "bg-[#0D9488]/8"
+          }`} />
 
           <div className="mx-auto max-w-6xl px-5 sm:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               <div className="lg:col-span-6 space-y-6 text-left">
                 <div
                   data-reveal
-                  className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-[11.5px] font-bold text-teal-300 shadow-xs backdrop-blur-md"
+                  className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[11.5px] font-bold shadow-xs backdrop-blur-md ${
+                    isDark ? "border-emerald-500/30 bg-emerald-500/10 text-teal-300" : "border-[#0D9488]/25 bg-[#EFFFFE] text-[#0F766E]"
+                  }`}
                 >
                   <span className="flex h-2 w-2 rounded-full bg-teal-400 animate-pulse" />
                   Trusted by 40,000+ Doctors & Clinics Worldwide
@@ -193,7 +227,7 @@ function Landing() {
                 <h1
                   data-reveal
                   data-reveal-delay="1"
-                  className="font-display text-4xl leading-[1.07] font-black tracking-tight sm:text-5xl text-white"
+                  className={`font-display text-4xl leading-[1.07] font-black tracking-tight sm:text-5xl ${isDark ? "text-white" : "text-[#0F172A]"}`}
                 >
                   Simplify Your Practice with{" "}
                   <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
@@ -204,7 +238,7 @@ function Landing() {
                 <p
                   data-reveal
                   data-reveal-delay="2"
-                  className="text-[15px] leading-relaxed text-slate-300 max-w-lg font-medium"
+                  className={`text-[15px] leading-relaxed max-w-lg font-medium ${isDark ? "text-slate-300" : "text-[#475569]"}`}
                 >
                   All-in-one clinical software for doctors, practice groups, and
                   hospitals — scheduling, EMR, prescriptions, billing, and
@@ -225,7 +259,9 @@ function Landing() {
                   </Link>
                   <a
                     href="#pricing"
-                    className="inline-flex h-11.5 items-center gap-2 rounded-xl border border-emerald-500/30 bg-[#0B1726]/80 hover:bg-[#0F2238] px-6 text-[13.5px] font-bold text-teal-300 shadow-sm transition-all backdrop-blur-md"
+                    className={`inline-flex h-11.5 items-center gap-2 rounded-xl px-6 text-[13.5px] font-bold transition-all shadow-xs ${
+                      isDark ? "border border-emerald-500/30 bg-[#0B1726]/80 hover:bg-[#0F2238] text-teal-300 backdrop-blur-md" : "border border-[#0D9488]/30 bg-white hover:bg-[#EFFFFE]/70 text-[#0F766E]"
+                    }`}
                   >
                     <Calendar className="h-4 w-4 text-teal-400" />
                     Book a Demo
@@ -235,7 +271,7 @@ function Landing() {
                 <div
                   data-reveal
                   data-reveal-delay="4"
-                  className="flex flex-wrap items-center gap-5 text-[11.5px] font-mono font-medium text-slate-400 pt-1"
+                  className={`flex flex-wrap items-center gap-5 text-[11.5px] font-mono font-medium pt-1 ${isDark ? "text-slate-400" : "text-[#64748B]"}`}
                 >
                   <span className="flex items-center gap-1.5">
                     <CheckCircle2 className="h-4 w-4 text-teal-400" />
@@ -252,10 +288,12 @@ function Landing() {
                 </div>
               </div>
 
-              {/* Tilted Dashboard Window (Dark Glass) */}
+              {/* Tilted Dashboard Window */}
               <div data-reveal data-reveal-delay="2" className="lg:col-span-6 space-y-4">
-                <div className="relative rounded-2xl border border-emerald-500/30 bg-[#0A1220] shadow-[0_30px_90px_-15px_rgba(13,148,136,0.35)] overflow-hidden transition-all duration-500 ease-out lg:[transform:perspective(1000px)_rotateY(-8deg)_rotateX(4deg)_rotate(-1.5deg)] lg:hover:[transform:perspective(1000px)_rotateY(-1deg)_rotateX(0deg)_rotate(0deg)] max-w-md mx-auto lg:max-w-none">
-                  <div className="flex items-center justify-between px-3.5 py-2.5 bg-[#020914] text-white border-b border-emerald-500/20">
+                <div className={`relative rounded-2xl border shadow-2xl overflow-hidden transition-all duration-500 ease-out lg:[transform:perspective(1000px)_rotateY(-8deg)_rotateX(4deg)_rotate(-1.5deg)] lg:hover:[transform:perspective(1000px)_rotateY(-1deg)_rotateX(0deg)_rotate(0deg)] max-w-md mx-auto lg:max-w-none ${
+                  isDark ? "border-emerald-500/30 bg-[#0A1220] shadow-[0_30px_90px_-15px_rgba(13,148,136,0.35)]" : "border-[#0D9488]/30 bg-white shadow-[0_30px_70px_-15px_rgba(13,148,136,0.25)]"
+                }`}>
+                  <div className="flex items-center justify-between px-3.5 py-2.5 bg-[#020914] text-white">
                     <div className="flex items-center gap-1.5">
                       <span className="h-2.5 w-2.5 rounded-full bg-rose-500" />
                       <span className="h-2.5 w-2.5 rounded-full bg-amber-500" />
@@ -275,17 +313,22 @@ function Landing() {
                   </div>
                 </div>
 
-                {/* Dark Glass Stat Cards */}
-                <div data-reveal data-reveal-delay="3" className="grid grid-cols-4 gap-2 text-center">
+                {/* Stat Cards — Soft Shadow, Smooth Rounded */}
+                <div data-reveal data-reveal-delay="3" className="grid grid-cols-4 gap-2.5 text-center">
                   {[
                     { v: "40K+", l: "Doctors" },
                     { v: "25K+", l: "Clinics" },
                     { v: "8M+", l: "Patients" },
                     { v: "99.9%", l: "Uptime" },
                   ].map((s) => (
-                    <div key={s.l} className="rounded-xl bg-[#0B1726]/90 border border-emerald-500/20 p-2.5 shadow-sm hover:border-emerald-500/40 transition-all backdrop-blur-md">
-                      <div className="font-display text-xl font-black text-white">{s.v}</div>
-                      <div className="text-[10px] font-mono font-bold text-teal-400 uppercase tracking-wider">{s.l}</div>
+                    <div
+                      key={s.l}
+                      className={`rounded-2xl p-3 shadow-md hover:shadow-lg transition-all ${
+                        isDark ? "bg-[#0B1726]/90 border-0 text-white backdrop-blur-md" : "bg-white border-0 text-[#0F172A]"
+                      }`}
+                    >
+                      <div className="font-display text-xl font-black text-emerald-500 dark:text-teal-300">{s.v}</div>
+                      <div className={`text-[10px] font-mono font-bold uppercase tracking-wider ${isDark ? "text-teal-400" : "text-[#64748B]"}`}>{s.l}</div>
                     </div>
                   ))}
                 </div>
@@ -294,29 +337,33 @@ function Landing() {
           </div>
         </section>
 
-        {/* ─── 3. The Problem Section (Dark Glass) ─── */}
-        <section id="problem" className="py-20 border-t border-emerald-500/15 bg-gradient-to-b from-[#050B14] via-[#081525] to-[#050B14] relative z-10">
+        {/* ─── 3. The Problem Section ─── */}
+        <section id="problem" className={`py-20 border-t ${
+          isDark ? "border-emerald-500/15 bg-gradient-to-b from-[#050B14] via-[#081525] to-[#050B14]" : "border-[#0D9488]/12 bg-[#F8FFFE]"
+        } relative z-10`}>
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div data-reveal className="text-center max-w-2xl mx-auto mb-14 space-y-2">
               <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-teal-400 font-bold">
                 The Operational Bottleneck
               </span>
-              <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl text-white">
+              <h2 className={`font-display text-3xl font-extrabold tracking-tight sm:text-4xl ${isDark ? "text-white" : "text-[#0F172A]"}`}>
                 Traditional Healthcare Operations Are Broken
               </h2>
-              <p className="text-[14px] text-slate-300 font-medium">
+              <p className={`text-[14px] font-medium ${isDark ? "text-slate-300" : "text-[#475569]"}`}>
                 Clinic owners lost an average of 4.2 hours daily managing fragmented systems.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
               {/* Before Autonique */}
-              <div data-reveal data-reveal-delay="1" className="rounded-2xl border border-rose-500/30 bg-gradient-to-br from-rose-950/30 via-[#0C1420] to-[#0C1420] p-6 space-y-4 shadow-md backdrop-blur-md">
-                <div className="flex items-center gap-2 text-rose-400 font-bold text-[14px]">
-                  <AlertCircle className="h-5 w-5 text-rose-400" />
+              <div data-reveal data-reveal-delay="1" className={`rounded-2xl p-6 space-y-4 shadow-md border-0 ${
+                isDark ? "bg-gradient-to-br from-rose-950/30 via-[#0C1420] to-[#0C1420] text-slate-300" : "bg-rose-50/50 text-[#475569]"
+              }`}>
+                <div className="flex items-center gap-2 text-rose-500 font-bold text-[14px]">
+                  <AlertCircle className="h-5 w-5 text-rose-500" />
                   <span>Legacy Disconnected Setup</span>
                 </div>
-                <ul className="space-y-3 text-[13px] text-slate-300">
+                <ul className="space-y-3 text-[13px]">
                   {[
                     "Missed appointments due to manual reminder calls",
                     "Paper-based prescriptions causing dosage errors",
@@ -325,20 +372,22 @@ function Landing() {
                     "Uncollected bills & missing revenue telemetry",
                   ].map((err) => (
                     <li key={err} className="flex items-start gap-2.5">
-                      <span className="h-1.5 w-1.5 rounded-full bg-rose-400 mt-2 shrink-0" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-rose-500 mt-2 shrink-0" />
                       <span>{err}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* With Autonique - Dark Glass Solution Card */}
-              <div data-reveal data-reveal-delay="2" className="rounded-2xl p-6 space-y-4 shadow-xl shadow-emerald-950/40 bg-gradient-to-br from-[#06382E] via-[#09221D] to-[#071322] border border-emerald-500/40 backdrop-blur-md">
-                <div className="flex items-center gap-2 text-teal-300 font-bold text-[14px]">
+              {/* With Autonique - Featured Solution Card (Soft Shadows, No Hard Line) */}
+              <div data-reveal data-reveal-delay="2" className={`rounded-2xl p-6 space-y-4 shadow-xl transition-all border-0 ${
+                isDark ? "bg-gradient-to-br from-[#06382E] via-[#09221D] to-[#07111E] shadow-emerald-950/60 text-white" : "kpi-card-mint shadow-teal-900/10 text-[#0F172A]"
+              }`}>
+                <div className="flex items-center gap-2 text-teal-400 font-bold text-[14px]">
                   <Sparkles className="h-5 w-5 text-teal-400" />
                   <span>Unified Autonique Operating System</span>
                 </div>
-                <ul className="space-y-3 text-[13px] text-slate-100">
+                <ul className="space-y-3 text-[13px]">
                   {[
                     "Automated WhatsApp & SMS appointment reminders (55% lower no-shows)",
                     "Digital ICD-10 prescription engine with 1-click PDF export",
@@ -358,21 +407,23 @@ function Landing() {
         </section>
 
         {/* ─── 4. What AUTONIQUE Clinics Solves (12 Modules) ─── */}
-        <section id="platform" className="py-20 border-t border-emerald-500/15 bg-[#050B14] relative z-10">
+        <section id="platform" className={`py-20 border-t ${
+          isDark ? "border-emerald-500/15 bg-[#050B14]" : "border-[#0D9488]/12 bg-white"
+        } relative z-10`}>
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div data-reveal className="text-center max-w-2xl mx-auto mb-14 space-y-2">
               <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-teal-400 font-bold">
                 One Intelligent System
               </span>
-              <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl text-white">
+              <h2 className={`font-display text-3xl font-extrabold tracking-tight sm:text-4xl ${isDark ? "text-white" : "text-[#0F172A]"}`}>
                 12 Essential Modules. One Platform.
               </h2>
-              <p className="text-[14px] text-slate-300 font-medium">
+              <p className={`text-[14px] font-medium ${isDark ? "text-slate-300" : "text-[#475569]"}`}>
                 Consolidate your software stack into a single, cohesive clinical environment.
               </p>
             </div>
 
-            {/* Dark Glass Modules Grid */}
+            {/* Soft Shadowed Cards without Hard Borders */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               {[
                 { title: "Patient CRM", desc: "Centralized medical histories", icon: Users },
@@ -394,13 +445,15 @@ function Landing() {
                     key={m.title}
                     data-reveal
                     data-reveal-delay={String((idx % 4) + 1)}
-                    className="rounded-2xl border border-emerald-500/20 bg-[#0B1726]/80 p-4.5 shadow-sm hover:border-emerald-400/50 hover:bg-[#0E2035] hover:shadow-[0_0_25px_rgba(13,148,136,0.25)] transition-all group backdrop-blur-md"
+                    className={`rounded-2xl p-4.5 shadow-md hover:shadow-xl transition-all group border-0 ${
+                      isDark ? "bg-[#0B1726]/80 text-white hover:bg-[#0E2035] backdrop-blur-md" : "bg-white text-[#0F172A] hover:bg-[#EFFFFE]/50"
+                    }`}
                   >
-                    <div className="h-9 w-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-teal-400 flex items-center justify-center mb-3 group-hover:bg-emerald-500 group-hover:text-white transition-all">
-                      <Icon className="h-4.5 w-4.5" />
+                    <div className="h-9 w-9 rounded-xl bg-emerald-500/10 text-teal-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                      <Icon className="h-4.5 w-4.5 text-teal-400" />
                     </div>
-                    <div className="font-bold text-[13.5px] text-white">{m.title}</div>
-                    <div className="text-[11px] text-slate-400 font-medium mt-0.5">{m.desc}</div>
+                    <div className="font-bold text-[13.5px]">{m.title}</div>
+                    <div className={`text-[11px] font-medium mt-0.5 ${isDark ? "text-slate-400" : "text-[#64748B]"}`}>{m.desc}</div>
                   </div>
                 );
               })}
@@ -409,13 +462,15 @@ function Landing() {
         </section>
 
         {/* ─── 5. Core Platform Capabilities ─── */}
-        <section className="py-20 border-t border-emerald-500/15 bg-gradient-to-b from-[#050B14] via-[#081525] to-[#050B14] relative z-10">
+        <section className={`py-20 border-t ${
+          isDark ? "border-emerald-500/15 bg-gradient-to-b from-[#050B14] via-[#081525] to-[#050B14]" : "border-[#0D9488]/12 bg-[#F8FFFE]"
+        } relative z-10`}>
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div data-reveal className="text-center max-w-xl mx-auto mb-14 space-y-2">
               <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-teal-400 font-bold">
                 Enterprise Features
               </span>
-              <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl text-white">
+              <h2 className={`font-display text-3xl font-extrabold tracking-tight sm:text-4xl ${isDark ? "text-white" : "text-[#0F172A]"}`}>
                 Engineered for High-Performance Clinics
               </h2>
             </div>
@@ -427,12 +482,12 @@ function Landing() {
                   desc: "Generate structured consultation notes and diagnostic summaries automatically during doctor visits.",
                   icon: Bot,
                   preview: (
-                    <div className="rounded-xl border border-emerald-500/30 bg-[#062620]/90 p-3 text-[11px] space-y-1.5">
-                      <div className="flex items-center justify-between text-emerald-300 font-bold">
+                    <div className={`rounded-xl p-3 text-[11px] space-y-1.5 ${isDark ? "bg-[#062620]/90 text-slate-200" : "bg-[#F0FDFA] text-[#475569]"}`}>
+                      <div className="flex items-center justify-between font-bold text-emerald-500">
                         <span className="flex items-center gap-1"><Sparkles className="h-3 w-3" /> AI Note Draft</span>
-                        <span className="text-teal-400 font-mono text-[9.5px]">ICD-10 Ready</span>
+                        <span className="font-mono text-[9.5px]">ICD-10 Ready</span>
                       </div>
-                      <p className="text-slate-300 font-mono text-[10px]">Patient presents with acute pharyngitis. Prescribed Amoxicillin 500mg.</p>
+                      <p className="font-mono text-[10px]">Patient presents with acute pharyngitis. Prescribed Amoxicillin 500mg.</p>
                     </div>
                   ),
                 },
@@ -441,12 +496,12 @@ function Landing() {
                   desc: "Multi-channel calendar scheduling with automated WhatsApp confirmation and cancellation management.",
                   icon: Calendar,
                   preview: (
-                    <div className="rounded-xl border border-teal-500/30 bg-[#062620]/90 p-3 text-[11px] space-y-1.5">
-                      <div className="flex items-center justify-between text-teal-300 font-bold">
+                    <div className={`rounded-xl p-3 text-[11px] space-y-1.5 ${isDark ? "bg-[#062620]/90 text-slate-200" : "bg-[#EEF2FF] text-[#475569]"}`}>
+                      <div className="flex items-center justify-between font-bold text-teal-400">
                         <span>WhatsApp Confirmation</span>
-                        <span className="text-teal-400 font-mono text-[9.5px]">Sent 09:30 AM</span>
+                        <span className="font-mono text-[9.5px]">Sent 09:30 AM</span>
                       </div>
-                      <p className="text-slate-300 text-[10.5px]">"Hello Ava, your visit with Dr. Reyes is confirmed for 10:30 AM today."</p>
+                      <p className="text-[10.5px]">"Hello Ava, your visit with Dr. Reyes is confirmed for 10:30 AM today."</p>
                     </div>
                   ),
                 },
@@ -455,12 +510,12 @@ function Landing() {
                   desc: "Accept online payments, issue digital receipts, and track clinic revenue with automated reconciliation.",
                   icon: Receipt,
                   preview: (
-                    <div className="rounded-xl border border-emerald-500/30 bg-[#062620]/90 p-3 text-[11px] space-y-1.5">
-                      <div className="flex items-center justify-between text-emerald-300 font-bold">
+                    <div className={`rounded-xl p-3 text-[11px] space-y-1.5 ${isDark ? "bg-[#062620]/90 text-slate-200" : "bg-[#FFF7ED] text-[#475569]"}`}>
+                      <div className="flex items-center justify-between font-bold text-emerald-400">
                         <span>Stripe Payment #INV-2841</span>
-                        <span className="text-emerald-400 font-bold">$129 Paid</span>
+                        <span className="font-bold">$129 Paid</span>
                       </div>
-                      <p className="text-slate-300 font-mono text-[10px]">Consultation Fee · Card •••• 4242</p>
+                      <p className="font-mono text-[10px]">Consultation Fee · Card •••• 4242</p>
                     </div>
                   ),
                 },
@@ -471,16 +526,18 @@ function Landing() {
                     key={card.title}
                     data-reveal
                     data-reveal-delay={String(i + 1)}
-                    className="rounded-2xl border border-emerald-500/20 bg-[#0B1726]/90 p-6 shadow-md hover:border-emerald-500/40 hover:shadow-[0_0_30px_rgba(13,148,136,0.2)] transition-all flex flex-col justify-between backdrop-blur-md"
+                    className={`rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between border-0 ${
+                      isDark ? "bg-[#0B1726]/90 text-white backdrop-blur-md" : "bg-white text-[#0F172A]"
+                    }`}
                   >
                     <div className="space-y-3">
-                      <div className="h-10 w-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-teal-400 flex items-center justify-center shadow-xs">
+                      <div className="h-10 w-10 rounded-xl bg-emerald-500/10 text-teal-400 flex items-center justify-center shadow-xs">
                         <Icon className="h-5 w-5" />
                       </div>
-                      <h3 className="text-[16px] font-bold text-white">{card.title}</h3>
-                      <p className="text-[13px] text-slate-300 leading-relaxed font-medium">{card.desc}</p>
+                      <h3 className="text-[16px] font-bold">{card.title}</h3>
+                      <p className={`text-[13px] leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-[#475569]"}`}>{card.desc}</p>
                     </div>
-                    <div className="mt-5 pt-4 border-t border-emerald-500/15">
+                    <div className="mt-5 pt-4 border-t border-emerald-500/10">
                       {card.preview}
                     </div>
                   </div>
@@ -490,14 +547,16 @@ function Landing() {
           </div>
         </section>
 
-        {/* ─── 6. How It Works (Dark Glass Steps) ─── */}
-        <section id="workflow" className="py-20 border-t border-emerald-500/15 bg-[#050B14] relative z-10">
+        {/* ─── 6. How It Works (6 Steps) ─── */}
+        <section id="workflow" className={`py-20 border-t ${
+          isDark ? "border-emerald-500/15 bg-[#050B14]" : "border-[#0D9488]/12 bg-white"
+        } relative z-10`}>
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div data-reveal className="text-center max-w-xl mx-auto mb-14 space-y-2">
               <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-teal-400 font-bold">
                 Seamless Patient Journey
               </span>
-              <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl text-white">
+              <h2 className={`font-display text-3xl font-extrabold tracking-tight sm:text-4xl ${isDark ? "text-white" : "text-[#0F172A]"}`}>
                 From Booking to Follow-up in 6 Steps
               </h2>
             </div>
@@ -515,25 +574,29 @@ function Landing() {
                   key={s.step}
                   data-reveal
                   data-reveal-delay={String((idx % 3) + 1)}
-                  className="rounded-2xl border border-emerald-500/20 bg-[#0B1726]/80 p-4 text-center relative group hover:border-emerald-400/50 hover:bg-[#0E2035] transition-all shadow-xs backdrop-blur-md"
+                  className={`rounded-2xl p-4 text-center relative group shadow-md hover:shadow-lg transition-all border-0 ${
+                    isDark ? "bg-[#0B1726]/80 text-white backdrop-blur-md" : "bg-white text-[#0F172A]"
+                  }`}
                 >
                   <div className="font-mono text-[12px] font-bold text-teal-400 mb-1">{s.step}</div>
-                  <div className="font-bold text-[13px] text-white">{s.title}</div>
-                  <div className="text-[10.5px] text-slate-400 font-medium mt-0.5">{s.sub}</div>
+                  <div className="font-bold text-[13px]">{s.title}</div>
+                  <div className={`text-[10.5px] font-medium mt-0.5 ${isDark ? "text-slate-400" : "text-[#64748B]"}`}>{s.sub}</div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ─── 7. Live Product Preview (Dark Glass) ─── */}
-        <section id="preview" className="py-20 border-t border-emerald-500/15 bg-gradient-to-b from-[#050B14] via-[#081525] to-[#050B14] relative z-10">
+        {/* ─── 7. Live Product Preview ─── */}
+        <section id="preview" className={`py-20 border-t ${
+          isDark ? "border-emerald-500/15 bg-gradient-to-b from-[#050B14] via-[#081525] to-[#050B14]" : "border-[#0D9488]/12 bg-[#F8FFFE]"
+        } relative z-10`}>
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div data-reveal className="text-center max-w-xl mx-auto mb-10 space-y-2">
               <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-teal-400 font-bold">
                 Interactive Software Showcase
               </span>
-              <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl text-white">
+              <h2 className={`font-display text-3xl font-extrabold tracking-tight sm:text-4xl ${isDark ? "text-white" : "text-[#0F172A]"}`}>
                 Designed for Doctors & Administrators
               </h2>
             </div>
@@ -553,7 +616,7 @@ function Landing() {
                   className={`px-4 py-2 rounded-xl text-[13px] font-bold transition-all cursor-pointer ${
                     activePreviewTab === t.id
                       ? "bg-gradient-to-r from-emerald-600 to-teal-500 text-white shadow-lg shadow-emerald-500/25"
-                      : "bg-[#0B1726]/80 border border-emerald-500/20 text-slate-300 hover:bg-[#0F2238]"
+                      : isDark ? "bg-[#0B1726]/80 text-slate-300 hover:bg-[#0F2238]" : "bg-white text-[#475569] hover:bg-[#EFFFFE]"
                   }`}
                 >
                   {t.label}
@@ -561,9 +624,11 @@ function Landing() {
               ))}
             </div>
 
-            {/* Display Mockup Window */}
-            <div data-reveal className="rounded-2xl border border-emerald-500/30 bg-[#0A1220] shadow-[0_30px_90px_-15px_rgba(13,148,136,0.3)] overflow-hidden max-w-4xl mx-auto backdrop-blur-xl">
-              <div className="flex items-center justify-between px-4 py-3 bg-[#020914] text-white border-b border-emerald-500/20">
+            {/* Showcase Window */}
+            <div data-reveal className={`rounded-3xl border-0 shadow-2xl overflow-hidden max-w-4xl mx-auto ${
+              isDark ? "bg-[#0A1220] shadow-emerald-950/40 backdrop-blur-xl" : "bg-white shadow-teal-900/10"
+            }`}>
+              <div className="flex items-center justify-between px-4 py-3 bg-[#020914] text-white">
                 <div className="flex items-center gap-1.5">
                   <span className="h-2.5 w-2.5 rounded-full bg-rose-500" />
                   <span className="h-2.5 w-2.5 rounded-full bg-amber-500" />
@@ -572,18 +637,18 @@ function Landing() {
                 <span className="font-mono text-[11px] text-teal-300">Autonique Clinical OS · {activePreviewTab.toUpperCase()}</span>
                 <span className="h-2 w-2 rounded-full bg-teal-400 animate-pulse" />
               </div>
-              <div className="p-6 bg-[#07111E] min-h-[320px] flex flex-col justify-center">
+              <div className={`p-6 min-h-[320px] flex flex-col justify-center ${isDark ? "bg-[#07111E]" : "bg-[#F8FFFE]"}`}>
                 {activePreviewTab === "dashboard" && (
                   <div className="space-y-4 animate-fade-in">
                     <div className="grid grid-cols-4 gap-3">
-                      <div className="rounded-xl p-3 bg-[#062620] border border-emerald-500/30"><div className="text-[10px] uppercase font-mono text-teal-300">Total Patients</div><div className="text-xl font-bold text-white">4,892</div></div>
-                      <div className="rounded-xl p-3 bg-[#062620] border border-emerald-500/30"><div className="text-[10px] uppercase font-mono text-teal-300">Appointments</div><div className="text-xl font-bold text-white">142 Today</div></div>
-                      <div className="rounded-xl p-3 bg-[#062620] border border-emerald-500/30"><div className="text-[10px] uppercase font-mono text-teal-300">Revenue</div><div className="text-xl font-bold text-white">$18,420</div></div>
-                      <div className="rounded-xl p-3 bg-[#062620] border border-emerald-500/30"><div className="text-[10px] uppercase font-mono text-teal-300">Active Doctors</div><div className="text-xl font-bold text-white">12 On Duty</div></div>
+                      <div className="rounded-xl p-3 kpi-card-mint border-0"><div className="text-[10px] uppercase font-mono text-teal-900">Total Patients</div><div className="text-xl font-bold text-[#0F172A]">4,892</div></div>
+                      <div className="rounded-xl p-3 kpi-card-lime border-0"><div className="text-[10px] uppercase font-mono font-bold text-lime-900">Appointments</div><div className="text-xl font-bold text-[#0F172A]">142 Today</div></div>
+                      <div className="rounded-xl p-3 kpi-card-emerald border-0"><div className="text-[10px] uppercase font-mono text-emerald-950 font-bold">Revenue</div><div className="text-xl font-bold text-[#0F172A]">$18,420</div></div>
+                      <div className="rounded-xl p-3 kpi-card-teal border-0"><div className="text-[10px] uppercase font-mono text-teal-950 font-bold">Active Doctors</div><div className="text-xl font-bold text-[#0F172A]">12 On Duty</div></div>
                     </div>
-                    <div className="rounded-xl border border-emerald-500/20 bg-[#0B1726] p-4 shadow-sm">
-                      <div className="flex justify-between items-center text-[12px] font-bold text-white mb-2"><span>Real-time Clinical Operations</span><span className="text-teal-400 font-mono text-[11px]">Updated 1 min ago</span></div>
-                      <div className="h-24 bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-emerald-500/5 rounded-lg flex items-center justify-center font-mono text-[12px] text-teal-300 font-bold border border-emerald-500/20">
+                    <div className={`rounded-xl p-4 shadow-xs ${isDark ? "bg-[#0B1726] text-white" : "bg-white text-[#0F172A]"}`}>
+                      <div className="flex justify-between items-center text-[12px] font-bold mb-2"><span>Real-time Clinical Operations</span><span className="text-teal-400 font-mono text-[11px]">Updated 1 min ago</span></div>
+                      <div className="h-24 bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-emerald-500/5 rounded-lg flex items-center justify-center font-mono text-[12px] text-teal-400 font-bold">
                         [ Interactive Telemetry Visualizer ]
                       </div>
                     </div>
@@ -591,7 +656,7 @@ function Landing() {
                 )}
                 {activePreviewTab === "crm" && (
                   <div className="space-y-3 animate-fade-in">
-                    <div className="flex items-center justify-between text-[12.5px] font-bold text-white pb-2 border-b border-emerald-500/20">
+                    <div className={`flex items-center justify-between text-[12.5px] font-bold pb-2 border-b ${isDark ? "text-white border-emerald-500/20" : "text-[#0F172A] border-border/40"}`}>
                       <span>Patient Records</span>
                       <span className="font-mono text-[10.5px] text-teal-400">5 Active Patients</span>
                     </div>
@@ -600,41 +665,41 @@ function Landing() {
                       { name: "Marcus Weiss", id: "P-1041", phone: "+49 30 4412 8802", status: "active", date: "22 Jul 2026" },
                       { name: "Priya Kapoor", id: "P-1040", phone: "+49 30 2201 4488", status: "active", date: "22 Jul 2026" },
                     ].map((p) => (
-                      <div key={p.id} className="flex items-center justify-between p-2.5 rounded-xl border border-emerald-500/20 bg-[#0B1726] text-[12px]">
-                        <span className="font-bold text-white">{p.name}</span>
+                      <div key={p.id} className={`flex items-center justify-between p-2.5 rounded-xl text-[12px] ${isDark ? "bg-[#0B1726] text-white" : "bg-white text-[#0F172A]"}`}>
+                        <span className="font-bold">{p.name}</span>
                         <span className="font-mono text-slate-400">{p.phone}</span>
                         <span className="font-mono text-slate-400">{p.date}</span>
-                        <span className="bg-emerald-500/10 text-teal-300 border border-emerald-500/20 font-mono text-[10px] px-2 py-0.5 rounded-full font-bold">Active</span>
+                        <span className="bg-emerald-500/10 text-teal-400 font-mono text-[10px] px-2 py-0.5 rounded-full font-bold">Active</span>
                       </div>
                     ))}
                   </div>
                 )}
                 {activePreviewTab === "appointments" && (
                   <div className="space-y-3 animate-fade-in">
-                    <div className="text-[12.5px] font-bold text-white pb-2 border-b border-emerald-500/20">Today's Appointment Schedule</div>
+                    <div className={`text-[12.5px] font-bold pb-2 border-b ${isDark ? "text-white border-emerald-500/20" : "text-[#0F172A] border-border/40"}`}>Today's Appointment Schedule</div>
                     {[
                       { time: "09:00 AM", doctor: "Dr. Reyes", patient: "Ava Chen", status: "Confirmed" },
                       { time: "10:30 AM", doctor: "Dr. Okafor", patient: "Marcus Weiss", status: "In Consultation" },
                       { time: "02:00 PM", doctor: "Dr. Reyes", patient: "Priya Kapoor", status: "Scheduled" },
                     ].map((a) => (
-                      <div key={a.time} className="flex items-center justify-between p-3 rounded-xl border border-emerald-500/20 bg-[#0B1726] text-[12px]">
+                      <div key={a.time} className={`flex items-center justify-between p-3 rounded-xl text-[12px] ${isDark ? "bg-[#0B1726] text-white" : "bg-white text-[#0F172A]"}`}>
                         <span className="font-mono font-bold text-teal-400">{a.time}</span>
-                        <span className="font-semibold text-white">{a.patient}</span>
+                        <span className="font-semibold">{a.patient}</span>
                         <span className="text-slate-400">{a.doctor}</span>
-                        <span className="bg-emerald-500/10 text-teal-300 border border-emerald-500/20 font-mono text-[10px] px-2 py-0.5 rounded-full font-bold">{a.status}</span>
+                        <span className="bg-emerald-500/10 text-teal-400 font-mono text-[10px] px-2 py-0.5 rounded-full font-bold">{a.status}</span>
                       </div>
                     ))}
                   </div>
                 )}
                 {activePreviewTab === "emr" && (
-                  <div className="p-4 rounded-xl border border-emerald-500/30 bg-[#0B1726] space-y-3 text-[12px] animate-fade-in">
-                    <div className="flex justify-between font-bold text-white border-b border-emerald-500/20 pb-2"><span>Electronic Medical Record #EMR-992</span><span className="text-teal-400 font-mono">ICD-10 Signed</span></div>
+                  <div className={`p-4 rounded-xl space-y-3 text-[12px] animate-fade-in ${isDark ? "bg-[#0B1726] text-white" : "bg-white text-[#0F172A]"}`}>
+                    <div className="flex justify-between font-bold border-b pb-2"><span>Electronic Medical Record #EMR-992</span><span className="text-teal-400 font-mono">ICD-10 Signed</span></div>
                     <p className="text-slate-300 font-sans">Patient presents for routine follow-up. Vital signs normal (BP: 120/80, Pulse: 72 bpm). Continuation of therapy recommended.</p>
                   </div>
                 )}
                 {activePreviewTab === "billing" && (
-                  <div className="p-4 rounded-xl border border-emerald-500/30 bg-[#0B1726] space-y-3 text-[12px] animate-fade-in">
-                    <div className="flex justify-between font-bold text-white border-b border-emerald-500/20 pb-2"><span>Stripe Billed Monthly Subscription</span><span className="text-teal-400 font-mono">$516 / mo</span></div>
+                  <div className={`p-4 rounded-xl space-y-3 text-[12px] animate-fade-in ${isDark ? "bg-[#0B1726] text-white" : "bg-white text-[#0F172A]"}`}>
+                    <div className="flex justify-between font-bold border-b pb-2"><span>Stripe Billed Monthly Subscription</span><span className="text-teal-400 font-mono">$516 / mo</span></div>
                     <p className="text-slate-300 font-mono text-[11px]">Growth Tier · 4 Active Provider Seats · Next Invoice: Aug 12, 2026</p>
                   </div>
                 )}
@@ -643,14 +708,16 @@ function Landing() {
           </div>
         </section>
 
-        {/* ─── 8. Why AUTONIQUE Clinics (Enterprise Architecture) ─── */}
-        <section className="py-20 border-t border-emerald-500/15 bg-[#050B14] relative z-10">
+        {/* ─── 8. Why AUTONIQUE Clinics ─── */}
+        <section className={`py-20 border-t ${
+          isDark ? "border-emerald-500/15 bg-[#050B14]" : "border-[#0D9488]/12 bg-white"
+        } relative z-10`}>
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div data-reveal className="text-center max-w-xl mx-auto mb-14 space-y-2">
               <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-teal-400 font-bold">
                 Enterprise Infrastructure
               </span>
-              <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl text-white">
+              <h2 className={`font-display text-3xl font-extrabold tracking-tight sm:text-4xl ${isDark ? "text-white" : "text-[#0F172A]"}`}>
                 Built for Scalability, Speed & Security
               </h2>
             </div>
@@ -667,13 +734,15 @@ function Landing() {
                     key={e.title}
                     data-reveal
                     data-reveal-delay={String(idx + 1)}
-                    className="rounded-2xl border border-emerald-500/20 bg-[#0B1726]/90 p-6 shadow-md hover:border-emerald-500/40 transition-all backdrop-blur-md"
+                    className={`rounded-2xl p-6 shadow-md hover:shadow-lg transition-all border-0 ${
+                      isDark ? "bg-[#0B1726]/90 text-white backdrop-blur-md" : "bg-white text-[#0F172A]"
+                    }`}
                   >
-                    <div className="h-10 w-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-teal-400 flex items-center justify-center mb-4 shadow-xs">
+                    <div className="h-10 w-10 rounded-xl bg-emerald-500/10 text-teal-400 flex items-center justify-center mb-4">
                       <Icon className="h-5 w-5 text-teal-400" />
                     </div>
-                    <h3 className="text-[15px] font-bold text-white">{e.title}</h3>
-                    <p className="text-[13px] text-slate-300 mt-1.5 leading-relaxed font-medium">{e.desc}</p>
+                    <h3 className="text-[15px] font-bold">{e.title}</h3>
+                    <p className={`text-[13px] mt-1.5 leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-[#475569]"}`}>{e.desc}</p>
                   </div>
                 );
               })}
@@ -682,7 +751,9 @@ function Landing() {
         </section>
 
         {/* ─── 9. Healthcare Compliance ─── */}
-        <section className="py-12 border-t border-emerald-500/15 bg-gradient-to-b from-[#050B14] via-[#081525] to-[#050B14] relative z-10">
+        <section className={`py-12 border-t ${
+          isDark ? "border-emerald-500/15 bg-gradient-to-b from-[#050B14] via-[#081525] to-[#050B14]" : "border-[#0D9488]/12 bg-[#F8FFFE]"
+        } relative z-10`}>
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div data-reveal className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
@@ -693,13 +764,15 @@ function Landing() {
               ].map((item, i) => {
                 const Icon = item.icon;
                 return (
-                  <div key={item.t} data-reveal data-reveal-delay={String(i + 1)} className="flex items-start gap-3 p-4 rounded-2xl border border-emerald-500/20 bg-[#0B1726]/80 shadow-sm backdrop-blur-md">
-                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-teal-400 shadow-xs">
+                  <div key={item.t} data-reveal data-reveal-delay={String(i + 1)} className={`flex items-start gap-3 p-4 rounded-2xl shadow-md border-0 ${
+                    isDark ? "bg-[#0B1726]/80 text-white backdrop-blur-md" : "bg-white text-[#0F172A]"
+                  }`}>
+                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-emerald-500/10 text-teal-400 shadow-xs">
                       <Icon className="h-4.5 w-4.5 text-teal-400" />
                     </div>
                     <div>
-                      <div className="text-[13px] font-bold text-white">{item.t}</div>
-                      <div className="text-[11px] text-slate-400 font-medium">{item.s}</div>
+                      <div className="text-[13px] font-bold">{item.t}</div>
+                      <div className={`text-[11px] font-medium ${isDark ? "text-slate-400" : "text-[#64748B]"}`}>{item.s}</div>
                     </div>
                   </div>
                 );
@@ -708,14 +781,16 @@ function Landing() {
           </div>
         </section>
 
-        {/* ─── 10. Social Proof / Testimonials ─── */}
-        <section id="social-proof" className="py-20 border-t border-emerald-500/15 bg-[#050B14] relative z-10">
+        {/* ─── 10. Testimonials ─── */}
+        <section id="social-proof" className={`py-20 border-t ${
+          isDark ? "border-emerald-500/15 bg-[#050B14]" : "border-[#0D9488]/12 bg-white"
+        } relative z-10`}>
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div data-reveal className="text-center max-w-lg mx-auto mb-14 space-y-2">
               <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-teal-400 font-bold">
                 Trusted by Healthcare Leaders
               </span>
-              <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl text-white">
+              <h2 className={`font-display text-3xl font-extrabold tracking-tight sm:text-4xl ${isDark ? "text-white" : "text-[#0F172A]"}`}>
                 What Medical Directors Say
               </h2>
             </div>
@@ -730,21 +805,23 @@ function Landing() {
                   key={t.name}
                   data-reveal
                   data-reveal-delay={t.delay}
-                  className="rounded-2xl border border-emerald-500/20 bg-[#0B1726]/90 p-6 shadow-md hover:border-emerald-500/40 transition-all flex flex-col gap-4 backdrop-blur-md"
+                  className={`rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all flex flex-col gap-4 border-0 ${
+                    isDark ? "bg-[#0B1726]/90 text-slate-200 backdrop-blur-md" : "bg-white text-[#334155]"
+                  }`}
                 >
                   <div className="flex gap-0.5">
                     {Array(t.stars).fill(0).map((_, i) => (
                       <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
                     ))}
                   </div>
-                  <p className="text-[13.5px] leading-relaxed text-slate-200 font-medium flex-1">"{t.quote}"</p>
-                  <div className="flex items-center gap-2.5 pt-3 border-t border-emerald-500/15">
+                  <p className="text-[13.5px] leading-relaxed font-medium flex-1">"{t.quote}"</p>
+                  <div className="flex items-center gap-2.5 pt-3 border-t border-emerald-500/10">
                     <div className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-emerald-600 to-teal-500 text-white font-bold text-[13px]">
                       {t.name[3]}
                     </div>
                     <div>
-                      <div className="text-[13px] font-bold text-white">{t.name}</div>
-                      <div className="text-[11px] text-slate-400 font-medium">{t.role}</div>
+                      <div className={`text-[13px] font-bold ${isDark ? "text-white" : "text-[#0F172A]"}`}>{t.name}</div>
+                      <div className={`text-[11px] font-medium ${isDark ? "text-slate-400" : "text-[#64748B]"}`}>{t.role}</div>
                     </div>
                   </div>
                 </div>
@@ -753,29 +830,33 @@ function Landing() {
           </div>
         </section>
 
-        {/* ─── 11. Pricing (Dark Glass) ─── */}
-        <section id="pricing" className="py-20 border-t border-emerald-500/15 bg-gradient-to-b from-[#050B14] via-[#081525] to-[#050B14] relative z-10">
+        {/* ─── 11. Pricing Section ─── */}
+        <section id="pricing" className={`py-20 border-t ${
+          isDark ? "border-emerald-500/15 bg-gradient-to-b from-[#050B14] via-[#081525] to-[#050B14]" : "border-[#0D9488]/12 bg-[#F8FFFE]"
+        } relative z-10`}>
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-12">
               <div data-reveal>
                 <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-teal-400 font-bold">
                   Subscription Plans
                 </span>
-                <h2 className="mt-1 font-display text-3xl font-extrabold tracking-tight sm:text-4xl text-white">
+                <h2 className={`mt-1 font-display text-3xl font-extrabold tracking-tight sm:text-4xl ${isDark ? "text-white" : "text-[#0F172A]"}`}>
                   Transparent & Predictable Pricing
                 </h2>
               </div>
 
-              <div data-reveal className="flex items-center gap-2 bg-[#0B1726] p-1.5 rounded-xl border border-emerald-500/20 shadow-xs self-start sm:self-auto backdrop-blur-md">
+              <div data-reveal className={`flex items-center gap-2 p-1.5 rounded-xl shadow-xs self-start sm:self-auto ${
+                isDark ? "bg-[#0B1726] border border-emerald-500/20" : "bg-white border border-[#0D9488]/20"
+              }`}>
                 <button
                   onClick={() => setAnnualBilling(false)}
-                  className={`px-3.5 py-1.5 rounded-lg text-[12px] font-bold transition-all cursor-pointer ${!annualBilling ? "bg-gradient-to-r from-emerald-600 to-teal-500 text-white shadow-sm" : "text-slate-400"}`}
+                  className={`px-3.5 py-1.5 rounded-lg text-[12px] font-bold transition-all cursor-pointer ${!annualBilling ? "bg-gradient-to-r from-emerald-600 to-teal-500 text-white shadow-sm" : isDark ? "text-slate-400" : "text-[#64748B]"}`}
                 >
                   Monthly
                 </button>
                 <button
                   onClick={() => setAnnualBilling(true)}
-                  className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-[12px] font-bold transition-all cursor-pointer ${annualBilling ? "bg-gradient-to-r from-emerald-600 to-teal-500 text-white shadow-sm" : "text-slate-400"}`}
+                  className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-[12px] font-bold transition-all cursor-pointer ${annualBilling ? "bg-gradient-to-r from-emerald-600 to-teal-500 text-white shadow-sm" : isDark ? "text-slate-400" : "text-[#64748B]"}`}
                 >
                   Annual
                   <span className="font-mono text-[9.5px] bg-emerald-500/20 text-teal-300 border border-emerald-500/30 px-1.5 py-0.2 rounded font-bold">Save 20%</span>
@@ -793,10 +874,10 @@ function Landing() {
                   key={t.n}
                   data-reveal
                   data-reveal-delay={t.delay}
-                  className={`rounded-2xl border p-6 flex flex-col justify-between transition-all duration-300 backdrop-blur-md ${
+                  className={`rounded-2xl border-0 p-6 flex flex-col justify-between transition-all duration-300 ${
                     t.highlight
-                      ? "border-emerald-500 bg-gradient-to-b from-[#06382E] via-[#09221D] to-[#07111E] ring-2 ring-emerald-500/30 shadow-2xl shadow-emerald-950/60"
-                      : "border-emerald-500/20 bg-[#0B1726]/80 shadow-sm hover:border-emerald-500/40"
+                      ? isDark ? "bg-gradient-to-b from-[#06382E] via-[#09221D] to-[#07111E] text-white shadow-2xl shadow-emerald-950/60 ring-2 ring-emerald-500/30" : "kpi-card-mint shadow-xl shadow-teal-900/10 text-[#0F172A] ring-2 ring-[#0D9488]/30"
+                      : isDark ? "bg-[#0B1726]/80 text-white shadow-md backdrop-blur-md" : "bg-white text-[#0F172A] shadow-md hover:shadow-xl"
                   }`}
                 >
                   <div>
@@ -805,17 +886,17 @@ function Landing() {
                         Most Popular
                       </div>
                     )}
-                    <h3 className="text-[15px] font-bold text-white">{t.n}</h3>
-                    <div className="mt-1 font-display text-3xl font-extrabold tracking-tight text-white">
+                    <h3 className="text-[15px] font-bold">{t.n}</h3>
+                    <div className="mt-1 font-display text-3xl font-extrabold tracking-tight">
                       {t.p}
                       {t.p !== "Custom" && (
-                        <span className="ml-1 font-mono text-[11.5px] text-slate-400 font-normal">/ mo</span>
+                        <span className={`ml-1 font-mono text-[11.5px] font-normal ${isDark ? "text-slate-400" : "text-[#64748B]"}`}>/ mo</span>
                       )}
                     </div>
-                    <div className="mt-0.5 text-[12px] text-slate-300 font-medium">{t.s}</div>
+                    <div className={`mt-0.5 text-[12px] font-medium ${isDark ? "text-slate-300" : "text-[#64748B]"}`}>{t.s}</div>
                     <ul className="mt-5 space-y-2.5">
                       {t.f.map((i) => (
-                        <li key={i} className="flex items-center gap-2 text-[12.5px] text-slate-200 font-medium">
+                        <li key={i} className="flex items-center gap-2 text-[12.5px] font-medium">
                           <CheckCircle2 className="h-4 w-4 text-teal-400 shrink-0" />
                           {i}
                         </li>
@@ -827,7 +908,7 @@ function Landing() {
                     className={`mt-6 inline-flex h-10 w-full items-center justify-center rounded-xl text-[13px] font-bold transition-all duration-300 cursor-pointer ${
                       t.highlight
                         ? "bg-gradient-to-r from-emerald-600 via-teal-500 to-cyan-500 hover:from-emerald-500 hover:to-teal-400 text-white shadow-lg shadow-emerald-500/25"
-                        : "border border-emerald-500/30 bg-[#07111E] hover:bg-[#0E2035] text-teal-300"
+                        : isDark ? "bg-[#07111E] hover:bg-[#0E2035] text-teal-300 border border-emerald-500/30" : "border border-[#0D9488]/25 bg-[#F8FFFE] hover:bg-[#EFFFFE] text-[#0F766E]"
                     }`}
                   >
                     Start Free Trial
@@ -838,14 +919,16 @@ function Landing() {
           </div>
         </section>
 
-        {/* ─── 12. FAQ Section ─── */}
-        <section className="py-20 border-t border-emerald-500/15 bg-[#050B14] relative z-10">
+        {/* ─── 12. FAQ Accordion ─── */}
+        <section className={`py-20 border-t ${
+          isDark ? "border-emerald-500/15 bg-[#050B14]" : "border-[#0D9488]/12 bg-white"
+        } relative z-10`}>
           <div className="mx-auto max-w-4xl px-5 sm:px-8">
             <div data-reveal className="text-center max-w-xl mx-auto mb-14 space-y-2">
               <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-teal-400 font-bold">
                 Frequently Asked Questions
               </span>
-              <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl text-white">
+              <h2 className={`font-display text-3xl font-extrabold tracking-tight sm:text-4xl ${isDark ? "text-white" : "text-[#0F172A]"}`}>
                 Everything You Need to Know
               </h2>
             </div>
@@ -861,17 +944,21 @@ function Landing() {
                   key={faq.q}
                   data-reveal
                   data-reveal-delay={String(i + 1)}
-                  className="rounded-2xl border border-emerald-500/20 bg-[#0B1726]/80 overflow-hidden shadow-xs backdrop-blur-md"
+                  className={`rounded-2xl border-0 overflow-hidden shadow-md ${
+                    isDark ? "bg-[#0B1726]/80 text-white backdrop-blur-md" : "bg-white text-[#0F172A]"
+                  }`}
                 >
                   <button
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex items-center justify-between p-5 text-left font-bold text-[14px] text-white cursor-pointer"
+                    className="w-full flex items-center justify-between p-5 text-left font-bold text-[14px] cursor-pointer"
                   >
                     <span>{faq.q}</span>
                     <ChevronDown className={`h-4 w-4 text-teal-400 transition-transform ${openFaq === i ? "rotate-180" : ""}`} />
                   </button>
                   {openFaq === i && (
-                    <div className="px-5 pb-5 pt-0 text-[13px] text-slate-300 leading-relaxed font-medium border-t border-emerald-500/15 mt-1">
+                    <div className={`px-5 pb-5 pt-0 text-[13px] leading-relaxed font-medium border-t ${
+                      isDark ? "text-slate-300 border-emerald-500/15" : "text-[#475569] border-border/30"
+                    } mt-1`}>
                       {faq.a}
                     </div>
                   )}
@@ -881,12 +968,14 @@ function Landing() {
           </div>
         </section>
 
-        {/* ─── 13. Final CTA Banner (Dark Glass Glowing) ─── */}
-        <section className="py-16 border-t border-emerald-500/15 bg-[#050B14] relative z-10">
+        {/* ─── 13. Final CTA Banner ─── */}
+        <section className={`py-16 border-t ${
+          isDark ? "border-emerald-500/15 bg-[#050B14]" : "border-[#0D9488]/12 bg-white"
+        } relative z-10`}>
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div
               data-reveal
-              className="rounded-3xl bg-gradient-to-br from-[#064E3B] via-[#0F766E] to-[#0D9488] p-10 text-center shadow-2xl shadow-emerald-900/50 relative overflow-hidden border border-emerald-400/30"
+              className="rounded-3xl bg-gradient-to-br from-[#064E3B] via-[#0F766E] to-[#0D9488] p-10 text-center shadow-2xl shadow-emerald-900/50 relative overflow-hidden border-0"
             >
               <div className="absolute -top-10 -right-10 h-48 w-48 rounded-full bg-teal-400/10 blur-2xl pointer-events-none" />
               <div className="absolute -bottom-10 -left-10 h-48 w-48 rounded-full bg-emerald-400/10 blur-2xl pointer-events-none" />
@@ -917,12 +1006,14 @@ function Landing() {
           </div>
         </section>
 
-        {/* ─── 14. Dark Glass Footer ─── */}
-        <footer className="border-t border-emerald-500/15 bg-[#030712] relative z-10">
+        {/* ─── 14. Footer ─── */}
+        <footer className={`border-t transition-colors duration-300 ${
+          isDark ? "border-emerald-500/15 bg-[#030712]" : "border-[#0D9488]/15 bg-[#F8FFFE]"
+        } relative z-10`}>
           <div className="mx-auto max-w-6xl px-5 py-10 sm:px-8">
             <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
-              <Logo />
-              <div className="flex flex-wrap gap-x-8 gap-y-2 text-[13px] text-slate-400 font-semibold">
+              <Logo isDark={isDark} />
+              <div className={`flex flex-wrap gap-x-8 gap-y-2 text-[13px] font-semibold ${isDark ? "text-slate-400" : "text-[#64748B]"}`}>
                 <a href="#problem" className="hover:text-teal-400 transition-colors">Why Change</a>
                 <a href="#platform" className="hover:text-teal-400 transition-colors">Platform</a>
                 <a href="#workflow" className="hover:text-teal-400 transition-colors">Workflow</a>
@@ -930,7 +1021,7 @@ function Landing() {
                 <a href="#pricing" className="hover:text-teal-400 transition-colors">Pricing</a>
                 <Link to="/dashboard" className="hover:text-teal-400 transition-colors">Dashboard</Link>
               </div>
-              <div className="text-[11px] text-slate-500 font-mono">
+              <div className={`text-[11px] font-mono ${isDark ? "text-slate-500" : "text-[#94A3B8]"}`}>
                 © 2026 Autonique Clinical OS · All rights reserved
               </div>
             </div>

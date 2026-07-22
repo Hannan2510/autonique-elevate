@@ -529,26 +529,13 @@ function Landing() {
 
                 {/* Right Side: Tilted WhatsApp Bot Mockup Frame */}
                 <div className="lg:col-span-6 flex justify-center">
-                  <div className="relative w-full max-w-sm">
-                    <div className="rounded-[8px] border border-[#0D9488]/30 dark:border-[#0D9488]/50 bg-white dark:bg-[#0B201E] shadow-[0_30px_70px_-15px_rgba(13,148,136,0.3)] overflow-hidden transition-all duration-500 ease-out lg:[transform:perspective(1000px)_rotateY(-8deg)_rotateX(4deg)_rotate(-1.5deg)] lg:hover:[transform:perspective(1000px)_rotateY(-1deg)_rotateX(0deg)_rotate(0deg)]">
-                      <div className="flex items-center justify-between px-3.5 py-2.5 bg-[#022C2C] text-white">
-                        <div className="flex items-center gap-1.5">
-                          <span className="h-2.5 w-2.5 rounded-full bg-[#EF4444]" />
-                          <span className="h-2.5 w-2.5 rounded-full bg-[#F59E0B]" />
-                          <span className="h-2.5 w-2.5 rounded-full bg-[#14B8A6]" />
-                        </div>
-                        <span className="font-mono text-[10.5px] font-bold text-[#99F6E4]">
-                          Autonique WhatsApp Bot · Verified
-                        </span>
-                        <span className="h-2 w-2 rounded-full bg-[#14B8A6] animate-pulse" />
-                      </div>
-                      <div className="overflow-hidden bg-[#075E54]/5 p-2 flex justify-center">
-                        <img
-                          src="/whatsapp-bot-img.png"
-                          alt="Autonique WhatsApp Clinic Bot Chat"
-                          className="w-full h-auto rounded-[6px] shadow-sm object-cover max-h-[480px]"
-                        />
-                      </div>
+                  <div className="relative w-full max-w-xs sm:max-w-sm">
+                    <div className="relative rounded-[24px] overflow-hidden transition-all duration-500 ease-out lg:[transform:perspective(1000px)_rotateY(-8deg)_rotateX(4deg)_rotate(-1.5deg)] lg:hover:[transform:perspective(1000px)_rotateY(-1deg)_rotateX(0deg)_rotate(0deg)] drop-shadow-[0_25px_35px_rgba(13,148,136,0.3)] hover:drop-shadow-[0_30px_45px_rgba(13,148,136,0.4)]">
+                      <img
+                        src="/whatsapp-bot-iphone.png"
+                        alt="Autonique WhatsApp Clinic Bot Interactive Mockup"
+                        className="w-full h-auto object-contain rounded-[24px] mix-blend-multiply dark:mix-blend-normal filter contrast-[1.05] brightness-[1.02]"
+                      />
                     </div>
                   </div>
                 </div>

@@ -298,12 +298,12 @@ function Landing() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {[
-                { t: "EMR & Vitals Capture", icon: FileSpreadsheet, b: ["Patient history & ICD-10 notes", "Structured treatment plans", "Digital clinical forms"], delay: "1", bg: "bg-[#F0FDFA] border-[#14B8A6]/25" },
-                { t: "Smart Scheduling", icon: Calendar, b: ["WhatsApp & SMS reminders", "Token & queue management", "Multi-doctor calendars"], delay: "2", bg: "bg-[#EFFFFE] border-[#0D9488]/20" },
-                { t: "Prescription Engine", icon: Pill, b: ["Preloaded medicine database", "Digital doctor signatures", "1-click PDF generation"], delay: "3", bg: "bg-[#F0FDFA] border-[#14B8A6]/25" },
-                { t: "Billing & Stripe", icon: Receipt, b: ["Branded clinic invoices", "Partial payment tracking", "Stripe payment gateway"], delay: "1", bg: "bg-[#EFFFFE] border-[#0D9488]/20" },
-                { t: "Inventory & Pharmacy", icon: Boxes, b: ["Medicine stock management", "Supplier purchase orders", "Expiry & batch tracking"], delay: "2", bg: "bg-[#F0FDFA] border-[#14B8A6]/25" },
-                { t: "Revenue Analytics", icon: BarChart3, b: ["Daily revenue telemetry", "Patient growth trends", "Doctor performance KPIs"], delay: "3", bg: "bg-[#EFFFFE] border-[#0D9488]/20" },
+                { t: "EMR & Vitals Capture", icon: FileSpreadsheet, b: ["Patient history & ICD-10 notes", "Structured treatment plans", "Digital clinical forms"], delay: "1", bg: "bg-[#F0FDFA] border-[#14B8A6]/30", iconBg: "text-[#0D9488]", iconRing: "ring-[#14B8A6]/20" },
+                { t: "Smart Scheduling", icon: Calendar, b: ["WhatsApp & SMS reminders", "Token & queue management", "Multi-doctor calendars"], delay: "2", bg: "bg-[#EEF2FF] border-[#818CF8]/25", iconBg: "text-[#6366F1]", iconRing: "ring-[#818CF8]/20" },
+                { t: "Prescription Engine", icon: Pill, b: ["Preloaded medicine database", "Digital doctor signatures", "1-click PDF generation"], delay: "3", bg: "bg-[#FFF7ED] border-[#FB923C]/25", iconBg: "text-[#EA580C]", iconRing: "ring-[#FB923C]/20" },
+                { t: "Billing & Stripe", icon: Receipt, b: ["Branded clinic invoices", "Partial payment tracking", "Stripe payment gateway"], delay: "1", bg: "bg-[#FDF2F8] border-[#E879F9]/20", iconBg: "text-[#A21CAF]", iconRing: "ring-[#E879F9]/20" },
+                { t: "Inventory & Pharmacy", icon: Boxes, b: ["Medicine stock management", "Supplier purchase orders", "Expiry & batch tracking"], delay: "2", bg: "bg-[#FFFBEB] border-[#FCD34D]/30", iconBg: "text-[#B45309]", iconRing: "ring-[#FCD34D]/20" },
+                { t: "Revenue Analytics", icon: BarChart3, b: ["Daily revenue telemetry", "Patient growth trends", "Doctor performance KPIs"], delay: "3", bg: "bg-[#F0F9FF] border-[#38BDF8]/25", iconBg: "text-[#0284C7]", iconRing: "ring-[#38BDF8]/20" },
               ].map((f) => {
                 const Icon = f.icon;
                 return (
@@ -313,14 +313,14 @@ function Landing() {
                     data-reveal-delay={f.delay}
                     className={`rounded-2xl border p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${f.bg}`}
                   >
-                    <div className="grid h-10 w-10 place-items-center rounded-xl bg-white shadow-sm text-[#0D9488] mb-4">
+                    <div className={`grid h-10 w-10 place-items-center rounded-xl bg-white shadow-sm ring-1 ${f.iconRing} ${f.iconBg} mb-4`}>
                       <Icon className="h-5 w-5" />
                     </div>
                     <h3 className="text-[15px] font-bold text-[#0F172A]">{f.t}</h3>
                     <ul className="mt-3 space-y-2 text-[12.5px] text-[#475569] font-medium">
                       {f.b.map((b) => (
                         <li key={b} className="flex items-center gap-2">
-                          <CheckCircle2 className="h-4 w-4 text-[#0D9488] shrink-0" />
+                          <CheckCircle2 className={`h-4 w-4 shrink-0 ${f.iconBg}`} />
                           {b}
                         </li>
                       ))}
@@ -404,15 +404,15 @@ function Landing() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {[
-                { name: "Dr. Sarah Ahmed", role: "General Practitioner, Karachi", quote: "Autonique transformed how we manage our clinic. Patient no-shows dropped by 55% after using WhatsApp reminders.", stars: 5, delay: "1" },
-                { name: "Dr. Farhan Malik", role: "Orthopedic Surgeon, Lahore", quote: "The billing and prescription modules save us 3+ hours every single day. It's the best investment we've made for our practice.", stars: 5, delay: "2" },
-                { name: "Dr. Nadia Reyes", role: "Clinic Director, Islamabad", quote: "From EMR to payments — everything is in one place. Our staff onboarded in just 2 days. Absolutely seamless.", stars: 5, delay: "3" },
+                { name: "Dr. Sarah Ahmed", role: "General Practitioner, Karachi", quote: "Autonique transformed how we manage our clinic. Patient no-shows dropped by 55% after using WhatsApp reminders.", stars: 5, delay: "1", bg: "bg-[#F0FDFA] border-[#14B8A6]/25", avatarGrad: "from-[#0F766E] to-[#14B8A6]", border: "border-t border-[#14B8A6]/15" },
+                { name: "Dr. Farhan Malik", role: "Orthopedic Surgeon, Lahore", quote: "The billing and prescription modules save us 3+ hours every single day. It's the best investment we've made for our practice.", stars: 5, delay: "2", bg: "bg-[#EEF2FF] border-[#818CF8]/25", avatarGrad: "from-[#6366F1] to-[#818CF8]", border: "border-t border-[#818CF8]/15" },
+                { name: "Dr. Nadia Reyes", role: "Clinic Director, Islamabad", quote: "From EMR to payments — everything is in one place. Our staff onboarded in just 2 days. Absolutely seamless.", stars: 5, delay: "3", bg: "bg-[#FFF7ED] border-[#FB923C]/25", avatarGrad: "from-[#EA580C] to-[#FB923C]", border: "border-t border-[#FB923C]/15" },
               ].map((t) => (
                 <div
                   key={t.name}
                   data-reveal
                   data-reveal-delay={t.delay}
-                  className="rounded-2xl border border-[#0D9488]/18 bg-[#F8FFFE] p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col gap-4"
+                  className={`rounded-2xl border ${t.bg} p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col gap-4`}
                 >
                   <div className="flex gap-0.5">
                     {Array(t.stars).fill(0).map((_, i) => (
@@ -420,8 +420,8 @@ function Landing() {
                     ))}
                   </div>
                   <p className="text-[13.5px] leading-relaxed text-[#334155] font-medium flex-1">"{t.quote}"</p>
-                  <div className="flex items-center gap-2.5 pt-1 border-t border-[#0D9488]/10">
-                    <div className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-[#0F766E] to-[#14B8A6] text-white font-bold text-[13px]">
+                  <div className={`flex items-center gap-2.5 pt-3 ${t.border}`}>
+                    <div className={`grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br ${t.avatarGrad} text-white font-bold text-[13px]`}>
                       {t.name[3]}
                     </div>
                     <div>
@@ -457,10 +457,10 @@ function Landing() {
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div data-reveal className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { icon: Shield, t: "HIPAA Compliant", s: "End-to-end encrypted patient data" },
-                { icon: Lock, t: "GDPR Certified", s: "Full data privacy compliance" },
-                { icon: Clock, t: "99.9% Uptime SLA", s: "Zero downtime guarantee" },
-                { icon: Award, t: "ISO 27001", s: "Enterprise security standard" },
+                { icon: Shield, t: "HIPAA Compliant", s: "End-to-end encrypted patient data", bg: "bg-[#F0FDFA] border-[#14B8A6]/25", ic: "text-[#0D9488]" },
+                { icon: Lock, t: "GDPR Certified", s: "Full data privacy compliance", bg: "bg-[#EEF2FF] border-[#818CF8]/25", ic: "text-[#6366F1]" },
+                { icon: Clock, t: "99.9% Uptime SLA", s: "Zero downtime guarantee", bg: "bg-[#FFF7ED] border-[#FB923C]/25", ic: "text-[#EA580C]" },
+                { icon: Award, t: "ISO 27001", s: "Enterprise security standard", bg: "bg-[#FDF2F8] border-[#E879F9]/20", ic: "text-[#A21CAF]" },
               ].map((item, i) => {
                 const Icon = item.icon;
                 return (
@@ -468,9 +468,9 @@ function Landing() {
                     key={item.t}
                     data-reveal
                     data-reveal-delay={String(i + 1)}
-                    className="flex items-start gap-3 p-4 rounded-2xl bg-[#F0FDFA] border border-[#14B8A6]/20"
+                    className={`flex items-start gap-3 p-4 rounded-2xl border ${item.bg}`}
                   >
-                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white shadow-sm text-[#0D9488]">
+                    <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white shadow-sm ${item.ic}`}>
                       <Icon className="h-4.5 w-4.5" />
                     </div>
                     <div>

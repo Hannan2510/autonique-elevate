@@ -57,7 +57,17 @@ function Landing() {
       </header>
 
       <section className="relative overflow-hidden border-b border-border/70">
-        <div className="absolute inset-0 bg-grid opacity-60" aria-hidden />
+        <div className="absolute inset-0" aria-hidden>
+          <img
+            src={heroClinic.url}
+            alt=""
+            width={1024}
+            height={1024}
+            className="h-full w-full object-cover opacity-70"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
+          <div className="absolute inset-0 bg-grid opacity-30" />
+        </div>
         <div className="relative mx-auto max-w-7xl px-5 pt-20 pb-24 sm:px-8 sm:pt-28 sm:pb-32">
           <div className="mx-auto max-w-3xl text-center">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-3 py-1 text-[12px] text-muted-foreground backdrop-blur">

@@ -230,7 +230,7 @@ function Landing() {
                 <ul className="mt-6 space-y-2.5">
                   {t.f.map((i) => (
                     <li key={i} className="flex items-center gap-2 text-[13px]">
-                      <Check className="h-3.5 w-3.5 text-muted-foreground" />
+                      <Check className="h-3.5 w-3.5 text-primary" />
                       {i}
                     </li>
                   ))}

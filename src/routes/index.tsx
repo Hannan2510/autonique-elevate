@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, ChevronRight } from "lucide-react";
+import heroClinic from "@/assets/hero-clinic.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({

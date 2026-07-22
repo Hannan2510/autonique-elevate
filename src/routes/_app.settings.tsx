@@ -271,70 +271,72 @@ function Settings() {
 
           {active === "billing" && (
             <div className="space-y-5">
-              {/* Current Subscription Status */}
-              <Card title="Clinic Owner Subscription" padding="p-4 sm:p-5">
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="min-w-0">
+              {/* Single Unified Clinic Owner Subscription Card */}
+              <Card title="Clinic Subscription & Plans" padding="p-4 sm:p-5">
+                {/* Active Plan Banner (Nested inside Card) */}
+                <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between rounded-xl bg-emerald-500/5 border border-emerald-500/20 p-3">
+                  <div>
                     <div className="flex items-center gap-2">
-                      <div className="font-display text-xl font-bold tracking-tight text-foreground">Growth Plan</div>
+                      <span className="text-[13px] font-bold text-foreground">Current: Growth Plan</span>
                       <Badge tone="success">Stripe Billed Monthly</Badge>
                     </div>
-                    <div className="mt-1 text-[11.5px] text-muted-foreground font-mono">
-                      $129 / provider · 4 active providers ($516/mo total) · Renews 12 Aug 2026
-                    </div>
+                    <p className="text-[11px] font-mono text-muted-foreground mt-0.5">
+                      $129/provider · 4 active providers ($516/mo total) · Renews 12 Aug 2026
+                    </p>
                   </div>
-                  <div className="flex shrink-0 gap-2">
-                    <button
-                      onClick={() => handleStripeUpgrade("Growth Plan Monthly Renewal", 516)}
-                      className="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[12px] font-semibold flex items-center gap-1.5 shadow-2xs transition-all cursor-pointer"
-                    >
-                      <StripeIcon className="h-3.5 w-3.5" />
-                      <span>Pay Monthly Subscription ($516)</span>
-                    </button>
-                  </div>
-                </div>
-              </Card>
-
-              {/* Monthly Subscription Tiers for Clinic Owners */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {[
-                  { name: "Starter", price: 49, desc: "For single practitioner clinics", seats: "1 Provider Seat", popular: false },
-                  { name: "Growth", price: 129, desc: "For expanding multi-doctor practices", seats: "$129/provider/mo", popular: true },
-                  { name: "Enterprise", price: 899, desc: "For multi-campus hospital groups", seats: "Unlimited Seats", popular: false },
-                ].map((tier) => (
-                  <div
-                    key={tier.name}
-                    className={`rounded-xl p-4 border transition-all ${
-                      tier.popular
-                        ? "border-emerald-500/30 bg-emerald-500/5 shadow-2xs"
-                        : "border-border/60 bg-card hover:bg-muted/20"
-                    }`}
+                  <button
+                    onClick={() => handleStripeUpgrade("Growth Plan Monthly Renewal", 516)}
+                    className="shrink-0 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[11.5px] font-semibold flex items-center gap-1.5 shadow-2xs transition-all cursor-pointer"
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="text-[12.5px] font-bold text-foreground">{tier.name}</span>
-                      {tier.popular && <Badge tone="success">Current Plan</Badge>}
-                    </div>
-                    <div className="mt-2 font-display text-2xl font-bold tracking-tight text-foreground">
-                      ${tier.price} <span className="text-[11px] text-muted-foreground font-mono font-normal">/mo</span>
-                    </div>
-                    <p className="text-[11px] text-muted-foreground mt-1 h-8">{tier.desc}</p>
-                    <div className="mt-3 font-mono text-[10px] text-emerald-800 dark:text-emerald-300 font-semibold">
-                      {tier.seats}
-                    </div>
-                    <button
-                      onClick={() => handleStripeUpgrade(`${tier.name} Subscription`, tier.price)}
-                      className={`mt-3 w-full py-1.5 rounded-lg font-medium text-[11.5px] flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                    <StripeIcon className="h-3.5 w-3.5" />
+                    <span>Pay $516 via Stripe</span>
+                  </button>
+                </div>
+
+                {/* Subscription Tiers Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {[
+                    { name: "Starter", price: 49, desc: "For single practitioner clinics", seats: "1 Provider Seat", popular: false },
+                    { name: "Growth", price: 129, desc: "For expanding multi-doctor practices", seats: "$129/provider/mo", popular: true },
+                    { name: "Enterprise", price: 899, desc: "For multi-campus hospital groups", seats: "Unlimited Seats", popular: false },
+                  ].map((tier) => (
+                    <div
+                      key={tier.name}
+                      className={`rounded-xl p-3.5 border transition-all flex flex-col justify-between ${
                         tier.popular
-                          ? "bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-2xs"
-                          : "border border-border/80 hover:bg-accent text-foreground"
+                          ? "border-emerald-500/40 bg-emerald-500/5 shadow-2xs"
+                          : "border-border/60 bg-card hover:bg-muted/20"
                       }`}
                     >
-                      <StripeIcon className="h-3 w-3" />
-                      <span>{tier.popular ? "Manage Stripe Subscription" : `Subscribe $${tier.price}/mo`}</span>
-                    </button>
-                  </div>
-                ))}
-              </div>
+                      <div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-[13px] font-bold text-foreground">{tier.name}</span>
+                          {tier.popular && <Badge tone="success">Active</Badge>}
+                        </div>
+                        <div className="mt-1 font-display text-[17px] font-bold tracking-tight text-foreground">
+                          ${tier.price} <span className="text-[10.5px] text-muted-foreground font-mono font-normal">/mo</span>
+                        </div>
+                        <p className="text-[11px] text-muted-foreground mt-0.5 leading-snug">{tier.desc}</p>
+                        <div className="mt-2 font-mono text-[10px] text-emerald-800 dark:text-emerald-300 font-semibold">
+                          {tier.seats}
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => handleStripeUpgrade(`${tier.name} Subscription`, tier.price)}
+                        className={`mt-3 w-full h-8 py-1 rounded-lg text-[11px] font-medium flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                          tier.popular
+                            ? "bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-2xs"
+                            : "border border-border/80 hover:bg-accent text-foreground"
+                        }`}
+                      >
+                        <StripeIcon className="h-3 w-3" />
+                        <span>{tier.popular ? "Manage Stripe Subscription" : `Subscribe $${tier.price}/mo`}</span>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </Card>
 
               {/* Payment Method Card */}
               <Card title="Stripe Payment Method" padding="p-0">

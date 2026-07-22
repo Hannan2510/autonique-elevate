@@ -151,33 +151,262 @@ function Landing() {
             </div>
           </div>
 
-          {/* 🖼️ REAL DASHBOARD UI MOCKUP FRAME (Matching Clinicia Desktop Frame with High-Res Dashboard Screenshot) */}
-          <div className="relative mx-auto mt-12 max-w-6xl">
+          {/* 🖼️ REAL DASHBOARD UI MOCKUP FRAME (Recreating User Image Exactly) */}
+          <div className="relative mx-auto mt-14 max-w-6xl">
             {/* Ambient Background Glow */}
             <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-emerald-500/20 via-teal-500/20 to-emerald-600/20 blur-xl opacity-75" />
 
             {/* Browser / OS Mockup Window */}
-            <div className="relative rounded-2xl border border-emerald-500/30 bg-card shadow-[0_25px_70px_-15px_rgba(16,185,129,0.22)] overflow-hidden transition-all backdrop-blur-xl">
+            <div className="relative rounded-2xl border border-emerald-500/30 bg-card shadow-[0_25px_70px_-15px_rgba(16,185,129,0.18)] overflow-hidden transition-all backdrop-blur-xl">
               
-              {/* Header Dots Bar */}
-              <div className="flex items-center justify-between border-b border-border/60 px-4 py-3 bg-gradient-to-r from-emerald-900 via-teal-900 to-emerald-950 text-white">
-                <div className="flex items-center gap-2">
-                  <span className="h-3 w-3 rounded-full bg-rose-400/80" />
-                  <span className="h-3 w-3 rounded-full bg-amber-400/80" />
-                  <span className="h-3 w-3 rounded-full bg-emerald-400/80" />
-                  <span className="ml-2 font-mono text-[11px] font-semibold text-emerald-200">Autonique Dashboard Telemetry</span>
-                </div>
-                <div className="flex items-center gap-2 text-[10.5px] font-mono text-emerald-200">
-                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" /> Live Operational
-                </div>
-              </div>
+              {/* Actual Dashboard Replica matching uploaded Image */}
+              <div className="flex min-h-[540px]">
+                
+                {/* Left Sidebar (From Image) */}
+                <div className="hidden md:flex w-52 flex-col border-r border-border/40 bg-background/95 p-4 justify-between">
+                  <div className="space-y-6">
+                    {/* Brand */}
+                    <div className="flex items-center gap-2">
+                      <div className="grid h-7 w-7 place-items-center rounded-lg bg-emerald-600 text-white font-bold text-[12px]">A</div>
+                      <div className="flex flex-col">
+                        <span className="text-[13px] font-bold text-foreground leading-none">Autonique</span>
+                        <span className="text-[8px] font-mono text-muted-foreground uppercase tracking-widest mt-0.5 font-medium">Clinical OS</span>
+                      </div>
+                    </div>
 
-              {/* Exact High-Res Dashboard Image */}
-              <img
-                src="/dashboard-home-img.png"
-                alt="Autonique Dashboard"
-                className="w-full object-cover rounded-b-2xl shadow-inner border-t border-white/10"
-              />
+                    {/* Nav Section */}
+                    <div className="space-y-1">
+                      <div className="text-[9.5px] font-mono uppercase text-muted-foreground tracking-widest font-bold mb-2">Platform</div>
+                      <div className="flex items-center gap-2.5 rounded-lg bg-sky-50 dark:bg-sky-950/40 px-3 py-1.5 text-[12.5px] font-semibold text-sky-900 dark:text-sky-300">
+                        <LayoutDashboard className="h-3.5 w-3.5 text-emerald-700" />
+                        <span>Overview</span>
+                      </div>
+                      <div className="flex items-center gap-2.5 rounded-lg px-3 py-1.5 text-[12.5px] font-medium text-muted-foreground hover:bg-accent">
+                        <Users className="h-3.5 w-3.5" />
+                        <span>Patients</span>
+                      </div>
+                      {[
+                        { label: "Appointments", badge: "SOON" },
+                        { label: "Revenue", badge: "SOON" },
+                        { label: "Reports", badge: "SOON" },
+                      ].map((item) => (
+                        <div key={item.label} className="flex items-center justify-between rounded-lg px-3 py-1.5 text-[12.5px] font-medium text-muted-foreground/60">
+                          <span>{item.label}</span>
+                          <span className="font-mono text-[9px] uppercase tracking-wider bg-muted px-1.5 py-0.2 rounded text-muted-foreground/60">{item.badge}</span>
+                        </div>
+                      ))}
+                      <div className="flex items-center gap-2.5 rounded-lg px-3 py-1.5 text-[12.5px] font-medium text-muted-foreground hover:bg-accent">
+                        <SettingsIcon className="h-3.5 w-3.5" />
+                        <span>Settings</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Main Dashboard Workspace (From Image) */}
+                <div className="flex-1 bg-background/50 p-4 sm:p-6 space-y-5 overflow-hidden">
+                  
+                  {/* Top Bar (From Image) */}
+                  <div className="flex items-center justify-between border-b border-border/40 pb-3">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 font-mono text-[10px] font-medium text-emerald-600 dark:text-emerald-400">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      Operational
+                    </span>
+                    <div className="flex items-center gap-3">
+                      <div className="hidden sm:flex items-center gap-2 rounded-md border border-border/60 bg-background px-3 py-1 text-[11px] font-mono text-muted-foreground w-64">
+                        <Search className="h-3 w-3" />
+                        <span>Search patients, visits, records…</span>
+                        <kbd className="ml-auto font-mono text-[9px] bg-muted px-1 rounded">⌘K</kbd>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="grid h-6 w-6 place-items-center rounded-full bg-emerald-600 text-white font-bold text-[10px]">IR</div>
+                        <span className="text-[11.5px] font-semibold text-foreground hidden sm:inline">Dr. Reyes</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Greeting Row (From Image) */}
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="font-display text-base sm:text-lg font-bold tracking-tight text-foreground">
+                        GOOD MORNING, <span className="text-emerald-800 dark:text-emerald-300">DR. SARAH</span> 👋
+                      </h3>
+                      <p className="text-[11px] font-mono text-muted-foreground">Here's what's happening in your clinic today.</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono text-[10.5px] text-muted-foreground hidden sm:inline">Sunday, June 22, 2026</span>
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 font-mono text-[10px] font-semibold text-emerald-700 dark:text-emerald-300">
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" /> Clinic Open
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* 4 KPI Pastel Cards (From Image) */}
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                    {/* Card 1 — Mint */}
+                    <div className="rounded-xl p-3.5 border border-emerald-500/10 kpi-gradient-mint shadow-2xs">
+                      <div className="flex items-center justify-between text-muted-foreground text-[11px] font-semibold">
+                        <span className="flex items-center gap-1.5 text-foreground/80"><Users className="h-3.5 w-3.5 text-emerald-700" /> Total Patients</span>
+                        <MoreHorizontal className="h-3.5 w-3.5" />
+                      </div>
+                      <div className="mt-1.5 font-display text-2xl font-bold tracking-tight text-foreground">4,892</div>
+                      <span className="mt-1 inline-block font-mono text-[10px] font-semibold text-emerald-800 dark:text-emerald-300 bg-white/80 dark:bg-card/80 px-1.5 py-0.2 rounded border border-emerald-500/20">This Month ↗ +12%</span>
+                    </div>
+
+                    {/* Card 2 — Lime */}
+                    <div className="rounded-xl p-3.5 border border-emerald-500/10 kpi-gradient-lime shadow-2xs">
+                      <div className="flex items-center justify-between text-muted-foreground text-[11px] font-semibold">
+                        <span className="flex items-center gap-1.5 text-foreground/80"><Calendar className="h-3.5 w-3.5 text-emerald-700" /> Appointments</span>
+                        <MoreHorizontal className="h-3.5 w-3.5" />
+                      </div>
+                      <div className="mt-1.5 font-display text-2xl font-bold tracking-tight text-foreground">48</div>
+                      <span className="mt-1 inline-block font-mono text-[10px] font-semibold text-emerald-800 dark:text-emerald-300 bg-white/80 dark:bg-card/80 px-1.5 py-0.2 rounded border border-emerald-500/20">New Bookings ↗ +8%</span>
+                    </div>
+
+                    {/* Card 3 — Emerald */}
+                    <div className="rounded-xl p-3.5 border border-emerald-500/10 kpi-gradient-emerald shadow-2xs">
+                      <div className="flex items-center justify-between text-muted-foreground text-[11px] font-semibold">
+                        <span className="flex items-center gap-1.5 text-foreground/80"><DollarSign className="h-3.5 w-3.5 text-emerald-700" /> Monthly Revenue</span>
+                        <MoreHorizontal className="h-3.5 w-3.5" />
+                      </div>
+                      <div className="mt-1.5 font-display text-2xl font-bold tracking-tight text-foreground">$24,500</div>
+                      <span className="mt-1 inline-block font-mono text-[10px] font-semibold text-emerald-800 dark:text-emerald-300 bg-white/80 dark:bg-card/80 px-1.5 py-0.2 rounded border border-emerald-500/20">Last Month ↗ +15%</span>
+                    </div>
+
+                    {/* Card 4 — Teal */}
+                    <div className="rounded-xl p-3.5 border border-emerald-500/10 kpi-gradient-teal shadow-2xs">
+                      <div className="flex items-center justify-between text-muted-foreground text-[11px] font-semibold">
+                        <span className="flex items-center gap-1.5 text-foreground/80"><Users className="h-3.5 w-3.5 text-emerald-700" /> Active Doctors</span>
+                        <MoreHorizontal className="h-3.5 w-3.5" />
+                      </div>
+                      <div className="mt-1.5 font-display text-2xl font-bold tracking-tight text-foreground">35</div>
+                      <span className="mt-1 inline-block font-mono text-[10px] font-semibold text-rose-600 bg-white/80 dark:bg-card/80 px-1.5 py-0.2 rounded border border-rose-500/20">On Leave ↘ 2%</span>
+                    </div>
+                  </div>
+
+                  {/* Graphs Section (From Image) */}
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5">
+                    
+                    {/* Left: Revenue Overview Smooth Line Graph (From Image) */}
+                    <div className="lg:col-span-8 rounded-xl border border-border/60 bg-card p-4 shadow-2xs space-y-2">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="font-bold text-[13px] text-foreground">Revenue Overview</div>
+                          <div className="text-[10px] font-mono text-muted-foreground">Last 6 months performance</div>
+                        </div>
+                        <div className="flex items-center gap-1 bg-muted/60 p-0.5 rounded-md text-[10px] font-semibold">
+                          <span className="px-2 py-0.5 rounded bg-background shadow-2xs text-foreground">Overview</span>
+                          <span className="px-2 py-0.5 text-muted-foreground">Monthly</span>
+                          <span className="px-2 py-0.5 text-muted-foreground">Yearly</span>
+                        </div>
+                      </div>
+
+                      {/* Smooth SVG Curved Line Chart + Active Tooltip (From Image) */}
+                      <div className="relative h-44 pt-4">
+                        <svg viewBox="0 0 500 120" className="h-full w-full overflow-visible" preserveAspectRatio="none">
+                          {/* Grid Lines */}
+                          <line x1="0" y1="20" x2="500" y2="20" stroke="currentColor" strokeDasharray="3 3" opacity="0.1" />
+                          <line x1="0" y1="60" x2="500" y2="60" stroke="currentColor" strokeDasharray="3 3" opacity="0.1" />
+                          <line x1="0" y1="100" x2="500" y2="100" stroke="currentColor" strokeDasharray="3 3" opacity="0.1" />
+                          
+                          {/* Curved Line Path */}
+                          <path
+                            d="M 0,90 Q 50,60 100,70 T 200,30 T 300,50 T 400,60 T 500,25"
+                            fill="none"
+                            stroke="#84cc16"
+                            strokeWidth="3.5"
+                          />
+
+                          {/* Data points */}
+                          <circle cx="100" cy="70" r="4" fill="#84cc16" />
+                          <circle cx="200" cy="30" r="4" fill="#84cc16" />
+                          <circle cx="300" cy="50" r="4" fill="#84cc16" />
+                          <circle cx="400" cy="60" r="4" fill="#84cc16" />
+                          <circle cx="500" cy="25" r="4" fill="#84cc16" />
+
+                          {/* Apr Tooltip Marker Line */}
+                          <line x1="200" y1="30" x2="200" y2="110" stroke="#84cc16" strokeDasharray="2 2" />
+                        </svg>
+
+                        {/* Tooltip Card (Apr Revenue: $15,000) from Image */}
+                        <div className="absolute top-6 left-[36%] rounded-lg border border-border/80 bg-background px-3 py-1.5 shadow-md text-left text-[10.5px]">
+                          <div className="font-mono text-muted-foreground font-semibold">Apr</div>
+                          <div className="font-bold text-emerald-700 dark:text-emerald-400">Revenue : $15,000</div>
+                        </div>
+
+                        {/* X-Axis Labels */}
+                        <div className="flex justify-between text-[9.5px] font-mono text-muted-foreground pt-1">
+                          <span>Jan</span>
+                          <span>Feb</span>
+                          <span>Mar</span>
+                          <span>Apr</span>
+                          <span>May</span>
+                          <span>Jun</span>
+                          <span>Jul</span>
+                          <span>Aug</span>
+                          <span>Sep</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right: Appointment Stats Donut Chart (From Image) */}
+                    <div className="lg:col-span-4 rounded-xl border border-border/60 bg-card p-4 shadow-2xs flex flex-col justify-between">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="font-bold text-[13px] text-foreground">Appointment Stats</div>
+                          <div className="text-[10px] font-mono text-muted-foreground">This month's distribution</div>
+                        </div>
+                      </div>
+
+                      {/* Donut Chart Graphics (From Image) */}
+                      <div className="relative my-2 flex items-center justify-center">
+                        <svg className="h-28 w-28 transform -rotate-90" viewBox="0 0 36 36">
+                          <path
+                            className="text-emerald-500"
+                            strokeWidth="4"
+                            strokeDasharray="60, 100"
+                            stroke="currentColor"
+                            fill="none"
+                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                          />
+                          <path
+                            className="text-lime-500"
+                            strokeWidth="4"
+                            strokeDasharray="25, 100"
+                            strokeDashoffset="-60"
+                            stroke="currentColor"
+                            fill="none"
+                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                          />
+                          <path
+                            className="text-rose-500"
+                            strokeWidth="4"
+                            strokeDasharray="15, 100"
+                            strokeDashoffset="-85"
+                            stroke="currentColor"
+                            fill="none"
+                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                          />
+                        </svg>
+                        <div className="absolute flex flex-col items-center text-center">
+                          <span className="font-display text-xl font-bold text-foreground leading-none">54</span>
+                          <span className="text-[9px] text-muted-foreground font-mono mt-0.5">Total Appointment</span>
+                        </div>
+                      </div>
+
+                      {/* Donut Legend (From Image) */}
+                      <div className="flex items-center justify-center gap-3 text-[10px] font-mono text-muted-foreground">
+                        <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-emerald-500" /> Completed</span>
+                        <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-lime-500" /> Upcoming</span>
+                        <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-rose-500" /> Cancelled</span>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
 
             </div>
           </div>

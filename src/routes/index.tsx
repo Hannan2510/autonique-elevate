@@ -595,7 +595,7 @@ function Landing() {
             </div>
 
             {/* Display Mockup Window */}
-            <div data-reveal className="rounded-[8px] border-none bg-white dark:bg-[#0D2926] shadow-2xl overflow-hidden max-w-4xl mx-auto">
+            <div data-reveal className="rounded-[8px] border border-[#0D9488]/20 dark:border-[#0D9488]/40 bg-white dark:bg-[#0D2926] shadow-2xl overflow-hidden max-w-4xl mx-auto">
               <div className="flex items-center justify-between px-4 py-3 bg-[#022C2C] text-white">
                 <div className="flex items-center gap-1.5">
                   <span className="h-2.5 w-2.5 rounded-full bg-rose-500" />
@@ -605,14 +605,14 @@ function Landing() {
                 <span className="font-mono text-[11px] text-[#99F6E4]">Autonique Clinical OS · {activePreviewTab.toUpperCase()}</span>
                 <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
               </div>
-              <div className="p-6 bg-[#F8FFFE] dark:bg-[#061514] min-h-[320px] flex flex-col justify-center">
+              <div className="p-5 sm:p-6 bg-[#F8FFFE] dark:bg-[#091E1C] min-h-[320px] flex flex-col justify-center">
                 {activePreviewTab === "dashboard" && (
                   <div className="space-y-4 animate-fade-in">
-                    <div className="overflow-hidden rounded-[8px] border border-[#0D9488]/20 dark:border-[#0D9488]/40 shadow-md">
+                    <div className="overflow-hidden rounded-[8px] border border-[#0D9488]/30 dark:border-[#2DD4BF]/40 ring-1 ring-[#0D9488]/10 dark:ring-[#2DD4BF]/20 shadow-xl dark:shadow-[0_14px_45px_rgba(0,0,0,0.75)] bg-white dark:bg-[#0F2F2C] p-1.5 transition-all">
                       <img
                         src="/dashboard-home-img.png"
                         alt="Autonique Doctor Dashboard Overview Screenshot"
-                        className="w-full h-auto object-cover object-top max-h-[460px] rounded-[8px]"
+                        className="w-full h-auto object-cover object-top max-h-[460px] rounded-[6px] dark:contrast-[1.02] dark:brightness-[0.98]"
                       />
                     </div>
                   </div>

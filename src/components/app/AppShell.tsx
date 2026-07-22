@@ -15,14 +15,21 @@ import {
   ChevronDown,
 } from "lucide-react";
 
-const nav = [
+type NavItem = {
+  to: string;
+  label: string;
+  icon: typeof LayoutDashboard;
+  disabled?: boolean;
+};
+
+const nav: NavItem[] = [
   { to: "/dashboard", label: "Overview", icon: LayoutDashboard },
   { to: "/customers", label: "Patients", icon: Users },
   { to: "/appointments", label: "Appointments", icon: Calendar, disabled: true },
   { to: "/revenue", label: "Revenue", icon: Receipt, disabled: true },
   { to: "/reports", label: "Reports", icon: BarChart3, disabled: true },
   { to: "/settings", label: "Settings", icon: SettingsIcon },
-] as const;
+];
 
 export function AppShell() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -151,7 +158,7 @@ function SidebarInner({
             return (
               <li key={item.to}>
                 <Link
-                  to={item.to}
+                  to={item.to as "/dashboard" | "/customers" | "/settings"}
                   onClick={onNavigate}
                   className={`flex items-center gap-2 rounded-md px-2 py-1.5 text-[13px] transition-colors ${
                     active

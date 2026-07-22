@@ -263,41 +263,33 @@
   transform: translateY(-2px);
 }
 
-/* Solid KPI Cards with border thickness */
+/* Solid KPI Cards without borders */
 .kpi-card-mint {
   background-color: #d1fae5;
-  border: 2px solid #10b981;
 }
 .dark .kpi-card-mint {
   background-color: rgba(6, 78, 59, 0.6);
-  border: 2px solid rgba(16, 185, 129, 0.6);
 }
 
 .kpi-card-lime {
   background-color: #ecfccb;
-  border: 2px solid #84cc16;
 }
 .dark .kpi-card-lime {
   background-color: rgba(54, 83, 20, 0.6);
-  border: 2px solid rgba(132, 204, 22, 0.6);
 }
 
 .kpi-card-emerald {
   background-color: #dcfce7;
-  border: 2px solid #22c55e;
 }
 .dark .kpi-card-emerald {
   background-color: rgba(6, 95, 70, 0.6);
-  border: 2px solid rgba(34, 197, 94, 0.6);
 }
 
 .kpi-card-teal {
   background-color: #ccfbf1;
-  border: 2px solid #14b8a6;
 }
 .dark .kpi-card-teal {
   background-color: rgba(19, 78, 74, 0.6);
-  border: 2px solid rgba(20, 184, 166, 0.6);
 }
 
 .glow-dot-emerald {

@@ -48,11 +48,6 @@ const patients: Patient[] = [
   { id: "P-1040", name: "Priya Kapoor", email: "priya.k@fastmail.com", phone: "+49 30 2201 4488", city: "Potsdam", status: "active", lastVisit: "22 Jul 2026", visits: 3, balance: 0, provider: "Dr. Reyes", notes: "New procedure evaluation in progress." },
   { id: "P-1039", name: "Jonas Lind", email: "jonas@lind.se", phone: "+46 8 4402 1188", city: "Stockholm", status: "new", lastVisit: "22 Jul 2026", visits: 1, balance: 120, provider: "Dr. Okafor", notes: "Referred by Dr. Bergman." },
   { id: "P-1038", name: "Sofia Martins", email: "sofia.martins@proton.me", phone: "+351 21 998 4412", city: "Lisbon", status: "active", lastVisit: "19 Jul 2026", visits: 22, balance: 0, provider: "Dr. Reyes", notes: "Long-term patient. Annual review due." },
-  { id: "P-1037", name: "Elena Rossi", email: "elena@rossi.it", phone: "+39 06 4488 9021", city: "Rome", status: "active", lastVisit: "18 Jul 2026", visits: 11, balance: 0, provider: "Dr. Reyes", notes: "" },
-  { id: "P-1036", name: "Rafael Ortiz", email: "r.ortiz@correo.es", phone: "+34 91 552 1204", city: "Madrid", status: "new", lastVisit: "12 Jul 2026", visits: 1, balance: 0, provider: "Dr. Okafor", notes: "First consultation. Requesting cost estimate." },
-  { id: "P-1035", name: "Nadia Haddad", email: "nadia@haddad.co", phone: "+971 4 552 1188", city: "Dubai", status: "active", lastVisit: "10 Jul 2026", visits: 8, balance: 480, provider: "Dr. Reyes", notes: "Outstanding balance from last visit." },
-  { id: "P-1034", name: "Timo Järvinen", email: "timo@jarvinen.fi", phone: "+358 9 552 4401", city: "Helsinki", status: "inactive", lastVisit: "22 Mar 2026", visits: 4, balance: 0, provider: "Dr. Okafor", notes: "Relocated." },
-  { id: "P-1033", name: "Isabelle Blanc", email: "isabelle@blanc.fr", phone: "+33 1 4488 5522", city: "Paris", status: "active", lastVisit: "08 Jul 2026", visits: 17, balance: 0, provider: "Dr. Reyes", notes: "" },
 ];
 
 const initials = (n: string) => n.split(" ").map((p) => p[0]).slice(0, 2).join("");
@@ -80,36 +75,36 @@ function Customers() {
   return (
     <>
       <PageHeader
-        title="Patients"
-        description={`${patients.length} records · 3 new this week`}
+        title="Patient Directory"
+        description={`${patients.length} active records · 3 new patients registered this week`}
         actions={
           <>
             <Button variant="outline" size="md">
-              <Filter className="h-3.5 w-3.5" />
+              <Filter className="h-3.5 w-3.5 text-muted-foreground" />
               <span className="hidden sm:inline">Filter</span>
             </Button>
             <Button size="md">
               <Plus className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">Add patient</span>
+              <span className="hidden sm:inline">Add Patient</span>
             </Button>
           </>
         }
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] min-h-[calc(100vh-3.5rem-105px)]">
-        <div className={`flex flex-col border-border lg:border-r ${mobileDetailOpen ? "hidden lg:flex" : "flex"}`}>
-          <div className="border-b border-border p-3">
+        <div className={`flex flex-col border-border/80 lg:border-r bg-card/20 ${mobileDetailOpen ? "hidden lg:flex" : "flex"}`}>
+          <div className="border-b border-border/70 p-3 bg-muted/20">
             <div className="relative">
               <Search className="pointer-events-none absolute top-1/2 left-2.5 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search by name, email, or ID"
-                className="h-9 w-full rounded-md border border-border bg-background pl-8 pr-3 text-[13px] placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring"
+                placeholder="Search by name, email, or ID (⌘F)…"
+                className="h-9 w-full rounded-md border border-border/80 bg-background pl-8 pr-3 text-[12.5px] placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring transition-all"
               />
             </div>
           </div>
-          <ul className="flex-1 divide-y divide-border overflow-y-auto">
+          <ul className="flex-1 divide-y divide-border/60 overflow-y-auto">
             {filtered.map((p) => {
               const active = p.id === selected.id;
               return (
@@ -119,18 +114,20 @@ function Customers() {
                       setSelectedId(p.id);
                       setMobileDetailOpen(true);
                     }}
-                    className={`flex w-full items-center gap-3 px-4 py-3 text-left transition-colors ${active ? "bg-accent" : "hover:bg-accent/50"}`}
+                    className={`flex w-full items-center gap-3 px-4 py-3.5 text-left transition-all ${
+                      active ? "bg-accent text-foreground font-medium shadow-2xs border-l-2 border-l-primary" : "hover:bg-accent/40 text-muted-foreground hover:text-foreground"
+                    }`}
                   >
-                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-border bg-background text-[11px] font-medium">
+                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-border bg-background font-mono text-[11px] font-semibold text-foreground">
                       {initials(p.name)}
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center justify-between gap-2">
-                        <div className="truncate text-[13.5px] font-medium">{p.name}</div>
+                        <div className="truncate text-[13.5px] font-semibold text-foreground">{p.name}</div>
                         <StatusBadge s={p.status} />
                       </div>
-                      <div className="mt-0.5 flex items-center gap-2 text-[11.5px] text-muted-foreground">
-                        <span className="font-mono">{p.id}</span>
+                      <div className="mt-1 flex items-center gap-2 text-[11px] text-muted-foreground font-mono">
+                        <span>{p.id}</span>
                         <span>·</span>
                         <span className="truncate">{p.city}</span>
                       </div>
@@ -140,29 +137,29 @@ function Customers() {
               );
             })}
             {filtered.length === 0 && (
-              <li className="p-8 text-center text-[13px] text-muted-foreground">No patients match "{query}".</li>
+              <li className="p-8 text-center text-[13px] text-muted-foreground font-mono">No patients match "{query}".</li>
             )}
           </ul>
         </div>
 
         <div className={`overflow-y-auto ${mobileDetailOpen ? "block" : "hidden lg:block"}`}>
-          <div className="border-b border-border px-5 py-3 lg:hidden">
-            <button onClick={() => setMobileDetailOpen(false)} className="inline-flex items-center gap-1 text-[13px] text-muted-foreground hover:text-foreground">
+          <div className="border-b border-border/70 px-5 py-3 lg:hidden bg-muted/20">
+            <button onClick={() => setMobileDetailOpen(false)} className="inline-flex items-center gap-1 text-[13px] font-medium text-muted-foreground hover:text-foreground">
               <ChevronLeft className="h-3.5 w-3.5" />
-              Back to list
+              Back to patient list
             </button>
           </div>
 
-          <div className="px-5 py-6 sm:px-8">
+          <div className="px-5 py-6 sm:px-8 space-y-6">
             <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4 sm:flex sm:items-center sm:justify-between">
               <div className="flex min-w-0 items-center gap-4">
-                <div className="grid h-14 w-14 shrink-0 place-items-center rounded-full border border-border bg-background text-[15px] font-medium">
+                <div className="grid h-14 w-14 shrink-0 place-items-center rounded-full border border-border/80 bg-primary/10 text-primary font-mono text-[16px] font-bold">
                   {initials(selected.name)}
                 </div>
                 <div className="min-w-0">
-                  <h2 className="truncate font-display text-2xl tracking-tight">{selected.name}</h2>
+                  <h2 className="truncate font-display text-2xl tracking-tight text-foreground">{selected.name}</h2>
                   <div className="mt-1 flex flex-wrap items-center gap-2 text-[12px] text-muted-foreground">
-                    <span className="font-mono">{selected.id}</span>
+                    <span className="font-mono text-[11px] bg-muted/80 px-1.5 py-0.5 rounded text-foreground">{selected.id}</span>
                     <span>·</span>
                     <span>{selected.provider}</span>
                     <StatusBadge s={selected.status} />
@@ -171,20 +168,21 @@ function Customers() {
               </div>
               <div className="flex shrink-0 items-center gap-2">
                 <Button variant="outline" size="md">
-                  <Calendar className="h-3.5 w-3.5" />
+                  <Calendar className="h-3.5 w-3.5 text-muted-foreground" />
                   <span className="hidden sm:inline">Schedule</span>
                 </Button>
                 <Button size="md">
-                  <span className="hidden sm:inline">Open chart</span>
+                  <span className="hidden sm:inline">Open Chart</span>
                   <span className="sm:hidden">Chart</span>
                 </Button>
-                <button className="grid h-8 w-8 place-items-center rounded-md border border-border text-muted-foreground hover:bg-accent">
+                <button className="grid h-8 w-8 place-items-center rounded-md border border-border/80 text-muted-foreground hover:bg-accent transition-colors">
                   <MoreHorizontal className="h-3.5 w-3.5" />
                 </button>
               </div>
             </div>
 
-            <div className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-4">
+            {/* Vercel Metrics Grid */}
+            <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border/80 bg-border/80 sm:grid-cols-4 shadow-2xs">
               {[
                 { l: "Last visit", v: selected.lastVisit },
                 { l: "Next visit", v: selected.nextVisit ?? "—" },
@@ -192,15 +190,15 @@ function Customers() {
                 { l: "Balance", v: selected.balance ? `$${selected.balance}` : "$0" },
               ].map((s) => (
                 <div key={s.l} className="bg-card p-4">
-                  <div className="text-[11px] text-muted-foreground">{s.l}</div>
-                  <div className="mt-1 font-display text-lg tracking-tight">{s.v}</div>
+                  <div className="text-[11px] font-medium text-muted-foreground">{s.l}</div>
+                  <div className="mt-1 font-display text-xl tracking-tight text-foreground">{s.v}</div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
-              <Card title="Contact" padding="p-0">
-                <dl className="divide-y divide-border">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+              <Card title="Contact Profile" padding="p-0">
+                <dl className="divide-y divide-border/70">
                   {[
                     { i: Mail, l: "Email", v: selected.email },
                     { i: Phone, l: "Phone", v: selected.phone },
@@ -208,55 +206,54 @@ function Customers() {
                   ].map((r) => {
                     const Icon = r.i;
                     return (
-                      <div key={r.l} className="grid grid-cols-[110px_1fr] items-center gap-3 px-5 py-3">
-                        <dt className="flex items-center gap-2 text-[12px] text-muted-foreground">
+                      <div key={r.l} className="grid grid-cols-[110px_1fr] items-center gap-3 px-5 py-3.5">
+                        <dt className="flex items-center gap-2 text-[12px] text-muted-foreground font-medium">
                           <Icon className="h-3.5 w-3.5" />
                           {r.l}
                         </dt>
-                        <dd className="truncate text-[13px]">{r.v}</dd>
+                        <dd className="truncate text-[13px] font-mono">{r.v}</dd>
                       </div>
                     );
                   })}
                 </dl>
               </Card>
 
-              <Card title="Clinical notes">
-                <p className="text-[13.5px] leading-relaxed text-muted-foreground">
-                  {selected.notes || "No notes recorded for this patient yet."}
+              <Card title="Clinical Notes & Alerts">
+                <p className="text-[13.5px] leading-relaxed text-muted-foreground bg-muted/20 p-3 rounded-lg border border-border/50">
+                  {selected.notes || "No additional clinical warnings or notes recorded."}
                 </p>
               </Card>
             </div>
 
             <Card
-              title="Recent visits"
-              className="mt-6"
+              title="Historical Visits & Invoices"
               padding="p-0"
-              action={<span className="font-mono text-[11px] text-muted-foreground">{selected.visits} total</span>}
+              action={<span className="font-mono text-[10.5px] bg-muted/80 px-2 py-0.5 rounded text-muted-foreground">{selected.visits} recorded</span>}
             >
               <div className="overflow-x-auto">
                 <table className="w-full text-[13px]">
-                  <thead className="border-b border-border bg-muted/40 text-left text-[11px] uppercase tracking-wider text-muted-foreground">
+                  <thead className="border-b border-border/70 bg-muted/30 text-left text-[11px] font-mono uppercase tracking-wider text-muted-foreground">
                     <tr>
-                      <th className="px-5 py-2.5 font-medium">Date</th>
-                      <th className="px-5 py-2.5 font-medium">Reason</th>
-                      <th className="px-5 py-2.5 font-medium">Provider</th>
-                      <th className="px-5 py-2.5 text-right font-medium">Amount</th>
-                      <th className="px-5 py-2.5 text-right font-medium">Status</th>
+                      <th className="px-5 py-3 font-medium">Date</th>
+                      <th className="px-5 py-3 font-medium">Reason</th>
+                      <th className="px-5 py-3 font-medium">Provider</th>
+                      <th className="px-5 py-3 text-right font-medium">Amount</th>
+                      <th className="px-5 py-3 text-right font-medium">Status</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-border">
+                  <tbody className="divide-y divide-border/60">
                     {[
                       { d: "22 Jul 2026", r: "Follow-up consultation", a: 180 },
                       { d: "08 Jul 2026", r: "Procedure", a: 940 },
                       { d: "18 Jun 2026", r: "Consultation", a: 180 },
                       { d: "02 Jun 2026", r: "Lab review", a: 60 },
                     ].map((r) => (
-                      <tr key={r.d} className="hover:bg-accent/40">
+                      <tr key={r.d} className="hover:bg-muted/30 transition-colors">
                         <td className="px-5 py-3 font-mono text-[12px] text-muted-foreground">{r.d}</td>
-                        <td className="px-5 py-3">{r.r}</td>
+                        <td className="px-5 py-3 font-medium text-foreground">{r.r}</td>
                         <td className="px-5 py-3 text-muted-foreground">{selected.provider}</td>
-                        <td className="px-5 py-3 text-right font-mono">${r.a}</td>
-                        <td className="px-5 py-3 text-right"><Badge tone="success">paid</Badge></td>
+                        <td className="px-5 py-3 text-right font-mono text-foreground">${r.a}</td>
+                        <td className="px-5 py-3 text-right"><Badge tone="success">Paid</Badge></td>
                       </tr>
                     ))}
                   </tbody>

@@ -110,7 +110,7 @@ function Logo({ isDark = true }: { isDark?: boolean }) {
         <span className={`text-[17.5px] font-extrabold tracking-tight leading-none ${isDark ? "text-white" : "text-[#0F172A]"} font-sans`}>
           Autonique
         </span>
-        <span className="text-[8.5px] text-teal-400 dark:text-teal-400 font-mono leading-none mt-0.5 uppercase tracking-[0.22em] font-bold">
+        <span className="text-[8.5px] text-[#0D9488] font-mono leading-none mt-0.5 uppercase tracking-[0.22em] font-bold">
           Clinical OS
         </span>
       </div>
@@ -125,6 +125,15 @@ function Landing() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   useScrollReveal();
+
+  // Sync theme class with HTML document root for CSS variables & Tailwind dark mode
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [isDark]);
 
   return (
     <>
@@ -152,7 +161,7 @@ function Landing() {
       }`}>
         
         {/* Subtle background glow */}
-        <div className={`fixed inset-0 pointer-events-none opacity-[0.035] bg-[radial-gradient(#14B8A6_1px,transparent_1px)] [background-size:28px_28px] z-0`} />
+        <div className="fixed inset-0 pointer-events-none opacity-[0.035] bg-[radial-gradient(#14B8A6_1px,transparent_1px)] [background-size:28px_28px] z-0" />
         {isDark && (
           <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none z-0" />
         )}
@@ -165,11 +174,11 @@ function Landing() {
             <Logo isDark={isDark} />
             
             <nav className={`hidden items-center gap-8 md:flex text-[13.5px] font-semibold ${isDark ? "text-slate-300" : "text-[#475569]"}`}>
-              <a href="#problem" className="hover:text-teal-400 transition-colors">Why Change</a>
-              <a href="#platform" className="hover:text-teal-400 transition-colors">Platform</a>
-              <a href="#workflow" className="hover:text-teal-400 transition-colors">Workflow</a>
-              <a href="#preview" className="hover:text-teal-400 transition-colors">Product</a>
-              <a href="#pricing" className="hover:text-teal-400 transition-colors">Pricing</a>
+              <a href="#problem" className="hover:text-[#0D9488] transition-colors">Why Change</a>
+              <a href="#platform" className="hover:text-[#0D9488] transition-colors">Platform</a>
+              <a href="#workflow" className="hover:text-[#0D9488] transition-colors">Workflow</a>
+              <a href="#preview" className="hover:text-[#0D9488] transition-colors">Product</a>
+              <a href="#pricing" className="hover:text-[#0D9488] transition-colors">Pricing</a>
             </nav>
 
             <div className="flex items-center gap-3">
@@ -230,7 +239,7 @@ function Landing() {
                   className={`font-display text-4xl leading-[1.07] font-black tracking-tight sm:text-5xl ${isDark ? "text-white" : "text-[#0F172A]"}`}
                 >
                   Simplify Your Practice with{" "}
-                  <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-500 bg-clip-text text-transparent">
                     Powerful Clinical OS
                   </span>
                 </h1>
@@ -313,7 +322,7 @@ function Landing() {
                   </div>
                 </div>
 
-                {/* Stat Cards — Soft Shadow, Smooth Rounded */}
+                {/* Stat Cards */}
                 <div data-reveal data-reveal-delay="3" className="grid grid-cols-4 gap-2.5 text-center">
                   {[
                     { v: "40K+", l: "Doctors" },
@@ -323,11 +332,11 @@ function Landing() {
                   ].map((s) => (
                     <div
                       key={s.l}
-                      className={`rounded-2xl p-3 shadow-md hover:shadow-lg transition-all ${
-                        isDark ? "bg-[#0B1726]/90 border-0 text-white backdrop-blur-md" : "bg-white border-0 text-[#0F172A]"
+                      className={`rounded-2xl p-3 shadow-md transition-all border-0 ${
+                        isDark ? "bg-[#0B1726]/90 text-white backdrop-blur-md" : "bg-white text-[#0F172A]"
                       }`}
                     >
-                      <div className="font-display text-xl font-black text-emerald-500 dark:text-teal-300">{s.v}</div>
+                      <div className={`font-display text-xl font-black ${isDark ? "text-teal-300" : "text-[#0F766E]"}`}>{s.v}</div>
                       <div className={`text-[10px] font-mono font-bold uppercase tracking-wider ${isDark ? "text-teal-400" : "text-[#64748B]"}`}>{s.l}</div>
                     </div>
                   ))}
@@ -357,7 +366,7 @@ function Landing() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
               {/* Before Autonique */}
               <div data-reveal data-reveal-delay="1" className={`rounded-2xl p-6 space-y-4 shadow-md border-0 ${
-                isDark ? "bg-gradient-to-br from-rose-950/30 via-[#0C1420] to-[#0C1420] text-slate-300" : "bg-rose-50/50 text-[#475569]"
+                isDark ? "bg-gradient-to-br from-rose-950/30 via-[#0C1420] to-[#0C1420] text-slate-300" : "bg-rose-50/70 text-[#475569]"
               }`}>
                 <div className="flex items-center gap-2 text-rose-500 font-bold text-[14px]">
                   <AlertCircle className="h-5 w-5 text-rose-500" />
@@ -379,7 +388,7 @@ function Landing() {
                 </ul>
               </div>
 
-              {/* With Autonique - Featured Solution Card (Soft Shadows, No Hard Line) */}
+              {/* With Autonique Solution Card */}
               <div data-reveal data-reveal-delay="2" className={`rounded-2xl p-6 space-y-4 shadow-xl transition-all border-0 ${
                 isDark ? "bg-gradient-to-br from-[#06382E] via-[#09221D] to-[#07111E] shadow-emerald-950/60 text-white" : "kpi-card-mint shadow-teal-900/10 text-[#0F172A]"
               }`}>
@@ -423,7 +432,6 @@ function Landing() {
               </p>
             </div>
 
-            {/* Soft Shadowed Cards without Hard Borders */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               {[
                 { title: "Patient CRM", desc: "Centralized medical histories", icon: Users },
@@ -446,13 +454,13 @@ function Landing() {
                     data-reveal
                     data-reveal-delay={String((idx % 4) + 1)}
                     className={`rounded-2xl p-4.5 shadow-md hover:shadow-xl transition-all group border-0 ${
-                      isDark ? "bg-[#0B1726]/80 text-white hover:bg-[#0E2035] backdrop-blur-md" : "bg-white text-[#0F172A] hover:bg-[#EFFFFE]/50"
+                      isDark ? "bg-[#0B1726]/80 text-white backdrop-blur-md" : "bg-white text-[#0F172A]"
                     }`}
                   >
                     <div className="h-9 w-9 rounded-xl bg-emerald-500/10 text-teal-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                       <Icon className="h-4.5 w-4.5 text-teal-400" />
                     </div>
-                    <div className="font-bold text-[13.5px]">{m.title}</div>
+                    <div className={`font-bold text-[13.5px] ${isDark ? "text-white" : "text-[#0F172A]"}`}>{m.title}</div>
                     <div className={`text-[11px] font-medium mt-0.5 ${isDark ? "text-slate-400" : "text-[#64748B]"}`}>{m.desc}</div>
                   </div>
                 );
@@ -534,7 +542,7 @@ function Landing() {
                       <div className="h-10 w-10 rounded-xl bg-emerald-500/10 text-teal-400 flex items-center justify-center shadow-xs">
                         <Icon className="h-5 w-5" />
                       </div>
-                      <h3 className="text-[16px] font-bold">{card.title}</h3>
+                      <h3 className={`text-[16px] font-bold ${isDark ? "text-white" : "text-[#0F172A]"}`}>{card.title}</h3>
                       <p className={`text-[13px] leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-[#475569]"}`}>{card.desc}</p>
                     </div>
                     <div className="mt-5 pt-4 border-t border-emerald-500/10">
@@ -547,7 +555,7 @@ function Landing() {
           </div>
         </section>
 
-        {/* ─── 6. How It Works (6 Steps) ─── */}
+        {/* ─── 6. How It Works ─── */}
         <section id="workflow" className={`py-20 border-t ${
           isDark ? "border-emerald-500/15 bg-[#050B14]" : "border-[#0D9488]/12 bg-white"
         } relative z-10`}>
@@ -579,7 +587,7 @@ function Landing() {
                   }`}
                 >
                   <div className="font-mono text-[12px] font-bold text-teal-400 mb-1">{s.step}</div>
-                  <div className="font-bold text-[13px]">{s.title}</div>
+                  <div className={`font-bold text-[13px] ${isDark ? "text-white" : "text-[#0F172A]"}`}>{s.title}</div>
                   <div className={`text-[10.5px] font-medium mt-0.5 ${isDark ? "text-slate-400" : "text-[#64748B]"}`}>{s.sub}</div>
                 </div>
               ))}
@@ -641,7 +649,7 @@ function Landing() {
                 {activePreviewTab === "dashboard" && (
                   <div className="space-y-4 animate-fade-in">
                     <div className="grid grid-cols-4 gap-3">
-                      <div className="rounded-xl p-3 kpi-card-mint border-0"><div className="text-[10px] uppercase font-mono text-teal-900">Total Patients</div><div className="text-xl font-bold text-[#0F172A]">4,892</div></div>
+                      <div className="rounded-xl p-3 kpi-card-mint border-0"><div className="text-[10px] uppercase font-mono text-teal-900 font-bold">Total Patients</div><div className="text-xl font-bold text-[#0F172A]">4,892</div></div>
                       <div className="rounded-xl p-3 kpi-card-lime border-0"><div className="text-[10px] uppercase font-mono font-bold text-lime-900">Appointments</div><div className="text-xl font-bold text-[#0F172A]">142 Today</div></div>
                       <div className="rounded-xl p-3 kpi-card-emerald border-0"><div className="text-[10px] uppercase font-mono text-emerald-950 font-bold">Revenue</div><div className="text-xl font-bold text-[#0F172A]">$18,420</div></div>
                       <div className="rounded-xl p-3 kpi-card-teal border-0"><div className="text-[10px] uppercase font-mono text-teal-950 font-bold">Active Doctors</div><div className="text-xl font-bold text-[#0F172A]">12 On Duty</div></div>
@@ -667,8 +675,8 @@ function Landing() {
                     ].map((p) => (
                       <div key={p.id} className={`flex items-center justify-between p-2.5 rounded-xl text-[12px] ${isDark ? "bg-[#0B1726] text-white" : "bg-white text-[#0F172A]"}`}>
                         <span className="font-bold">{p.name}</span>
-                        <span className="font-mono text-slate-400">{p.phone}</span>
-                        <span className="font-mono text-slate-400">{p.date}</span>
+                        <span className={`font-mono ${isDark ? "text-slate-400" : "text-[#64748B]"}`}>{p.phone}</span>
+                        <span className={`font-mono ${isDark ? "text-slate-400" : "text-[#64748B]"}`}>{p.date}</span>
                         <span className="bg-emerald-500/10 text-teal-400 font-mono text-[10px] px-2 py-0.5 rounded-full font-bold">Active</span>
                       </div>
                     ))}
@@ -685,7 +693,7 @@ function Landing() {
                       <div key={a.time} className={`flex items-center justify-between p-3 rounded-xl text-[12px] ${isDark ? "bg-[#0B1726] text-white" : "bg-white text-[#0F172A]"}`}>
                         <span className="font-mono font-bold text-teal-400">{a.time}</span>
                         <span className="font-semibold">{a.patient}</span>
-                        <span className="text-slate-400">{a.doctor}</span>
+                        <span className={`text-slate-400 ${isDark ? "text-slate-400" : "text-[#64748B]"}`}>{a.doctor}</span>
                         <span className="bg-emerald-500/10 text-teal-400 font-mono text-[10px] px-2 py-0.5 rounded-full font-bold">{a.status}</span>
                       </div>
                     ))}
@@ -694,13 +702,13 @@ function Landing() {
                 {activePreviewTab === "emr" && (
                   <div className={`p-4 rounded-xl space-y-3 text-[12px] animate-fade-in ${isDark ? "bg-[#0B1726] text-white" : "bg-white text-[#0F172A]"}`}>
                     <div className="flex justify-between font-bold border-b pb-2"><span>Electronic Medical Record #EMR-992</span><span className="text-teal-400 font-mono">ICD-10 Signed</span></div>
-                    <p className="text-slate-300 font-sans">Patient presents for routine follow-up. Vital signs normal (BP: 120/80, Pulse: 72 bpm). Continuation of therapy recommended.</p>
+                    <p className={`font-sans ${isDark ? "text-slate-300" : "text-[#475569]"}`}>Patient presents for routine follow-up. Vital signs normal (BP: 120/80, Pulse: 72 bpm). Continuation of therapy recommended.</p>
                   </div>
                 )}
                 {activePreviewTab === "billing" && (
                   <div className={`p-4 rounded-xl space-y-3 text-[12px] animate-fade-in ${isDark ? "bg-[#0B1726] text-white" : "bg-white text-[#0F172A]"}`}>
                     <div className="flex justify-between font-bold border-b pb-2"><span>Stripe Billed Monthly Subscription</span><span className="text-teal-400 font-mono">$516 / mo</span></div>
-                    <p className="text-slate-300 font-mono text-[11px]">Growth Tier · 4 Active Provider Seats · Next Invoice: Aug 12, 2026</p>
+                    <p className={`font-mono text-[11px] ${isDark ? "text-slate-300" : "text-[#475569]"}`}>Growth Tier · 4 Active Provider Seats · Next Invoice: Aug 12, 2026</p>
                   </div>
                 )}
               </div>
@@ -741,7 +749,7 @@ function Landing() {
                     <div className="h-10 w-10 rounded-xl bg-emerald-500/10 text-teal-400 flex items-center justify-center mb-4">
                       <Icon className="h-5 w-5 text-teal-400" />
                     </div>
-                    <h3 className="text-[15px] font-bold">{e.title}</h3>
+                    <h3 className={`text-[15px] font-bold ${isDark ? "text-white" : "text-[#0F172A]"}`}>{e.title}</h3>
                     <p className={`text-[13px] mt-1.5 leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-[#475569]"}`}>{e.desc}</p>
                   </div>
                 );
@@ -771,7 +779,7 @@ function Landing() {
                       <Icon className="h-4.5 w-4.5 text-teal-400" />
                     </div>
                     <div>
-                      <div className="text-[13px] font-bold">{item.t}</div>
+                      <div className={`text-[13px] font-bold ${isDark ? "text-white" : "text-[#0F172A]"}`}>{item.t}</div>
                       <div className={`text-[11px] font-medium ${isDark ? "text-slate-400" : "text-[#64748B]"}`}>{item.s}</div>
                     </div>
                   </div>
@@ -814,7 +822,7 @@ function Landing() {
                       <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
                     ))}
                   </div>
-                  <p className="text-[13.5px] leading-relaxed font-medium flex-1">"{t.quote}"</p>
+                  <p className={`text-[13.5px] leading-relaxed font-medium flex-1 ${isDark ? "text-slate-200" : "text-[#334155]"}`}>"{t.quote}"</p>
                   <div className="flex items-center gap-2.5 pt-3 border-t border-emerald-500/10">
                     <div className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-emerald-600 to-teal-500 text-white font-bold text-[13px]">
                       {t.name[3]}
@@ -886,17 +894,17 @@ function Landing() {
                         Most Popular
                       </div>
                     )}
-                    <h3 className="text-[15px] font-bold">{t.n}</h3>
-                    <div className="mt-1 font-display text-3xl font-extrabold tracking-tight">
+                    <h3 className={`text-[15px] font-bold ${isDark || t.highlight ? "text-white" : "text-[#0F172A]"}`}>{t.n}</h3>
+                    <div className={`mt-1 font-display text-3xl font-extrabold tracking-tight ${isDark || t.highlight ? "text-white" : "text-[#0F172A]"}`}>
                       {t.p}
                       {t.p !== "Custom" && (
-                        <span className={`ml-1 font-mono text-[11.5px] font-normal ${isDark ? "text-slate-400" : "text-[#64748B]"}`}>/ mo</span>
+                        <span className={`ml-1 font-mono text-[11.5px] font-normal ${isDark || t.highlight ? "text-slate-300" : "text-[#64748B]"}`}>/ mo</span>
                       )}
                     </div>
-                    <div className={`mt-0.5 text-[12px] font-medium ${isDark ? "text-slate-300" : "text-[#64748B]"}`}>{t.s}</div>
+                    <div className={`mt-0.5 text-[12px] font-medium ${isDark || t.highlight ? "text-teal-200" : "text-[#64748B]"}`}>{t.s}</div>
                     <ul className="mt-5 space-y-2.5">
                       {t.f.map((i) => (
-                        <li key={i} className="flex items-center gap-2 text-[12.5px] font-medium">
+                        <li key={i} className={`flex items-center gap-2 text-[12.5px] font-medium ${isDark || t.highlight ? "text-slate-200" : "text-[#334155]"}`}>
                           <CheckCircle2 className="h-4 w-4 text-teal-400 shrink-0" />
                           {i}
                         </li>
@@ -950,10 +958,10 @@ function Landing() {
                 >
                   <button
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex items-center justify-between p-5 text-left font-bold text-[14px] cursor-pointer"
+                    className={`w-full flex items-center justify-between p-5 text-left font-bold text-[14px] cursor-pointer ${isDark ? "text-white" : "text-[#0F172A]"}`}
                   >
                     <span>{faq.q}</span>
-                    <ChevronDown className={`h-4 w-4 text-teal-400 transition-transform ${openFaq === i ? "rotate-180" : ""}`} />
+                    <ChevronDown className="h-4 w-4 text-teal-400 transition-transform" style={{ transform: openFaq === i ? "rotate(180deg)" : "rotate(0deg)" }} />
                   </button>
                   {openFaq === i && (
                     <div className={`px-5 pb-5 pt-0 text-[13px] leading-relaxed font-medium border-t ${
@@ -1014,12 +1022,12 @@ function Landing() {
             <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
               <Logo isDark={isDark} />
               <div className={`flex flex-wrap gap-x-8 gap-y-2 text-[13px] font-semibold ${isDark ? "text-slate-400" : "text-[#64748B]"}`}>
-                <a href="#problem" className="hover:text-teal-400 transition-colors">Why Change</a>
-                <a href="#platform" className="hover:text-teal-400 transition-colors">Platform</a>
-                <a href="#workflow" className="hover:text-teal-400 transition-colors">Workflow</a>
-                <a href="#preview" className="hover:text-teal-400 transition-colors">Product</a>
-                <a href="#pricing" className="hover:text-teal-400 transition-colors">Pricing</a>
-                <Link to="/dashboard" className="hover:text-teal-400 transition-colors">Dashboard</Link>
+                <a href="#problem" className="hover:text-[#0D9488] transition-colors">Why Change</a>
+                <a href="#platform" className="hover:text-[#0D9488] transition-colors">Platform</a>
+                <a href="#workflow" className="hover:text-[#0D9488] transition-colors">Workflow</a>
+                <a href="#preview" className="hover:text-[#0D9488] transition-colors">Product</a>
+                <a href="#pricing" className="hover:text-[#0D9488] transition-colors">Pricing</a>
+                <Link to="/dashboard" className="hover:text-[#0D9488] transition-colors">Dashboard</Link>
               </div>
               <div className={`text-[11px] font-mono ${isDark ? "text-slate-500" : "text-[#94A3B8]"}`}>
                 © 2026 Autonique Clinical OS · All rights reserved

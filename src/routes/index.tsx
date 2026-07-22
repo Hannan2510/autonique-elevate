@@ -250,27 +250,21 @@ function Landing() {
                 </div>
               </div>
 
-              {/* Tilted Dashboard Window */}
+              {/* Tilted Ecosystem Graphic Window */}
               <div data-reveal data-reveal-delay="2" className="lg:col-span-6 space-y-4">
-                <div className="relative rounded-[8px] border border-[#0D9488]/30 dark:border-[#0D9488]/50 bg-white dark:bg-[#0B201E] shadow-[0_30px_70px_-15px_rgba(13,148,136,0.25)] overflow-hidden transition-all duration-500 ease-out lg:[transform:perspective(1000px)_rotateY(-8deg)_rotateX(4deg)_rotate(-1.5deg)] lg:hover:[transform:perspective(1000px)_rotateY(-1deg)_rotateX(0deg)_rotate(0deg)] max-w-md mx-auto lg:max-w-none">
-                  <div className="flex items-center justify-between px-3.5 py-2.5 bg-[#022C2C] text-white">
-                    <div className="flex items-center gap-1.5">
-                      <span className="h-2.5 w-2.5 rounded-full bg-[#EF4444]" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-[#F59E0B]" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-[#14B8A6]" />
-                    </div>
-                    <span className="font-mono text-[10.5px] font-bold text-[#99F6E4]">
-                      Autonique Clinical OS · Live
-                    </span>
-                    <span className="h-2 w-2 rounded-full bg-[#14B8A6] animate-pulse" />
-                  </div>
-                  <div className="overflow-hidden" style={{ maxHeight: "340px" }}>
-                    <img
-                      src="/dashboard-home-img.png"
-                      alt="Autonique Clinical OS Dashboard"
-                      className="w-full h-auto object-cover object-top"
-                    />
-                  </div>
+                <div className="relative rounded-[16px] border border-[#0D9488]/20 dark:border-[#0D9488]/40 bg-white dark:bg-[#0B201E] shadow-[0_30px_70px_-15px_rgba(13,148,136,0.25)] overflow-hidden transition-all duration-500 ease-out lg:[transform:perspective(1000px)_rotateY(-8deg)_rotateX(4deg)_rotate(-1.5deg)] lg:hover:[transform:perspective(1000px)_rotateY(-1deg)_rotateX(0deg)_rotate(0deg)] max-w-md mx-auto lg:max-w-none">
+                  {/* Light Theme Ecosystem Image */}
+                  <img
+                    src="/ecosystem-light.png"
+                    alt="Autonique Connected Clinic Operating System Ecosystem (Light)"
+                    className="block dark:hidden w-full h-auto object-contain rounded-[12px] p-1.5 transition-all duration-300 hover:scale-[1.01]"
+                  />
+                  {/* Dark Theme Ecosystem Image */}
+                  <img
+                    src="/ecosystem-dark.jpg"
+                    alt="Autonique Connected Clinic Operating System Ecosystem (Dark)"
+                    className="hidden dark:block w-full h-auto object-contain rounded-[12px] p-1.5 transition-all duration-300 hover:scale-[1.01]"
+                  />
                 </div>
               </div>
             </div>
@@ -614,17 +608,12 @@ function Landing() {
               <div className="p-6 bg-[#F8FFFE] dark:bg-[#061514] min-h-[320px] flex flex-col justify-center">
                 {activePreviewTab === "dashboard" && (
                   <div className="space-y-4 animate-fade-in">
-                    <div className="grid grid-cols-4 gap-3">
-                      <div className="rounded-[8px] border-none p-3 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-400/20 via-transparent to-transparent shadow-xs"><div className="text-[10px] uppercase font-mono text-[#0F766E] dark:text-[#2DD4BF] font-bold">Total Patients</div><div className="text-xl font-black text-[#0F172A] dark:text-white">4,892</div></div>
-                      <div className="rounded-[8px] border-none p-3 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-lime-400/20 via-transparent to-transparent shadow-xs"><div className="text-[10px] uppercase font-mono text-[#4D7C0F] dark:text-[#A3E635] font-bold">Appointments</div><div className="text-xl font-black text-[#0F172A] dark:text-white">142 Today</div></div>
-                      <div className="rounded-[8px] border-none p-3 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-teal-400/20 via-transparent to-transparent shadow-xs"><div className="text-[10px] uppercase font-mono text-[#0F766E] dark:text-[#2DD4BF] font-bold">Revenue</div><div className="text-xl font-black text-[#0F172A] dark:text-white">$18,420</div></div>
-                      <div className="rounded-[8px] border-none p-3 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-400/20 via-transparent to-transparent shadow-xs"><div className="text-[10px] uppercase font-mono text-[#4338CA] dark:text-[#818CF8] font-bold">Active Doctors</div><div className="text-xl font-black text-[#0F172A] dark:text-white">12 On Duty</div></div>
-                    </div>
-                    <div className="rounded-xl border border-emerald-500/20 bg-white dark:bg-[#0D2926] p-4 shadow-sm">
-                      <div className="flex justify-between items-center text-[12px] font-bold text-[#0F172A] dark:text-white mb-2"><span>Real-time Clinical Operations</span><span className="text-emerald-700 dark:text-[#2DD4BF] font-mono text-[11px]">Updated 1 min ago</span></div>
-                      <div className="h-24 bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-emerald-500/5 rounded-lg flex items-center justify-center font-mono text-[12px] text-emerald-800 dark:text-[#2DD4BF] font-bold">
-                        [ Interactive Telemetry Visualizer ]
-                      </div>
+                    <div className="overflow-hidden rounded-[8px] border border-[#0D9488]/20 dark:border-[#0D9488]/40 shadow-md">
+                      <img
+                        src="/dashboard-home-img.png"
+                        alt="Autonique Doctor Dashboard Overview Screenshot"
+                        className="w-full h-auto object-cover object-top max-h-[460px] rounded-[8px]"
+                      />
                     </div>
                   </div>
                 )}

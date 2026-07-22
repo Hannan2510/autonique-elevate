@@ -68,7 +68,7 @@ const kpiCards = [
     delta: "+12%",
     up: true,
     icon: Users,
-    gradientClass: "kpi-gradient-mint",
+    cardClass: "kpi-card-mint",
   },
   {
     title: "Appointments",
@@ -77,7 +77,7 @@ const kpiCards = [
     delta: "+8%",
     up: true,
     icon: CalendarIcon,
-    gradientClass: "kpi-gradient-lime",
+    cardClass: "kpi-card-lime",
   },
   {
     title: "Monthly Revenue",
@@ -86,7 +86,7 @@ const kpiCards = [
     delta: "+15%",
     up: true,
     icon: DollarSign,
-    gradientClass: "kpi-gradient-emerald",
+    cardClass: "kpi-card-emerald",
   },
   {
     title: "Active Doctors",
@@ -95,7 +95,7 @@ const kpiCards = [
     delta: "2%",
     up: false,
     icon: UserCheck,
-    gradientClass: "kpi-gradient-teal",
+    cardClass: "kpi-card-teal",
   },
 ];
 
@@ -154,14 +154,14 @@ function Dashboard() {
       />
 
       <div className="px-4 py-4 sm:px-6 space-y-4 sm:space-y-5">
-        {/* KPI Cards Grid — Compact, Neat Gradient Cards */}
+        {/* KPI Cards Grid — Compact Solid Color Cards with Thickness */}
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {kpiCards.map((card) => {
             const Icon = card.icon;
             return (
               <div
                 key={card.title}
-                className={`rounded-xl p-3.5 sm:p-4 transition-all shadow-sm hover:shadow-md relative overflow-hidden group cursor-pointer border border-emerald-500/10 ${card.gradientClass}`}
+                className={`rounded-xl p-3.5 sm:p-4 transition-all shadow-2xs hover:shadow-md relative overflow-hidden group cursor-pointer ${card.cardClass}`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">

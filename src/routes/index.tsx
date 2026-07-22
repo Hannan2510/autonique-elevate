@@ -527,23 +527,14 @@ function Landing() {
                   </div>
                 </div>
 
-                {/* Right Side: Tilted WhatsApp Bot Mockup Frame */}
+                {/* Right Side: Floating 3D Tilted Mobile Phone PNG (Pure Transparent Background) */}
                 <div className="lg:col-span-6 flex justify-center">
-                  <div className="relative w-full max-w-xs sm:max-w-sm">
-                    <div className="relative rounded-[24px] overflow-hidden transition-all duration-500 ease-out lg:[transform:perspective(1000px)_rotateY(-8deg)_rotateX(4deg)_rotate(-1.5deg)] lg:hover:[transform:perspective(1000px)_rotateY(-1deg)_rotateX(0deg)_rotate(0deg)] drop-shadow-[0_25px_35px_rgba(13,148,136,0.3)] hover:drop-shadow-[0_30px_45px_rgba(13,148,136,0.4)]">
-                      {/* Light Theme Render */}
-                      <img
-                        src="/whatsapp-bot-light.jpg"
-                        alt="Autonique WhatsApp Clinic Bot Interactive Mockup (Light)"
-                        className="block dark:hidden w-full h-auto object-cover rounded-2xl shadow-2xl transition-all duration-300 hover:scale-[1.01]"
-                      />
-                      {/* Dark Theme Render */}
-                      <img
-                        src="/whatsapp-bot-dark.jpg"
-                        alt="Autonique WhatsApp Clinic Bot Interactive Mockup (Dark)"
-                        className="hidden dark:block w-full h-auto object-cover rounded-2xl shadow-2xl transition-all duration-300 hover:scale-[1.01]"
-                      />
-                    </div>
+                  <div className="relative w-full max-w-[280px] sm:max-w-[320px]">
+                    <img
+                      src="/whatsapp-bot-phone-transparent.png"
+                      alt="Autonique WhatsApp Clinic Bot Mobile Phone"
+                      className="w-full h-auto object-contain transition-all duration-500 ease-out lg:[transform:perspective(1000px)_rotateY(-8deg)_rotateX(4deg)_rotate(-1.5deg)] lg:hover:[transform:perspective(1000px)_rotateY(-1deg)_rotateX(0deg)_rotate(0deg)] filter drop-shadow-[0_20px_35px_rgba(13,148,136,0.3)] hover:drop-shadow-[0_25px_45px_rgba(13,148,136,0.45)]"
+                    />
                   </div>
                 </div>
               </div>

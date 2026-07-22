@@ -435,23 +435,6 @@ function Landing() {
           </div>
         </section>
 
-        {/* ─── 6. Mobile App & WhatsApp Bot Banner ─── */}
-        <section className="py-14 border-t border-[#0D9488]/12 bg-[#F8FFFE] relative z-10">
-          <div className="mx-auto max-w-6xl px-5 sm:px-8">
-            <div data-reveal className="rounded-3xl border border-[#0D9488]/20 bg-white overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300">
-              {/* Cropped — hides bottom icons */}
-              <div className="overflow-hidden" style={{ maxHeight: "320px" }}>
-                <img
-                  src="/whatsapp-bot-section.png"
-                  alt="Manage with Autonique — WhatsApp Bot Automation & Mobile App"
-                  className="w-full h-auto object-cover object-top"
-                  style={{ imageRendering: "auto" }}
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* ─── 7. Trust / Security Strip ─── */}
         <section className="py-12 border-t border-[#0D9488]/12 bg-white relative z-10">
           <div className="mx-auto max-w-6xl px-5 sm:px-8">

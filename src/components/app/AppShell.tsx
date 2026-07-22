@@ -1,5 +1,5 @@
 import { Link, Outlet, useRouterState } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   LayoutDashboard,
   Users,
@@ -14,7 +14,53 @@ import {
   ChevronDown,
   LogOut,
   Building2,
+  Sun,
+  Moon,
 } from "lucide-react";
+
+export function useTheme() {
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("theme");
+      if (saved === "dark" || saved === "light") return saved;
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    return "light";
+  });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((prev) => (prev === "light" ? "dark" : "light"));
+
+  return { theme, toggleTheme };
+}
+
+export function ThemeToggle() {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <button
+      onClick={toggleTheme}
+      className="grid h-7.5 w-7.5 place-items-center rounded-md border border-border/60 text-muted-foreground hover:bg-accent hover:text-foreground transition-colors cursor-pointer"
+      title={`Switch to ${theme === "light" ? "Dark" : "Light"} Mode`}
+      aria-label="Toggle theme"
+    >
+      {theme === "dark" ? (
+        <Sun className="h-3.5 w-3.5 text-amber-400" />
+      ) : (
+        <Moon className="h-3.5 w-3.5 text-[#0F766E]" />
+      )}
+    </button>
+  );
+}
 
 type NavItem = {
   to: string;
@@ -88,6 +134,8 @@ export function AppShell() {
                 Operational
               </span>
             </div>
+
+            <ThemeToggle />
 
             <button className="relative grid h-7.5 w-7.5 place-items-center rounded-md border border-border/60 text-muted-foreground hover:bg-accent hover:text-foreground transition-colors cursor-pointer">
               <Bell className="h-3.5 w-3.5" />

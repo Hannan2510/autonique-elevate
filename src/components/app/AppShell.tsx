@@ -13,6 +13,7 @@ import {
   Menu,
   X,
   ChevronDown,
+  LogOut,
 } from "lucide-react";
 
 type NavItem = {
@@ -94,13 +95,14 @@ export function AppShell() {
               <Bell className="h-3.5 w-3.5" />
               <span className="absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500" />
             </button>
-            <button className="flex items-center gap-2 rounded-md border border-border/60 pl-1.5 pr-2.5 py-1 text-[11.5px] hover:bg-accent transition-colors cursor-pointer">
-              <div className="grid h-4.5 w-4.5 place-items-center rounded-full bg-emerald-600 text-[9.5px] font-bold text-white">
-                IR
-              </div>
-              <span className="hidden font-medium sm:inline">Dr. Reyes</span>
-              <ChevronDown className="hidden h-3 w-3 text-muted-foreground sm:inline" />
-            </button>
+
+            <Link
+              to="/"
+              className="grid h-7.5 w-7.5 place-items-center rounded-md border border-border/60 text-muted-foreground hover:bg-accent hover:text-foreground transition-colors cursor-pointer"
+              title="Log Out to Landing Page"
+            >
+              <LogOut className="h-3.5 w-3.5" />
+            </Link>
           </div>
         </header>
 
@@ -134,7 +136,7 @@ function SidebarInner({
   skipBrand?: boolean;
 }) {
   return (
-    <>
+    <div className="flex flex-col h-full">
       {!skipBrand && (
         <div className="flex h-12 items-center border-b border-border/40 px-4">
           <Brand />
@@ -183,7 +185,20 @@ function SidebarInner({
           </ul>
         </div>
       </nav>
-    </>
+
+      {/* Profile Section in Bottom Left of Sidebar */}
+      <div className="border-t border-border/40 p-3 mt-auto">
+        <div className="flex items-center gap-2.5 rounded-lg px-2 py-1.5 text-[13px] hover:bg-accent transition-colors cursor-pointer">
+          <div className="grid h-7 w-7 place-items-center rounded-full bg-emerald-600 text-[10.5px] font-bold text-white shrink-0">
+            IR
+          </div>
+          <div className="flex flex-col min-w-0">
+            <span className="font-semibold text-foreground text-[12px] truncate">Dr. Reyes</span>
+            <span className="text-[10px] text-muted-foreground truncate">reyes@autonique.com</span>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 

@@ -5,7 +5,6 @@ import {
   Shield,
   CheckCircle2,
   Rocket,
-  MessageSquare,
   FileSpreadsheet,
   Pill,
   Receipt,
@@ -328,64 +327,6 @@ function Landing() {
                   </div>
                 );
               })}
-            </div>
-          </div>
-        </section>
-
-        {/* ─── 4. WhatsApp Automation ─── */}
-        <section id="engagement" className="py-20 border-t border-[#0D9488]/12 bg-[#F8FFFE] relative z-10">
-          <div className="mx-auto max-w-6xl px-5 sm:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <div data-reveal className="lg:col-span-5 space-y-5">
-                <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#0D9488] font-bold">
-                  WhatsApp Automation
-                </span>
-                <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl text-[#0F172A]">
-                  Patient Engagement, Reinvented
-                </h2>
-                <p className="text-[14.5px] leading-relaxed text-[#475569] font-medium">
-                  Automate appointment confirmations, reminders, and prescription delivery on WhatsApp. Reduce no-shows by up to 60%.
-                </p>
-                <ul className="space-y-3 pt-1">
-                  {[
-                    "Send instant appointment reminders on WhatsApp",
-                    "Share digital prescriptions & invoices in one click",
-                    "Automate routine follow-up checkup messages",
-                  ].map((item) => (
-                    <li key={item} className="flex items-center gap-2.5 text-[13.5px] text-[#0F172A] font-semibold">
-                      <CheckCircle2 className="h-4.5 w-4.5 text-[#0D9488] shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div data-reveal data-reveal-delay="2" className="lg:col-span-7">
-                <div className="rounded-2xl border border-[#0D9488]/25 bg-white p-6 shadow-xl space-y-4">
-                  <div className="rounded-xl bg-[#022C2C] p-4 text-white flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <MessageSquare className="h-5 w-5 text-[#2DD4BF]" />
-                      <div>
-                        <div className="text-[13px] font-bold">WhatsApp Business Gateway</div>
-                        <div className="text-[10px] text-teal-200/70 font-mono">Automated Patient Messaging</div>
-                      </div>
-                    </div>
-                    <span className="px-2.5 py-0.5 rounded-lg bg-[#14B8A6]/20 text-[#2DD4BF] font-mono text-[10px] font-bold">Active</span>
-                  </div>
-                  <div className="space-y-2.5 font-mono text-[11px]">
-                    {[
-                      { m: "✓ Appointment reminder sent to Ava Chen", t: "09:00 AM" },
-                      { m: "✓ Prescription PDF shared to James Malik", t: "10:15 AM" },
-                      { m: "✓ Follow-up checkup reminder — Dr. Reyes", t: "10:32 AM" },
-                    ].map((msg) => (
-                      <div key={msg.t} className="rounded-xl bg-[#F0FDFA] border border-[#14B8A6]/25 px-3.5 py-2.5 text-[#0F766E] flex items-center justify-between font-semibold">
-                        <span>{msg.m}</span>
-                        <span className="text-[9.5px] text-[#64748B] shrink-0 ml-2">{msg.t}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </section>

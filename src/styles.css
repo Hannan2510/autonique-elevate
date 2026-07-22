@@ -265,31 +265,31 @@
 
 /* Solid KPI Cards without borders */
 .kpi-card-mint {
-  background-color: #d1fae5;
+  background-color: #a7f3d0; /* Rich soft mint */
 }
 .dark .kpi-card-mint {
-  background-color: rgba(6, 78, 59, 0.6);
+  background-color: rgba(6, 78, 59, 0.75);
 }
 
 .kpi-card-lime {
-  background-color: #ecfccb;
+  background-color: #d9f99d; /* Rich soft lime */
 }
 .dark .kpi-card-lime {
-  background-color: rgba(54, 83, 20, 0.6);
+  background-color: rgba(54, 83, 20, 0.75);
 }
 
 .kpi-card-emerald {
-  background-color: #dcfce7;
+  background-color: #86efac; /* Rich soft emerald */
 }
 .dark .kpi-card-emerald {
-  background-color: rgba(6, 95, 70, 0.6);
+  background-color: rgba(6, 95, 70, 0.75);
 }
 
 .kpi-card-teal {
-  background-color: #ccfbf1;
+  background-color: #99f6e4; /* Rich soft teal */
 }
 .dark .kpi-card-teal {
-  background-color: rgba(19, 78, 74, 0.6);
+  background-color: rgba(19, 78, 74, 0.75);
 }
 
 .glow-dot-emerald {

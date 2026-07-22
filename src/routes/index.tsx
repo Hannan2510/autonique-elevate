@@ -294,7 +294,7 @@ function Landing() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
               {/* Before Autonique */}
-              <div data-reveal data-reveal-delay="1" className="rounded-[8px] border border-rose-200/80 dark:border-rose-900/40 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-rose-500/10 via-white to-white dark:from-rose-950/40 dark:via-[#0D2926] dark:to-[#0D2926] p-6 space-y-4 shadow-xs">
+              <div data-reveal data-reveal-delay="1" className="rounded-[8px] border-none bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-rose-500/10 via-white to-white dark:from-rose-950/40 dark:via-[#0D2926] dark:to-[#0D2926] p-6 space-y-4 shadow-xs">
                 <div className="flex items-center gap-2 text-rose-700 dark:text-rose-400 font-bold text-[14px]">
                   <AlertCircle className="h-5 w-5 text-rose-600 dark:text-rose-400" />
                   <span>Legacy Disconnected Setup</span>
@@ -316,7 +316,7 @@ function Landing() {
               </div>
 
               {/* With Autonique - Featured Highlight Card */}
-              <div data-reveal data-reveal-delay="2" className="rounded-[8px] border border-emerald-500/30 dark:border-emerald-500/50 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-500/20 via-white to-white dark:from-emerald-500/25 dark:via-[#0D2926] dark:to-[#0D2926] p-6 space-y-4 shadow-md transition-all">
+              <div data-reveal data-reveal-delay="2" className="rounded-[8px] border-none bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-500/20 via-white to-white dark:from-emerald-500/25 dark:via-[#0D2926] dark:to-[#0D2926] p-6 space-y-4 shadow-md transition-all">
                 <div className="flex items-center gap-2 text-[#0F766E] dark:text-[#2DD4BF] font-bold text-[14px]">
                   <Sparkles className="h-5 w-5 text-[#0D9488] dark:text-[#2DD4BF]" />
                   <span>Unified Autonique Operating System</span>
@@ -377,7 +377,7 @@ function Landing() {
                     key={m.title}
                     data-reveal
                     data-reveal-delay={String((idx % 4) + 1)}
-                    className={`rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${m.spot} via-transparent to-transparent p-4.5 shadow-xs hover:border-[#0D9488]/40 transition-all group`}
+                    className={`rounded-[8px] border-none bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${m.spot} via-transparent to-transparent p-4.5 shadow-xs hover:shadow-md transition-all group`}
                   >
                     <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-[#EFFFFE] to-[#CCFBF1] dark:from-[#0F3531] dark:to-[#092523] text-[#0F766E] dark:text-[#2DD4BF] flex items-center justify-center mb-3 shadow-xs group-hover:scale-105 transition-transform">
                       <Icon className="h-4.5 w-4.5" />
@@ -459,7 +459,7 @@ function Landing() {
                     key={card.title}
                     data-reveal
                     data-reveal-delay={String(i + 1)}
-                    className={`rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${card.spot} via-transparent to-transparent p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between`}
+                    className={`rounded-[8px] border-none bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${card.spot} via-transparent to-transparent p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between`}
                   >
                     <div className="space-y-3">
                       <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#EFFFFE] to-[#CCFBF1] dark:from-[#0F3531] dark:to-[#092523] text-[#0F766E] dark:text-[#2DD4BF] flex items-center justify-center shadow-xs">
@@ -477,7 +477,7 @@ function Landing() {
             </div>
 
             {/* 2-Column WhatsApp Bot Feature Showcase with Tilted Image on Right */}
-            <div data-reveal className="rounded-2xl border border-[#0D9488]/20 dark:border-[#0D9488]/40 bg-white dark:bg-[#0B201E] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-teal-500/10 via-transparent to-transparent p-8 lg:p-10 shadow-lg">
+            <div data-reveal className="rounded-2xl border-none bg-white dark:bg-[#0B201E] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-teal-500/10 via-transparent to-transparent p-8 lg:p-10 shadow-lg">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                 {/* Left Side Info */}
                 <div className="lg:col-span-6 space-y-6 text-left">
@@ -501,7 +501,7 @@ function Landing() {
                       { t: "55% Lower No-Shows", desc: "Automated pre-visit WhatsApp reminders" },
                       { t: "Meta Verified Bot", desc: "End-to-end encrypted healthcare chat" },
                     ].map((item) => (
-                      <div key={item.t} className="flex items-start gap-2.5 p-2.5 rounded-xl border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-[#F8FFFE] dark:bg-[#061514]">
+                      <div key={item.t} className="flex items-start gap-2.5 p-2.5 rounded-xl border-none bg-[#F8FFFE] dark:bg-[#061514]">
                         <CheckCircle2 className="h-4 w-4 text-[#0D9488] dark:text-[#2DD4BF] shrink-0 mt-0.5" />
                         <div>
                           <div className="text-[12.5px] font-bold text-[#0F172A] dark:text-white">{item.t}</div>
@@ -561,7 +561,7 @@ function Landing() {
                   key={s.step}
                   data-reveal
                   data-reveal-delay={String((idx % 3) + 1)}
-                  className={`rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${s.spot} via-transparent to-transparent p-4 text-center relative group hover:border-[#0D9488] transition-all shadow-xs`}
+                  className={`rounded-[8px] border-none bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${s.spot} via-transparent to-transparent p-4 text-center relative group transition-all shadow-xs`}
                 >
                   <div className="font-mono text-[12px] font-bold text-[#0D9488] dark:text-[#2DD4BF] mb-1">{s.step}</div>
                   <div className="font-bold text-[13px] text-[#0F172A] dark:text-white">{s.title}</div>
@@ -608,7 +608,7 @@ function Landing() {
             </div>
 
             {/* Display Mockup Window */}
-            <div data-reveal className="rounded-[8px] border border-[#0D9488]/30 dark:border-[#0D9488]/50 bg-white dark:bg-[#0D2926] shadow-2xl overflow-hidden max-w-4xl mx-auto">
+            <div data-reveal className="rounded-[8px] border-none bg-white dark:bg-[#0D2926] shadow-2xl overflow-hidden max-w-4xl mx-auto">
               <div className="flex items-center justify-between px-4 py-3 bg-[#022C2C] text-white">
                 <div className="flex items-center gap-1.5">
                   <span className="h-2.5 w-2.5 rounded-full bg-rose-500" />
@@ -622,10 +622,10 @@ function Landing() {
                 {activePreviewTab === "dashboard" && (
                   <div className="space-y-4 animate-fade-in">
                     <div className="grid grid-cols-4 gap-3">
-                      <div className="rounded-[8px] border border-[#0D9488]/20 dark:border-[#0D9488]/40 p-3 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-400/20 via-transparent to-transparent"><div className="text-[10px] uppercase font-mono text-[#0F766E] dark:text-[#2DD4BF] font-bold">Total Patients</div><div className="text-xl font-black text-[#0F172A] dark:text-white">4,892</div></div>
-                      <div className="rounded-[8px] border border-[#0D9488]/20 dark:border-[#0D9488]/40 p-3 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-lime-400/20 via-transparent to-transparent"><div className="text-[10px] uppercase font-mono text-[#4D7C0F] dark:text-[#A3E635] font-bold">Appointments</div><div className="text-xl font-black text-[#0F172A] dark:text-white">142 Today</div></div>
-                      <div className="rounded-[8px] border border-[#0D9488]/20 dark:border-[#0D9488]/40 p-3 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-teal-400/20 via-transparent to-transparent"><div className="text-[10px] uppercase font-mono text-[#0F766E] dark:text-[#2DD4BF] font-bold">Revenue</div><div className="text-xl font-black text-[#0F172A] dark:text-white">$18,420</div></div>
-                      <div className="rounded-[8px] border border-[#0D9488]/20 dark:border-[#0D9488]/40 p-3 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-400/20 via-transparent to-transparent"><div className="text-[10px] uppercase font-mono text-[#4338CA] dark:text-[#818CF8] font-bold">Active Doctors</div><div className="text-xl font-black text-[#0F172A] dark:text-white">12 On Duty</div></div>
+                      <div className="rounded-[8px] border-none p-3 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-400/20 via-transparent to-transparent shadow-xs"><div className="text-[10px] uppercase font-mono text-[#0F766E] dark:text-[#2DD4BF] font-bold">Total Patients</div><div className="text-xl font-black text-[#0F172A] dark:text-white">4,892</div></div>
+                      <div className="rounded-[8px] border-none p-3 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-lime-400/20 via-transparent to-transparent shadow-xs"><div className="text-[10px] uppercase font-mono text-[#4D7C0F] dark:text-[#A3E635] font-bold">Appointments</div><div className="text-xl font-black text-[#0F172A] dark:text-white">142 Today</div></div>
+                      <div className="rounded-[8px] border-none p-3 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-teal-400/20 via-transparent to-transparent shadow-xs"><div className="text-[10px] uppercase font-mono text-[#0F766E] dark:text-[#2DD4BF] font-bold">Revenue</div><div className="text-xl font-black text-[#0F172A] dark:text-white">$18,420</div></div>
+                      <div className="rounded-[8px] border-none p-3 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-400/20 via-transparent to-transparent shadow-xs"><div className="text-[10px] uppercase font-mono text-[#4338CA] dark:text-[#818CF8] font-bold">Active Doctors</div><div className="text-xl font-black text-[#0F172A] dark:text-white">12 On Duty</div></div>
                     </div>
                     <div className="rounded-xl border border-emerald-500/20 bg-white dark:bg-[#0D2926] p-4 shadow-sm">
                       <div className="flex justify-between items-center text-[12px] font-bold text-[#0F172A] dark:text-white mb-2"><span>Real-time Clinical Operations</span><span className="text-emerald-700 dark:text-[#2DD4BF] font-mono text-[11px]">Updated 1 min ago</span></div>
@@ -713,7 +713,7 @@ function Landing() {
                     key={e.title}
                     data-reveal
                     data-reveal-delay={String(idx + 1)}
-                    className={`rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${e.spot} via-transparent to-transparent p-6 shadow-xs hover:shadow-md transition-all`}
+                    className={`rounded-[8px] border-none bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${e.spot} via-transparent to-transparent p-6 shadow-xs hover:shadow-md transition-all`}
                   >
                     <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#EFFFFE] to-[#CCFBF1] dark:from-[#0F3531] dark:to-[#092523] text-[#0F766E] dark:text-[#2DD4BF] flex items-center justify-center mb-4 shadow-xs">
                       <Icon className="h-5 w-5" />
@@ -739,7 +739,7 @@ function Landing() {
               ].map((item, i) => {
                 const Icon = item.icon;
                 return (
-                  <div key={item.t} data-reveal data-reveal-delay={String(i + 1)} className={`flex items-start gap-3 p-4 rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${item.spot} via-transparent to-transparent shadow-xs`}>
+                  <div key={item.t} data-reveal data-reveal-delay={String(i + 1)} className={`flex items-start gap-3 p-4 rounded-[8px] border-none bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${item.spot} via-transparent to-transparent shadow-xs`}>
                     <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[#EFFFFE] to-[#CCFBF1] dark:from-[#0F3531] dark:to-[#092523] text-[#0D9488] dark:text-[#2DD4BF] shadow-xs">
                       <Icon className="h-4.5 w-4.5" />
                     </div>
@@ -776,7 +776,7 @@ function Landing() {
                   key={t.name}
                   data-reveal
                   data-reveal-delay={t.delay}
-                  className={`rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${t.spot} via-transparent to-transparent p-6 shadow-xs hover:shadow-md transition-all flex flex-col gap-4`}
+                  className={`rounded-[8px] border-none bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${t.spot} via-transparent to-transparent p-6 shadow-xs hover:shadow-md transition-all flex flex-col gap-4`}
                 >
                   <div className="flex gap-0.5">
                     {Array(t.stars).fill(0).map((_, i) => (
@@ -839,9 +839,9 @@ function Landing() {
                   key={t.n}
                   data-reveal
                   data-reveal-delay={t.delay}
-                  className={`rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${t.spot} via-transparent to-transparent p-6 flex flex-col justify-between transition-all duration-300 ${
+                  className={`rounded-[8px] border-none bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${t.spot} via-transparent to-transparent p-6 flex flex-col justify-between transition-all duration-300 ${
                     t.highlight
-                      ? "border-[#0D9488] ring-2 ring-[#0D9488]/40 shadow-xl scale-[1.02]"
+                      ? "ring-2 ring-[#0D9488]/40 shadow-xl scale-[1.02]"
                       : "shadow-xs hover:shadow-md"
                   }`}
                 >
@@ -907,7 +907,7 @@ function Landing() {
                   key={faq.q}
                   data-reveal
                   data-reveal-delay={String(i + 1)}
-                  className="rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-400/10 via-transparent to-transparent overflow-hidden shadow-xs"
+                  className="rounded-[8px] border-none bg-white dark:bg-[#0D2926] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-400/10 via-transparent to-transparent overflow-hidden shadow-xs"
                 >
                   <button
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}

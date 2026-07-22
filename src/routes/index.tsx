@@ -281,7 +281,7 @@ function Landing() {
                     { v: "8M+", l: "Patients" },
                     { v: "99.9%", l: "Uptime" },
                   ].map((s) => (
-                    <div key={s.l} className="rounded-xl bg-white dark:bg-[#0B201E] border border-[#0D9488]/15 dark:border-[#0D9488]/30 p-2.5 shadow-xs hover:border-[#0D9488]/40 transition-all">
+                    <div key={s.l} className="rounded-[8px] border-none bg-white dark:bg-[#0B201E] p-2.5 shadow-xs transition-all">
                       <div className="font-display text-xl font-black text-[#0F766E] dark:text-[#2DD4BF]">{s.v}</div>
                       <div className="text-[10px] font-mono font-bold text-[#64748B] dark:text-[#809995] uppercase tracking-wider">{s.l}</div>
                     </div>
@@ -574,10 +574,10 @@ function Landing() {
                 {activePreviewTab === "dashboard" && (
                   <div className="space-y-4 animate-fade-in">
                     <div className="grid grid-cols-4 gap-3">
-                      <div className="rounded-xl p-3 kpi-card-mint"><div className="text-[10px] uppercase font-mono text-[#0F766E]">Total Patients</div><div className="text-xl font-bold">4,892</div></div>
-                      <div className="rounded-xl p-3 kpi-card-lime"><div className="text-[10px] uppercase font-mono text-[#4D7C0F]">Appointments</div><div className="text-xl font-bold">142 Today</div></div>
-                      <div className="rounded-xl p-3 kpi-card-emerald"><div className="text-[10px] uppercase font-mono text-[#15803D]">Revenue</div><div className="text-xl font-bold">$18,420</div></div>
-                      <div className="rounded-xl p-3 kpi-card-teal"><div className="text-[10px] uppercase font-mono text-[#0F766E]">Active Doctors</div><div className="text-xl font-bold">12 On Duty</div></div>
+                      <div className="rounded-[8px] p-3 kpi-card-mint"><div className="text-[10px] uppercase font-mono text-[#0F766E]">Total Patients</div><div className="text-xl font-bold">4,892</div></div>
+                      <div className="rounded-[8px] p-3 kpi-card-lime"><div className="text-[10px] uppercase font-mono text-[#4D7C0F]">Appointments</div><div className="text-xl font-bold">142 Today</div></div>
+                      <div className="rounded-[8px] p-3 kpi-card-emerald"><div className="text-[10px] uppercase font-mono text-[#15803D]">Revenue</div><div className="text-xl font-bold">$18,420</div></div>
+                      <div className="rounded-[8px] p-3 kpi-card-teal"><div className="text-[10px] uppercase font-mono text-[#0F766E]">Active Doctors</div><div className="text-xl font-bold">12 On Duty</div></div>
                     </div>
                     <div className="rounded-xl border border-emerald-500/20 bg-white dark:bg-[#0D2926] p-4 shadow-sm">
                       <div className="flex justify-between items-center text-[12px] font-bold text-[#0F172A] dark:text-white mb-2"><span>Real-time Clinical Operations</span><span className="text-emerald-700 dark:text-[#2DD4BF] font-mono text-[11px]">Updated 1 min ago</span></div>

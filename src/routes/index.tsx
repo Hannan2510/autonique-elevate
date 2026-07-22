@@ -252,7 +252,7 @@ function Landing() {
 
               {/* Tilted Dashboard Window */}
               <div data-reveal data-reveal-delay="2" className="lg:col-span-6 space-y-4">
-                <div className="relative rounded-2xl border border-[#0D9488]/30 dark:border-[#0D9488]/50 bg-white dark:bg-[#0B201E] shadow-[0_30px_70px_-15px_rgba(13,148,136,0.25)] overflow-hidden transition-all duration-500 ease-out lg:[transform:perspective(1000px)_rotateY(-8deg)_rotateX(4deg)_rotate(-1.5deg)] lg:hover:[transform:perspective(1000px)_rotateY(-1deg)_rotateX(0deg)_rotate(0deg)] max-w-md mx-auto lg:max-w-none">
+                <div className="relative rounded-[8px] border border-[#0D9488]/30 dark:border-[#0D9488]/50 bg-white dark:bg-[#0B201E] shadow-[0_30px_70px_-15px_rgba(13,148,136,0.25)] overflow-hidden transition-all duration-500 ease-out lg:[transform:perspective(1000px)_rotateY(-8deg)_rotateX(4deg)_rotate(-1.5deg)] lg:hover:[transform:perspective(1000px)_rotateY(-1deg)_rotateX(0deg)_rotate(0deg)] max-w-md mx-auto lg:max-w-none">
                   <div className="flex items-center justify-between px-3.5 py-2.5 bg-[#022C2C] text-white">
                     <div className="flex items-center gap-1.5">
                       <span className="h-2.5 w-2.5 rounded-full bg-[#EF4444]" />
@@ -309,7 +309,7 @@ function Landing() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
               {/* Before Autonique */}
-              <div data-reveal data-reveal-delay="1" className="rounded-2xl border border-rose-200/80 dark:border-rose-900/40 bg-rose-50/40 dark:bg-rose-950/20 p-6 space-y-4 shadow-xs">
+              <div data-reveal data-reveal-delay="1" className="rounded-[8px] border border-rose-200/80 dark:border-rose-900/40 bg-rose-50/40 dark:bg-rose-950/20 p-6 space-y-4 shadow-xs">
                 <div className="flex items-center gap-2 text-rose-700 dark:text-rose-400 font-bold text-[14px]">
                   <AlertCircle className="h-5 w-5 text-rose-600 dark:text-rose-400" />
                   <span>Legacy Disconnected Setup</span>
@@ -331,7 +331,7 @@ function Landing() {
               </div>
 
               {/* With Autonique - Featured Highlight Card */}
-              <div data-reveal data-reveal-delay="2" className="rounded-2xl p-6 space-y-4 shadow-md transition-all kpi-card-mint border border-[#0D9488]/30">
+              <div data-reveal data-reveal-delay="2" className="rounded-[8px] p-6 space-y-4 shadow-md transition-all kpi-card-mint border-none">
                 <div className="flex items-center gap-2 text-[#0F766E] dark:text-[#0F766E] font-bold text-[14px]">
                   <Sparkles className="h-5 w-5 text-[#0D9488]" />
                   <span>Unified Autonique Operating System</span>
@@ -392,7 +392,7 @@ function Landing() {
                     key={m.title}
                     data-reveal
                     data-reveal-delay={String((idx % 4) + 1)}
-                    className="rounded-2xl border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] p-4.5 shadow-xs hover:border-[#0D9488]/40 transition-all group"
+                    className="rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] p-4.5 shadow-xs hover:border-[#0D9488]/40 transition-all group"
                   >
                     <div className="h-9 w-9 rounded-xl bg-[#EFFFFE] dark:bg-[#0F3531] text-[#0F766E] dark:text-[#2DD4BF] flex items-center justify-center mb-3 group-hover:bg-[#0F766E] group-hover:text-white transition-colors">
                       <Icon className="h-4.5 w-4.5" />
@@ -469,7 +469,7 @@ function Landing() {
                     key={card.title}
                     data-reveal
                     data-reveal-delay={String(i + 1)}
-                    className="rounded-2xl border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
+                    className="rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
                   >
                     <div className="space-y-3">
                       <div className="h-10 w-10 rounded-xl bg-[#EFFFFE] dark:bg-[#0F3531] text-[#0F766E] dark:text-[#2DD4BF] flex items-center justify-center shadow-xs">
@@ -513,7 +513,7 @@ function Landing() {
                   key={s.step}
                   data-reveal
                   data-reveal-delay={String((idx % 3) + 1)}
-                  className="rounded-2xl border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] p-4 text-center relative group hover:border-[#0D9488] transition-all shadow-xs"
+                  className="rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] p-4 text-center relative group hover:border-[#0D9488] transition-all shadow-xs"
                 >
                   <div className="font-mono text-[12px] font-bold text-[#0D9488] dark:text-[#2DD4BF] mb-1">{s.step}</div>
                   <div className="font-bold text-[13px] text-[#0F172A] dark:text-white">{s.title}</div>
@@ -560,7 +560,7 @@ function Landing() {
             </div>
 
             {/* Display Mockup Window */}
-            <div data-reveal className="rounded-2xl border border-[#0D9488]/30 dark:border-[#0D9488]/50 bg-white dark:bg-[#0D2926] shadow-2xl overflow-hidden max-w-4xl mx-auto">
+            <div data-reveal className="rounded-[8px] border border-[#0D9488]/30 dark:border-[#0D9488]/50 bg-white dark:bg-[#0D2926] shadow-2xl overflow-hidden max-w-4xl mx-auto">
               <div className="flex items-center justify-between px-4 py-3 bg-[#022C2C] text-white">
                 <div className="flex items-center gap-1.5">
                   <span className="h-2.5 w-2.5 rounded-full bg-rose-500" />
@@ -665,7 +665,7 @@ function Landing() {
                     key={e.title}
                     data-reveal
                     data-reveal-delay={String(idx + 1)}
-                    className="rounded-2xl border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] p-6 shadow-xs hover:shadow-md transition-all"
+                    className="rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] p-6 shadow-xs hover:shadow-md transition-all"
                   >
                     <div className="h-10 w-10 rounded-xl bg-[#EFFFFE] dark:bg-[#0F3531] text-[#0F766E] dark:text-[#2DD4BF] flex items-center justify-center mb-4 shadow-xs">
                       <Icon className="h-5 w-5" />
@@ -691,7 +691,7 @@ function Landing() {
               ].map((item, i) => {
                 const Icon = item.icon;
                 return (
-                  <div key={item.t} data-reveal data-reveal-delay={String(i + 1)} className="flex items-start gap-3 p-4 rounded-2xl border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] shadow-xs">
+                  <div key={item.t} data-reveal data-reveal-delay={String(i + 1)} className="flex items-start gap-3 p-4 rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] shadow-xs">
                     <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-[#EFFFFE] dark:bg-[#0F3531] text-[#0D9488] dark:text-[#2DD4BF] shadow-xs">
                       <Icon className="h-4.5 w-4.5" />
                     </div>
@@ -728,7 +728,7 @@ function Landing() {
                   key={t.name}
                   data-reveal
                   data-reveal-delay={t.delay}
-                  className="rounded-2xl border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] p-6 shadow-xs hover:shadow-md transition-all flex flex-col gap-4"
+                  className="rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] p-6 shadow-xs hover:shadow-md transition-all flex flex-col gap-4"
                 >
                   <div className="flex gap-0.5">
                     {Array(t.stars).fill(0).map((_, i) => (
@@ -791,7 +791,7 @@ function Landing() {
                   key={t.n}
                   data-reveal
                   data-reveal-delay={t.delay}
-                  className={`rounded-2xl border p-6 flex flex-col justify-between transition-all duration-300 ${
+                  className={`rounded-[8px] border p-6 flex flex-col justify-between transition-all duration-300 ${
                     t.highlight
                       ? "border-[#0D9488] kpi-card-mint ring-2 ring-[#0D9488]/30 shadow-xl"
                       : "border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] shadow-xs hover:shadow-md"
@@ -859,7 +859,7 @@ function Landing() {
                   key={faq.q}
                   data-reveal
                   data-reveal-delay={String(i + 1)}
-                  className="rounded-2xl border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] overflow-hidden shadow-xs"
+                  className="rounded-[8px] border border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-white dark:bg-[#0D2926] overflow-hidden shadow-xs"
                 >
                   <button
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}

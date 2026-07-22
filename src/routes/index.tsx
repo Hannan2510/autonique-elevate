@@ -273,17 +273,17 @@ function Landing() {
                   </div>
                 </div>
 
-                {/* Clean Stat Cards */}
-                <div data-reveal data-reveal-delay="3" className="grid grid-cols-4 gap-2 text-center">
+                {/* Light-Colored Gradient Stat / KPI Cards */}
+                <div data-reveal data-reveal-delay="3" className="grid grid-cols-4 gap-2.5 text-center">
                   {[
-                    { v: "40K+", l: "Doctors" },
-                    { v: "25K+", l: "Clinics" },
-                    { v: "8M+", l: "Patients" },
-                    { v: "99.9%", l: "Uptime" },
+                    { v: "40K+", l: "Doctors", bg: "bg-gradient-to-br from-[#ECFDF5] via-[#D1FAE5] to-[#A7F3D0] dark:from-[#064E3B]/70 dark:to-[#022C22]/90", tc: "text-[#047857] dark:text-[#34D399]", lc: "text-[#065F46] dark:text-[#6EE7B7]" },
+                    { v: "25K+", l: "Clinics", bg: "bg-gradient-to-br from-[#F0FDFA] via-[#CCFBF1] to-[#99F6E4] dark:from-[#115E59]/70 dark:to-[#042F2C]/90", tc: "text-[#0F766E] dark:text-[#2DD4BF]", lc: "text-[#115E59] dark:text-[#5EEAD4]" },
+                    { v: "8M+", l: "Patients", bg: "bg-gradient-to-br from-[#F7FEE7] via-[#ECFCCB] to-[#D9F99D] dark:from-[#3F6212]/70 dark:to-[#1A2E05]/90", tc: "text-[#4D7C0F] dark:text-[#A3E635]", lc: "text-[#3F6212] dark:text-[#BEF264]" },
+                    { v: "99.9%", l: "Uptime", bg: "bg-gradient-to-br from-[#EEF2FF] via-[#E0E7FF] to-[#C7D2FE] dark:from-[#3730A3]/70 dark:to-[#1E1B4B]/90", tc: "text-[#4338CA] dark:text-[#818CF8]", lc: "text-[#3730A3] dark:text-[#A5B4FC]" },
                   ].map((s) => (
-                    <div key={s.l} className="rounded-[8px] border-none bg-white dark:bg-[#0B201E] p-2.5 shadow-xs transition-all">
-                      <div className="font-display text-xl font-black text-[#0F766E] dark:text-[#2DD4BF]">{s.v}</div>
-                      <div className="text-[10px] font-mono font-bold text-[#64748B] dark:text-[#809995] uppercase tracking-wider">{s.l}</div>
+                    <div key={s.l} className={`rounded-[8px] border-none ${s.bg} p-2.5 shadow-sm transition-all hover:scale-[1.02]`}>
+                      <div className={`font-display text-xl font-black ${s.tc}`}>{s.v}</div>
+                      <div className={`text-[10px] font-mono font-bold uppercase tracking-wider ${s.lc}`}>{s.l}</div>
                     </div>
                   ))}
                 </div>
@@ -574,10 +574,10 @@ function Landing() {
                 {activePreviewTab === "dashboard" && (
                   <div className="space-y-4 animate-fade-in">
                     <div className="grid grid-cols-4 gap-3">
-                      <div className="rounded-[8px] p-3 kpi-card-mint"><div className="text-[10px] uppercase font-mono text-[#0F766E]">Total Patients</div><div className="text-xl font-bold">4,892</div></div>
-                      <div className="rounded-[8px] p-3 kpi-card-lime"><div className="text-[10px] uppercase font-mono text-[#4D7C0F]">Appointments</div><div className="text-xl font-bold">142 Today</div></div>
-                      <div className="rounded-[8px] p-3 kpi-card-emerald"><div className="text-[10px] uppercase font-mono text-[#15803D]">Revenue</div><div className="text-xl font-bold">$18,420</div></div>
-                      <div className="rounded-[8px] p-3 kpi-card-teal"><div className="text-[10px] uppercase font-mono text-[#0F766E]">Active Doctors</div><div className="text-xl font-bold">12 On Duty</div></div>
+                      <div className="rounded-[8px] border-none p-3 bg-gradient-to-br from-[#ECFDF5] via-[#D1FAE5] to-[#A7F3D0] dark:from-[#064E3B]/70 dark:to-[#022C22]/90"><div className="text-[10px] uppercase font-mono text-[#065F46] dark:text-[#6EE7B7] font-bold">Total Patients</div><div className="text-xl font-black text-[#047857] dark:text-[#34D399]">4,892</div></div>
+                      <div className="rounded-[8px] border-none p-3 bg-gradient-to-br from-[#F7FEE7] via-[#ECFCCB] to-[#D9F99D] dark:from-[#3F6212]/70 dark:to-[#1A2E05]/90"><div className="text-[10px] uppercase font-mono text-[#3F6212] dark:text-[#BEF264] font-bold">Appointments</div><div className="text-xl font-black text-[#4D7C0F] dark:text-[#A3E635]">142 Today</div></div>
+                      <div className="rounded-[8px] border-none p-3 bg-gradient-to-br from-[#F0FDFA] via-[#CCFBF1] to-[#99F6E4] dark:from-[#115E59]/70 dark:to-[#042F2C]/90"><div className="text-[10px] uppercase font-mono text-[#115E59] dark:text-[#5EEAD4] font-bold">Revenue</div><div className="text-xl font-black text-[#0F766E] dark:text-[#2DD4BF]">$18,420</div></div>
+                      <div className="rounded-[8px] border-none p-3 bg-gradient-to-br from-[#EEF2FF] via-[#E0E7FF] to-[#C7D2FE] dark:from-[#3730A3]/70 dark:to-[#1E1B4B]/90"><div className="text-[10px] uppercase font-mono text-[#3730A3] dark:text-[#A5B4FC] font-bold">Active Doctors</div><div className="text-xl font-black text-[#4338CA] dark:text-[#818CF8]">12 On Duty</div></div>
                     </div>
                     <div className="rounded-xl border border-emerald-500/20 bg-white dark:bg-[#0D2926] p-4 shadow-sm">
                       <div className="flex justify-between items-center text-[12px] font-bold text-[#0F172A] dark:text-white mb-2"><span>Real-time Clinical Operations</span><span className="text-emerald-700 dark:text-[#2DD4BF] font-mono text-[11px]">Updated 1 min ago</span></div>

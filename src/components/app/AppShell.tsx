@@ -71,10 +71,7 @@ export function AppShell() {
             </button>
 
             <div className="hidden items-center gap-2 text-[11.5px] text-muted-foreground sm:flex">
-              <span className="font-medium text-foreground">Meridian Clinics</span>
-              <span className="text-muted-foreground/60">/</span>
-              <span className="font-mono text-[10.5px] bg-muted/60 px-1.5 py-0.5 rounded text-foreground">v2.4.0</span>
-              <span className="ml-1.5 inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2 py-0.5 font-mono text-[10px] font-medium text-emerald-600 dark:text-emerald-400">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2 py-0.5 font-mono text-[10px] font-medium text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 Operational
               </span>

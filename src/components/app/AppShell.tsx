@@ -118,11 +118,11 @@ export function AppShell() {
               <Menu className="h-3.5 w-3.5" />
             </button>
 
-            <div className="relative w-44 sm:w-56">
-              <Search className="pointer-events-none absolute top-1/2 left-2.5 h-3 w-3 -translate-y-1/2 text-muted-foreground" />
+            <div className="relative w-64 sm:w-80 md:w-[420px]">
+              <Search className="pointer-events-none absolute top-1/2 left-2.5 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
               <input
                 placeholder="Search patients, visits, records…"
-                className="h-7.5 w-full rounded-md border border-border/60 bg-background pl-7 pr-3 text-[11.5px] placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring focus:border-ring transition-all"
+                className="h-8.5 w-full rounded-lg border border-border/60 bg-background/80 pl-8 pr-3 text-[12px] placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-[#0D9488] focus:border-[#0D9488] transition-all shadow-2xs"
               />
             </div>
           </div>

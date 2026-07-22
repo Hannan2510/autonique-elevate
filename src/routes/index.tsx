@@ -144,11 +144,11 @@ function Landing() {
         [data-reveal-delay="5"] { transition-delay: 0.5s; }
       `}</style>
 
-      <div className="min-h-screen bg-[#F8FFFE] dark:bg-[#061514] text-[#0F172A] dark:text-[#E2F1F0] font-sans selection:bg-[#0D9488]/20 selection:text-[#0F766E] overflow-x-hidden antialiased">
+      <div className="min-h-screen bg-[#F8FFFE] dark:bg-[#061514] text-[#0F172A] dark:text-[#E2F1F0] font-sans selection:bg-[#0D9488]/20 selection:text-[#0F766E] overflow-x-clip antialiased">
         <div className="fixed inset-0 pointer-events-none opacity-[0.035] dark:opacity-[0.06] bg-[radial-gradient(#0D9488_1px,transparent_1px)] [background-size:24px_24px] z-0" />
 
-        {/* ─── 1. Sticky Header ─── */}
-        <header className="sticky top-0 z-50 border-b border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-[#F8FFFE]/92 dark:bg-[#061514]/92 backdrop-blur-xl">
+        {/* ─── 1. Constant Sticky Header ─── */}
+        <header className="sticky top-0 z-[100] border-b border-[#0D9488]/15 dark:border-[#0D9488]/30 bg-[#F8FFFE]/95 dark:bg-[#061514]/95 backdrop-blur-xl shadow-xs transition-all">
           <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
             <Logo />
             <nav className="hidden items-center gap-8 md:flex text-[13.5px] font-semibold text-[#475569] dark:text-[#94A3B8]">

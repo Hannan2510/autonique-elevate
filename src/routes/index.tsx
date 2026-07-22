@@ -22,7 +22,7 @@ export const Route = createFileRoute("/")({
 function Logo({ className = "" }: { className?: string }) {
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      <div className="grid h-6 w-6 place-items-center rounded-md bg-foreground text-background text-[11px] font-semibold tracking-tight">
+      <div className="grid h-6 w-6 place-items-center rounded-md bg-primary text-primary-foreground text-[11px] font-semibold tracking-tight">
         A
       </div>
       <span className="text-[15px] font-semibold tracking-tight">Autonique</span>
@@ -47,7 +47,7 @@ function Landing() {
             <a href="#" className="hidden text-[13px] text-muted-foreground hover:text-foreground sm:inline">
               Sign in
             </a>
-            <Link to="/dashboard" className="inline-flex h-8 items-center gap-1.5 rounded-md bg-foreground px-3 text-[13px] font-medium text-background transition-opacity hover:opacity-90">
+            <Link to="/dashboard" className="inline-flex h-8 items-center gap-1.5 rounded-md bg-primary px-3 text-[13px] font-medium text-primary-foreground transition-opacity hover:opacity-90">
               Open app
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
@@ -60,7 +60,7 @@ function Landing() {
         <div className="relative mx-auto max-w-7xl px-5 pt-20 pb-24 sm:px-8 sm:pt-28 sm:pb-32">
           <div className="mx-auto max-w-3xl text-center">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-3 py-1 text-[12px] text-muted-foreground backdrop-blur">
-              <span className="h-1.5 w-1.5 rounded-full bg-foreground" />
+              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
               New — Autonique 2.4 · Team scheduling
               <ChevronRight className="h-3 w-3" />
             </div>
@@ -71,7 +71,7 @@ function Landing() {
               Autonique unifies scheduling, patient records, revenue and team operations into one considered workspace. Built for clinics that expect more from their software.
             </p>
             <div className="mt-9 flex items-center justify-center gap-3">
-              <Link to="/dashboard" className="inline-flex h-10 items-center gap-1.5 rounded-md bg-foreground px-4 text-[13px] font-medium text-background transition-opacity hover:opacity-90">
+              <Link to="/dashboard" className="inline-flex h-10 items-center gap-1.5 rounded-md bg-primary px-4 text-[13px] font-medium text-primary-foreground transition-opacity hover:opacity-90">
                 Start free trial
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
@@ -94,7 +94,7 @@ function Landing() {
               <div className="grid grid-cols-12 gap-0">
                 <aside className="col-span-3 hidden border-r border-border p-4 lg:block">
                   <div className="mb-4 flex items-center gap-2">
-                    <div className="h-5 w-5 rounded bg-foreground" />
+                    <div className="h-5 w-5 rounded bg-primary" />
                     <span className="text-[12px] font-medium">Autonique</span>
                   </div>
                   <div className="space-y-1">
@@ -188,7 +188,7 @@ function Landing() {
             "Autonique replaced four tools and made the workday quieter. It's the first clinical software our team actually enjoys using."
           </blockquote>
           <div className="mt-8 flex items-center gap-3">
-            <div className="h-9 w-9 rounded-full bg-foreground/90" />
+            <div className="h-9 w-9 rounded-full bg-primary/90" />
             <div className="text-[13px]">
               <div className="font-medium">Dr. Iman Reyes</div>
               <div className="text-muted-foreground">Medical Director, Meridian Clinics</div>
@@ -209,7 +209,7 @@ function Landing() {
               { n: "Growth", p: "$129", s: "For growing multi-provider teams.", f: ["Everything in Starter", "Revenue & invoicing", "Automations", "Priority support"], highlight: true },
               { n: "Enterprise", p: "Custom", s: "For clinic networks & groups.", f: ["SSO & SCIM", "Audit logs", "SLA & dedicated CSM"] },
             ].map((t) => (
-              <div key={t.n} className={`rounded-xl border p-6 ${t.highlight ? "border-foreground" : "border-border bg-card"}`}>
+              <div key={t.n} className={`rounded-xl border p-6 ${t.highlight ? "border-primary ring-1 ring-primary/20" : "border-border bg-card"}`}>
                 <div className="text-[13px] font-medium">{t.n}</div>
                 <div className="mt-4 font-display text-4xl tracking-tight">
                   {t.p}
@@ -224,7 +224,7 @@ function Landing() {
                     </li>
                   ))}
                 </ul>
-                <button className={`mt-8 inline-flex h-9 w-full items-center justify-center rounded-md text-[13px] font-medium transition-colors ${t.highlight ? "bg-foreground text-background hover:opacity-90" : "border border-border bg-background hover:bg-accent"}`}>
+                <button className={`mt-8 inline-flex h-9 w-full items-center justify-center rounded-md text-[13px] font-medium transition-colors ${t.highlight ? "bg-primary text-primary-foreground hover:opacity-90" : "border border-border bg-background hover:bg-accent"}`}>
                   Get started
                 </button>
               </div>

@@ -83,6 +83,19 @@ export function AppShell() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  useEffect(() => {
+    // Force light mode in dashboard
+    const root = document.documentElement;
+    root.classList.remove("dark");
+    return () => {
+      // Restore user theme preference when navigating away
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        root.classList.add("dark");
+      }
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Sidebar — desktop */}
@@ -134,8 +147,6 @@ export function AppShell() {
                 Operational
               </span>
             </div>
-
-            <ThemeToggle />
 
             <button className="relative grid h-7.5 w-7.5 place-items-center rounded-md border border-border/60 text-muted-foreground hover:bg-accent hover:text-foreground transition-colors cursor-pointer">
               <Bell className="h-3.5 w-3.5" />

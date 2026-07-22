@@ -266,19 +266,19 @@
 /* Clinexa Mockup Soft Gradient KPI Cards */
 .kpi-gradient-mint {
   background: linear-gradient(135deg, rgba(167, 243, 208, 0.55) 0%, rgba(220, 252, 231, 0.45) 50%, rgba(240, 253, 244, 0.2) 100%);
-  box-shadow: 0 2px 8px -1px rgba(52, 211, 153, 0.18), 0 1px 3px 0 rgba(52, 211, 153, 0.10);
+  box-shadow: 0 4px 14px -2px rgba(52, 211, 153, 0.32), 0 2px 6px 0 rgba(52, 211, 153, 0.18);
 }
 .kpi-gradient-lime {
   background: linear-gradient(135deg, rgba(236, 252, 203, 0.65) 0%, rgba(247, 254, 231, 0.5) 50%, rgba(255, 255, 255, 0.2) 100%);
-  box-shadow: 0 2px 8px -1px rgba(163, 230, 53, 0.18), 0 1px 3px 0 rgba(163, 230, 53, 0.10);
+  box-shadow: 0 4px 14px -2px rgba(132, 204, 22, 0.30), 0 2px 6px 0 rgba(132, 204, 22, 0.16);
 }
 .kpi-gradient-emerald {
   background: linear-gradient(135deg, rgba(187, 247, 208, 0.6) 0%, rgba(220, 252, 231, 0.45) 50%, rgba(240, 253, 244, 0.2) 100%);
-  box-shadow: 0 2px 8px -1px rgba(52, 211, 153, 0.20), 0 1px 3px 0 rgba(52, 211, 153, 0.12);
+  box-shadow: 0 4px 14px -2px rgba(52, 211, 153, 0.34), 0 2px 6px 0 rgba(52, 211, 153, 0.20);
 }
 .kpi-gradient-teal {
   background: linear-gradient(135deg, rgba(153, 246, 228, 0.5) 0%, rgba(204, 251, 241, 0.4) 50%, rgba(240, 253, 244, 0.2) 100%);
-  box-shadow: 0 2px 8px -1px rgba(20, 184, 166, 0.18), 0 1px 3px 0 rgba(20, 184, 166, 0.10);
+  box-shadow: 0 4px 14px -2px rgba(20, 184, 166, 0.32), 0 2px 6px 0 rgba(20, 184, 166, 0.18);
 }
 
 .glow-dot-emerald {

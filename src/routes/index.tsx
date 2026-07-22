@@ -422,10 +422,10 @@ function Landing() {
                   icon: Calendar,
                   spot: "from-teal-400/20",
                   preview: (
-                    <div className="rounded-xl border border-teal-500/20 bg-[#EEF2FF] dark:bg-[#122438] p-3 text-[11px] space-y-1.5 shadow-xs">
-                      <div className="flex items-center justify-between text-teal-900 dark:text-teal-300 font-bold">
+                    <div className="rounded-xl border border-[#0D9488]/20 bg-[#F0FDFA] dark:bg-[#0F3531] p-3 text-[11px] space-y-1.5 shadow-xs">
+                      <div className="flex items-center justify-between text-[#0F766E] dark:text-[#2DD4BF] font-bold">
                         <span>WhatsApp Confirmation</span>
-                        <span className="text-emerald-700 dark:text-[#2DD4BF] font-mono text-[9.5px]">Sent 09:30 AM</span>
+                        <span className="text-[#0D9488] dark:text-[#2DD4BF] font-mono text-[9.5px]">Sent 09:30 AM</span>
                       </div>
                       <p className="text-[#475569] dark:text-[#A0B0AD] text-[10.5px]">"Hello Ava, your visit with Dr. Reyes is confirmed for 10:30 AM today."</p>
                     </div>
@@ -435,12 +435,12 @@ function Landing() {
                   title: "Medical Billing & Stripe",
                   desc: "Accept online payments, issue digital receipts, and track clinic revenue with automated reconciliation.",
                   icon: Receipt,
-                  spot: "from-lime-400/20",
+                  spot: "from-emerald-400/20",
                   preview: (
-                    <div className="rounded-xl border border-lime-500/20 bg-[#FFF7ED] dark:bg-[#2E2014] p-3 text-[11px] space-y-1.5 shadow-xs">
-                      <div className="flex items-center justify-between text-lime-900 dark:text-lime-300 font-bold">
+                    <div className="rounded-xl border border-[#0D9488]/20 bg-[#F0FDFA] dark:bg-[#0F3531] p-3 text-[11px] space-y-1.5 shadow-xs">
+                      <div className="flex items-center justify-between text-[#0F766E] dark:text-[#2DD4BF] font-bold">
                         <span>Stripe Payment #INV-2841</span>
-                        <span className="text-emerald-800 dark:text-[#2DD4BF] font-bold">$129 Paid</span>
+                        <span className="text-[#0D9488] dark:text-[#2DD4BF] font-bold">$129 Paid</span>
                       </div>
                       <p className="text-[#475569] dark:text-[#A0B0AD] font-mono text-[10px]">Consultation Fee · Card •••• 4242</p>
                     </div>

@@ -534,7 +534,7 @@ function Landing() {
                       <img
                         src="/whatsapp-bot-iphone.png"
                         alt="Autonique WhatsApp Clinic Bot Interactive Mockup"
-                        className="w-full h-auto object-contain rounded-[24px] mix-blend-multiply dark:mix-blend-normal filter contrast-[1.05] brightness-[1.02]"
+                        className="w-full h-auto object-cover rounded-2xl shadow-2xl transition-all duration-300 hover:scale-[1.01]"
                       />
                     </div>
                   </div>

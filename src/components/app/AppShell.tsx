@@ -62,24 +62,15 @@ export function AppShell() {
       <div className="lg:pl-60">
         {/* Top bar - Compact modern SaaS style */}
         <header className="sticky top-0 z-30 flex h-12 items-center justify-between gap-3 border-b border-border/40 bg-background/90 px-4 backdrop-blur-md sm:px-6">
-          <div className="flex items-center gap-2.5 min-w-0">
+          <div className="flex items-center gap-2.5 min-w-0 flex-1">
             <button
-              className="grid h-7 w-7 place-items-center rounded-md border border-border/60 text-muted-foreground hover:bg-accent lg:hidden"
+              className="grid h-7 w-7 place-items-center rounded-md border border-border/60 text-muted-foreground hover:bg-accent lg:hidden shrink-0"
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
             >
               <Menu className="h-3.5 w-3.5" />
             </button>
 
-            <div className="hidden items-center gap-2 text-[11.5px] text-muted-foreground sm:flex">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2 py-0.5 font-mono text-[10px] font-medium text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                Operational
-              </span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2">
             <div className="relative w-44 sm:w-56">
               <Search className="pointer-events-none absolute top-1/2 left-2.5 h-3 w-3 -translate-y-1/2 text-muted-foreground" />
               <input
@@ -89,6 +80,15 @@ export function AppShell() {
               <kbd className="pointer-events-none absolute top-1/2 right-2 flex -translate-y-1/2 items-center gap-0.5 rounded border border-border bg-muted/80 px-1 py-0.2 font-mono text-[9px] text-muted-foreground shadow-2xs">
                 <Command className="h-2 w-2" />K
               </kbd>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 shrink-0">
+            <div className="hidden items-center gap-2 text-[11.5px] text-muted-foreground sm:flex">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2 py-0.5 font-mono text-[10px] font-medium text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Operational
+              </span>
             </div>
 
             <button className="relative grid h-7.5 w-7.5 place-items-center rounded-md border border-border/60 text-muted-foreground hover:bg-accent hover:text-foreground transition-colors cursor-pointer">

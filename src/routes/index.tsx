@@ -1,21 +1,12 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  ArrowRight,
-  Check,
-  ChevronRight,
-  Activity,
   Calendar,
   Users,
   DollarSign,
   Shield,
-  Zap,
-  Sparkles,
-  Clock,
   CheckCircle2,
-  Lock,
   Building,
-  HeartPulse,
   Rocket,
   Smartphone,
   Award,
@@ -29,30 +20,24 @@ import {
   Boxes,
   BarChart3,
   Stethoscope,
-  ChevronDown,
-  PhoneCall,
-  Download,
-  Share2,
-  Bell,
-  Star,
+  ChevronRight,
+  MoreHorizontal,
   Search,
-  Command,
   LayoutDashboard,
   Settings as SettingsIcon,
-  MoreHorizontal,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Autonique — Enterprise Clinical OS for Modern Healthcare Groups" },
+      { title: "Autonique — All-in-One Clinic Management Software for Doctors & Practice Groups" },
       {
         name: "description",
         content:
-          "The official operating system for high-performing clinics. Unifies patient scheduling, EMR, revenue telemetry, and team workflows.",
+          "Manage appointments, patient EMR, prescriptions, billing, WhatsApp reminders, and multi-branch clinic operations with Autonique.",
       },
-      { property: "og:title", content: "Autonique — Enterprise Clinical OS" },
-      { property: "og:description", content: "All-in-one clinical software for doctors, practice groups, and hospital networks." },
+      { property: "og:title", content: "Autonique — Clinic Management Software for Doctors and Clinics" },
+      { property: "og:description", content: "All-in-one software for doctors, clinics, and hospitals to manage appointments, EMR, billing, and patient communication." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -81,13 +66,13 @@ function Landing() {
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-emerald-500/20 selection:text-emerald-700 overflow-x-hidden">
       
-      {/* 🌟 Ultra-Premium Sticky Glass Navigation Header */}
-      <header className="sticky top-0 z-50 border-b border-emerald-500/10 bg-background/80 backdrop-blur-xl transition-all">
+      {/* Clinicia-style Header */}
+      <header className="sticky top-0 z-50 border-b border-border/60 bg-background/90 backdrop-blur-md transition-all">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
           <Logo />
 
           {/* Navigation Links */}
-          <nav className="hidden items-center gap-8 lg:flex text-[13px] font-medium text-muted-foreground">
+          <nav className="hidden items-center gap-7 lg:flex text-[13px] font-medium text-muted-foreground">
             <a href="#features" className="hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors">Features</a>
             <a href="#solutions" className="hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors">Solutions</a>
             <a href="#why-choose" className="hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors">Why Choose Us</a>
@@ -100,338 +85,204 @@ function Landing() {
             <Link to="/dashboard" className="hidden text-[13px] font-semibold text-emerald-800 dark:text-emerald-300 hover:text-emerald-900 sm:inline transition-colors px-3 py-1.5 rounded-lg hover:bg-emerald-500/10">
               Sign In
             </Link>
-            <Link to="/dashboard" className="inline-flex h-9 items-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 px-4 text-[12.5px] font-semibold text-white transition-all shadow-md shadow-emerald-600/20 active:scale-95 cursor-pointer">
+            <Link to="/dashboard" className="inline-flex h-9 items-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 px-4 text-[12.5px] font-semibold text-white transition-all shadow-md shadow-emerald-600/20 cursor-pointer active:scale-95">
               <Rocket className="h-3.5 w-3.5" />
-              <span>Open App</span>
+              <span>Start Free Trial</span>
             </Link>
           </div>
         </div>
       </header>
 
-      {/* 1. Hero Section — Ultra Premium Mesh Backdrop */}
-      <section id="home" className="relative overflow-hidden pt-12 pb-24 lg:pt-16 lg:pb-32 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-500/12 via-background to-background">
+      {/* 1. Hero Section — Exact Clinicia Side-by-Side 2-Column Layout */}
+      <section id="home" className="relative overflow-hidden border-b border-border/60 pt-12 pb-20 lg:pt-16 lg:pb-24 bg-gradient-to-b from-emerald-500/5 via-background to-background">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          
-          {/* Top Hero Heading Block */}
-          <div className="mx-auto max-w-3xl text-center space-y-5">
-            {/* Official Announcement Pill */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1 text-[11.5px] font-semibold text-emerald-800 dark:text-emerald-300 shadow-2xs backdrop-blur-md">
-              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Autonique 2.4 Clinical OS · High-Precision Practice Management</span>
-              <ChevronRight className="h-3.5 w-3.5 text-emerald-700 dark:text-emerald-400" />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            {/* Left Column (6 cols): Text Content */}
+            <div className="lg:col-span-6 space-y-5 text-left">
+              {/* Trust Badge */}
+              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-[11.5px] font-semibold text-emerald-800 dark:text-emerald-300 shadow-2xs">
+                <Shield className="h-3.5 w-3.5 text-emerald-600" />
+                <span>Trusted by 40,000+ Healthcare Professionals</span>
+              </div>
+
+              {/* Main Headline (Clinicia style) */}
+              <h1 className="text-balance font-display text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-5xl text-foreground">
+                Simplify Your Practice with Powerful <span className="text-emerald-600 dark:text-emerald-400">Clinic Management Software</span>
+              </h1>
+
+              {/* Subtitle */}
+              <p className="text-[15px] leading-relaxed text-muted-foreground max-w-xl">
+                All-in-one software for doctors, clinics, and hospitals to manage appointments, EMR, billing, and patient communication.
+              </p>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3.5 pt-2">
+                <Link to="/dashboard" className="inline-flex h-11 items-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 px-6 text-[13.5px] font-semibold text-white transition-all shadow-md shadow-emerald-600/20 cursor-pointer active:scale-98">
+                  <Rocket className="h-4 w-4" />
+                  <span>Start Free Trial</span>
+                </Link>
+                <a href="#demo" className="inline-flex h-11 items-center gap-2 rounded-xl border border-emerald-500/30 bg-card hover:bg-emerald-500/5 px-6 text-[13.5px] font-semibold text-emerald-800 dark:text-emerald-300 transition-all shadow-2xs">
+                  <Calendar className="h-4 w-4 text-emerald-600" />
+                  <span>Book a demo</span>
+                </a>
+              </div>
             </div>
 
-            {/* Main Title */}
-            <h1 className="text-balance font-display text-4xl leading-[1.06] font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-foreground">
-              Simplify Your Practice with Powerful <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 bg-clip-text text-transparent">Clinic Management Software</span>
-            </h1>
-
-            {/* Subtitle */}
-            <p className="mx-auto max-w-xl text-balance text-[15px] leading-relaxed text-muted-foreground sm:text-base">
-              All-in-one software for doctors, clinics, and hospitals to manage appointments, EMR, prescriptions, billing, and patient communication on WhatsApp.
-            </p>
-
-            {/* Hero CTAs */}
-            <div className="flex flex-wrap items-center justify-center gap-3.5 pt-2">
-              <Link to="/dashboard" className="inline-flex h-11 items-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 px-6 text-[13.5px] font-semibold text-white transition-all shadow-lg shadow-emerald-600/25 active:scale-98 cursor-pointer">
-                <Rocket className="h-4 w-4" />
-                <span>Start Free Trial</span>
-              </Link>
-              <a href="#demo" className="inline-flex h-11 items-center gap-2 rounded-xl border border-emerald-500/30 bg-card hover:bg-emerald-500/5 px-6 text-[13.5px] font-semibold text-emerald-800 dark:text-emerald-300 transition-all shadow-2xs">
-                <Calendar className="h-4 w-4 text-emerald-600" />
-                <span>Book a Demo</span>
-              </a>
-            </div>
-
-            {/* Quick Trust Badges */}
-            <div className="flex flex-wrap items-center justify-center gap-5 pt-3 text-[11.5px] font-mono text-muted-foreground">
-              <span className="flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" /> No credit card required</span>
-              <span className="flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" /> 14-day full feature trial</span>
-              <span className="flex items-center gap-1.5"><Shield className="h-3.5 w-3.5 text-emerald-600" /> HIPAA & GDPR Compliant</span>
-            </div>
-          </div>
-
-          {/* 🖼️ REAL DASHBOARD UI MOCKUP FRAME (Recreating User Image Exactly) */}
-          <div className="relative mx-auto mt-14 max-w-6xl">
-            {/* Ambient Background Glow */}
-            <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-emerald-500/20 via-teal-500/20 to-emerald-600/20 blur-xl opacity-75" />
-
-            {/* Browser / OS Mockup Window */}
-            <div className="relative rounded-2xl border border-emerald-500/30 bg-card shadow-[0_25px_70px_-15px_rgba(16,185,129,0.18)] overflow-hidden transition-all backdrop-blur-xl">
+            {/* Right Column (6 cols): Dashboard Window Frame + Compact Stats Bar Directly Underneath */}
+            <div className="lg:col-span-6 space-y-4">
               
-              {/* Actual Dashboard Replica matching uploaded Image */}
-              <div className="flex min-h-[540px]">
+              {/* Desktop Window Frame with Light Green Dashboard UI inside */}
+              <div className="rounded-2xl border border-emerald-500/30 bg-card shadow-[0_20px_50px_-10px_rgba(16,185,129,0.18)] overflow-hidden transition-all">
                 
-                {/* Left Sidebar (From Image) */}
-                <div className="hidden md:flex w-52 flex-col border-r border-border/40 bg-background/95 p-4 justify-between">
-                  <div className="space-y-6">
-                    {/* Brand */}
-                    <div className="flex items-center gap-2">
-                      <div className="grid h-7 w-7 place-items-center rounded-lg bg-emerald-600 text-white font-bold text-[12px]">A</div>
-                      <div className="flex flex-col">
-                        <span className="text-[13px] font-bold text-foreground leading-none">Autonique</span>
-                        <span className="text-[8px] font-mono text-muted-foreground uppercase tracking-widest mt-0.5 font-medium">Clinical OS</span>
-                      </div>
-                    </div>
-
-                    {/* Nav Section */}
-                    <div className="space-y-1">
-                      <div className="text-[9.5px] font-mono uppercase text-muted-foreground tracking-widest font-bold mb-2">Platform</div>
-                      <div className="flex items-center gap-2.5 rounded-lg bg-sky-50 dark:bg-sky-950/40 px-3 py-1.5 text-[12.5px] font-semibold text-sky-900 dark:text-sky-300">
-                        <LayoutDashboard className="h-3.5 w-3.5 text-emerald-700" />
-                        <span>Overview</span>
-                      </div>
-                      <div className="flex items-center gap-2.5 rounded-lg px-3 py-1.5 text-[12.5px] font-medium text-muted-foreground hover:bg-accent">
-                        <Users className="h-3.5 w-3.5" />
-                        <span>Patients</span>
-                      </div>
-                      {[
-                        { label: "Appointments", badge: "SOON" },
-                        { label: "Revenue", badge: "SOON" },
-                        { label: "Reports", badge: "SOON" },
-                      ].map((item) => (
-                        <div key={item.label} className="flex items-center justify-between rounded-lg px-3 py-1.5 text-[12.5px] font-medium text-muted-foreground/60">
-                          <span>{item.label}</span>
-                          <span className="font-mono text-[9px] uppercase tracking-wider bg-muted px-1.5 py-0.2 rounded text-muted-foreground/60">{item.badge}</span>
-                        </div>
-                      ))}
-                      <div className="flex items-center gap-2.5 rounded-lg px-3 py-1.5 text-[12.5px] font-medium text-muted-foreground hover:bg-accent">
-                        <SettingsIcon className="h-3.5 w-3.5" />
-                        <span>Settings</span>
-                      </div>
-                    </div>
+                {/* Window Header Dots + Title */}
+                <div className="flex items-center justify-between border-b border-border/60 px-4 py-2.5 bg-gradient-to-r from-emerald-900 via-teal-900 to-emerald-950 text-white">
+                  <div className="flex items-center gap-2">
+                    <span className="h-3 w-3 rounded-full bg-rose-400" />
+                    <span className="h-3 w-3 rounded-full bg-amber-400" />
+                    <span className="h-3 w-3 rounded-full bg-emerald-400" />
                   </div>
+                  <span className="font-mono text-[11px] font-semibold text-emerald-200">Autonique Dashboard</span>
+                  <div className="w-12" />
                 </div>
 
-                {/* Main Dashboard Workspace (From Image) */}
-                <div className="flex-1 bg-background/50 p-4 sm:p-6 space-y-5 overflow-hidden">
+                {/* Dashboard Inner Canvas */}
+                <div className="p-4 sm:p-5 bg-background space-y-4 text-left">
                   
-                  {/* Top Bar (From Image) */}
-                  <div className="flex items-center justify-between border-b border-border/40 pb-3">
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 font-mono text-[10px] font-medium text-emerald-600 dark:text-emerald-400">
+                  {/* Top Bar */}
+                  <div className="flex items-center justify-between border-b border-border/40 pb-2.5">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 font-mono text-[10px] font-medium text-emerald-700 dark:text-emerald-300">
                       <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
                       Operational
                     </span>
-                    <div className="flex items-center gap-3">
-                      <div className="hidden sm:flex items-center gap-2 rounded-md border border-border/60 bg-background px-3 py-1 text-[11px] font-mono text-muted-foreground w-64">
+                    <div className="flex items-center gap-2">
+                      <div className="hidden sm:flex items-center gap-2 rounded-md border border-border/60 bg-background px-2.5 py-1 text-[10.5px] font-mono text-muted-foreground w-48">
                         <Search className="h-3 w-3" />
-                        <span>Search patients, visits, records…</span>
-                        <kbd className="ml-auto font-mono text-[9px] bg-muted px-1 rounded">⌘K</kbd>
+                        <span>Search patients...</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <div className="grid h-6 w-6 place-items-center rounded-full bg-emerald-600 text-white font-bold text-[10px]">IR</div>
-                        <span className="text-[11.5px] font-semibold text-foreground hidden sm:inline">Dr. Reyes</span>
+                      <div className="flex items-center gap-1.5">
+                        <div className="grid h-5.5 w-5.5 place-items-center rounded-full bg-emerald-600 text-white font-bold text-[9.5px]">IR</div>
+                        <span className="text-[11px] font-semibold text-foreground hidden sm:inline">Dr. Reyes</span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Greeting Row (From Image) */}
+                  {/* Greeting Row */}
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="font-display text-base sm:text-lg font-bold tracking-tight text-foreground">
-                        GOOD MORNING, <span className="text-emerald-800 dark:text-emerald-300">DR. SARAH</span> 👋
+                      <h3 className="font-display text-sm sm:text-base font-bold tracking-tight text-foreground">
+                        GOOD MORNING, <span className="text-emerald-700 dark:text-emerald-400">DR. SARAH</span> 👋
                       </h3>
-                      <p className="text-[11px] font-mono text-muted-foreground">Here's what's happening in your clinic today.</p>
+                      <p className="text-[10.5px] font-mono text-muted-foreground">Here's what's happening in your clinic today.</p>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="font-mono text-[10.5px] text-muted-foreground hidden sm:inline">Sunday, June 22, 2026</span>
-                      <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 font-mono text-[10px] font-semibold text-emerald-700 dark:text-emerald-300">
-                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" /> Clinic Open
-                      </span>
+                    <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 font-mono text-[9.5px] font-semibold text-emerald-700 dark:text-emerald-300">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" /> Clinic Open
+                    </span>
+                  </div>
+
+                  {/* 4 Light Green KPI Cards Row */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    <div className="rounded-xl p-2.5 border border-emerald-500/10 kpi-gradient-mint shadow-2xs">
+                      <span className="text-[9.5px] font-semibold text-foreground/80 block">Total Patients</span>
+                      <span className="font-display text-base font-bold text-foreground block mt-0.5">4,892</span>
+                      <span className="text-[9px] font-mono text-emerald-800 dark:text-emerald-300 font-semibold block mt-0.5">+12% month</span>
+                    </div>
+                    <div className="rounded-xl p-2.5 border border-emerald-500/10 kpi-gradient-lime shadow-2xs">
+                      <span className="text-[9.5px] font-semibold text-foreground/80 block">Appointments</span>
+                      <span className="font-display text-base font-bold text-foreground block mt-0.5">48</span>
+                      <span className="text-[9px] font-mono text-emerald-800 dark:text-emerald-300 font-semibold block mt-0.5">+8% bookings</span>
+                    </div>
+                    <div className="rounded-xl p-2.5 border border-emerald-500/10 kpi-gradient-emerald shadow-2xs">
+                      <span className="text-[9.5px] font-semibold text-foreground/80 block">Monthly Revenue</span>
+                      <span className="font-display text-base font-bold text-foreground block mt-0.5">$24,500</span>
+                      <span className="text-[9px] font-mono text-emerald-800 dark:text-emerald-300 font-semibold block mt-0.5">+15% revenue</span>
+                    </div>
+                    <div className="rounded-xl p-2.5 border border-emerald-500/10 kpi-gradient-teal shadow-2xs">
+                      <span className="text-[9.5px] font-semibold text-foreground/80 block">Active Doctors</span>
+                      <span className="font-display text-base font-bold text-foreground block mt-0.5">35</span>
+                      <span className="text-[9px] font-mono text-emerald-800 dark:text-emerald-300 font-semibold block mt-0.5">On Leave -2%</span>
                     </div>
                   </div>
 
-                  {/* 4 KPI Pastel Cards (From Image) */}
-                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                    {/* Card 1 — Mint */}
-                    <div className="rounded-xl p-3.5 border border-emerald-500/10 kpi-gradient-mint shadow-2xs">
-                      <div className="flex items-center justify-between text-muted-foreground text-[11px] font-semibold">
-                        <span className="flex items-center gap-1.5 text-foreground/80"><Users className="h-3.5 w-3.5 text-emerald-700" /> Total Patients</span>
-                        <MoreHorizontal className="h-3.5 w-3.5" />
-                      </div>
-                      <div className="mt-1.5 font-display text-2xl font-bold tracking-tight text-foreground">4,892</div>
-                      <span className="mt-1 inline-block font-mono text-[10px] font-semibold text-emerald-800 dark:text-emerald-300 bg-white/80 dark:bg-card/80 px-1.5 py-0.2 rounded border border-emerald-500/20">This Month ↗ +12%</span>
-                    </div>
-
-                    {/* Card 2 — Lime */}
-                    <div className="rounded-xl p-3.5 border border-emerald-500/10 kpi-gradient-lime shadow-2xs">
-                      <div className="flex items-center justify-between text-muted-foreground text-[11px] font-semibold">
-                        <span className="flex items-center gap-1.5 text-foreground/80"><Calendar className="h-3.5 w-3.5 text-emerald-700" /> Appointments</span>
-                        <MoreHorizontal className="h-3.5 w-3.5" />
-                      </div>
-                      <div className="mt-1.5 font-display text-2xl font-bold tracking-tight text-foreground">48</div>
-                      <span className="mt-1 inline-block font-mono text-[10px] font-semibold text-emerald-800 dark:text-emerald-300 bg-white/80 dark:bg-card/80 px-1.5 py-0.2 rounded border border-emerald-500/20">New Bookings ↗ +8%</span>
-                    </div>
-
-                    {/* Card 3 — Emerald */}
-                    <div className="rounded-xl p-3.5 border border-emerald-500/10 kpi-gradient-emerald shadow-2xs">
-                      <div className="flex items-center justify-between text-muted-foreground text-[11px] font-semibold">
-                        <span className="flex items-center gap-1.5 text-foreground/80"><DollarSign className="h-3.5 w-3.5 text-emerald-700" /> Monthly Revenue</span>
-                        <MoreHorizontal className="h-3.5 w-3.5" />
-                      </div>
-                      <div className="mt-1.5 font-display text-2xl font-bold tracking-tight text-foreground">$24,500</div>
-                      <span className="mt-1 inline-block font-mono text-[10px] font-semibold text-emerald-800 dark:text-emerald-300 bg-white/80 dark:bg-card/80 px-1.5 py-0.2 rounded border border-emerald-500/20">Last Month ↗ +15%</span>
-                    </div>
-
-                    {/* Card 4 — Teal */}
-                    <div className="rounded-xl p-3.5 border border-emerald-500/10 kpi-gradient-teal shadow-2xs">
-                      <div className="flex items-center justify-between text-muted-foreground text-[11px] font-semibold">
-                        <span className="flex items-center gap-1.5 text-foreground/80"><Users className="h-3.5 w-3.5 text-emerald-700" /> Active Doctors</span>
-                        <MoreHorizontal className="h-3.5 w-3.5" />
-                      </div>
-                      <div className="mt-1.5 font-display text-2xl font-bold tracking-tight text-foreground">35</div>
-                      <span className="mt-1 inline-block font-mono text-[10px] font-semibold text-rose-600 bg-white/80 dark:bg-card/80 px-1.5 py-0.2 rounded border border-rose-500/20">On Leave ↘ 2%</span>
-                    </div>
-                  </div>
-
-                  {/* Graphs Section (From Image) */}
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5">
+                  {/* Graphs Split Row */}
+                  <div className="grid grid-cols-1 sm:grid-cols-12 gap-2.5">
                     
-                    {/* Left: Revenue Overview Smooth Line Graph (From Image) */}
-                    <div className="lg:col-span-8 rounded-xl border border-border/60 bg-card p-4 shadow-2xs space-y-2">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <div className="font-bold text-[13px] text-foreground">Revenue Overview</div>
-                          <div className="text-[10px] font-mono text-muted-foreground">Last 6 months performance</div>
-                        </div>
-                        <div className="flex items-center gap-1 bg-muted/60 p-0.5 rounded-md text-[10px] font-semibold">
-                          <span className="px-2 py-0.5 rounded bg-background shadow-2xs text-foreground">Overview</span>
-                          <span className="px-2 py-0.5 text-muted-foreground">Monthly</span>
-                          <span className="px-2 py-0.5 text-muted-foreground">Yearly</span>
-                        </div>
+                    {/* Revenue Line Chart */}
+                    <div className="sm:col-span-7 rounded-xl border border-border/60 bg-card p-3 shadow-2xs space-y-1">
+                      <div className="flex justify-between text-[11px] font-bold text-foreground">
+                        <span>Revenue Overview</span>
+                        <span className="text-[9.5px] font-mono text-muted-foreground font-normal">Last 6 Months</span>
                       </div>
-
-                      {/* Smooth SVG Curved Line Chart + Active Tooltip (From Image) */}
-                      <div className="relative h-44 pt-4">
-                        <svg viewBox="0 0 500 120" className="h-full w-full overflow-visible" preserveAspectRatio="none">
-                          {/* Grid Lines */}
-                          <line x1="0" y1="20" x2="500" y2="20" stroke="currentColor" strokeDasharray="3 3" opacity="0.1" />
-                          <line x1="0" y1="60" x2="500" y2="60" stroke="currentColor" strokeDasharray="3 3" opacity="0.1" />
-                          <line x1="0" y1="100" x2="500" y2="100" stroke="currentColor" strokeDasharray="3 3" opacity="0.1" />
-                          
-                          {/* Curved Line Path */}
+                      <div className="relative h-28 pt-2">
+                        <svg viewBox="0 0 400 100" className="h-full w-full overflow-visible" preserveAspectRatio="none">
+                          <line x1="0" y1="20" x2="400" y2="20" stroke="currentColor" strokeDasharray="3 3" opacity="0.1" />
+                          <line x1="0" y1="60" x2="400" y2="60" stroke="currentColor" strokeDasharray="3 3" opacity="0.1" />
                           <path
-                            d="M 0,90 Q 50,60 100,70 T 200,30 T 300,50 T 400,60 T 500,25"
+                            d="M 0,80 Q 40,50 80,60 T 160,20 T 240,40 T 320,50 T 400,15"
                             fill="none"
                             stroke="#84cc16"
-                            strokeWidth="3.5"
+                            strokeWidth="3"
                           />
-
-                          {/* Data points */}
-                          <circle cx="100" cy="70" r="4" fill="#84cc16" />
-                          <circle cx="200" cy="30" r="4" fill="#84cc16" />
-                          <circle cx="300" cy="50" r="4" fill="#84cc16" />
-                          <circle cx="400" cy="60" r="4" fill="#84cc16" />
-                          <circle cx="500" cy="25" r="4" fill="#84cc16" />
-
-                          {/* Apr Tooltip Marker Line */}
-                          <line x1="200" y1="30" x2="200" y2="110" stroke="#84cc16" strokeDasharray="2 2" />
+                          <circle cx="160" cy="20" r="3.5" fill="#84cc16" />
                         </svg>
-
-                        {/* Tooltip Card (Apr Revenue: $15,000) from Image */}
-                        <div className="absolute top-6 left-[36%] rounded-lg border border-border/80 bg-background px-3 py-1.5 shadow-md text-left text-[10.5px]">
-                          <div className="font-mono text-muted-foreground font-semibold">Apr</div>
-                          <div className="font-bold text-emerald-700 dark:text-emerald-400">Revenue : $15,000</div>
-                        </div>
-
-                        {/* X-Axis Labels */}
-                        <div className="flex justify-between text-[9.5px] font-mono text-muted-foreground pt-1">
-                          <span>Jan</span>
-                          <span>Feb</span>
-                          <span>Mar</span>
-                          <span>Apr</span>
-                          <span>May</span>
-                          <span>Jun</span>
-                          <span>Jul</span>
-                          <span>Aug</span>
-                          <span>Sep</span>
+                        <div className="absolute top-1 left-[35%] rounded bg-background border border-border/80 px-2 py-0.5 shadow-2xs text-[9.5px] font-bold text-emerald-700 dark:text-emerald-400">
+                          Apr : $15,000
                         </div>
                       </div>
                     </div>
 
-                    {/* Right: Appointment Stats Donut Chart (From Image) */}
-                    <div className="lg:col-span-4 rounded-xl border border-border/60 bg-card p-4 shadow-2xs flex flex-col justify-between">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <div className="font-bold text-[13px] text-foreground">Appointment Stats</div>
-                          <div className="text-[10px] font-mono text-muted-foreground">This month's distribution</div>
-                        </div>
-                      </div>
-
-                      {/* Donut Chart Graphics (From Image) */}
-                      <div className="relative my-2 flex items-center justify-center">
-                        <svg className="h-28 w-28 transform -rotate-90" viewBox="0 0 36 36">
-                          <path
-                            className="text-emerald-500"
-                            strokeWidth="4"
-                            strokeDasharray="60, 100"
-                            stroke="currentColor"
-                            fill="none"
-                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                          />
-                          <path
-                            className="text-lime-500"
-                            strokeWidth="4"
-                            strokeDasharray="25, 100"
-                            strokeDashoffset="-60"
-                            stroke="currentColor"
-                            fill="none"
-                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                          />
-                          <path
-                            className="text-rose-500"
-                            strokeWidth="4"
-                            strokeDasharray="15, 100"
-                            strokeDashoffset="-85"
-                            stroke="currentColor"
-                            fill="none"
-                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                          />
+                    {/* Donut Chart */}
+                    <div className="sm:col-span-5 rounded-xl border border-border/60 bg-card p-3 shadow-2xs flex flex-col justify-between items-center text-center">
+                      <div className="text-[11px] font-bold text-foreground w-full text-left">Appointment Stats</div>
+                      <div className="relative my-1 flex items-center justify-center">
+                        <svg className="h-20 w-20 transform -rotate-90" viewBox="0 0 36 36">
+                          <path className="text-emerald-500" strokeWidth="4" strokeDasharray="60, 100" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                          <path className="text-lime-500" strokeWidth="4" strokeDasharray="25, 100" strokeDashoffset="-60" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                         </svg>
-                        <div className="absolute flex flex-col items-center text-center">
-                          <span className="font-display text-xl font-bold text-foreground leading-none">54</span>
-                          <span className="text-[9px] text-muted-foreground font-mono mt-0.5">Total Appointment</span>
+                        <div className="absolute flex flex-col items-center">
+                          <span className="font-display text-base font-bold text-foreground leading-none">54</span>
+                          <span className="text-[8px] text-muted-foreground font-mono">Total</span>
                         </div>
                       </div>
-
-                      {/* Donut Legend (From Image) */}
-                      <div className="flex items-center justify-center gap-3 text-[10px] font-mono text-muted-foreground">
-                        <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-emerald-500" /> Completed</span>
-                        <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-lime-500" /> Upcoming</span>
-                        <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-rose-500" /> Cancelled</span>
+                      <div className="flex gap-2 text-[9px] font-mono text-muted-foreground">
+                        <span className="flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-emerald-500" /> Done</span>
+                        <span className="flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-lime-500" /> Upcoming</span>
                       </div>
                     </div>
 
                   </div>
 
                 </div>
+              </div>
 
+              {/* Compact Statistics Bar directly under the Dashboard frame (Clinicia Screenshot replica) */}
+              <div className="grid grid-cols-4 gap-2 text-center pt-2">
+                <div>
+                  <div className="font-display text-2xl font-extrabold text-emerald-600 dark:text-emerald-400">40K+</div>
+                  <div className="text-[10.5px] font-mono font-bold text-muted-foreground uppercase tracking-wider">DOCTORS</div>
+                </div>
+                <div>
+                  <div className="font-display text-2xl font-extrabold text-emerald-600 dark:text-emerald-400">25K+</div>
+                  <div className="text-[10.5px] font-mono font-bold text-muted-foreground uppercase tracking-wider">CLINICS</div>
+                </div>
+                <div>
+                  <div className="font-display text-2xl font-extrabold text-emerald-600 dark:text-emerald-400">8M+</div>
+                  <div className="text-[10.5px] font-mono font-bold text-muted-foreground uppercase tracking-wider">PATIENTS</div>
+                </div>
+                <div>
+                  <div className="font-display text-2xl font-extrabold text-emerald-600 dark:text-emerald-400">99.9%</div>
+                  <div className="text-[10.5px] font-mono font-bold text-muted-foreground uppercase tracking-wider">UPTIME</div>
+                </div>
               </div>
 
             </div>
-          </div>
 
-        </div>
-      </section>
-
-      {/* 2. Official Trust Logos Section */}
-      <section className="border-y border-emerald-500/10 bg-emerald-500/5 py-10">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="text-center font-mono text-[10.5px] uppercase tracking-[0.2em] text-emerald-800 dark:text-emerald-300 font-bold">
-            Trusted by 40,000+ doctors across 25,000+ clinics & medical groups
-          </div>
-          <div className="mt-6 grid grid-cols-2 items-center gap-y-5 sm:grid-cols-3 md:grid-cols-6">
-            {["Northwind Health", "Meridian Clinics", "Aster Care", "Solace Health", "Umbra Medical", "Vantage Health"].map((n) => (
-              <div key={n} className="text-center font-display text-[15px] font-bold tracking-tight text-foreground/80 hover:text-emerald-700 transition-colors cursor-default">
-                {n}
-              </div>
-            ))}
           </div>
         </div>
       </section>
 
-      {/* 3. What is Autonique? Section */}
-      <section id="about" className="py-20 border-b border-border/60 bg-background">
+      {/* 2. What is Autonique? Section */}
+      <section id="about" className="py-20 border-b border-border/60 bg-muted/20">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             
@@ -450,7 +301,7 @@ function Landing() {
                 Autonique is a powerful yet intuitive cloud-based practice management platform built specifically for doctors, clinics, and healthcare institutions. Whether you're a solo practitioner or managing a multi-speciality, multi-branch clinic, Autonique simplifies your operations — from appointments and EMR to billing, inventory, and patient communication.
               </p>
               <div className="pt-2 flex items-center gap-3">
-                <Link to="/dashboard" className="inline-flex h-10 items-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 px-5 text-[13px] font-semibold text-white shadow-md cursor-pointer">
+                <Link to="/dashboard" className="inline-flex h-10 items-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 px-5 text-[13px] font-semibold text-white shadow-2xs cursor-pointer">
                   <Rocket className="h-4 w-4" />
                   <span>Start Free Trial</span>
                 </Link>
@@ -462,7 +313,7 @@ function Landing() {
 
             <div className="lg:col-span-6">
               {/* Dual View Mockup Container */}
-              <div className="rounded-2xl border border-emerald-500/20 bg-card p-4 shadow-xl space-y-3 backdrop-blur-xl">
+              <div className="rounded-2xl border border-emerald-500/20 bg-card p-4 shadow-xl space-y-3">
                 <div className="rounded-xl border border-emerald-500/10 kpi-gradient-lime p-4 flex items-center justify-between">
                   <div>
                     <div className="text-[12.5px] font-bold text-foreground">Multi-Device Cloud Access</div>
@@ -489,8 +340,8 @@ function Landing() {
         </div>
       </section>
 
-      {/* 4. Why Choose Autonique? Section */}
-      <section id="why-choose" className="py-20 border-b border-border/60 bg-muted/20">
+      {/* 3. Why Choose Autonique? Section */}
+      <section id="why-choose" className="py-20 border-b border-border/60 bg-background">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400 font-semibold">
@@ -528,7 +379,7 @@ function Landing() {
         </div>
       </section>
 
-      {/* 5. App Download Banner Section */}
+      {/* 4. App Download Banner Section */}
       <section className="py-12 border-b border-border/60 bg-gradient-to-r from-emerald-900 via-teal-900 to-emerald-950 text-white">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
@@ -551,8 +402,8 @@ function Landing() {
         </div>
       </section>
 
-      {/* 6. Smart Features Section */}
-      <section id="features" className="py-20 border-b border-border/60 bg-background">
+      {/* 5. Smart Features Section — Clinicia Bullet List Grid */}
+      <section id="features" className="py-20 border-b border-border/60 bg-muted/20">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400 font-semibold">
@@ -627,7 +478,187 @@ function Landing() {
         </div>
       </section>
 
-      {/* 7. Official Pricing Section */}
+      {/* 6. Solutions Built for Every Type of Practice Section */}
+      <section id="solutions" className="py-20 border-b border-border/60 bg-background">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <span className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400 font-semibold">
+              Tailored Solutions
+            </span>
+            <h2 className="mt-2 font-display text-3xl font-bold tracking-tight sm:text-4xl text-foreground">
+              Solutions Built for Every Type of Practice
+            </h2>
+            <p className="mt-2 text-[14px] text-muted-foreground">
+              From solo practitioners to multi-branch networks — we have the right solution for your healthcare practice
+            </p>
+          </div>
+
+          {/* Solutions Tab Selector */}
+          <div className="flex justify-center mb-8">
+            <div className="inline-flex rounded-xl bg-muted/60 p-1 border border-border/60 font-medium text-[12px]">
+              <button
+                onClick={() => setSolutionTab("size")}
+                className={`px-4 py-1.5 rounded-lg transition-all cursor-pointer ${
+                  solutionTab === "size" ? "bg-emerald-600 text-white font-semibold shadow-2xs" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                By Practice Size
+              </button>
+              <button
+                onClick={() => setSolutionTab("speciality")}
+                className={`px-4 py-1.5 rounded-lg transition-all cursor-pointer ${
+                  solutionTab === "speciality" ? "bg-emerald-600 text-white font-semibold shadow-2xs" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                By Medical Specialty
+              </button>
+            </div>
+          </div>
+
+          {/* Solutions Grid Display */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {solutionTab === "size" ? (
+              [
+                { title: "Solo Doctor Practice", desc: "Clean appointment booking, quick EMR notes and fast patient invoicing designed for individual practitioners.", tag: "Solo Practice" },
+                { title: "Multi-Doctor Clinic", desc: "Share room schedules, manage doctor queue tokens, and delegate billing roles across staff members.", tag: "Group Clinic" },
+                { title: "Multi-Branch Network", desc: "Centralized practice management across multiple clinic locations with real-time revenue telemetry.", tag: "Multi-Campus" },
+              ].map((s) => (
+                <div key={s.title} className="rounded-2xl border border-emerald-500/20 bg-card p-5 shadow-2xs hover:bg-emerald-500/5 transition-all">
+                  <span className="font-mono text-[10px] font-semibold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider bg-emerald-500/10 px-2 py-0.5 rounded">{s.tag}</span>
+                  <h4 className="text-[14px] font-bold text-foreground mt-2">{s.title}</h4>
+                  <p className="text-[12.5px] leading-relaxed text-muted-foreground mt-1.5">{s.desc}</p>
+                </div>
+              ))
+            ) : (
+              [
+                { title: "Dental Practice", desc: "Tooth charts, dental lab order tracking, pre-set dental procedures, and digital consent forms.", tag: "Dentistry" },
+                { title: "Dermatology & Cosmetology", desc: "Before & after photo attachment, skin procedure billing, and custom prescription templates.", tag: "Dermatology" },
+                { title: "Pediatrics & Child Care", desc: "Vaccination schedule trackers, child growth charts, and automated parent WhatsApp alerts.", tag: "Pediatrics" },
+              ].map((s) => (
+                <div key={s.title} className="rounded-2xl border border-emerald-500/20 bg-card p-5 shadow-2xs hover:bg-emerald-500/5 transition-all">
+                  <span className="font-mono text-[10px] font-semibold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider bg-emerald-500/10 px-2 py-0.5 rounded">{s.tag}</span>
+                  <h4 className="text-[14px] font-bold text-foreground mt-2">{s.title}</h4>
+                  <p className="text-[12.5px] leading-relaxed text-muted-foreground mt-1.5">{s.desc}</p>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Patient Engagement Reinvented Section */}
+      <section className="py-20 border-b border-border/60 bg-muted/20">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-6 space-y-4">
+              <span className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400 font-semibold">
+                Patient Communication
+              </span>
+              <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl text-foreground">
+                Patient Engagement, Reinvented
+              </h2>
+              <p className="text-[14px] leading-relaxed text-muted-foreground">
+                Transform patient communication and engagement with our integrated digital tools. Reduce no-shows by up to 65%.
+              </p>
+              
+              <div className="space-y-3 pt-2">
+                {[
+                  "Send appointment confirmations & reminders on WhatsApp",
+                  "Share digital prescriptions, lab reports & invoices in 1 click",
+                  "Automate follow-ups, birthday wishes, and routine checkups",
+                  "Seamless online appointment booking on your website",
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-2.5 text-[13px] text-foreground">
+                    <div className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-500/10 text-emerald-600 mt-0.5">
+                      <CheckCircle2 className="h-3.5 w-3.5" />
+                    </div>
+                    <span className="font-medium">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="lg:col-span-6">
+              <div className="rounded-2xl border border-emerald-500/20 bg-card p-6 shadow-xl space-y-4">
+                <div className="rounded-xl bg-gradient-to-r from-emerald-900 to-teal-950 p-4 text-white flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <MessageSquare className="h-6 w-6 text-emerald-300" />
+                    <div>
+                      <div className="text-[12.5px] font-bold">WhatsApp Business Gateway</div>
+                      <div className="text-[10px] text-emerald-200/80 font-mono">Automated Patient Messaging</div>
+                    </div>
+                  </div>
+                  <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px]">Active</span>
+                </div>
+
+                <div className="space-y-2.5 font-mono text-[11px]">
+                  <div className="rounded-lg bg-emerald-500/10 border border-emerald-500/20 p-3 text-emerald-800 dark:text-emerald-300 flex items-center justify-between">
+                    <span>✓ Appointment reminder sent to Ava Chen</span>
+                    <span className="text-[9.5px]">09:00 AM</span>
+                  </div>
+                  <div className="rounded-lg bg-emerald-500/10 border border-emerald-500/20 p-3 text-emerald-800 dark:text-emerald-300 flex items-center justify-between">
+                    <span>✓ Digital RX PDF shared via WhatsApp</span>
+                    <span className="text-[9.5px]">10:32 AM</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Built with Privacy & Compliance Section */}
+      <section className="py-16 border-b border-border/60 bg-emerald-500/5">
+        <div className="mx-auto max-w-4xl px-5 sm:px-8 text-center space-y-3">
+          <div className="grid h-12 w-12 place-items-center rounded-2xl bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 mx-auto">
+            <Shield className="h-6 w-6" />
+          </div>
+          <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground">Built with Privacy & Compliance in Mind</h2>
+          <p className="text-[13.5px] leading-relaxed text-muted-foreground max-w-2xl mx-auto">
+            Your patient data is encrypted, secure, and backed up — always. Granular role access controls ensure full patient privacy, HIPAA compliance, and internal data safety.
+          </p>
+        </div>
+      </section>
+
+      {/* 9. Doctors Testimonials Section */}
+      <section id="testimonials" className="py-20 border-b border-border/60 bg-background">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400 font-semibold">
+              Doctor Reviews
+            </span>
+            <h2 className="mt-2 font-display text-3xl font-bold tracking-tight sm:text-4xl text-foreground">
+              What Our Doctors Say
+            </h2>
+            <p className="mt-2 text-[14px] text-muted-foreground">
+              Hear from clinic owners and medical directors using Autonique daily
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              { name: "Dr. Iman Reyes", role: "Medical Director, Meridian Clinics", quote: "Autonique replaced four disparate software tools and made our clinical workday dramatically quieter. The WhatsApp reminder integration alone cut our no-shows by 60%." },
+              { name: "Dr. Ngozi Okafor", role: "Lead Physician, Aster Care", quote: "The EMR interface is ridiculously fast. Writing clinical notes and generating branded prescription PDFs takes less than 30 seconds." },
+              { name: "Dr. Marcus Weiss", role: "Owner, Berlin Dental Group", quote: "Managing billing, patient queues, and supplier inventory across our 3 branches is now effortless. Best clinic management software we have used." },
+            ].map((t) => (
+              <div key={t.name} className="rounded-2xl border border-emerald-500/10 kpi-gradient-mint p-6 shadow-2xs flex flex-col justify-between">
+                <p className="text-[13px] leading-relaxed text-foreground italic">"{t.quote}"</p>
+                <div className="mt-6 flex items-center gap-3 pt-4 border-t border-emerald-500/10">
+                  <div className="grid h-9 w-9 place-items-center rounded-full bg-emerald-600 font-bold text-white text-[11px]">
+                    {t.name.split(" ").map((p) => p[0]).join("")}
+                  </div>
+                  <div>
+                    <div className="text-[13px] font-bold text-foreground">{t.name}</div>
+                    <div className="text-[10.5px] font-mono text-muted-foreground">{t.role}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 10. Official Pricing Section */}
       <section id="pricing" className="py-20 border-b border-border/60 bg-muted/20">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-10">

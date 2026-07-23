@@ -47,10 +47,36 @@ function StripeCheckoutForm({
   const [isProcessing, setIsProcessing] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  // Interactive state for testing input fields
+  const [cardNumber, setCardNumber] = useState("4242 4242 4242 4242");
+  const [expDate, setExpDate] = useState("12/34");
+  const [cvc, setCvc] = useState("123");
+  const [zip, setZip] = useState("10119");
+  const [cardHolder, setCardHolder] = useState("Dr. Sarah Khan");
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsProcessing(true);
     setErrorMessage(null);
+
+    // Basic validation check for sandbox inputs
+    if (!cardNumber || cardNumber.replace(/\s/g, "").length < 15) {
+      setErrorMessage("Please enter a valid test card number (e.g. 4242 4242 4242 4242).");
+      setIsProcessing(false);
+      return;
+    }
+
+    if (!expDate || expDate.length < 4) {
+      setErrorMessage("Please enter a valid expiry date (e.g. 12/34).");
+      setIsProcessing(false);
+      return;
+    }
+
+    if (!cvc || cvc.length < 3) {
+      setErrorMessage("Please enter a 3-digit CVC (e.g. 123).");
+      setIsProcessing(false);
+      return;
+    }
 
     // If real Stripe is loaded and not demo fallback
     if (stripe && elements && !isDemo) {
@@ -76,7 +102,6 @@ function StripeCheckoutForm({
         } else if (result.paymentIntent && result.paymentIntent.status === "succeeded") {
           onPaymentSuccess(result.paymentIntent.id);
         } else {
-          // Fallback succeeded status
           onPaymentSuccess(`pi_${Math.random().toString(36).substring(2, 12)}`);
         }
       } catch (err: any) {
@@ -88,7 +113,7 @@ function StripeCheckoutForm({
       setTimeout(() => {
         const generatedTx = `pi_3M${Math.random().toString(36).substring(2, 11)}${Date.now().toString(36)}`;
         onPaymentSuccess(generatedTx);
-      }, 1600);
+      }, 1400);
     }
   };
 
@@ -114,8 +139,8 @@ function StripeCheckoutForm({
       </div>
 
       {/* Stripe Payment Element Container */}
-      <div className="space-y-3 rounded-xl border border-[#0D9488]/20 dark:border-[#0D9488]/40 p-4 bg-white dark:bg-[#0B201E]">
-        <div className="flex items-center justify-between mb-2">
+      <div className="space-y-3.5 rounded-xl border border-[#0D9488]/20 dark:border-[#0D9488]/40 p-4 bg-white dark:bg-[#0B201E]">
+        <div className="flex items-center justify-between mb-1">
           <label className="block text-[11px] font-semibold text-[#64748B] dark:text-[#809995] uppercase font-mono">
             Stripe Secure Card Element
           </label>
@@ -124,27 +149,76 @@ function StripeCheckoutForm({
           </div>
         </div>
 
-        {/* Real Stripe Element or Sandbox Interface */}
+        {/* Real Stripe Element or Interactive Sandbox Inputs */}
         {stripe && elements && !isDemo ? (
           <PaymentElement options={{ layout: "tabs" }} />
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-3 font-sans">
             <div>
-              <label className="block text-[11px] font-medium text-[#475569] dark:text-[#A0B0AD] mb-1">
+              <label className="block text-[11px] font-semibold text-[#475569] dark:text-[#A0B0AD] mb-1">
+                Cardholder Name
+              </label>
+              <input
+                type="text"
+                value={cardHolder}
+                onChange={(e) => setCardHolder(e.target.value)}
+                required
+                placeholder="Dr. Sarah Khan"
+                className="h-9 w-full rounded-lg border border-[#0D9488]/30 dark:border-[#0D9488]/50 bg-[#F8FFFE] dark:bg-[#061514] px-3 text-[12.5px] font-medium text-[#0F172A] dark:text-white placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-[#0D9488]"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[11px] font-semibold text-[#475569] dark:text-[#A0B0AD] mb-1">
                 Card Information
               </label>
-              <div className="rounded-md border border-[#0D9488]/30 dark:border-[#0D9488]/50 bg-[#F8FFFE] dark:bg-[#061514] p-3 text-[12px] font-mono flex items-center justify-between">
-                <span className="text-[#0F172A] dark:text-white">4242 •••• •••• 4242</span>
-                <span className="text-[10px] font-bold text-[#0D9488] dark:text-[#2DD4BF]">VISA TEST</span>
+              <div className="rounded-lg border border-[#0D9488]/30 dark:border-[#0D9488]/50 overflow-hidden focus-within:ring-1 focus-within:ring-[#0D9488]">
+                <div className="relative border-b border-[#0D9488]/20 bg-[#F8FFFE] dark:bg-[#061514]">
+                  <input
+                    type="text"
+                    value={cardNumber}
+                    onChange={(e) => setCardNumber(e.target.value)}
+                    required
+                    placeholder="4242 4242 4242 4242"
+                    className="h-9.5 w-full bg-transparent pl-3 pr-16 text-[12.5px] font-mono text-[#0F172A] dark:text-white placeholder:text-muted-foreground focus:outline-none"
+                  />
+                  <div className="absolute right-2.5 top-1/2 -translate-y-1/2 font-mono text-[10px] font-extrabold text-[#0D9488] dark:text-[#2DD4BF] bg-[#CCFBF1] dark:bg-[#0F3531] px-1.5 py-0.5 rounded">
+                    VISA TEST
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 divide-x divide-[#0D9488]/20 bg-[#F8FFFE] dark:bg-[#061514]">
+                  <input
+                    type="text"
+                    value={expDate}
+                    onChange={(e) => setExpDate(e.target.value)}
+                    required
+                    placeholder="MM / YY"
+                    className="h-9.5 w-full bg-transparent px-3 text-[12.5px] font-mono text-[#0F172A] dark:text-white placeholder:text-muted-foreground focus:outline-none"
+                  />
+                  <input
+                    type="text"
+                    value={cvc}
+                    onChange={(e) => setCvc(e.target.value)}
+                    required
+                    placeholder="CVC / CVV"
+                    className="h-9.5 w-full bg-transparent px-3 text-[12.5px] font-mono text-[#0F172A] dark:text-white placeholder:text-muted-foreground focus:outline-none"
+                  />
+                </div>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              <div className="rounded-md border border-[#0D9488]/30 dark:border-[#0D9488]/50 bg-[#F8FFFE] dark:bg-[#061514] p-2.5 text-[11.5px] font-mono text-[#64748B] dark:text-[#809995]">
-                Exp: 12/28
-              </div>
-              <div className="rounded-md border border-[#0D9488]/30 dark:border-[#0D9488]/50 bg-[#F8FFFE] dark:bg-[#061514] p-2.5 text-[11.5px] font-mono text-[#64748B] dark:text-[#809995]">
-                CVC: 123
-              </div>
+
+            <div>
+              <label className="block text-[11px] font-semibold text-[#475569] dark:text-[#A0B0AD] mb-1">
+                ZIP / Postal Code
+              </label>
+              <input
+                type="text"
+                value={zip}
+                onChange={(e) => setZip(e.target.value)}
+                required
+                placeholder="10119"
+                className="h-9 w-full max-w-[150px] rounded-lg border border-[#0D9488]/30 dark:border-[#0D9488]/50 bg-[#F8FFFE] dark:bg-[#061514] px-3 text-[12.5px] font-mono text-[#0F172A] dark:text-white placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-[#0D9488]"
+              />
             </div>
           </div>
         )}
@@ -179,7 +253,7 @@ function StripeCheckoutForm({
         </button>
 
         <p className="text-[10px] text-center text-[#64748B] dark:text-[#809995] font-mono">
-          Stripe Sandbox Card: <span className="font-bold text-[#0F172A] dark:text-white">4242 4242 4242 4242</span> · CVC: <span className="font-bold text-[#0F172A] dark:text-white">123</span>
+          Visa Test Card: <span className="font-bold text-[#0F172A] dark:text-white">4242 4242 4242 4242</span> · Exp: <span className="font-bold text-[#0F172A] dark:text-white">12/34</span> · CVV: <span className="font-bold text-[#0F172A] dark:text-white">123</span>
         </p>
       </div>
     </form>

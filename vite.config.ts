@@ -5,7 +5,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import { nitro } from "nitro/vite";
 
-const isVercel = process.env.VERCEL === "1";
+const isVercel = !!process.env.VERCEL;
 
 export default defineConfig({
   plugins: [

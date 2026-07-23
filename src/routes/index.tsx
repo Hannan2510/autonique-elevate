@@ -62,6 +62,19 @@ function Landing() {
 
   useScrollReveal();
 
+  useEffect(() => {
+    const saved = localStorage.getItem("theme");
+    const root = document.documentElement;
+    if (!saved) {
+      root.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else if (saved === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+  }, []);
+
   return (
     <>
       <style>{`

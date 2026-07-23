@@ -16,6 +16,9 @@ export default defineConfig({
     }),
     nitro({
       preset: isVercel ? "vercel" : "node-server",
+      output: {
+        dir: "dist",
+      },
     }),
     react(),
   ],

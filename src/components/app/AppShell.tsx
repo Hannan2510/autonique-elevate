@@ -173,11 +173,34 @@ export function AppShell() {
 
 function Brand() {
   return (
-    <Link to="/dashboard" className="flex items-center gap-2.5 group">
-      <div className="grid h-7 w-7 place-items-center rounded-lg bg-gradient-to-br from-emerald-600 to-teal-700 text-white font-bold text-[12px] tracking-tight shadow-sm transition-transform group-hover:scale-105">A</div>
+    <Link to="/" className="flex items-center gap-2.5 group cursor-pointer" title="Return to Landing Page">
+      <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-[#0F766E] via-[#0D9488] to-[#14B8A6] text-white shadow-md shadow-[#0D9488]/30 transition-transform duration-300 group-hover:scale-105">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          className="h-4.5 w-4.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path
+            d="M12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16z"
+            fill="#14B8A6"
+            opacity="0.18"
+          />
+          <path
+            d="M5 12h2.8l1.7-3.5 3.5 7 1.7-3.5H19"
+            stroke="#fff"
+            strokeWidth="2.1"
+          />
+        </svg>
+      </div>
       <div className="flex flex-col">
-        <span className="text-[13.5px] font-bold tracking-tight leading-none text-foreground">Autonique</span>
-        <span className="text-[8.5px] text-muted-foreground/70 font-mono leading-none mt-0.5 uppercase tracking-widest font-medium">Clinical OS</span>
+        <span className="text-[14px] font-bold tracking-tight leading-none text-foreground group-hover:text-[#0D9488] transition-colors font-sans">
+          Autonique
+        </span>
+        <span className="text-[8.5px] text-[#0D9488] dark:text-[#2DD4BF] font-mono leading-none mt-0.5 uppercase tracking-[0.2em] font-bold">
+          Clinical OS
+        </span>
       </div>
     </Link>
   );

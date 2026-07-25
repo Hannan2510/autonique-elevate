@@ -1,34 +1,136 @@
 # Autonique Clinical OS
 
-A premium, HIPAA-compliant SaaS clinical operating system for doctor clinics and hospital groups.
+> A premium, HIPAA-compliant SaaS clinical operating system for doctor clinics and hospital groups — built with TanStack Start, React 19, Stripe, and Tailwind CSS v4.
 
 ---
 
-## 💳 Stripe Payment Gateway Integration
+## ✨ Project Overview
 
-I have implemented a modern, high-fidelity Stripe Elements payment flow with zero external redirects, keeping users completely inside the app workspace.
+**Autonique Clinical OS** is a full-stack SaaS application designed to digitize and automate clinical operations. It features a polished marketing landing page, a multi-page dashboard for clinic administrators, an inline Stripe payment gateway, a patient records management panel, and comprehensive settings management — all in one unified application.
 
-### Key Elements Integrated
-1. **Secure Card Container**: Consolidated Card Number, Expiry, and CVC into a single connected border elements block matching official Stripe Elements.
-2. **Dynamic Brand Auto-Detector**: Automatically detects and highlights card brands (Visa, Mastercard, Amex, Discover) with hover/type highlighting.
-3. **Multi-Step Checkout Wizard** (`_app.clinic.tsx`): Guides clinic admins through seat configurations, dynamic pricing calculations, card details input, medical license validation, HIPAA consent, and anti-fraud telemetry handshakes.
-4. **Settings Payment Modal** (`StripePaymentModal.tsx`): Mounted directly on-site to handle immediate invoice payments and credit card manager updates.
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| **Framework** | TanStack Start (React 19 + SSR) |
+| **Routing** | TanStack Router (file-based) |
+| **Styling** | Tailwind CSS v4 + custom design tokens |
+| **UI Primitives** | Radix UI + Lucide Icons |
+| **Charts** | Recharts |
+| **Payments** | Stripe Elements + Stripe Node SDK |
+| **Forms** | React Hook Form + Zod validation |
+| **Build Tool** | Vite 8 + Nitro (SSR bundler) |
+| **Deployment** | Cloudflare Pages / Vercel (auto-detected via `vite.config.ts`) |
 
 ---
 
 ## 📁 Key Files & Core Architecture
 
-Below are the most important files in this repository and how they drive the project's features:
+```
+autonique-elevate/
+├── src/
+│   ├── routes/
+│   │   ├── index.tsx               → Landing page (marketing site)
+│   │   ├── _app.tsx                → Dashboard layout shell (AppShell)
+│   │   ├── _app.dashboard.tsx      → Overview KPIs & analytics
+│   │   ├── _app.clinic.tsx         → Clinic panel + Stripe checkout wizard
+│   │   ├── _app.customers.tsx      → Patient records management
+│   │   └── _app.settings.tsx       → Profile, billing, security & notifications
+│   ├── components/
+│   │   ├── app/
+│   │   │   ├── AppShell.tsx        → Sidebar, topbar, theme switcher
+│   │   │   └── StripePaymentModal.tsx → On-site Stripe payment modal
+│   │   └── landing/
+│   │       ├── HeroSection.tsx     → Animated hero with CTA buttons
+│   │       ├── PricingSection.tsx  → Plan cards with annual/monthly toggle
+│   │       ├── ProblemSolutionSection.tsx → Feature comparison layout
+│   │       └── ...14 more sections
+│   ├── lib/
+│   │   ├── stripe.ts               → Stripe.js frontend loader
+│   │   └── stripePaymentIntent.ts  → Server-side payment intent creator
+│   └── styles.css                  → Global design system tokens & animations
+├── Phase-2/                        → Marketing & social media assets
+├── .env.example                    → Environment variable template
+└── vite.config.ts                  → Auto-detects Cloudflare/Vercel preset
+```
 
-### 1. Frontend & Routing Layer
-- **[_app.clinic.tsx](file:///C:/Users/sayya/.gemini/antigravity/scratch/autonique-elevate/src/routes/_app.clinic.tsx)**: Handles the main Clinic panel and the 4-step Subscription Checkout Wizard, complete with 3D card flipping previews and dynamic pricing calculators.
-- **[_app.settings.tsx](file:///C:/Users/sayya/.gemini/antigravity/scratch/autonique-elevate/src/routes/_app.settings.tsx)**: Manages plan upgrades, active card statements, quota dials, and opens the invoice payment modals.
-- **[AppShell.tsx](file:///C:/Users/sayya/.gemini/antigravity/scratch/autonique-elevate/src/components/app/AppShell.tsx)**: The main layout wrapper with a responsive dashboard sidebar, theme switcher, global search, and account controls.
+---
 
-### 2. Stripe Gateway Logic
-- **[StripePaymentModal.tsx](file:///C:/Users/sayya/.gemini/antigravity/scratch/autonique-elevate/src/components/app/StripePaymentModal.tsx)**: An on-site modal overlay that renders Stripe Elements dynamically when keys are active, or falls back to an offline simulated sandbox.
-- **[stripe.ts](file:///C:/Users/sayya/.gemini/antigravity/scratch/autonique-elevate/src/lib/stripe.ts)**: Configures the frontend `@stripe/stripe-js` loader to fetch live keys.
-- **[stripePaymentIntent.ts](file:///C:/Users/sayya/.gemini/antigravity/scratch/autonique-elevate/src/lib/stripePaymentIntent.ts)**: A server-side action (`createServerFn`) that creates payment intents using the official Node Stripe SDK.
+## 🗺️ Application Pages & Features
+
+### 🌐 Landing Page (`/`)
+A full marketing site built across **14 modular sections** including:
+- Animated hero with live product preview
+- Problem/solution feature breakdown
+- Interactive module showcases
+- Compliance badges (HIPAA, PCI-DSS, SOC 2)
+- Pricing cards with monthly/annual toggle
+- Doctor testimonials
+- Enterprise architecture diagram
+- FAQ accordion
+- CTA banner + Footer
+
+### 📊 Dashboard (`/dashboard`)
+- KPI cards: Total Patients, Appointments, Monthly Revenue, Active Doctors
+- Revenue overview with curved line chart (Recharts)
+- Donut chart for appointment status breakdown
+- Recent appointments table with doctor & patient avatars
+- Compact sidebar patients quick-list
+
+### 🏥 Clinic Panel (`/clinic`)
+- Clinic management hub with plan tier display
+- **4-Step Subscription Checkout Wizard**:
+  1. Configure provider seats (1–20)
+  2. Stripe card entry with 3D card flip preview
+  3. HIPAA consent & medical license validation
+  4. Live telemetry console + payment success receipt
+- Subscription plan management (Starter / Growth / Enterprise)
+- Invoice history table with inline payment triggers
+
+### 👥 Patients (`/customers`)
+- Full patient records table with search & filter
+- Patient cards: ID, status, contact, provider, balance, visit history
+- Expandable patient detail drawer with notes, next appointment, balance
+- Real-time search by name, email, or doctor
+
+### ⚙️ Settings (`/settings`)
+- **Profile tab**: Doctor bio, avatar, contact info
+- **Notifications tab**: Email, SMS & clinical alert toggles
+- **Security tab**: Password change, 2FA, active sessions manager
+- **Billing tab**: Active plan display, quota dials, card manager, invoice list + Stripe payment modal triggers
+
+---
+
+## 💳 Stripe Payment Integration
+
+### How it works
+
+```
+User clicks Pay Now
+        ↓
+createStripePaymentIntentFn (Server Action)
+        ↓
+stripe.paymentIntents.create() via Stripe Node SDK
+        ↓
+clientSecret returned to browser
+        ↓
+Stripe Elements mounts using clientSecret
+        ↓
+User completes payment → Stripe confirms
+```
+
+### Sandbox Fallback
+If no Stripe keys are configured, the app automatically falls back to an **offline interactive sandbox** that simulates the full payment flow including the security telemetry console and receipt generation.
+
+### Testing Credentials
+Use these details in sandbox mode:
+```
+Card:  4242 4242 4242 4242
+Exp:   12/34
+CVC:   123
+```
 
 ---
 
@@ -67,8 +169,43 @@ My codebase supports **multi-tenant workspace architecture** out of the box at t
 
 ---
 
-## 🚀 Phase 2 Assets & Marketing
+## 🚀 Getting Started Locally
 
-Here are the marketing copy files and promotional creative folders prepared for Phase 2:
-- **[LinkedIn Posts Folder](./Phase-2/Linkedin%20Posts/)**: Contains standard text scripts (`Post1.md`, `Post2.md`) ready for publication.
-- **[Social Media Creative Designs](./Phase-2/Social%20Media%20Creative/)**: Contains graphics and design creatives (`image1.jpeg`, `img2.png`) for social feeds.
+```bash
+# 1. Clone the repository
+git clone https://github.com/Hannan2510/autonique-elevate.git
+cd autonique-elevate
+
+# 2. Install dependencies
+npm install
+
+# 3. Set up environment variables
+cp .env.example .env
+# Add your Stripe keys inside .env
+
+# 4. Start the dev server
+npm run dev
+# Opens at http://localhost:3000
+```
+
+---
+
+## ☁️ Deployment
+
+This project auto-detects the deployment environment in `vite.config.ts`:
+- **Cloudflare Pages** — set environment variables in the Cloudflare Pages dashboard under **Settings → Environment Variables**
+- **Vercel** — set via the Vercel Project Settings under **Environment Variables**
+
+Build command: `npm run build`
+Output directory: `dist/public`
+
+---
+
+## 📦 Phase 2 — Marketing & Social Assets
+
+These folders contain prepared content and design assets for the product launch campaign:
+
+| Folder | Contents |
+|---|---|
+| [📝 LinkedIn Posts](./Phase-2/Linkedin%20Posts/) | `Post1.md` — AI Receptionist product intro post · `Post2.md` — Revenue impact awareness post |
+| [🎨 Social Media Creative](./Phase-2/Social%20Media%20Creative/) | `image1.jpeg` · `img2.png` — Visual creatives for social feed posts |

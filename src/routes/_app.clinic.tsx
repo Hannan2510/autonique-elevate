@@ -62,7 +62,7 @@ function ClinicPanel() {
   const [activePlan, setActivePlan] = useState<"starter" | "growth" | "enterprise">("growth");
   
   // Main provider seat count
-  const [activeSeats, setActiveSeats] = useState(4);
+  const [activeSeats, setActiveSeats] = useState(1);
 
   // Invoices list
   const [invoices, setInvoices] = useState([
@@ -75,7 +75,7 @@ function ClinicPanel() {
   const [wizardOpen, setWizardOpen] = useState(false);
   const [wizardStep, setWizardStep] = useState<1 | 2 | 3 | 4>(1);
   const [wizardPlanId, setWizardPlanId] = useState<"starter" | "growth" | "enterprise">("growth");
-  const [wizardSeatsCount, setWizardSeatsCount] = useState(4);
+  const [wizardSeatsCount, setWizardSeatsCount] = useState(1);
   const [wizardIsPayingInvoice, setWizardIsPayingInvoice] = useState(false);
   const [wizardInvoiceId, setWizardInvoiceId] = useState("");
 
@@ -168,7 +168,7 @@ function ClinicPanel() {
   const handleStartCheckout = (planId: "starter" | "growth" | "enterprise") => {
     setWizardIsPayingInvoice(false);
     setWizardPlanId(planId);
-    setWizardSeatsCount(planId === "starter" ? 1 : planId === "growth" ? 4 : 10);
+    setWizardSeatsCount(planId === "starter" ? 1 : planId === "growth" ? 1 : 10);
     setWizardStep(1);
     setErrorMessage(null);
     setWizardOpen(true);

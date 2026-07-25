@@ -80,11 +80,11 @@ function ClinicPanel() {
   const [wizardInvoiceId, setWizardInvoiceId] = useState("");
 
   // Card input states inside wizard
-  const [cardNumber, setCardNumber] = useState("4242 4242 4242 4242");
-  const [expDate, setExpDate] = useState("12/34");
-  const [cvc, setCvc] = useState("123");
-  const [cardHolder, setCardHolder] = useState("Dr. Sarah Khan");
-  const [zip, setZip] = useState("10119");
+  const [cardNumber, setCardNumber] = useState("");
+  const [expDate, setExpDate] = useState("");
+  const [cvc, setCvc] = useState("");
+  const [cardHolder, setCardHolder] = useState("");
+  const [zip, setZip] = useState("");
   
   // Consent states
   const [licenseId, setLicenseId] = useState("MD-84920");
@@ -451,6 +451,17 @@ function ClinicPanel() {
                         placeholder="123"
                       />
                     </div>
+                  </div>
+
+                  {/* Sandbox helper note */}
+                  <div className="rounded-2xl border border-emerald-500/10 bg-emerald-500/5 p-4 space-y-1">
+                    <div className="text-[11.5px] font-bold text-emerald-800 dark:text-emerald-350 flex items-center gap-1.5">
+                      <Lock className="h-3.5 w-3.5" />
+                      <span>Sandbox Stripe Gateway Instructions</span>
+                    </div>
+                    <p className="text-[10.5px] text-emerald-700 dark:text-emerald-400 leading-normal">
+                      For testing purposes, you can manually type Stripe's standard sandbox details: Card number <span className="font-mono font-bold bg-emerald-500/10 px-1 py-0.5 rounded text-foreground">4242 4242 4242 4242</span>, Expiry <span className="font-mono font-bold bg-emerald-500/10 px-1 py-0.5 rounded text-foreground">12/34</span>, and CVV <span className="font-mono font-bold bg-emerald-500/10 px-1 py-0.5 rounded text-foreground">123</span>. Alternatively, click any preset pill below to auto-fill.
+                    </p>
                   </div>
 
                   {/* Sandbox Fast test presets */}

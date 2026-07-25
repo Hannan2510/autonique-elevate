@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   User,
   Bell,
@@ -21,8 +21,13 @@ import {
   CheckCircle2,
   Clock,
   Save,
+  ArrowUpRight,
+  AlertTriangle,
+  Receipt,
+  Download,
 } from "lucide-react";
 import { Badge, Button, PageHeader } from "@/components/app/AppShell";
+import { StripePaymentModal, StripePaymentItem } from "@/components/app/StripePaymentModal";
 
 export const Route = createFileRoute("/_app/settings")({
   head: () => ({
@@ -82,6 +87,53 @@ function FormRow({ label, description, children }: { label: string; description?
 function Settings() {
   const [activeTab, setActiveTab] = useState<TabId>("profile");
   const [savedToast, setSavedToast] = useState(false);
+
+  // Billing specific states
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+  const [selectedPaymentItem, setSelectedPaymentItem] = useState<StripePaymentItem | null>(null);
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">("monthly");
+  const [activePlan, setActivePlan] = useState<"essential" | "growth" | "enterprise">("growth");
+  const [checkoutLoadingPlan, setCheckoutLoadingPlan] = useState<string | null>(null);
+  const [invoices, setInvoices] = useState([
+    { id: "INV-2026-004", date: "Jul 12, 2026", duration: "Jun 12, 2026 - Jul 12, 2026", amount: "$516.00", status: "Paid" },
+    { id: "INV-2026-003", date: "Jun 12, 2026", duration: "May 12, 2026 - Jun 12, 2026", amount: "$516.00", status: "Paid" },
+    { id: "INV-2026-002", date: "May 12, 2026", duration: "Apr 12, 2026 - May 12, 2026", amount: "$516.00", status: "Paid" },
+    { id: "INV-2026-001", date: "Apr 12, 2026", duration: "Mar 12, 2026 - Apr 12, 2026", amount: "$129.00", status: "Paid" },
+  ]);
+
+  const handleSelectPlan = (planId: "essential" | "growth" | "enterprise", amount: number) => {
+    setCheckoutLoadingPlan(planId);
+    setTimeout(() => {
+      setCheckoutLoadingPlan(null);
+      setSelectedPaymentItem({
+        title: `${planId.charAt(0).toUpperCase() + planId.slice(1)} Plan Subscription`,
+        description: `Autonique ${planId.toUpperCase()} Tier — ${billingCycle === "annual" ? "Annual" : "Monthly"} Cycle`,
+        amount: amount,
+        invoiceId: `INV-2026-00${invoices.length + 1}`,
+        patientName: "Clinic Admin Account",
+      });
+      setIsPaymentModalOpen(true);
+    }, 900);
+  };
+
+  const handlePaymentSuccess = (txId: string) => {
+    const newInvId = `INV-2026-00${invoices.length + 1}`;
+    const newAmount = selectedPaymentItem?.amount ? `$${selectedPaymentItem.amount.toFixed(2)}` : "$0.00";
+    const today = new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+    
+    setInvoices((prev) => [
+      { id: newInvId, date: today, duration: "Jul 12, 2026 - Aug 12, 2026", amount: newAmount, status: "Paid" },
+      ...prev,
+    ]);
+
+    if (selectedPaymentItem?.title.includes("Essential")) {
+      setActivePlan("essential");
+    } else if (selectedPaymentItem?.title.includes("Growth")) {
+      setActivePlan("growth");
+    } else {
+      setActivePlan("enterprise");
+    }
+  };
 
   // Form States
   const [notifs, setNotifs] = useState({
@@ -387,40 +439,382 @@ function Settings() {
 
           {/* ──────── 6. BILLING ──────── */}
           {activeTab === "billing" && (
-            <div className="space-y-6">
-              <div className="rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/8 via-card to-card p-6 shadow-xs">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border/40 pb-5">
+            <div className="space-y-8">
+              {/* Active Plan Overview */}
+              <div className="rounded-3xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/8 via-card to-card p-6 shadow-xs">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 border-b border-border/40 pb-6">
                   <div>
-                    <div className="flex items-center gap-2.5 mb-1.5">
-                      <span className="text-xl font-bold text-foreground">Growth Plan</span>
-                      <Badge tone="success">Active Subscription</Badge>
+                    <div className="flex items-center gap-2.5 mb-2">
+                      <span className="text-xl font-black text-foreground tracking-tight">
+                        {activePlan === "essential" ? "Essential Plan" : activePlan === "growth" ? "Growth Plan" : "Enterprise Suite"}
+                      </span>
+                      <Badge tone="success" className="animate-pulse">Active Subscription</Badge>
                     </div>
-                    <p className="text-[12.5px] text-muted-foreground">
-                      $129 / provider · <strong className="text-foreground">4 Active Seats</strong> ($516 / month total)
+                    <p className="text-[13px] text-muted-foreground leading-normal">
+                      {activePlan === "essential" 
+                        ? `$49 / month · Basic practice tools` 
+                        : activePlan === "growth"
+                        ? `$129 / provider · 4 Active Seats ($516 / month total)`
+                        : `Custom pricing · Enterprise Dedicated Suite`}
                     </p>
                   </div>
-                  <div className="text-right sm:text-right">
-                    <div className="text-[11px] font-mono text-muted-foreground uppercase tracking-wider">Next Billing Date</div>
-                    <div className="text-[14px] font-bold text-foreground mt-0.5">August 12, 2026</div>
+                  <div className="flex flex-wrap gap-4 items-center">
+                    <div className="bg-background/60 border border-border/40 px-4 py-2 rounded-2xl">
+                      <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">Next Invoice</div>
+                      <div className="text-[13.5px] font-bold text-foreground mt-0.5">Aug 12, 2026</div>
+                    </div>
+                    <div className="bg-background/60 border border-border/40 px-4 py-2 rounded-2xl">
+                      <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">Status</div>
+                      <div className="text-[13.5px] font-bold text-emerald-600 mt-0.5">Auto-Renew On</div>
+                    </div>
                   </div>
                 </div>
 
-                <div className="mt-6">
-                  <h4 className="text-[12.5px] font-semibold text-foreground uppercase tracking-wider mb-3 font-mono text-muted-foreground">Features Included in Your Subscription</h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                    {[
-                      "Up to 10 Provider Seats",
-                      "Unlimited Patient Records",
-                      "WhatsApp Patient Engagement",
-                      "E-Prescriptions & EHR Charting",
-                      "Revenue Analytics & Reports",
-                      "24/7 Dedicated Support",
-                    ].map((feat) => (
-                      <div key={feat} className="flex items-center gap-2 text-[12.5px] font-medium text-foreground bg-background/60 p-2.5 rounded-xl border border-border/40">
-                        <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
-                        <span>{feat}</span>
+                {/* Usage Quota Indicators */}
+                <div className="mt-6 space-y-4">
+                  <h4 className="text-[11.5px] font-bold text-foreground uppercase tracking-wider font-mono text-muted-foreground">
+                    Subscription Usage Quotas
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    {/* Patient Quota */}
+                    <div className="bg-background/40 border border-border/40 rounded-2xl p-4.5 space-y-2">
+                      <div className="flex justify-between text-[11px] font-bold text-foreground">
+                        <span>Patient Records</span>
+                        <span className="text-muted-foreground font-mono">4,210 / 5,000 (84%)</span>
                       </div>
-                    ))}
+                      <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
+                        <div className="h-full bg-amber-500 rounded-full transition-all" style={{ width: "84%" }} />
+                      </div>
+                      <p className="text-[10px] text-muted-foreground">Approaching capacity limit. Upgrade plan to expand limit.</p>
+                    </div>
+
+                    {/* WhatsApp Messages */}
+                    <div className="bg-background/40 border border-border/40 rounded-2xl p-4.5 space-y-2">
+                      <div className="flex justify-between text-[11px] font-bold text-foreground">
+                        <span>WhatsApp Automated Broadcasts</span>
+                        <span className="text-muted-foreground font-mono">892 / 1,000 (89%)</span>
+                      </div>
+                      <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
+                        <div className="h-full bg-rose-500 rounded-full transition-all" style={{ width: "89%" }} />
+                      </div>
+                      <p className="text-[10px] text-muted-foreground">Resets in 18 days. SMS overage charges may apply.</p>
+                    </div>
+
+                    {/* Team Seats */}
+                    <div className="bg-background/40 border border-border/40 rounded-2xl p-4.5 space-y-2">
+                      <div className="flex justify-between text-[11px] font-bold text-foreground">
+                        <span>Active Team Seats</span>
+                        <span className="text-muted-foreground font-mono">4 / 10 (40%)</span>
+                      </div>
+                      <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
+                        <div className="h-full bg-emerald-600 rounded-full transition-all" style={{ width: "40%" }} />
+                      </div>
+                      <p className="text-[10px] text-muted-foreground">6 seats remaining in your Growth billing tier.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Monthly vs. Annual Selector Toggle */}
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-1">
+                <div>
+                  <h3 className="text-[15px] font-black text-foreground tracking-tight">Available Subscription Plans</h3>
+                  <p className="text-[12px] text-muted-foreground mt-0.5">Scale or modify your clinical system tier anytime.</p>
+                </div>
+                <div className="inline-flex items-center gap-1 rounded-2xl bg-muted/60 p-1 border border-border/30">
+                  <button
+                    type="button"
+                    onClick={() => setBillingCycle("monthly")}
+                    className={`px-4 py-1.5 rounded-xl text-[12px] font-bold transition-all cursor-pointer ${
+                      billingCycle === "monthly"
+                        ? "bg-white dark:bg-[#071F1D] text-emerald-850 dark:text-[#2DD4BF] shadow-xs"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    Monthly
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setBillingCycle("annual")}
+                    className={`px-4 py-1.5 rounded-xl text-[12px] font-bold transition-all relative flex items-center gap-1 cursor-pointer ${
+                      billingCycle === "annual"
+                        ? "bg-white dark:bg-[#071F1D] text-emerald-850 dark:text-[#2DD4BF] shadow-xs"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    <span>Annual</span>
+                    <span className="bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 px-1 py-0.2 rounded-md text-[8.5px] font-black uppercase">
+                      -20%
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Plans Comparison Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* Tier 1: Essential */}
+                <div className={`rounded-3xl border p-6 flex flex-col justify-between transition-all bg-card ${
+                  activePlan === "essential"
+                    ? "border-emerald-500 shadow-md shadow-emerald-500/5 ring-1 ring-emerald-500/30"
+                    : "border-border/60 hover:border-border/100"
+                }`}>
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h4 className="text-[14.5px] font-extrabold text-foreground">Essential Plan</h4>
+                        <p className="text-[11.5px] text-muted-foreground mt-0.5">Sole practitioners starting out.</p>
+                      </div>
+                      {activePlan === "essential" && (
+                        <Badge tone="success">Current</Badge>
+                      )}
+                    </div>
+                    <div className="flex items-baseline gap-1 py-1">
+                      <span className="text-3xl font-black text-foreground">
+                        ${billingCycle === "annual" ? "39" : "49"}
+                      </span>
+                      <span className="text-[11.5px] text-muted-foreground">/ month</span>
+                    </div>
+                    <ul className="space-y-2.5 pt-2 text-[12.5px] text-foreground">
+                      {[
+                        "Up to 2 provider seats",
+                        "1,000 Patient Records",
+                        "Online Patient Scheduling",
+                        "HIPAA-compliant EHR Charting",
+                        "Standard E-Prescriptions",
+                      ].map((f) => (
+                        <li key={f} className="flex items-start gap-2">
+                          <CheckCircle2 className="h-4 w-4 text-emerald-600 mt-0.5 shrink-0" />
+                          <span>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="mt-8">
+                    {activePlan === "essential" ? (
+                      <Button variant="outline" className="w-full text-[12px] font-bold" disabled>
+                        Active Subscription
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="outline"
+                        onClick={() => handleSelectPlan("essential", billingCycle === "annual" ? 39 : 49)}
+                        disabled={checkoutLoadingPlan !== null}
+                        className="w-full text-[12px] font-bold cursor-pointer"
+                      >
+                        {checkoutLoadingPlan === "essential" ? (
+                          <span className="flex items-center gap-1.5">
+                            <RefreshCw className="h-3 animate-spin" /> Preparing checkout...
+                          </span>
+                        ) : (
+                          "Select Essential Plan"
+                        )}
+                      </Button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Tier 2: Growth (Recommended) */}
+                <div className={`rounded-3xl border p-6 flex flex-col justify-between transition-all bg-card relative ${
+                  activePlan === "growth"
+                    ? "border-emerald-500 shadow-lg shadow-emerald-500/10 ring-2 ring-emerald-500/20"
+                    : "border-border/60 hover:border-emerald-500/40"
+                }`}>
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 inline-flex items-center gap-1 bg-gradient-to-r from-[#0F766E] to-[#0D9488] border border-[#2DD4BF]/40 text-white font-extrabold font-mono text-[9px] px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
+                    <Sparkles className="h-3 w-3 text-amber-300 animate-pulse" /> RECOMMENDED TIER
+                  </div>
+                  <div className="space-y-4 pt-1">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h4 className="text-[14.5px] font-extrabold text-foreground">Growth Plan</h4>
+                        <p className="text-[11.5px] text-muted-foreground mt-0.5">Growing clinics and operations.</p>
+                      </div>
+                      {activePlan === "growth" && (
+                        <Badge tone="success">Current</Badge>
+                      )}
+                    </div>
+                    <div className="flex items-baseline gap-1 py-1">
+                      <span className="text-3xl font-black text-foreground">
+                        ${billingCycle === "annual" ? "99" : "129"}
+                      </span>
+                      <span className="text-[11.5px] text-muted-foreground">/ month</span>
+                    </div>
+                    <ul className="space-y-2.5 pt-2 text-[12.5px] text-foreground">
+                      {[
+                        "Up to 10 provider seats",
+                        "Unlimited Patient Records",
+                        "WhatsApp automated scheduling",
+                        "AI clinical notes & voice-to-chart",
+                        "Multi-terminal billing & invoices",
+                        "Priority HIPAA support line",
+                      ].map((f) => (
+                        <li key={f} className="flex items-start gap-2">
+                          <CheckCircle2 className="h-4 w-4 text-emerald-600 mt-0.5 shrink-0" />
+                          <span>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="mt-8">
+                    {activePlan === "growth" ? (
+                      <Button className="w-full text-[12px] font-bold shadow-md shadow-emerald-500/10" disabled>
+                        Active Subscription
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() => handleSelectPlan("growth", billingCycle === "annual" ? 99 : 129)}
+                        disabled={checkoutLoadingPlan !== null}
+                        className="w-full text-[12px] font-bold cursor-pointer"
+                      >
+                        {checkoutLoadingPlan === "growth" ? (
+                          <span className="flex items-center gap-1.5">
+                            <RefreshCw className="h-3 animate-spin" /> Preparing checkout...
+                          </span>
+                        ) : (
+                          "Select Growth Plan"
+                        )}
+                      </Button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Tier 3: Enterprise */}
+                <div className={`rounded-3xl border p-6 flex flex-col justify-between transition-all bg-card ${
+                  activePlan === "enterprise"
+                    ? "border-emerald-500 shadow-md shadow-emerald-500/5 ring-1 ring-emerald-500/30"
+                    : "border-border/60 hover:border-border/100"
+                }`}>
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h4 className="text-[14.5px] font-extrabold text-foreground">Enterprise Suite</h4>
+                        <p className="text-[11.5px] text-muted-foreground mt-0.5">Large clinics, groups & hospitals.</p>
+                      </div>
+                      {activePlan === "enterprise" && (
+                        <Badge tone="success">Current</Badge>
+                      )}
+                    </div>
+                    <div className="flex items-baseline gap-1 py-1">
+                      <span className="text-3xl font-black text-foreground">Custom</span>
+                      <span className="text-[11.5px] text-muted-foreground">/ custom contract</span>
+                    </div>
+                    <ul className="space-y-2.5 pt-2 text-[12.5px] text-foreground">
+                      {[
+                        "Unlimited provider seats",
+                        "Dedicated database isolation",
+                        "Custom EHR layout developer access",
+                        "On-premise deployment options",
+                        "Custom SLA & 1-on-1 team support",
+                        "SSO & strict audit log logs",
+                      ].map((f) => (
+                        <li key={f} className="flex items-start gap-2">
+                          <CheckCircle2 className="h-4 w-4 text-emerald-600 mt-0.5 shrink-0" />
+                          <span>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="mt-8">
+                    {activePlan === "enterprise" ? (
+                      <Button variant="outline" className="w-full text-[12px] font-bold" disabled>
+                        Active Subscription
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="outline"
+                        onClick={() => handleSelectPlan("enterprise", 499)}
+                        disabled={checkoutLoadingPlan !== null}
+                        className="w-full text-[12px] font-bold cursor-pointer"
+                      >
+                        {checkoutLoadingPlan === "enterprise" ? (
+                          <span className="flex items-center gap-1.5">
+                            <RefreshCw className="h-3 animate-spin" /> Preparing checkout...
+                          </span>
+                        ) : (
+                          "Contact Sales / Upgrade"
+                        )}
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Payment Details & Invoice History Section */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Active Card Details */}
+                <div className="rounded-3xl border border-border/50 bg-card p-6 shadow-xs lg:col-span-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-[13.5px] font-bold text-foreground mb-3 flex items-center gap-1.5 font-mono text-muted-foreground uppercase tracking-wider">
+                      <CreditCard className="h-4 w-4 text-emerald-700 dark:text-emerald-450" />
+                      <span>Payment Method</span>
+                    </h3>
+                    <div className="rounded-2xl border border-border/40 p-4.5 bg-background/50 relative overflow-hidden">
+                      <div className="absolute right-3 top-3 font-mono text-[9px] font-extrabold text-[#0D9488] bg-[#CCFBF1] dark:bg-[#07211E] border border-[#0D9488]/20 px-1.5 py-0.2 rounded">
+                        Active
+                      </div>
+                      <div className="font-mono text-[13px] tracking-widest text-foreground font-bold">
+                        •••• •••• •••• 4242
+                      </div>
+                      <div className="flex justify-between items-end mt-5">
+                        <div>
+                          <div className="text-[7.5px] uppercase tracking-widest text-muted-foreground">Expiry</div>
+                          <div className="text-[11.5px] font-mono font-bold text-foreground mt-0.5">12 / 34</div>
+                        </div>
+                        <div>
+                          <div className="text-[7.5px] uppercase tracking-widest text-muted-foreground">Cardholder</div>
+                          <div className="text-[11.5px] font-bold text-foreground mt-0.5 uppercase">Dr. Sarah Khan</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-border/40">
+                    <Button variant="outline" size="sm" className="w-full text-[12px] font-bold cursor-pointer" onClick={() => handleSelectPlan(activePlan, activePlan === "essential" ? 49 : 129)}>
+                      Update Credit Card
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Invoices List Table */}
+                <div className="rounded-3xl border border-border/50 bg-card p-6 shadow-xs lg:col-span-2">
+                  <h3 className="text-[13.5px] font-bold text-foreground mb-4 flex items-center gap-1.5 font-mono text-muted-foreground uppercase tracking-wider">
+                    <Receipt className="h-4 w-4 text-emerald-700 dark:text-emerald-450" />
+                    <span>Billing History & Invoices</span>
+                  </h3>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse">
+                      <thead>
+                        <tr className="border-b border-border/40 text-[10.5px] font-mono text-muted-foreground uppercase tracking-wider">
+                          <th className="py-2.5">Invoice ID</th>
+                          <th className="py-2.5">Date</th>
+                          <th className="py-2.5">Billing Period</th>
+                          <th className="py-2.5">Amount</th>
+                          <th className="py-2.5">Status</th>
+                          <th className="py-2.5 text-right">Receipt</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border/20 text-[12px]">
+                        {invoices.map((inv) => (
+                          <tr key={inv.id} className="hover:bg-muted/10 transition-colors">
+                            <td className="py-3 font-semibold text-foreground font-mono">{inv.id}</td>
+                            <td className="py-3 text-muted-foreground">{inv.date}</td>
+                            <td className="py-3 text-muted-foreground font-mono text-[10.5px]">{inv.duration}</td>
+                            <td className="py-3 font-bold text-foreground">{inv.amount}</td>
+                            <td className="py-3">
+                              <Badge tone="success">{inv.status}</Badge>
+                            </td>
+                            <td className="py-3 text-right">
+                              <button
+                                type="button"
+                                onClick={() => alert(`Downloading receipt: ${inv.id}`)}
+                                className="inline-flex h-7 w-7 items-center justify-center rounded-lg border border-border/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
+                                title="Download PDF Invoice"
+                              >
+                                <Download className="h-3.5 w-3.5" />
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
@@ -429,6 +823,15 @@ function Settings() {
 
         </div>
       </div>
+
+      {selectedPaymentItem && (
+        <StripePaymentModal
+          isOpen={isPaymentModalOpen}
+          onClose={() => setIsPaymentModalOpen(false)}
+          item={selectedPaymentItem}
+          onSuccess={handlePaymentSuccess}
+        />
+      )}
     </div>
   );
 }

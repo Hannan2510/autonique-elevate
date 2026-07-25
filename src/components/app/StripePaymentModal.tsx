@@ -200,6 +200,57 @@ function StripeCheckoutForm({
     return () => clearInterval(logIntervalRef.current);
   }, []);
 
+  if (isProcessing) {
+    return (
+      <div className="flex flex-col items-center justify-center py-6 px-2 min-h-[340px] space-y-6 animate-fade-in font-sans">
+        <div className="relative flex items-center justify-center">
+          {/* Animated concentric processing rings */}
+          <div className="absolute w-24 h-24 rounded-full border-4 border-emerald-500/10 border-t-emerald-600 animate-spin" />
+          <div className="absolute w-18 h-18 rounded-full border-4 border-teal-500/20 border-b-teal-500 animate-spin-reverse" />
+          <div className="grid h-12 w-12 place-items-center rounded-full bg-emerald-600 text-white shadow-lg">
+            <Lock className="h-5 w-5 animate-pulse" />
+          </div>
+        </div>
+
+        <div className="text-center space-y-1.5">
+          <h3 className="text-[14.5px] font-black text-foreground tracking-tight uppercase">
+            Executing Secure Stripe Authorization Pipeline
+          </h3>
+          <p className="text-[12px] text-muted-foreground">
+            Please do not close this window or refresh the page.
+          </p>
+        </div>
+
+        {/* Full-width Terminal Console block */}
+        <div className="w-full rounded-2xl bg-slate-950 dark:bg-slate-900 border border-border/40 p-5 shadow-2xl space-y-3 font-mono text-[11px] leading-relaxed text-[#10B981] dark:text-[#34D399]">
+          <div className="flex items-center gap-2 border-b border-white/5 pb-2 mb-1.5">
+            <div className="flex gap-1.5">
+              <div className="w-2.5 h-2.5 rounded-full bg-[#EF4444]/70" />
+              <div className="w-2.5 h-2.5 rounded-full bg-[#F59E0B]/70" />
+              <div className="w-2.5 h-2.5 rounded-full bg-[#10B981]/70" />
+            </div>
+            <span className="text-[9px] text-muted-foreground/60 uppercase font-bold tracking-widest ml-1">Stripe Telemetry Ledger</span>
+          </div>
+
+          <div className="space-y-1.5">
+            {secureLogs.slice(0, activeLogIndex + 1).map((log, index) => (
+              <div key={index} className="flex items-start gap-2.5">
+                <span className="text-[#34D399] font-black">✓</span>
+                <span>{log}</span>
+              </div>
+            ))}
+            {activeLogIndex < secureLogs.length - 1 && (
+              <div className="flex items-center gap-1.5 opacity-70">
+                <span className="text-[#34D399] animate-pulse">■</span>
+                <span>{secureLogs[activeLogIndex + 1]}</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* 3D Glassmorphic Card Preview */}
@@ -477,41 +528,14 @@ function StripeCheckoutForm({
 
       {/* Pay Button / Progressive secure logs */}
       <div className="space-y-3.5 pt-1">
-        {isProcessing ? (
-          <div className="rounded-xl bg-[#F0FDFA] dark:bg-[#072421] border border-[#0D9488]/30 p-4 space-y-3">
-            <div className="flex items-center gap-3">
-              <RefreshCw className="h-4.5 w-4.5 animate-spin text-[#0D9488] dark:text-[#2DD4BF]" />
-              <span className="text-[12.5px] font-bold text-[#0F766E] dark:text-[#2DD4BF]">
-                Processing Stripe Secure Transaction...
-              </span>
-            </div>
-            {/* Step Handshake Logs */}
-            <div className="bg-black/5 dark:bg-black/20 rounded-lg p-2.5 font-mono text-[10px] text-[#475569] dark:text-[#99F6E4]/80 space-y-1">
-              {secureLogs.slice(0, activeLogIndex + 1).map((log, index) => (
-                <div key={index} className="flex items-start gap-1.5">
-                  <span className="text-[#0D9488] dark:text-[#2DD4BF] font-extrabold">✓</span>
-                  <span>{log}</span>
-                </div>
-              ))}
-              {activeLogIndex < secureLogs.length - 1 && (
-                <div className="flex items-center gap-1 opacity-70">
-                  <span className="text-[#0D9488] dark:text-[#2DD4BF] animate-pulse">■</span>
-                  <span>{secureLogs[activeLogIndex + 1]}</span>
-                </div>
-              )}
-            </div>
-          </div>
-        ) : (
-          <button
-            type="submit"
-            disabled={isProcessing}
-            className="w-full h-11.5 rounded-xl bg-gradient-to-r from-[#0F766E] via-[#0D9488] to-[#14B8A6] hover:scale-[1.01] active:scale-[0.99] text-white font-extrabold text-[13.5px] shadow-lg shadow-[#0D9488]/20 flex items-center justify-center gap-2.5 transition-all cursor-pointer disabled:opacity-70"
-          >
-            <Lock className="h-4 w-4" />
-            <span>Pay ${item.amount.toFixed(2)} with Stripe</span>
-            <ArrowRight className="h-4 w-4" />
-          </button>
-        )}
+        <button
+          type="submit"
+          className="w-full h-11.5 rounded-xl bg-gradient-to-r from-[#0F766E] via-[#0D9488] to-[#14B8A6] hover:scale-[1.01] active:scale-[0.99] text-white font-extrabold text-[13.5px] shadow-lg shadow-[#0D9488]/20 flex items-center justify-center gap-2.5 transition-all cursor-pointer"
+        >
+          <Lock className="h-4 w-4" />
+          <span>Pay ${item.amount.toFixed(2)} with Stripe</span>
+          <ArrowRight className="h-4 w-4" />
+        </button>
 
         <div className="flex items-center justify-center gap-3.5 text-[9.5px] font-bold font-mono text-[#64748B] dark:text-[#809995] uppercase tracking-wider mt-2.5">
           <span className="flex items-center gap-1">

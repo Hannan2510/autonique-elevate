@@ -281,7 +281,7 @@ function ClinicPanel() {
             </div>
 
             {/* Stepper Progress Bar */}
-            {!wizardIsPayingInvoice && wizardStep < 4 && (
+            {!wizardIsPayingInvoice && wizardStep < 4 && !processing && (
               <div className="px-6 pt-4 pb-2 border-b border-border/20 flex items-center justify-between text-[11px] font-mono font-bold text-muted-foreground">
                 <div className={`flex items-center gap-1.5 ${wizardStep >= 1 ? "text-emerald-700 dark:text-emerald-450" : ""}`}>
                   <span className="h-5 w-5 rounded-full border border-current flex items-center justify-center text-[10px]">1</span>
@@ -303,8 +303,57 @@ function ClinicPanel() {
             {/* Modal Body */}
             <div className="p-6 overflow-y-auto max-h-[calc(100vh-14rem)] space-y-6">
 
-              {/* STEP 1: CONFIGURE SEATS */}
-              {wizardStep === 1 && !wizardIsPayingInvoice && (
+              {processing ? (
+                <div className="flex flex-col items-center justify-center py-6 px-2 min-h-[340px] space-y-6 animate-fade-in font-sans">
+                  <div className="relative flex items-center justify-center">
+                    {/* Animated concentric processing rings */}
+                    <div className="absolute w-24 h-24 rounded-full border-4 border-emerald-500/10 border-t-emerald-600 animate-spin" />
+                    <div className="absolute w-18 h-18 rounded-full border-4 border-teal-500/20 border-b-teal-500 animate-spin-reverse" />
+                    <div className="grid h-12 w-12 place-items-center rounded-full bg-emerald-600 text-white shadow-lg">
+                      <Lock className="h-5 w-5 animate-pulse" />
+                    </div>
+                  </div>
+
+                  <div className="text-center space-y-1.5">
+                    <h3 className="text-[14.5px] font-black text-foreground tracking-tight uppercase">
+                      Executing Secure Stripe Authorization Pipeline
+                    </h3>
+                    <p className="text-[12px] text-muted-foreground">
+                      Please do not close this window or refresh the page.
+                    </p>
+                  </div>
+
+                  {/* Full-width Terminal Console block */}
+                  <div className="w-full rounded-2xl bg-slate-950 dark:bg-slate-900 border border-border/40 p-5 shadow-2xl space-y-3 font-mono text-[11px] leading-relaxed text-[#10B981] dark:text-[#34D399]">
+                    <div className="flex items-center gap-2 border-b border-white/5 pb-2 mb-1.5">
+                      <div className="flex gap-1.5">
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#EF4444]/70" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#F59E0B]/70" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#10B981]/70" />
+                      </div>
+                      <span className="text-[9px] text-muted-foreground/60 uppercase font-bold tracking-widest ml-1">Stripe Telemetry Ledger</span>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      {secureLogs.slice(0, activeLogIndex + 1).map((log, index) => (
+                        <div key={index} className="flex items-start gap-2.5">
+                          <span className="text-[#34D399] font-black">✓</span>
+                          <span>{log}</span>
+                        </div>
+                      ))}
+                      {activeLogIndex < secureLogs.length - 1 && (
+                        <div className="flex items-center gap-1.5 opacity-70">
+                          <span className="text-[#34D399] animate-pulse">■</span>
+                          <span>{secureLogs[activeLogIndex + 1]}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  {/* STEP 1: CONFIGURE SEATS */}
+                  {wizardStep === 1 && !wizardIsPayingInvoice && (
                 <div className="space-y-5">
                   <div className="bg-muted/10 border border-border/30 rounded-2xl p-4.5 flex items-center justify-between">
                     <div>
@@ -671,24 +720,8 @@ function ClinicPanel() {
                   </div>
                 </div>
               )}
-
-              {/* Secure Handshake Diagnostic Loader console */}
-              {processing && (
-                <div className="bg-black/90 dark:bg-black/95 rounded-2xl p-5 font-mono text-[10.5px] space-y-2 border border-border/20 text-emerald-400">
-                  <div className="flex items-center gap-2 text-white">
-                    <RefreshCw className="h-3.5 w-3.5 animate-spin" />
-                    <span>Executing Secure Stripe Authorization Pipeline</span>
-                  </div>
-                  <div className="space-y-1.5 pt-3 text-[10px]">
-                    {secureLogs.slice(0, activeLogIndex + 1).map((log, index) => (
-                      <div key={log} className="flex items-start gap-2">
-                        <span className="text-emerald-600 font-bold">✔</span>
-                        <span>{log}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+            </>
+          )}
 
               {/* Error Notification Alert */}
               {errorMessage && (

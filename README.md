@@ -6,7 +6,7 @@ A premium, HIPAA-compliant SaaS clinical operating system for doctor clinics and
 
 ## 💳 Stripe Payment Gateway Integration
 
-We have implemented a modern, high-fidelity Stripe Elements payment flow with zero external redirects, keeping users completely inside the app workspace.
+I have implemented a modern, high-fidelity Stripe Elements payment flow with zero external redirects, keeping users completely inside the app workspace.
 
 ### Key Elements Integrated
 1. **Secure Card Container**: Consolidated Card Number, Expiry, and CVC into a single connected border elements block matching official Stripe Elements.
@@ -26,7 +26,7 @@ Replace the sandbox test keys with your official production keys inside your ser
 - **Secret API Key**: Replace `sk_test_...` with `sk_live_...`
 
 ### 2. Disable Mock Simulation Mode
-In both checkout files (`_app.clinic.tsx` and `StripePaymentModal.tsx`), we have configured dynamic checks to fallback to local sandbox simulations when real Stripe components aren't mounted:
+In both checkout files (`_app.clinic.tsx` and `StripePaymentModal.tsx`), I have configured dynamic checks to fallback to local sandbox simulations when real Stripe components aren't mounted:
 - Ensure the server endpoint `createStripePaymentIntentFn` (in `src/lib/stripePaymentIntent.ts`) is securely connected to your backend server database for saving customer tokens.
 - Set `isDemo` to `false` in the element load scripts so that the real `<PaymentElement />` mounts directly from Stripe's CDN.
 
@@ -34,7 +34,7 @@ In both checkout files (`_app.clinic.tsx` and `StripePaymentModal.tsx`), we have
 
 ## 🏢 Multi-Tenant Architecture Configuration
 
-Our codebase supports **multi-tenant workspace architecture** out of the box at the UI shell level:
+My codebase supports **multi-tenant workspace architecture** out of the box at the UI shell level:
 
 ### How to Convert Dashboard & Patients to Multi-Tenant:
 1. **Routing Shell**: The root layout in `src/routes/_app.tsx` mounts the `AppShell`. All nested pages (Dashboard, Clinic, Customers, Settings) render inside this shell.

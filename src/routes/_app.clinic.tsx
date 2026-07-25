@@ -407,40 +407,7 @@ function ClinicPanel() {
                     </div>
                   </div>
 
-                  {/* Express Checkout Shortcuts */}
-                  <div className="space-y-3">
-                    <div className="grid grid-cols-2 gap-3.5">
-                      {/* Apple Pay Button */}
-                      <button
-                        type="button"
-                        onClick={() => alert("Apple Pay integration triggered successfully.")}
-                        className="h-10.5 rounded-xl bg-black text-white hover:bg-black/90 active:scale-[0.99] flex items-center justify-center gap-1.5 transition-all shadow-xs cursor-pointer font-bold"
-                      >
-                        <span className="font-extrabold text-[15px] tracking-tight"> Pay</span>
-                      </button>
 
-                      {/* Link Button */}
-                      <button
-                        type="button"
-                        onClick={() => {
-                          quickFill("visa");
-                          alert("Link Auto-Fill completed using secure test card details.");
-                        }}
-                        className="h-10.5 rounded-xl bg-[#00D665] text-emerald-950 hover:bg-[#00c55d] active:scale-[0.99] flex items-center justify-center gap-2 transition-all shadow-xs cursor-pointer"
-                      >
-                        <span className="h-5 w-5 rounded-full bg-[#0F2F1D] text-[#00D665] flex items-center justify-center font-bold text-[10px]">➜</span>
-                        <span className="font-extrabold text-[12px] tracking-wider uppercase bg-[#0F2F1D] text-white px-1.5 py-0.5 rounded">Link</span>
-                        <span className="font-extrabold text-[12.5px] font-mono">4242</span>
-                      </button>
-                    </div>
-
-                    {/* OR Divider */}
-                    <div className="flex items-center my-4">
-                      <div className="flex-grow border-t border-border/40" />
-                      <span className="px-3 text-[10.5px] font-bold text-muted-foreground uppercase font-mono tracking-widest">OR</span>
-                      <div className="flex-grow border-t border-border/40" />
-                    </div>
-                  </div>
 
                   {/* Contact Information (Email) */}
                   <div className="space-y-1.5">

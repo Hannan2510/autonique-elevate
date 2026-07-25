@@ -581,14 +581,14 @@ function ClinicPanel() {
                     </label>
                   </div>
 
-                  {/* Sandbox Caution Note */}
-                  <div className="rounded-2xl border border-amber-500/25 bg-amber-500/5 p-4.5 space-y-1">
-                    <div className="text-[11.5px] font-bold text-amber-800 dark:text-amber-350 flex items-center gap-1.5">
-                      <AlertCircle className="h-4.5 w-4.5 text-amber-600 shrink-0" />
-                      <span>Sandbox Gateway Verification Caution</span>
+                  {/* Sandbox Info Note */}
+                  <div className="rounded-2xl border border-emerald-500/15 bg-emerald-500/5 p-4 space-y-1">
+                    <div className="text-[11.5px] font-bold text-emerald-800 dark:text-emerald-350 flex items-center gap-1.5">
+                      <Lock className="h-3.5 w-3.5 text-emerald-700" />
+                      <span>Use these details for testing / sample:</span>
                     </div>
-                    <p className="text-[10.5px] text-amber-700 dark:text-amber-400 leading-normal">
-                      Please manually type Stripe's standard test credentials to authorize: Card number <span className="font-mono font-bold bg-amber-500/10 px-1 py-0.5 rounded text-foreground">4242 4242 4242 4242</span>, Expiry <span className="font-mono font-bold bg-amber-500/10 px-1 py-0.5 rounded text-foreground">12/34</span>, and CVC <span className="font-mono font-bold bg-amber-500/10 px-1 py-0.5 rounded text-foreground">123</span>. Any other inputs will trigger a sandbox transaction decline.
+                    <p className="text-[11px] text-[#475569] dark:text-[#A0B0AD] leading-normal font-mono">
+                      Card: <span className="font-bold text-foreground">4242 4242 4242 4242</span> · Exp: <span className="font-bold text-foreground">12/34</span> · CVC: <span className="font-bold text-foreground">123</span>
                     </p>
                   </div>
                 </div>

@@ -407,60 +407,188 @@ function ClinicPanel() {
                     </div>
                   </div>
 
-                  {/* Card input fields */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1">
-                      <label className="text-[11.5px] font-bold text-foreground">Cardholder Name</label>
+                  {/* Express Checkout Shortcuts */}
+                  <div className="space-y-3">
+                    <div className="grid grid-cols-2 gap-3.5">
+                      {/* Apple Pay Button */}
+                      <button
+                        type="button"
+                        onClick={() => alert("Apple Pay integration triggered successfully.")}
+                        className="h-10.5 rounded-xl bg-black text-white hover:bg-black/90 active:scale-[0.99] flex items-center justify-center gap-1.5 transition-all shadow-xs cursor-pointer font-bold"
+                      >
+                        <span className="font-extrabold text-[15px] tracking-tight"> Pay</span>
+                      </button>
+
+                      {/* Link Button */}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          quickFill("visa");
+                          alert("Link Auto-Fill completed using secure test card details.");
+                        }}
+                        className="h-10.5 rounded-xl bg-[#00D665] text-emerald-950 hover:bg-[#00c55d] active:scale-[0.99] flex items-center justify-center gap-2 transition-all shadow-xs cursor-pointer"
+                      >
+                        <span className="h-5 w-5 rounded-full bg-[#0F2F1D] text-[#00D665] flex items-center justify-center font-bold text-[10px]">➜</span>
+                        <span className="font-extrabold text-[12px] tracking-wider uppercase bg-[#0F2F1D] text-white px-1.5 py-0.5 rounded">Link</span>
+                        <span className="font-extrabold text-[12.5px] font-mono">4242</span>
+                      </button>
+                    </div>
+
+                    {/* OR Divider */}
+                    <div className="flex items-center my-4">
+                      <div className="flex-grow border-t border-border/40" />
+                      <span className="px-3 text-[10.5px] font-bold text-muted-foreground uppercase font-mono tracking-widest">OR</span>
+                      <div className="flex-grow border-t border-border/40" />
+                    </div>
+                  </div>
+
+                  {/* Contact Information (Email) */}
+                  <div className="space-y-1.5">
+                    <label className="text-[12.5px] font-bold text-foreground block">Contact information</label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="email@example.com"
+                      className="h-9.5 w-full rounded-xl border border-border/60 bg-background px-3.5 text-[12.5px] focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all"
+                    />
+                  </div>
+
+                  {/* Payment Method Details */}
+                  <div className="space-y-4 pt-1">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[12.5px] font-bold text-foreground flex items-center gap-1.5">
+                        <StripeIcon className="h-4.5 w-4.5 text-[#0D9488]" /> Payment method
+                      </span>
+                      <span className="text-[9.5px] font-mono font-bold text-muted-foreground uppercase tracking-widest">Stripe Secure</span>
+                    </div>
+
+                    {/* Merged Card Details Block */}
+                    <div className="rounded-2xl border border-border/50 bg-background overflow-hidden focus-within:ring-2 focus-within:ring-[#0D9488]/40 transition-all shadow-2xs">
+                      {/* Card Number Row */}
+                      <div className="relative border-b border-border/30 px-3.5 py-2.5 flex items-center justify-between">
+                        <input
+                          type="text"
+                          value={cardNumber}
+                          onChange={(e) => handleCardNumberChange(e.target.value)}
+                          required
+                          placeholder="Card number"
+                          className="bg-transparent w-full focus:outline-none font-mono text-[13px] text-foreground placeholder:text-muted-foreground"
+                        />
+                        {/* Dynamic brand indicator logo */}
+                        <div className="flex items-center gap-1.5 shrink-0 select-none">
+                          <span className={`px-1.5 py-0.2 rounded border text-[8px] font-black font-mono tracking-tight transition-all ${
+                            cardNumber.startsWith("4") 
+                              ? "bg-[#0D9488] text-white border-transparent scale-105" 
+                              : "bg-muted text-muted-foreground border-border/40 opacity-40"
+                          }`}>
+                            VISA
+                          </span>
+                          <span className={`px-1.5 py-0.2 rounded border text-[8px] font-black font-mono tracking-tight transition-all ${
+                            cardNumber.startsWith("5") 
+                              ? "bg-purple-650 text-white border-transparent scale-105" 
+                              : "bg-muted text-muted-foreground border-border/40 opacity-40"
+                          }`}>
+                            MC
+                          </span>
+                          <span className={`px-1.5 py-0.2 rounded border text-[8px] font-black font-mono tracking-tight transition-all ${
+                            cardNumber.startsWith("3") 
+                              ? "bg-blue-650 text-white border-transparent scale-105" 
+                              : "bg-muted text-muted-foreground border-border/40 opacity-40"
+                          }`}>
+                            AMEX
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Expiry & CVC Row */}
+                      <div className="grid grid-cols-2 divide-x divide-border/30">
+                        <div className="px-3.5 py-2.5">
+                          <input
+                            type="text"
+                            value={expDate}
+                            onChange={(e) => handleExpiryChange(e.target.value)}
+                            required
+                            placeholder="MM / YY"
+                            className="bg-transparent w-full focus:outline-none font-mono text-[13px] text-foreground placeholder:text-muted-foreground"
+                          />
+                        </div>
+                        <div className="px-3.5 py-2.5 flex items-center justify-between">
+                          <input
+                            type="text"
+                            value={cvc}
+                            onChange={(e) => setCvc(e.target.value.replace(/\D/g, "").slice(0, 4))}
+                            onFocus={() => setIsFlipped(true)}
+                            onBlur={() => setIsFlipped(false)}
+                            required
+                            placeholder="CVC"
+                            className="bg-transparent w-full focus:outline-none font-mono text-[13px] text-foreground placeholder:text-muted-foreground"
+                          />
+                          <StripeIcon className="h-4 w-4 text-muted-foreground/60 shrink-0" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Cardholder Name */}
+                    <div className="space-y-1.5">
+                      <label className="text-[11.5px] font-bold text-foreground">Cardholder name</label>
                       <input
                         type="text"
                         value={cardHolder}
                         onChange={(e) => setCardHolder(e.target.value)}
-                        className="h-9 w-full rounded-xl border border-border/60 bg-background px-3 text-[12px] focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
-                        placeholder="Dr. Sarah Khan"
+                        required
+                        placeholder="Full name on card"
+                        className="h-9.5 w-full rounded-xl border border-border/60 bg-background px-3.5 text-[12.5px] focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all"
                       />
                     </div>
-                    <div className="space-y-1">
-                      <label className="text-[11.5px] font-bold text-foreground">Card Number</label>
+
+                    {/* Billing Address Container */}
+                    <div className="space-y-1.5">
+                      <label className="text-[11.5px] font-bold text-foreground">Billing address</label>
+                      <div className="rounded-2xl border border-border/50 bg-background overflow-hidden focus-within:ring-2 focus-within:ring-[#0D9488]/40 transition-all shadow-2xs">
+                        {/* Country Selector */}
+                        <div className="relative border-b border-border/30 px-3.5 py-2.5">
+                          <select className="bg-transparent w-full text-[12.5px] text-foreground focus:outline-none cursor-pointer">
+                            <option>India</option>
+                            <option>Germany</option>
+                            <option>United States</option>
+                            <option>United Kingdom</option>
+                            <option>Singapore</option>
+                          </select>
+                        </div>
+                        {/* Address input */}
+                        <div className="px-3.5 py-2.5">
+                          <input
+                            type="text"
+                            required
+                            placeholder="Address"
+                            className="bg-transparent w-full focus:outline-none text-[12.5px] text-foreground placeholder:text-muted-foreground"
+                          />
+                        </div>
+                      </div>
+                      <button type="button" onClick={() => alert("Address search activated.")} className="text-[11px] font-bold text-emerald-805 dark:text-emerald-350 hover:underline cursor-pointer">
+                        Enter address manually
+                      </button>
+                    </div>
+
+                    {/* Save Information Checkbox */}
+                    <label className="flex items-center gap-2.5 pt-2 cursor-pointer select-none">
                       <input
-                        type="text"
-                        value={cardNumber}
-                        onChange={(e) => handleCardNumberChange(e.target.value)}
-                        className="h-9 w-full rounded-xl border border-border/60 bg-background px-3 text-[12px] font-mono focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
-                        placeholder="4242 4242 4242 4242"
+                        type="checkbox"
+                        defaultChecked
+                        className="h-4.5 w-4.5 rounded border-border text-emerald-600 focus:ring-emerald-500/20"
                       />
-                    </div>
-                    <div className="space-y-1">
-                      <label className="text-[11.5px] font-bold text-foreground">Expiry Date (MM/YY)</label>
-                      <input
-                        type="text"
-                        value={expDate}
-                        onChange={(e) => handleExpiryChange(e.target.value)}
-                        className="h-9 w-full rounded-xl border border-border/60 bg-background px-3 text-[12px] font-mono focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
-                        placeholder="12/34"
-                      />
-                    </div>
-                    <div className="space-y-1">
-                      <label className="text-[11.5px] font-bold text-foreground">CVC / CVV</label>
-                      <input
-                        type="text"
-                        value={cvc}
-                        onFocus={() => setIsFlipped(true)}
-                        onBlur={() => setIsFlipped(false)}
-                        onChange={(e) => setCvc(e.target.value.replace(/\D/g, "").slice(0, 4))}
-                        className="h-9 w-full rounded-xl border border-border/60 bg-background px-3 text-[12px] font-mono focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
-                        placeholder="123"
-                      />
-                    </div>
+                      <span className="text-[11.5px] text-foreground font-medium">Save my information for faster checkout</span>
+                    </label>
                   </div>
 
-                  {/* Sandbox helper note */}
-                  <div className="rounded-2xl border border-emerald-500/10 bg-emerald-500/5 p-4 space-y-1">
+                  {/* Sandbox Instructions note */}
+                  <div className="rounded-2xl border border-emerald-500/10 bg-emerald-500/5 p-4.5 space-y-1">
                     <div className="text-[11.5px] font-bold text-emerald-800 dark:text-emerald-350 flex items-center gap-1.5">
-                      <Lock className="h-3.5 w-3.5" />
+                      <Lock className="h-3.5 w-3.5 text-emerald-700" />
                       <span>Sandbox Stripe Gateway Instructions</span>
                     </div>
-                    <p className="text-[10.5px] text-emerald-700 dark:text-emerald-400 leading-normal">
-                      For testing purposes, you can manually type Stripe's standard sandbox details: Card number <span className="font-mono font-bold bg-emerald-500/10 px-1 py-0.5 rounded text-foreground">4242 4242 4242 4242</span>, Expiry <span className="font-mono font-bold bg-emerald-500/10 px-1 py-0.5 rounded text-foreground">12/34</span>, and CVV <span className="font-mono font-bold bg-emerald-500/10 px-1 py-0.5 rounded text-foreground">123</span>. Alternatively, click any preset pill below to auto-fill.
+                    <p className="text-[10.5px] text-[#475569] dark:text-[#A0B0AD] leading-normal">
+                      For testing purposes, you can manually type Stripe's standard sandbox details: Card number <span className="font-mono font-bold bg-emerald-500/10 px-1 py-0.5 rounded text-[#0F766E] dark:text-[#2DD4BF]">4242 4242 4242 4242</span>, Expiry <span className="font-mono font-bold bg-emerald-500/10 px-1 py-0.5 rounded text-[#0F766E] dark:text-[#2DD4BF]">12/34</span>, and CVV <span className="font-mono font-bold bg-emerald-500/10 px-1 py-0.5 rounded text-[#0F766E] dark:text-[#2DD4BF]">123</span>. Alternatively, click any preset pill below to auto-fill.
                     </p>
                   </div>
 

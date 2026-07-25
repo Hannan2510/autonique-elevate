@@ -332,27 +332,44 @@ function StripeCheckoutForm({
                   />
                   {/* Dynamic brand indicator logo */}
                   <div className="flex items-center gap-1.5 shrink-0 select-none">
-                    <span className={`px-1.5 py-0.2 rounded border text-[8px] font-black font-mono tracking-tight transition-all ${
-                      cardNumber.startsWith("4") 
-                        ? "bg-[#0D9488] text-white border-transparent scale-105" 
-                        : "bg-muted text-muted-foreground border-border/40 opacity-40"
+                    {/* VISA Logo */}
+                    <div className={`w-8.5 h-5 rounded flex items-center justify-center text-[8px] font-black italic select-none transition-all ${
+                      !cardNumber || cardNumber.startsWith("4")
+                        ? "bg-[#1A1F71] text-white opacity-100 scale-105 border border-white/10"
+                        : "bg-muted text-muted-foreground/40 opacity-20 border border-border/40"
                     }`}>
-                      VISA
-                    </span>
-                    <span className={`px-1.5 py-0.2 rounded border text-[8px] font-black font-mono tracking-tight transition-all ${
-                      cardNumber.startsWith("5") 
-                        ? "bg-purple-600 text-white border-transparent scale-105" 
-                        : "bg-muted text-muted-foreground border-border/40 opacity-40"
+                      <span className="text-[#F7B600] font-black">V</span>ISA
+                    </div>
+
+                    {/* Mastercard circles Logo */}
+                    <div className={`w-8.5 h-5 rounded flex items-center justify-center select-none transition-all ${
+                      !cardNumber || cardNumber.startsWith("5")
+                        ? "bg-[#1E1E1E] opacity-100 scale-105 border border-white/10"
+                        : "bg-muted opacity-20 border border-border/40"
                     }`}>
-                      MC
-                    </span>
-                    <span className={`px-1.5 py-0.2 rounded border text-[8px] font-black font-mono tracking-tight transition-all ${
-                      cardNumber.startsWith("3") 
-                        ? "bg-blue-600 text-white border-transparent scale-105" 
-                        : "bg-muted text-muted-foreground border-border/40 opacity-40"
+                      <div className="flex items-center -space-x-1.5">
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#EB001B]" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F00] opacity-90" />
+                      </div>
+                    </div>
+
+                    {/* AMEX Logo */}
+                    <div className={`w-8.5 h-5 rounded flex items-center justify-center text-[7.5px] font-black select-none tracking-tighter transition-all ${
+                      !cardNumber || cardNumber.startsWith("3")
+                        ? "bg-[#0070CD] text-white opacity-100 scale-105 border border-white/10"
+                        : "bg-muted text-muted-foreground/40 opacity-20 border border-border/40"
                     }`}>
                       AMEX
-                    </span>
+                    </div>
+
+                    {/* Discover/Diners Logo */}
+                    <div className={`w-8.5 h-5 rounded flex items-center justify-center text-[7px] font-bold select-none tracking-tight transition-all ${
+                      !cardNumber || cardNumber.startsWith("6") || cardNumber.startsWith("36") || cardNumber.startsWith("38")
+                        ? "bg-[#3078B4] text-white opacity-100 scale-105 border border-white/10"
+                        : "bg-muted text-muted-foreground/40 opacity-20 border border-border/40"
+                    }`}>
+                      DISC
+                    </div>
                   </div>
                 </div>
 

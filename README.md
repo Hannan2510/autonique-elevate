@@ -16,6 +16,22 @@ I have implemented a modern, high-fidelity Stripe Elements payment flow with zer
 
 ---
 
+## 📁 Key Files & Core Architecture
+
+Below are the most important files in this repository and how they drive the project's features:
+
+### 1. Frontend & Routing Layer
+- **[_app.clinic.tsx](file:///C:/Users/sayya/.gemini/antigravity/scratch/autonique-elevate/src/routes/_app.clinic.tsx)**: Handles the main Clinic panel and the 4-step Subscription Checkout Wizard, complete with 3D card flipping previews and dynamic pricing calculators.
+- **[_app.settings.tsx](file:///C:/Users/sayya/.gemini/antigravity/scratch/autonique-elevate/src/routes/_app.settings.tsx)**: Manages plan upgrades, active card statements, quota dials, and opens the invoice payment modals.
+- **[AppShell.tsx](file:///C:/Users/sayya/.gemini/antigravity/scratch/autonique-elevate/src/components/app/AppShell.tsx)**: The main layout wrapper with a responsive dashboard sidebar, theme switcher, global search, and account controls.
+
+### 2. Stripe Gateway Logic
+- **[StripePaymentModal.tsx](file:///C:/Users/sayya/.gemini/antigravity/scratch/autonique-elevate/src/components/app/StripePaymentModal.tsx)**: An on-site modal overlay that renders Stripe Elements dynamically when keys are active, or falls back to an offline simulated sandbox.
+- **[stripe.ts](file:///C:/Users/sayya/.gemini/antigravity/scratch/autonique-elevate/src/lib/stripe.ts)**: Configures the frontend `@stripe/stripe-js` loader to fetch live keys.
+- **[stripePaymentIntent.ts](file:///C:/Users/sayya/.gemini/antigravity/scratch/autonique-elevate/src/lib/stripePaymentIntent.ts)**: A server-side action (`createServerFn`) that creates payment intents using the official Node Stripe SDK.
+
+---
+
 ## ⚙️ Shifting from Sandbox to Real (Production) Stripe
 
 To transition the Stripe integration from the local test sandbox to live production payments, follow these steps:
@@ -48,3 +64,11 @@ My codebase supports **multi-tenant workspace architecture** out of the box at t
    const { data: patients } = useQuery(["patients", currentTenant.id], () => fetchPatientsByTenant(currentTenant.id));
    ```
 4. **AppShell Workspace Switcher Dropdown**: Replace the static `<Brand />` component inside `AppShell.tsx` with an interactive dropdown selection menu displaying the user's authorized clinics/locations.
+
+---
+
+## 🚀 Phase 2 Assets & Marketing
+
+Here are the marketing copy files and promotional creative folders prepared for Phase 2:
+- **[LinkedIn Posts Folder](./Phase-2/Linkedin%20Posts/)**: Contains standard text scripts (`Post1.md`, `Post2.md`) ready for publication.
+- **[Social Media Creative Designs](./Phase-2/Social%20Media%20Creative/)**: Contains graphics and design creatives (`image1.jpeg`, `img2.png`) for social feeds.

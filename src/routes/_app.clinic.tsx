@@ -88,7 +88,7 @@ function ClinicPanel() {
   
   // Consent states
   const [licenseId, setLicenseId] = useState("MD-84920");
-  const [consentChecked, setConsentChecked] = useState(true);
+  const [consentChecked, setConsentChecked] = useState(false);
 
   // Interactive UI animation states
   const [isFlipped, setIsFlipped] = useState(false);

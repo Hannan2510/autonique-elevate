@@ -24,6 +24,7 @@ import {
   Edit2,
 } from "lucide-react";
 import { Card, PageHeader } from "@/components/app/AppShell";
+import { MetricCard } from "@/components/app/MetricCard";
 
 export const Route = createFileRoute("/_app/dashboard")({
   head: () => ({
@@ -154,43 +155,20 @@ function Dashboard() {
       />
 
       <div className="px-4 py-4 sm:px-6 space-y-4 sm:space-y-5">
-        {/* KPI Cards Grid — Compact Solid Color Cards with Thickness */}
+        {/* KPI Cards Grid — Centralized MetricCard Components */}
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {kpiCards.map((card) => {
-            const Icon = card.icon;
-            return (
-              <div
-                key={card.title}
-                className={`rounded-[8px] border-none p-3.5 sm:p-4 transition-all shadow-2xs hover:shadow-md relative overflow-hidden group cursor-pointer ${card.cardClass}`}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="grid h-7 w-7 place-items-center rounded-full bg-white/90 dark:bg-card/90 text-foreground shadow-2xs">
-                      <Icon className="h-3.5 w-3.5 text-emerald-700 dark:text-emerald-400" />
-                    </div>
-                    <span className="text-[12px] font-semibold text-foreground/90">{card.title}</span>
-                  </div>
-                  <button className="text-muted-foreground hover:text-foreground p-0.5 rounded hover:bg-white/40 transition-colors">
-                    <MoreHorizontal className="h-3.5 w-3.5" />
-                  </button>
-                </div>
-
-                <div className="mt-2.5 font-display text-[22px] sm:text-2xl font-bold tracking-tight text-foreground">
-                  {card.value}
-                </div>
-
-                <div className="mt-2 flex items-center gap-2">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-white/90 dark:bg-card/90 px-2 py-0.5 text-[10px] font-semibold text-foreground shadow-2xs border border-black/5">
-                    <span className="text-muted-foreground/80 font-medium">{card.badgeLabel}</span>
-                    <span className={`inline-flex items-center font-mono ${card.up ? "text-emerald-700 dark:text-emerald-400" : "text-rose-600"}`}>
-                      {card.up ? <TrendingUp className="mr-0.5 h-2.5 w-2.5 inline" /> : <TrendingDown className="mr-0.5 h-2.5 w-2.5 inline" />}
-                      {card.delta}
-                    </span>
-                  </span>
-                </div>
-              </div>
-            );
-          })}
+          {kpiCards.map((card) => (
+            <MetricCard
+              key={card.title}
+              title={card.title}
+              value={card.value}
+              badgeLabel={card.badgeLabel}
+              delta={card.delta}
+              up={card.up}
+              icon={card.icon}
+              cardClass={card.cardClass}
+            />
+          ))}
         </div>
 
         {/* Charts Section — Compact Line Chart + Donut Chart */}

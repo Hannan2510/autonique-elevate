@@ -37,6 +37,9 @@ autonique-elevate/
 │   │   ├── _app.dashboard.tsx      → Overview KPIs & analytics
 │   │   ├── _app.clinic.tsx         → Clinic panel + Stripe checkout wizard
 │   │   ├── _app.customers.tsx      → Patient records management
+│   │   ├── _app.appointments.tsx   → Appointments slots & scheduler
+│   │   ├── _app.revenue.tsx        → Revenue tracker & merchant connections
+│   │   ├── _app.reports.tsx        → Analytics & clinical reports compilation
 │   │   └── _app.settings.tsx       → Profile, billing, security & notifications
 │   ├── components/
 │   │   ├── app/
@@ -49,11 +52,13 @@ autonique-elevate/
 │   │       └── ...14 more sections
 │   ├── lib/
 │   │   ├── stripe.ts               → Stripe.js frontend loader
-│   │   └── stripePaymentIntent.ts  → Server-side payment intent creator
+│   │   ├── stripePaymentIntent.ts  → Server-side payment intent creator
+│   │   └── utils.ts                → Classname merger utilities
 │   └── styles.css                  → Global design system tokens & animations
 ├── Phase-2/                        → Marketing & social media assets
 ├── .env.example                    → Environment variable template
-└── vite.config.ts                  → Auto-detects Cloudflare/Vercel preset
+├── vite.config.ts                  → Auto-detects Cloudflare/Vercel preset
+└── tsconfig.json                   → Path resolution config (`@/*`)
 ```
 
 ---
@@ -79,6 +84,29 @@ A full marketing site built across **14 modular sections** including:
 - Recent appointments table with doctor & patient avatars
 - Compact sidebar patients quick-list
 
+### 📅 Appointments (`/appointments`)
+- Interactive, responsive schedule manager
+- **Interactive Development Controls** (Toggle loading skeletons or simulate API error modes)
+- Skeletons simulating queue fetches on mount
+- Detailed fallback error display with retry capabilities
+- Premium empty state showing "No appointments scheduled today" with Setup Guide and Book Appointment CTAs
+- Integrated informational cards detailing Practitioner Rosters and auto-reminders
+
+### 💳 Revenue & Ledgers (`/revenue`)
+- Transaction billing summary and Stripe sync engine
+- Pulse metrics displaying Net Revenue, Stripe Payouts, and Outstanding Invoices
+- Synchronize Stripe accounts dynamically with simulated load indicators
+- Skeletons simulating transactional table updates
+- Fallback errors illustrating connection timeout details
+- Premium empty state indicating "No payment gateways connected" with manuals to Setup Guides
+
+### 📈 Reports Engine (`/reports`)
+- Compilation tool for clinical auditing and revenue summaries
+- Skeletons simulating data compilation queues
+- Detailed error messages illustrating connection delays
+- Premium empty state indicating "No analytics reports compiled"
+- Context triggers detailing cryptographic HIPAA audit logs and granular Role-Based Access controls
+
 ### 🏥 Clinic Panel (`/clinic`)
 - Clinic management hub with plan tier display
 - **4-Step Subscription Checkout Wizard**:
@@ -100,6 +128,16 @@ A full marketing site built across **14 modular sections** including:
 - **Notifications tab**: Email, SMS & clinical alert toggles
 - **Security tab**: Password change, 2FA, active sessions manager
 - **Billing tab**: Active plan display, quota dials, card manager, invoice list + Stripe payment modal triggers
+
+---
+
+## 🛠️ Production Polish & Interactive Testing
+
+To assist developers in evaluating performance behavior and UX layouts under adverse or transient state conditions, the newly introduced tabs (**Appointments**, **Revenue**, and **Reports**) have been outfitted with a **Development Controls panel** at the top of their views:
+* **Simulate Loading**: Manually triggers a CSS keyframe-pulsing skeleton overlay that matches the content card density.
+* **Trigger Error Mode**: Simulates API sync timeouts or authorization token drops, rendering a custom error panel detailing the query failure and exposing recovery CTAs.
+* **Empty States**: Configured with Lucide SVG graphics, value descriptions, setup manuals, and action routes designed to feel clean and premium.
+* **Responsive Reflows**: All metrics grids, filters, schedules, and menus automatically resize to fit narrow mobile viewports, tablets, and wide monitors.
 
 ---
 

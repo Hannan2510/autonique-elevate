@@ -74,9 +74,9 @@ const nav: NavItem[] = [
   { to: "/dashboard", label: "Overview", icon: LayoutDashboard },
   { to: "/clinic", label: "Clinic Panel", icon: Building2 },
   { to: "/customers", label: "Patients", icon: Users },
-  { to: "/appointments", label: "Appointments", icon: Calendar, disabled: true },
-  { to: "/revenue", label: "Revenue", icon: Receipt, disabled: true },
-  { to: "/reports", label: "Reports", icon: BarChart3, disabled: true },
+  { to: "/appointments", label: "Appointments", icon: Calendar },
+  { to: "/revenue", label: "Revenue", icon: Receipt },
+  { to: "/reports", label: "Reports", icon: BarChart3 },
   { to: "/settings", label: "Settings", icon: SettingsIcon },
 ];
 
@@ -232,21 +232,10 @@ function SidebarInner({
             {nav.map((item) => {
               const active = pathname === item.to || (item.to !== "/dashboard" && pathname.startsWith(item.to));
               const Icon = item.icon;
-              if (item.disabled) {
-                return (
-                  <li key={item.to}>
-                    <div className="flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-[13px] text-muted-foreground/50 select-none">
-                      <Icon className="h-3.5 w-3.5" />
-                      <span>{item.label}</span>
-                      <span className="ml-auto font-mono text-[9.5px] uppercase tracking-wider text-muted-foreground/40 bg-muted px-1.5 py-0.5 rounded">Soon</span>
-                    </div>
-                  </li>
-                );
-              }
               return (
                 <li key={item.to}>
                   <Link
-                    to={item.to as "/dashboard" | "/customers" | "/settings"}
+                    to={item.to as any}
                     onClick={onNavigate}
                     className={`relative flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition-all ${
                       active

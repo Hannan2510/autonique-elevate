@@ -69,21 +69,61 @@ function StatusBadge({ s }: { s: Patient["status"] }) {
   return <Badge tone={tone as "success" | "info" | "muted"}>{s}</Badge>;
 }
 
+import { DataTable, Column } from "@/components/app/DataTable";
+
 function Customers() {
-  const [query, setQuery] = useState("");
-  const [tabFilter, setTabFilter] = useState<"all" | "active" | "new">("all");
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  const filtered = useMemo(() => {
-    return patients.filter((p) => {
-      if (tabFilter !== "all" && p.status !== tabFilter) return false;
-      if (!query) return true;
-      const q = query.toLowerCase();
-      return p.name.toLowerCase().includes(q) || p.email.toLowerCase().includes(q) || p.id.toLowerCase().includes(q) || p.city.toLowerCase().includes(q);
-    });
-  }, [query, tabFilter]);
-
   const selectedPatient = useMemo(() => patients.find((p) => p.id === selectedId), [selectedId]);
+
+  const columns: Column<Patient>[] = [
+    {
+      header: "Patient",
+      render: (p) => (
+        <span className="font-semibold text-foreground text-[12.5px] hover:text-emerald-700 transition-colors">
+          {p.name}
+        </span>
+      ),
+    },
+    {
+      header: "Contact",
+      render: (p) => (
+        <div className="flex items-center gap-1.5 font-mono text-[11px] text-foreground">
+          <Phone className="h-3 w-3 text-muted-foreground shrink-0" />
+          {p.phone}
+        </div>
+      ),
+    },
+    {
+      header: "Last Visit",
+      render: (p) => (
+        <div className="flex items-center gap-1.5 font-mono text-[11px] text-muted-foreground">
+          <Clock className="h-3 w-3 shrink-0" />
+          {p.lastVisit}
+        </div>
+      ),
+    },
+    {
+      header: "Status",
+      render: (p) => <StatusBadge s={p.status} />,
+    },
+    {
+      header: "",
+      className: "text-right",
+      render: (p) => (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setSelectedId(p.id);
+          }}
+          className="p-1.5 rounded-lg text-muted-foreground hover:text-emerald-700 hover:bg-emerald-500/10 transition-colors cursor-pointer"
+          title="View Patient"
+        >
+          <Eye className="h-4 w-4" />
+        </button>
+      ),
+    },
+  ];
 
   return (
     <>
@@ -106,129 +146,25 @@ function Customers() {
       />
 
       <div className="px-4 py-5 sm:px-6 space-y-5">
-
-        {/* Premium Filter + Search Bar */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 rounded-xl bg-card border border-border/50 px-4 py-3 shadow-sm">
-          <div className="flex items-center gap-3 min-w-0 flex-1">
-            <div className="relative flex-1 max-w-sm">
-              <Search className="pointer-events-none absolute top-1/2 left-3 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-              <input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search patients by name, email or ID…"
-                className="h-8 w-full rounded-lg border border-border/60 bg-background pl-9 pr-3 text-[12px] placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500/50 transition-all"
-              />
+        <DataTable
+          data={patients}
+          columns={columns}
+          searchPlaceholder="Search patients by name, email or ID…"
+          searchKeys={["name", "email", "id", "city"]}
+          filterTabs={[
+            { label: "All", value: "all", filterFn: () => true },
+            { label: "Active", value: "active", filterFn: (p) => p.status === "active" },
+            { label: "New", value: "new", filterFn: (p) => p.status === "new" },
+          ]}
+          pageSize={5}
+          onRowClick={(p) => setSelectedId(p.id)}
+          emptyState={
+            <div className="flex flex-col items-center gap-2 py-4">
+              <Users className="h-8 w-8 text-muted-foreground/30" />
+              <p className="text-[12px] text-muted-foreground font-mono">No patients found matching the search criteria</p>
             </div>
-
-            {/* Tab Filter */}
-            <div className="hidden sm:flex items-center gap-0.5 rounded-lg bg-muted/60 p-0.5 text-[11px] font-medium border border-border/30">
-              {(["all", "active", "new"] as const).map((t) => (
-                <button
-                  key={t}
-                  onClick={() => setTabFilter(t)}
-                  className={`rounded-md px-3 py-1 capitalize transition-all cursor-pointer ${
-                    tabFilter === t
-                      ? "bg-background text-foreground shadow-sm font-semibold border border-border/40"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {t}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
-            <span className="hidden sm:block font-mono text-[10.5px] text-muted-foreground">{filtered.length} records</span>
-            <Button variant="outline" size="sm">
-              <Filter className="h-3 w-3 text-muted-foreground" />
-              <span>Filter</span>
-            </Button>
-          </div>
-        </div>
-
-        {/* Premium Patient Table */}
-        <div className="rounded-xl bg-card border border-border/50 shadow-sm overflow-hidden">
-          {/* Table Header */}
-          <div className="flex items-center justify-between px-5 py-3.5 bg-muted/30 border-b border-border/40">
-            <h3 className="text-[12.5px] font-semibold text-foreground tracking-tight">Patient Records</h3>
-            <span className="font-mono text-[10px] text-muted-foreground bg-muted/60 px-2 py-0.5 rounded-full border border-border/30">
-              {filtered.length} / {patients.length} patients
-            </span>
-          </div>
-
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-[12px]">
-              <thead className="bg-muted/20 font-mono text-[10px] uppercase tracking-widest text-muted-foreground border-b border-border/40">
-                <tr>
-                  <th className="px-5 py-3 font-semibold">Patient</th>
-                  <th className="px-5 py-3 font-semibold">Contact</th>
-                  <th className="px-5 py-3 font-semibold">Last Visit</th>
-                  <th className="px-5 py-3 font-semibold">Status</th>
-                  <th className="px-5 py-3 font-semibold"></th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border/30">
-                {filtered.map((p, idx) => (
-                  <tr
-                    key={p.id}
-                    onClick={() => setSelectedId(p.id)}
-                    className="hover:bg-emerald-500/4 transition-colors cursor-pointer group relative"
-                  >
-                    <td className="px-5 py-3.5">
-                      <span className="font-semibold text-foreground text-[12.5px] group-hover:text-emerald-700 transition-colors">
-                        {p.name}
-                      </span>
-                    </td>
-                    <td className="px-5 py-3.5">
-                      <div className="flex items-center gap-1.5 font-mono text-[11px] text-foreground">
-                        <Phone className="h-3 w-3 text-muted-foreground shrink-0" />
-                        {p.phone}
-                      </div>
-                    </td>
-                    <td className="px-5 py-3.5">
-                      <div className="flex items-center gap-1.5 font-mono text-[11px] text-muted-foreground">
-                        <Clock className="h-3 w-3 shrink-0" />
-                        {p.lastVisit}
-                      </div>
-                    </td>
-                    <td className="px-5 py-3.5">
-                      <StatusBadge s={p.status} />
-                    </td>
-                    <td className="px-5 py-3.5 text-right">
-                      <button
-                        onClick={(e) => { e.stopPropagation(); setSelectedId(p.id); }}
-                        className="p-1.5 rounded-lg text-muted-foreground hover:text-emerald-700 hover:bg-emerald-500/10 transition-colors cursor-pointer"
-                        title="View Patient"
-                      >
-                        <Eye className="h-4 w-4" />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-                {filtered.length === 0 && (
-                  <tr>
-                    <td colSpan={5} className="px-5 py-12 text-center">
-                      <div className="flex flex-col items-center gap-2">
-                        <Users className="h-8 w-8 text-muted-foreground/30" />
-                        <p className="text-[12px] text-muted-foreground font-mono">No patients found matching "{query}"</p>
-                      </div>
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Table Footer */}
-          <div className="flex items-center justify-between px-5 py-3 border-t border-border/40 bg-muted/10">
-            <span className="font-mono text-[10.5px] text-muted-foreground">Showing {filtered.length} of {patients.length} patients</span>
-            <div className="flex items-center gap-1.5">
-              <span className="font-mono text-[10.5px] text-muted-foreground">Page 1 of 1</span>
-              <ChevronRight className="h-3 w-3 text-muted-foreground/50" />
-            </div>
-          </div>
-        </div>
+          }
+        />
       </div>
 
       {/* Premium Slide-Over Patient Detail Drawer */}

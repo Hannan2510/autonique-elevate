@@ -52,37 +52,7 @@ const tabs = [
 
 type TabId = (typeof tabs)[number]["id"];
 
-/* Clean Custom Switch */
-function Switch({ checked, onChange }: { checked: boolean; onChange: (v: boolean) => void }) {
-  return (
-    <button
-      type="button"
-      onClick={() => onChange(!checked)}
-      className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-emerald-500/30 ${
-        checked ? "bg-emerald-600" : "bg-muted-foreground/20"
-      }`}
-    >
-      <span
-        className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-md transition duration-200 ease-in-out ${
-          checked ? "translate-x-5" : "translate-x-0"
-        }`}
-      />
-    </button>
-  );
-}
-
-/* Styled Form Field Container */
-function FormRow({ label, description, children }: { label: string; description?: string; children: React.ReactNode }) {
-  return (
-    <div className="flex flex-col gap-2 py-4 border-b border-border/40 last:border-0 sm:flex-row sm:items-start sm:justify-between sm:gap-8">
-      <div className="max-w-xs space-y-0.5">
-        <label className="text-[13px] font-semibold text-foreground tracking-tight">{label}</label>
-        {description && <p className="text-[11.5px] leading-relaxed text-muted-foreground">{description}</p>}
-      </div>
-      <div className="flex-1 max-w-lg">{children}</div>
-    </div>
-  );
-}
+import { FormRow, FormSwitch as Switch } from "@/components/app/FormComponents";
 
 function Settings() {
   const [activeTab, setActiveTab] = useState<TabId>("profile");

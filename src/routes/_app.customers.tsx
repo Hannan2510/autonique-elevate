@@ -231,6 +231,36 @@ function Customers() {
                   </div>
                 </div>
 
+                {/* Vitals Telemetry Grid */}
+                <div className="rounded-xl border border-border/50 bg-card overflow-hidden shadow-sm">
+                  <div className="px-4 py-2.5 bg-muted/30 border-b border-border/40 flex items-center justify-between">
+                    <h4 className="text-[11px] font-bold text-foreground uppercase tracking-wider font-mono text-muted-foreground">Active Telemetry Vitals</h4>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[9px] font-mono text-muted-foreground">Live Sync</span>
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    </div>
+                  </div>
+                  <div className="p-3.5 grid grid-cols-2 gap-2.5">
+                    {[
+                      { name: "Blood Pressure", val: "120/80", unit: "mmHg", status: "Optimal", color: "text-emerald-700 bg-emerald-500/10 dark:text-emerald-400" },
+                      { name: "Heart Rate", val: "72", unit: "bpm", status: "Normal", color: "text-emerald-700 bg-emerald-500/10 dark:text-emerald-400" },
+                      { name: "Oxygen Saturation", val: "99%", unit: "SpO2", status: "Healthy", color: "text-emerald-700 bg-emerald-500/10 dark:text-emerald-400" },
+                      { name: "Body Temperature", val: "98.6", unit: "°F", status: "Normal", color: "text-emerald-700 bg-emerald-500/10 dark:text-emerald-400" }
+                    ].map((vit) => (
+                      <div key={vit.name} className="p-2.5 bg-background/50 border border-border/30 rounded-xl space-y-1">
+                        <div className="text-[9.5px] font-mono text-muted-foreground uppercase tracking-wide leading-none">{vit.name}</div>
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-[13px] font-black text-foreground tracking-tight">{vit.val}</span>
+                          <span className="text-[8.5px] font-mono text-muted-foreground">{vit.unit}</span>
+                        </div>
+                        <span className={`inline-flex items-center px-1.5 py-0.2 rounded text-[8px] font-black font-mono uppercase tracking-wide ${vit.color}`}>
+                          {vit.status}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
                 {/* Contact Information */}
                 <div className="rounded-xl border border-border/50 bg-card overflow-hidden shadow-sm">
                   <div className="px-4 py-2.5 bg-muted/30 border-b border-border/40">

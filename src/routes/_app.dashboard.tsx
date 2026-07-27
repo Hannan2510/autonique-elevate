@@ -130,6 +130,20 @@ const sidePatientsList = [
   { name: "David Brown", detail: "Diabetes Type 2", age: "58y", date: "Jun 18", avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&auto=format&fit=crop&q=80" },
 ];
 
+const CustomTooltip = ({ active, payload, label }: any) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-card/90 backdrop-blur-md border border-border/40 rounded-xl p-2.5 shadow-lg shadow-black/5 font-sans text-[11.5px] space-y-0.5">
+        <p className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground font-semibold">{label}</p>
+        <p className="font-bold text-foreground">
+          Revenue: <span className="text-emerald-700 dark:text-emerald-400 font-mono">{`$${payload[0].value.toLocaleString()}`}</span>
+        </p>
+      </div>
+    );
+  }
+  return null;
+};
+
 function Dashboard() {
   const [chartTimeframe, setChartTimeframe] = useState<"overview" | "monthly" | "yearly">("overview");
 
@@ -166,7 +180,7 @@ function Dashboard() {
               delta={card.delta}
               up={card.up}
               icon={card.icon}
-              cardClass={card.cardClass}
+              cardClass={`${card.cardClass} hover:scale-[1.02] transition-transform duration-300`}
             />
           ))}
         </div>
@@ -212,17 +226,7 @@ function Dashboard() {
                     tickFormatter={(v) => `$${v / 1000}k`}
                     tick={{ fill: "var(--muted-foreground)", fontSize: 10.5, fontFamily: "var(--font-mono)" }}
                   />
-                  <Tooltip
-                    cursor={{ stroke: "#a3e635", strokeDasharray: "3 3" }}
-                    contentStyle={{
-                      background: "var(--card)",
-                      border: "none",
-                      borderRadius: 8,
-                      fontSize: 11,
-                      boxShadow: "0 6px 20px rgba(0, 0, 0, 0.1)",
-                    }}
-                    formatter={(v: number) => [`$${v.toLocaleString()}`, "Revenue"]}
-                  />
+                  <Tooltip content={<CustomTooltip />} cursor={{ stroke: "var(--color-primary)", strokeDasharray: "3 3" }} />
                   <ReferenceLine x="May" stroke="#a3e635" strokeDasharray="3 3" />
                   <Line
                     type="monotone"

@@ -418,38 +418,62 @@ function ClinicPanel() {
                     <div className={`relative w-full h-full duration-700 transform-style-3d ${isFlipped ? "rotate-y-[180deg]" : ""}`}>
                       
                       {/* Card Front */}
-                      <div className="absolute inset-0 w-full h-full rounded-2xl bg-gradient-to-br from-[#0F766E] via-[#0D9488] to-[#115E59] p-5 flex flex-col justify-between text-white backface-hidden shadow-lg border border-[#2DD4BF]/20">
-                        <div className="flex justify-between items-start">
-                          <div className="space-y-1">
-                            <div className="text-[7.5px] uppercase tracking-widest text-[#2DD4BF] font-black">Clinical Gateway Secure</div>
-                            <div className="font-bold text-[13.5px] tracking-tight">AUTONIQUE OS</div>
+                      <div className="absolute inset-0 w-full h-full rounded-2xl bg-gradient-to-br from-[#0F766E] via-[#0D9488] to-[#115E59] p-5 flex flex-col justify-between text-white backface-hidden shadow-xl border border-[#2DD4BF]/20 overflow-hidden">
+                        {/* Decorative Background Mesh */}
+                        <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] z-0" />
+                        
+                        <div className="relative z-10 flex justify-between items-start">
+                          <div className="space-y-0.5">
+                            <div className="text-[7.5px] uppercase tracking-widest text-[#2dd4bf] font-mono font-black">Clinical Gateway Secure</div>
+                            <div className="font-extrabold text-[13px] tracking-tight">AUTONIQUE OS</div>
                           </div>
-                          <div className="font-mono font-black italic text-base">VISA</div>
+                          <div className="font-mono font-black italic text-base tracking-tighter">VISA</div>
                         </div>
-                        <div className="font-mono text-[16px] tracking-widest text-center py-2 font-bold select-all">
+
+                        {/* Metallic Chip SVG */}
+                        <div className="relative z-10 my-1">
+                          <svg className="w-8.5 h-6.5 opacity-90" viewBox="0 0 48 36" fill="none">
+                            <rect width="48" height="36" rx="5" fill="url(#chip-grad)" />
+                            <path d="M0 12h48M0 24h48M16 0v36M32 0v36" stroke="rgba(0,0,0,0.18)" strokeWidth="0.75" />
+                            <rect x="18" y="10" width="12" height="16" rx="2" fill="none" stroke="rgba(0,0,0,0.2)" strokeWidth="0.75" />
+                            <defs>
+                              <linearGradient id="chip-grad" x1="0" y1="0" x2="48" y2="36" gradientUnits="userSpaceOnUse">
+                                <stop stopColor="#FFE8A3" />
+                                <stop offset="0.5" stopColor="#E2B13C" />
+                                <stop offset="1" stopColor="#9C7721" />
+                              </linearGradient>
+                            </defs>
+                          </svg>
+                        </div>
+
+                        <div className="relative z-10 font-mono text-[16px] tracking-widest text-center py-1 font-bold select-all">
                           {cardNumber || "•••• •••• •••• ••••"}
                         </div>
-                        <div className="flex justify-between items-end">
-                          <div>
-                            <div className="text-[7.5px] uppercase tracking-widest text-[#2DD4BF]">Cardholder</div>
-                            <div className="text-[11.5px] font-bold mt-0.5 truncate max-w-[160px]">{cardHolder || "DR. NAME HERE"}</div>
+
+                        <div className="relative z-10 flex justify-between items-end">
+                          <div className="min-w-0 flex-1 pr-4">
+                            <div className="text-[7.5px] uppercase tracking-widest text-[#2dd4bf] font-mono leading-none">Cardholder</div>
+                            <div className="text-[11px] font-bold mt-1 truncate uppercase tracking-wide">{cardHolder || "DR. NAME HERE"}</div>
                           </div>
-                          <div>
-                            <div className="text-[7.5px] uppercase tracking-widest text-[#2DD4BF]">Expires</div>
-                            <div className="text-[11.5px] font-mono font-bold mt-0.5">{expDate || "MM/YY"}</div>
+                          <div className="shrink-0 text-right">
+                            <div className="text-[7.5px] uppercase tracking-widest text-[#2dd4bf] font-mono leading-none">Expires</div>
+                            <div className="text-[11px] font-mono font-bold mt-1">{expDate || "MM/YY"}</div>
                           </div>
                         </div>
                       </div>
 
                       {/* Card Back */}
-                      <div className="absolute inset-0 w-full h-full rounded-2xl bg-gradient-to-br from-[#115E59] to-[#0F172A] p-5 flex flex-col justify-between text-white rotate-y-[180deg] backface-hidden shadow-lg border border-[#2DD4BF]/10">
-                        <div className="w-full h-9 bg-black/80 -mx-5 mt-2" />
-                        <div className="flex justify-end items-center gap-3">
-                          <span className="text-[7.5px] uppercase tracking-widest text-muted-foreground/60">CVC Code</span>
-                          <span className="bg-white text-black px-3 py-1 font-mono text-[12px] font-extrabold rounded-md shadow-inner">{cvc || "•••"}</span>
+                      <div className="absolute inset-0 w-full h-full rounded-2xl bg-gradient-to-br from-[#115E59] to-[#0A1210] p-5 flex flex-col justify-between text-white rotate-y-[180deg] backface-hidden shadow-xl border border-[#2DD4BF]/10 overflow-hidden">
+                        {/* Black Magnetic Strip */}
+                        <div className="absolute top-4 left-0 right-0 h-9 bg-[#121212]" />
+
+                        <div className="mt-11 flex justify-end items-center gap-2 relative z-10">
+                          <span className="text-[7px] uppercase tracking-widest text-muted-foreground/80 font-mono font-bold">CVC Code</span>
+                          <span className="bg-white/95 text-black px-2.5 py-0.5 font-mono text-[11.5px] font-black rounded shadow-inner select-all">{cvc || "•••"}</span>
                         </div>
-                        <div className="text-[7px] text-muted-foreground leading-normal text-right">
-                          HIPAA & PCI-DSS Compliant Secure Encryption Pipeline.
+
+                        <div className="text-[6.5px] text-muted-foreground/80 leading-normal text-right font-mono mt-auto pt-4 relative z-10">
+                          HIPAA & PCI-DSS ENCRYPTED CLINICAL SECURE PIPELINE. DO NOT SHARE.
                         </div>
                       </div>
 

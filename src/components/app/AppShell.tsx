@@ -1,5 +1,6 @@
 import { Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
+import { toast } from "sonner";
 import {
   LayoutDashboard,
   Users,
@@ -216,6 +217,8 @@ function SidebarInner({
   onNavigate?: () => void;
   skipBrand?: boolean;
 }) {
+  const [profileOpen, setProfileOpen] = useState(false);
+
   return (
     <div className="flex flex-col h-full">
       {!skipBrand && (
@@ -256,16 +259,64 @@ function SidebarInner({
         </div>
       </nav>
 
-      {/* Profile Section in Bottom Left of Sidebar */}
-      <div className="border-t border-border/40 p-3 mt-auto">
-        <div className="flex items-center gap-2.5 rounded-lg px-2 py-1.5 text-[13px] hover:bg-accent transition-colors cursor-pointer">
-          <div className="grid h-7 w-7 place-items-center rounded-full bg-emerald-600 text-[10.5px] font-bold text-white shrink-0">
-            IR
+      {/* Profile Section in Bottom Left of Sidebar with Workspace Switcher */}
+      <div className="border-t border-border/40 p-3 mt-auto relative">
+        {profileOpen && (
+          <div className="absolute bottom-[54px] left-3 right-3 bg-card border border-border/50 rounded-xl shadow-xl p-2 z-30 space-y-1.5 animate-in fade-in slide-in-from-bottom-2 duration-150">
+            <div className="px-2 py-1 border-b border-border/30">
+              <span className="font-mono text-[8.5px] uppercase tracking-wider text-muted-foreground font-bold">Switch Workspace</span>
+              <div className="mt-1 space-y-0.5">
+                {[
+                  { name: "Apex Clinic (HQ)", desc: "Main Campus", active: true },
+                  { name: "Eastside Branch", desc: "Outpatient Services", active: false },
+                  { name: "St. Jude Clinic", desc: "Consultation Unit", active: false }
+                ].map((cli) => (
+                  <button
+                    key={cli.name}
+                    type="button"
+                    onClick={() => {
+                      toast.success(`Switched to workspace: ${cli.name}`);
+                      setProfileOpen(false);
+                    }}
+                    className={`w-full flex items-center justify-between p-1.5 rounded-lg text-left text-[11.5px] transition-colors cursor-pointer ${
+                      cli.active ? "bg-accent/80 font-semibold" : "hover:bg-accent/40"
+                    }`}
+                  >
+                    <div className="flex flex-col min-w-0">
+                      <span className="text-foreground truncate leading-tight">{cli.name}</span>
+                      <span className="text-[9px] text-muted-foreground truncate leading-none mt-0.5">{cli.desc}</span>
+                    </div>
+                    {cli.active && <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shrink-0" />}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="flex flex-col gap-0.5 text-[11px] px-1 py-0.5">
+              <Link to="/settings" onClick={() => setProfileOpen(false)} className="px-2 py-1 rounded-md hover:bg-accent/40 text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2">
+                <SettingsIcon className="h-3 w-3" />
+                <span>Account settings</span>
+              </Link>
+              <Link to="/" className="px-2 py-1 rounded-md hover:bg-accent/40 text-rose-600 hover:text-rose-700 transition-colors flex items-center gap-2">
+                <LogOut className="h-3 w-3" />
+                <span>Logout</span>
+              </Link>
+            </div>
           </div>
-          <div className="flex flex-col min-w-0">
-            <span className="font-semibold text-foreground text-[12px] truncate">Dr. Reyes</span>
-            <span className="text-[10px] text-muted-foreground truncate">reyes@autonique.com</span>
+        )}
+        <div 
+          onClick={() => setProfileOpen(!profileOpen)}
+          className={`flex items-center justify-between rounded-lg px-2 py-1.5 text-[13px] hover:bg-accent transition-all cursor-pointer ${profileOpen ? 'bg-accent/60' : ''}`}
+        >
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="grid h-7 w-7 place-items-center rounded-full bg-emerald-600 text-[10.5px] font-bold text-white shrink-0">
+              IR
+            </div>
+            <div className="flex flex-col min-w-0">
+              <span className="font-semibold text-foreground text-[12px] truncate">Dr. Reyes</span>
+              <span className="text-[10px] text-muted-foreground truncate">reyes@autonique.com</span>
+            </div>
           </div>
+          <ChevronDown className={`h-3.5 w-3.5 text-muted-foreground transition-transform duration-200 ${profileOpen ? 'rotate-180' : ''}`} />
         </div>
       </div>
     </div>

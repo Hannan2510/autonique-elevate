@@ -442,44 +442,62 @@ function Settings() {
 
                 {/* Usage Quota Indicators */}
                 <div className="mt-6 space-y-4">
-                  <h4 className="text-[11.5px] font-bold text-foreground uppercase tracking-wider font-mono text-muted-foreground">
+                  <h4 className="text-[11px] font-bold text-foreground uppercase tracking-wider font-mono text-muted-foreground">
                     Subscription Usage Quotas
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                     {/* Patient Quota */}
-                    <div className="bg-background/40 border border-border/40 rounded-2xl p-4.5 space-y-2">
-                      <div className="flex justify-between text-[11px] font-bold text-foreground">
-                        <span>Patient Records</span>
-                        <span className="text-muted-foreground font-mono">4,210 / 5,000 (84%)</span>
+                    <div className="bg-background/40 border border-border/40 rounded-2xl p-4 flex items-center gap-4 shadow-3xs">
+                      <div className="relative shrink-0 w-14 h-14">
+                        <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                          <circle className="text-muted/20 dark:text-muted/10" strokeWidth="3.5" stroke="currentColor" fill="none" r="15.9155" cx="18" cy="18" />
+                          <circle className="text-amber-500 transition-all duration-500" strokeWidth="3.5" strokeDasharray="100" strokeDashoffset={100 - 84} strokeLinecap="round" stroke="currentColor" fill="none" r="15.9155" cx="18" cy="18" />
+                        </svg>
+                        <div className="absolute inset-0 flex items-center justify-center font-mono text-[10.5px] font-bold text-foreground">
+                          84%
+                        </div>
                       </div>
-                      <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
-                        <div className="h-full bg-amber-500 rounded-full transition-all" style={{ width: "84%" }} />
+                      <div className="min-w-0 flex-1 space-y-0.5">
+                        <span className="text-[11.5px] font-bold text-foreground block">Patient Records</span>
+                        <span className="text-[9.5px] text-muted-foreground block font-mono leading-none">4,210 / 5,000</span>
+                        <p className="text-[9.5px] text-muted-foreground/80 leading-normal">Approaching limit. Upgrade plan to expand.</p>
                       </div>
-                      <p className="text-[10px] text-muted-foreground">Approaching capacity limit. Upgrade plan to expand limit.</p>
                     </div>
 
                     {/* WhatsApp Messages */}
-                    <div className="bg-background/40 border border-border/40 rounded-2xl p-4.5 space-y-2">
-                      <div className="flex justify-between text-[11px] font-bold text-foreground">
-                        <span>WhatsApp Automated Broadcasts</span>
-                        <span className="text-muted-foreground font-mono">892 / 1,000 (89%)</span>
+                    <div className="bg-background/40 border border-border/40 rounded-2xl p-4 flex items-center gap-4 shadow-3xs">
+                      <div className="relative shrink-0 w-14 h-14">
+                        <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                          <circle className="text-muted/20 dark:text-muted/10" strokeWidth="3.5" stroke="currentColor" fill="none" r="15.9155" cx="18" cy="18" />
+                          <circle className="text-rose-500 transition-all duration-500" strokeWidth="3.5" strokeDasharray="100" strokeDashoffset={100 - 89} strokeLinecap="round" stroke="currentColor" fill="none" r="15.9155" cx="18" cy="18" />
+                        </svg>
+                        <div className="absolute inset-0 flex items-center justify-center font-mono text-[10.5px] font-bold text-foreground">
+                          89%
+                        </div>
                       </div>
-                      <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
-                        <div className="h-full bg-rose-500 rounded-full transition-all" style={{ width: "89%" }} />
+                      <div className="min-w-0 flex-1 space-y-0.5">
+                        <span className="text-[11.5px] font-bold text-foreground block">WhatsApp Broadcasts</span>
+                        <span className="text-[9.5px] text-muted-foreground block font-mono leading-none">892 / 1,000</span>
+                        <p className="text-[9.5px] text-muted-foreground/80 leading-normal">Resets in 18 days. SMS overage charges apply.</p>
                       </div>
-                      <p className="text-[10px] text-muted-foreground">Resets in 18 days. SMS overage charges may apply.</p>
                     </div>
 
                     {/* Team Seats */}
-                    <div className="bg-background/40 border border-border/40 rounded-2xl p-4.5 space-y-2">
-                      <div className="flex justify-between text-[11px] font-bold text-foreground">
-                        <span>Active Team Seats</span>
-                        <span className="text-muted-foreground font-mono">4 / 10 (40%)</span>
+                    <div className="bg-background/40 border border-border/40 rounded-2xl p-4 flex items-center gap-4 shadow-3xs">
+                      <div className="relative shrink-0 w-14 h-14">
+                        <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                          <circle className="text-muted/20 dark:text-muted/10" strokeWidth="3.5" stroke="currentColor" fill="none" r="15.9155" cx="18" cy="18" />
+                          <circle className="text-[#0D9488] transition-all duration-500" strokeWidth="3.5" strokeDasharray="100" strokeDashoffset={100 - 40} strokeLinecap="round" stroke="currentColor" fill="none" r="15.9155" cx="18" cy="18" />
+                        </svg>
+                        <div className="absolute inset-0 flex items-center justify-center font-mono text-[10.5px] font-bold text-foreground">
+                          40%
+                        </div>
                       </div>
-                      <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
-                        <div className="h-full bg-emerald-600 rounded-full transition-all" style={{ width: "40%" }} />
+                      <div className="min-w-0 flex-1 space-y-0.5">
+                        <span className="text-[11.5px] font-bold text-foreground block">Active Team Seats</span>
+                        <span className="text-[9.5px] text-muted-foreground block font-mono leading-none">4 / 10 seats</span>
+                        <p className="text-[9.5px] text-muted-foreground/80 leading-normal">6 seats remaining in Growth tier.</p>
                       </div>
-                      <p className="text-[10px] text-muted-foreground">6 seats remaining in your Growth billing tier.</p>
                     </div>
                   </div>
                 </div>

@@ -28,6 +28,8 @@ import {
 } from "lucide-react";
 import { Badge, Button, PageHeader } from "@/components/app/AppShell";
 import { StripePaymentModal, StripePaymentItem } from "@/components/app/StripePaymentModal";
+import { getTenantSettingsFn, updateTenantSettingsFn, getAuditLogsFn } from "@/lib/serverFunctions";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/_app/settings")({
   head: () => ({
@@ -45,9 +47,11 @@ export const Route = createFileRoute("/_app/settings")({
 
 const tabs = [
   { id: "profile", label: "Profile", icon: User, desc: "Personal information & doctor bio" },
+  { id: "clinic", label: "Clinic Profile", icon: Building2, desc: "Clinic name, hours & address" },
   { id: "notifications", label: "Notifications", icon: Bell, desc: "Email, SMS & clinical alerts" },
   { id: "security", label: "Security", icon: Shield, desc: "Password, 2FA & active sessions" },
   { id: "billing", label: "Billing", icon: CreditCard, desc: "Current plan & included features" },
+  { id: "audit", label: "HIPAA Audit Trail", icon: ShieldCheck, desc: "Immutable security access logs" },
 ] as const;
 
 type TabId = (typeof tabs)[number]["id"];
@@ -57,6 +61,20 @@ import { FormRow, FormSwitch as Switch } from "@/components/app/FormComponents";
 function Settings() {
   const [activeTab, setActiveTab] = useState<TabId>("profile");
   const [savedToast, setSavedToast] = useState(false);
+
+  // Clinic configurations database states
+  const [clinic, setClinic] = useState({
+    name: "Apex Clinic (HQ)",
+    phone: "+49 30 8823 1100",
+    address: "Friedrichstraße 95, 10117 Berlin",
+    openingTime: "08:00",
+    closingTime: "18:00",
+  });
+  const [loadingClinic, setLoadingClinic] = useState(true);
+
+  // Audit Logs database states
+  const [auditLogs, setAuditLogs] = useState<any[]>([]);
+  const [loadingAudit, setLoadingAudit] = useState(false);
 
   // Billing specific states
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
@@ -70,6 +88,50 @@ function Settings() {
     { id: "INV-2026-002", date: "May 12, 2026", duration: "Apr 12, 2026 - May 12, 2026", amount: "$516.00", status: "Paid" },
     { id: "INV-2026-001", date: "Apr 12, 2026", duration: "Mar 12, 2026 - Apr 12, 2026", amount: "$129.00", status: "Paid" },
   ]);
+
+  // Load clinic settings from database
+  const loadClinicSettings = async () => {
+    setLoadingClinic(true);
+    try {
+      const data: any = await getTenantSettingsFn();
+      if (data) {
+        setClinic({
+          name: data.name || "",
+          phone: data.phone || "",
+          address: data.address || "",
+          openingTime: data.openingTime || "08:00",
+          closingTime: data.closingTime || "18:00",
+        });
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoadingClinic(false);
+    }
+  };
+
+  // Load audit logs from database
+  const loadAuditLogs = async () => {
+    setLoadingAudit(true);
+    try {
+      const logs = await getAuditLogsFn();
+      setAuditLogs(logs);
+    } catch (err: any) {
+      toast.error(err?.message || "Failed to load audit trails.");
+    } finally {
+      setLoadingAudit(false);
+    }
+  };
+
+  useEffect(() => {
+    loadClinicSettings();
+  }, []);
+
+  useEffect(() => {
+    if (activeTab === "audit") {
+      loadAuditLogs();
+    }
+  }, [activeTab]);
 
   const handleSelectPlan = (planId: "essential" | "growth" | "enterprise", amount: number) => {
     setCheckoutLoadingPlan(planId);
@@ -118,7 +180,16 @@ function Settings() {
   const [theme, setTheme] = useState<"light" | "dark" | "system">("light");
   const [density, setDensity] = useState<"comfortable" | "compact">("comfortable");
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    if (activeTab === "clinic") {
+      try {
+        await updateTenantSettingsFn(clinic);
+        toast.success("Clinic configuration details saved successfully.");
+      } catch (err: any) {
+        toast.error(err?.message || "Failed to update configurations.");
+        return;
+      }
+    }
     setSavedToast(true);
     setTimeout(() => setSavedToast(false), 3000);
   };
@@ -252,6 +323,80 @@ function Settings() {
                     />
                   </FormRow>
                 </div>
+              </div>
+            </div>
+          )}
+
+          {/* ──────── CLINIC PROFILE ──────── */}
+          {activeTab === "clinic" && (
+            <div className="space-y-6">
+              <div className="rounded-2xl border border-border/50 bg-card p-6 shadow-xs">
+                <div className="border-b border-border/40 pb-4 mb-6">
+                  <h2 className="text-[15px] font-bold text-foreground tracking-tight">Clinic Details & Hours</h2>
+                  <p className="text-[12px] text-muted-foreground mt-0.5">Define your practice identifier, operating schedule, and location address.</p>
+                </div>
+
+                {loadingClinic ? (
+                  <div className="py-12 flex flex-col items-center justify-center space-y-3">
+                    <div className="h-6 w-6 rounded-full border-2 border-emerald-500 border-t-transparent animate-spin" />
+                    <span className="text-[11px] font-mono text-muted-foreground">Loading clinic records...</span>
+                  </div>
+                ) : (
+                  <div className="space-y-1 divide-y divide-border/30">
+                    <FormRow label="Clinic Brand Name" description="The official title displayed on client portals.">
+                      <input
+                        type="text"
+                        value={clinic.name}
+                        onChange={(e) => setClinic({ ...clinic, name: e.target.value })}
+                        className="h-10 w-full rounded-xl border border-border/60 bg-background px-3.5 text-[12.5px] text-foreground focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
+                        placeholder="Clinic Name"
+                      />
+                    </FormRow>
+
+                    <FormRow label="Contact Phone" description="Help line for patients seeking appointment bookings.">
+                      <input
+                        type="text"
+                        value={clinic.phone}
+                        onChange={(e) => setClinic({ ...clinic, phone: e.target.value })}
+                        className="h-10 w-full rounded-xl border border-border/60 bg-background px-3.5 text-[12.5px] text-foreground focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
+                        placeholder="Phone Number"
+                      />
+                    </FormRow>
+
+                    <FormRow label="Physical Address" description="The clinical campus location coordinates.">
+                      <input
+                        type="text"
+                        value={clinic.address}
+                        onChange={(e) => setClinic({ ...clinic, address: e.target.value })}
+                        className="h-10 w-full rounded-xl border border-border/60 bg-background px-3.5 text-[12.5px] text-foreground focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
+                        placeholder="Clinic Address"
+                      />
+                    </FormRow>
+
+                    <FormRow label="Operating Hours" description="Opening and closing time controls for patient scheduling.">
+                      <div className="grid grid-cols-2 gap-3 max-w-sm">
+                        <div>
+                          <label className="text-[10px] text-muted-foreground block mb-1">Opening Time</label>
+                          <input
+                            type="time"
+                            value={clinic.openingTime}
+                            onChange={(e) => setClinic({ ...clinic, openingTime: e.target.value })}
+                            className="h-9 w-full rounded-lg border border-border/60 bg-background px-3 text-[12px] text-foreground focus:outline-none focus:ring-1 focus:ring-emerald-500/50"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-[10px] text-muted-foreground block mb-1">Closing Time</label>
+                          <input
+                            type="time"
+                            value={clinic.closingTime}
+                            onChange={(e) => setClinic({ ...clinic, closingTime: e.target.value })}
+                            className="h-9 w-full rounded-lg border border-border/60 bg-background px-3 text-[12px] text-foreground focus:outline-none focus:ring-1 focus:ring-emerald-500/50"
+                          />
+                        </div>
+                      </div>
+                    </FormRow>
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -805,6 +950,70 @@ function Settings() {
                     </table>
                   </div>
                 </div>
+              </div>
+            </div>
+          )}
+
+          {/* ──────── HIPAA AUDIT TRAIL ──────── */}
+          {activeTab === "audit" && (
+            <div className="space-y-6">
+              <div className="rounded-2xl border border-border/50 bg-card p-6 shadow-xs">
+                <div className="border-b border-border/40 pb-4 mb-6 flex items-center justify-between">
+                  <div>
+                    <h2 className="text-[15px] font-bold text-foreground tracking-tight">Security Audit Logs (HIPAA Compliance)</h2>
+                    <p className="text-[12px] text-muted-foreground mt-0.5">Immutable records tracking system access, data reads, and record updates.</p>
+                  </div>
+                  <Button variant="outline" size="sm" onClick={loadAuditLogs} disabled={loadingAudit} className="cursor-pointer">
+                    Refresh Logs
+                  </Button>
+                </div>
+
+                {loadingAudit ? (
+                  <div className="py-12 flex flex-col items-center justify-center space-y-3">
+                    <div className="h-6 w-6 rounded-full border-2 border-emerald-500 border-t-transparent animate-spin" />
+                    <span className="text-[11px] font-mono text-muted-foreground">Fetching HIPAA records...</span>
+                  </div>
+                ) : auditLogs.length === 0 ? (
+                  <div className="py-12 text-center text-muted-foreground font-mono text-[12px]">
+                    No security events found in log files.
+                  </div>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse text-[12px]">
+                      <thead>
+                        <tr className="border-b border-border/40 text-[10.5px] font-mono text-muted-foreground uppercase tracking-wider bg-muted/15">
+                          <th className="py-2.5 px-3">Timestamp</th>
+                          <th className="py-2.5 px-3">Action</th>
+                          <th className="py-2.5 px-3">Actor ID</th>
+                          <th className="py-2.5 px-3">Resource</th>
+                          <th className="py-2.5 px-3">Details</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border/20">
+                        {auditLogs.map((log) => {
+                          const isRead = log.action.startsWith("READ");
+                          const isDelete = log.action.startsWith("DELETE");
+                          const isCreate = log.action.startsWith("CREATE");
+                          const tone = isRead ? "info" : isDelete ? "muted" : isCreate ? "success" : "warning";
+                          
+                          return (
+                            <tr key={log.id} className="hover:bg-muted/15 transition-colors">
+                              <td className="py-3 px-3 font-mono text-[11px] text-muted-foreground">
+                                {new Date(log.createdAt).toLocaleString()}
+                              </td>
+                              <td className="py-3 px-3">
+                                <Badge tone={tone as "success" | "info" | "muted" | "warning"}>{log.action}</Badge>
+                              </td>
+                              <td className="py-3 px-3 font-mono text-[11px] text-foreground">{log.userId}</td>
+                              <td className="py-3 px-3 font-semibold text-foreground capitalize">{log.resource}</td>
+                              <td className="py-3 px-3 text-muted-foreground font-sans">{log.details}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
               </div>
             </div>
           )}

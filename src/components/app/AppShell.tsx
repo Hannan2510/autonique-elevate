@@ -65,7 +65,7 @@ export function ThemeToggle() {
 }
 
 type NavItem = {
-  to: string;
+  to: "/dashboard" | "/clinic" | "/customers" | "/appointments" | "/revenue" | "/reports" | "/settings";
   label: string;
   icon: typeof LayoutDashboard;
   disabled?: boolean;
@@ -238,7 +238,7 @@ function SidebarInner({
               return (
                 <li key={item.to}>
                   <Link
-                    to={item.to as any}
+                    to={item.to}
                     onClick={onNavigate}
                     className={`relative flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition-all ${
                       active
@@ -262,10 +262,14 @@ function SidebarInner({
       {/* Profile Section in Bottom Left of Sidebar with Workspace Switcher */}
       <div className="border-t border-border/40 p-3 mt-auto relative">
         {profileOpen && (
-          <div className="absolute bottom-[54px] left-3 right-3 bg-card border border-border/50 rounded-xl shadow-xl p-2 z-30 space-y-1.5 animate-in fade-in slide-in-from-bottom-2 duration-150">
+          <div 
+            role="menu"
+            aria-label="Workspace Switcher"
+            className="absolute bottom-[54px] left-3 right-3 bg-card border border-border/50 rounded-xl shadow-xl p-2 z-30 space-y-1.5 animate-in fade-in slide-in-from-bottom-2 duration-150"
+          >
             <div className="px-2 py-1 border-b border-border/30">
               <span className="font-mono text-[8.5px] uppercase tracking-wider text-muted-foreground font-bold">Switch Workspace</span>
-              <div className="mt-1 space-y-0.5">
+              <div className="mt-1 space-y-0.5" role="none">
                 {[
                   { name: "Apex Clinic (HQ)", desc: "Main Campus", active: true },
                   { name: "Eastside Branch", desc: "Outpatient Services", active: false },
@@ -274,11 +278,12 @@ function SidebarInner({
                   <button
                     key={cli.name}
                     type="button"
+                    role="menuitem"
                     onClick={() => {
                       toast.success(`Switched to workspace: ${cli.name}`);
                       setProfileOpen(false);
                     }}
-                    className={`w-full flex items-center justify-between p-1.5 rounded-lg text-left text-[11.5px] transition-colors cursor-pointer ${
+                    className={`w-full flex items-center justify-between p-1.5 rounded-lg text-left text-[11.5px] transition-colors cursor-pointer focus:outline-none focus:ring-1 focus:ring-emerald-500/50 ${
                       cli.active ? "bg-accent/80 font-semibold" : "hover:bg-accent/40"
                     }`}
                   >
@@ -291,12 +296,21 @@ function SidebarInner({
                 ))}
               </div>
             </div>
-            <div className="flex flex-col gap-0.5 text-[11px] px-1 py-0.5">
-              <Link to="/settings" onClick={() => setProfileOpen(false)} className="px-2 py-1 rounded-md hover:bg-accent/40 text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2">
+            <div className="flex flex-col gap-0.5 text-[11px] px-1 py-0.5" role="none">
+              <Link 
+                to="/settings" 
+                role="menuitem"
+                onClick={() => setProfileOpen(false)} 
+                className="px-2 py-1 rounded-md hover:bg-accent/40 text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 focus:outline-none focus:ring-1 focus:ring-emerald-500/50"
+              >
                 <SettingsIcon className="h-3 w-3" />
                 <span>Account settings</span>
               </Link>
-              <Link to="/" className="px-2 py-1 rounded-md hover:bg-accent/40 text-rose-600 hover:text-rose-700 transition-colors flex items-center gap-2">
+              <Link 
+                to="/" 
+                role="menuitem"
+                className="px-2 py-1 rounded-md hover:bg-accent/40 text-rose-600 hover:text-rose-700 transition-colors flex items-center gap-2 focus:outline-none focus:ring-1 focus:ring-emerald-500/50"
+              >
                 <LogOut className="h-3 w-3" />
                 <span>Logout</span>
               </Link>
@@ -304,8 +318,18 @@ function SidebarInner({
           </div>
         )}
         <div 
+          role="button"
+          aria-haspopup="menu"
+          aria-expanded={profileOpen}
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setProfileOpen(!profileOpen);
+            }
+          }}
           onClick={() => setProfileOpen(!profileOpen)}
-          className={`flex items-center justify-between rounded-lg px-2 py-1.5 text-[13px] hover:bg-accent transition-all cursor-pointer ${profileOpen ? 'bg-accent/60' : ''}`}
+          className={`flex items-center justify-between rounded-lg px-2 py-1.5 text-[13px] hover:bg-accent transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-emerald-500/50 ${profileOpen ? 'bg-accent/60' : ''}`}
         >
           <div className="flex items-center gap-2.5 min-w-0">
             <div className="grid h-7 w-7 place-items-center rounded-full bg-emerald-600 text-[10.5px] font-bold text-white shrink-0">

@@ -1,0 +1,57 @@
+version: "3.8"
+
+services:
+  # 1. PostgreSQL Database Service
+  db:
+    image: postgres:16-alpine
+    container_name: autonique_postgres_db
+    restart: always
+    environment:
+      POSTGRES_DB: autonique
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d autonique"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # 2. Main SaaS Web Application Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: autonique_web_app
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgres://postgres:postgrespassword@db:5432/autonique
+      - PORT=3000
+      - NODE_ENV=production
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # 3. Background Job Queue Worker Service
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: autonique_jobs_worker
+    restart: always
+    environment:
+      - DATABASE_URL=postgres://postgres:postgrespassword@db:5432/autonique
+      - NODE_ENV=production
+    # Override build command to run the queue processor instead of the web server
+    command: ["node", "--import", "tsx", "src/services/worker.ts"]
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
